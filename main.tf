@@ -57,6 +57,7 @@ resource "aws_cloudfront_distribution" "rootDistribution" {
     cloudfront_default_certificate = true
   }
 
+  price_class = "PriceClass_100"
   restrictions {
     geo_restriction {
       restriction_type = "none"
@@ -212,6 +213,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     ssl_support_method = "vip"
   }
 
+  price_class = "PriceClass_100"
   restrictions {
     geo_restriction {
       restriction_type = "none"
@@ -236,10 +238,25 @@ variable "domainName" {
   default = "gregchow.net"
 }
 
-#already created, terraform just manages it
 resource "aws_route53_zone" "hostedZone" {
   name = var.domainName
 }
+
+resource "aws_route53domains_registered_domain" "domain" {
+  domain_name = "gregchow.net"
+
+  #set name servers of registered domain to match hosted zone
+  dynamic "name_server" {
+    for_each = toset(aws_route53_zone.hostedZone.name_servers)
+    content{
+       name = name_server.value
+    }
+  }
+
+  tags = {
+    Environment = "gregchow.net"
+  }
+} 
 
 resource "aws_acm_certificate" "cert" {
   domain_name               = var.domainName

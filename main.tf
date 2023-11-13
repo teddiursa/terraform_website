@@ -337,27 +337,27 @@ resource "aws_route53_record" "rootRecord" {
   }
  }
 
-#  resource "aws_route53_record" "record6" {
-#   zone_id = aws_route53_zone.hostedZone.zone_id
-#   name    = "www.gregchow.net"
-#   type    = "AAAA"
-#   alias {
-#     name = aws_cloudfront_distribution.distribution.domain_name
-#     zone_id = aws_cloudfront_distribution.distribution.hosted_zone_id
-#     evaluate_target_health = true
-#   }
-# }
+ resource "aws_route53_record" "record6" {
+  zone_id = aws_route53_zone.hostedZone.zone_id
+  name    = "www.gregchow.net"
+  type    = "AAAA"
+  alias {
+    name = aws_cloudfront_distribution.distribution.domain_name
+    zone_id = aws_cloudfront_distribution.distribution.hosted_zone_id
+    evaluate_target_health = true
+  }
+}
 
-#  resource "aws_route53_record" "rootRecord6" {
-#   zone_id = aws_route53_zone.hostedZone.zone_id
-#   name    = "gregchow.net"
-#   type   = "AAAA"
-#     alias {
-#     name = aws_cloudfront_distribution.rootDistribution.domain_name
-#     zone_id = aws_cloudfront_distribution.rootDistribution.hosted_zone_id
-#     evaluate_target_health = true
-#   }
-#  }
+ resource "aws_route53_record" "rootRecord6" {
+  zone_id = aws_route53_zone.hostedZone.zone_id
+  name    = "gregchow.net"
+  type   = "AAAA"
+    alias {
+    name = aws_cloudfront_distribution.rootDistribution.domain_name
+    zone_id = aws_cloudfront_distribution.rootDistribution.hosted_zone_id
+    evaluate_target_health = true
+  }
+ }
 
 
 

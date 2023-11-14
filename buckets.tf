@@ -70,7 +70,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 resource "aws_s3_object" "html" {
   bucket = aws_s3_bucket.terraformBucket.id
   key    = "home.html"
-  source = "./home.html"
+  source = "../website/home.html"
   content_type = "text/html"
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
@@ -81,21 +81,21 @@ resource "aws_s3_object" "html" {
 resource "aws_s3_object" "css" {
   bucket = aws_s3_bucket.terraformBucket.id
   key    = "home.css"
-  source = "./home.css"
+  source = "../website/home.css"
   content_type = "text/css"
 }
 
 resource "aws_s3_object" "js" {
   bucket = aws_s3_bucket.terraformBucket.id
   key    = "home.js"
-  source = "./home.js"
+  source = "../website/home.js"
   content_type = "text/javascript"
 }
 
 resource "aws_s3_object" "diagramSVG" {
   bucket = aws_s3_bucket.terraformBucket.id
   key    = "CloudDiagram.svg"
-  source = "./CloudDiagram.svg"
+  source = "../website/CloudDiagram.svg"
   content_type = "image/svg+xml"
 }
 

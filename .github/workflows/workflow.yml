@@ -20,4 +20,6 @@ jobs:
         aws-region: us-east-1
 
     - name: Deploy static site to S3 bucket
-      run: aws s3 sync ./home.html s3://www.gregchow.net --delete
+      run: aws s3 sync home.html s3://www.gregchow.net --delete
+           aws s3 sync home.css s3://www.gregchow.net --delete
+           aws s3 sync home.js s3://www.gregchow.net --delete

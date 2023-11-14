@@ -83,7 +83,7 @@
                                                             <h4>Junior Network Engineer</h4>
                                                         </div>
                                                         <div class="col-md-3 col-sm-3 col-xs-3">
-                                                            <h3>Aug 2023 - Present</h3>
+                                                            <h3 align="right">Aug 2023 - Present</h3>
                                                         </div>
                                                     </div>
                                                     <div class="row experience-summary">
@@ -101,7 +101,7 @@
                                                             <h4>Technical Support Engineer</h4>
                                                         </div>
                                                         <div class="col-md-3 col-sm-3 col-xs-3">
-                                                            <h3>Apr 2019 - Aug 2023</h3>
+                                                            <h3 align="right">Apr 2019 - Aug 2023</h3>
                                                         </div>
                                                     </div>
                                                     <div class="row experience-summary">
@@ -125,15 +125,15 @@
                                                 <div class="certifications">
                                                     <h2 class="text-center">Education and Certifications</h2>
 
-                                                    <div class="row certification-title">
+                                                    <div class="certification-title">
                                                         <div class="certification-row">
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-9 col-sm-9 col-xs-9">
                                                                 <h3>Univesity of California, Santa Cruz</h3>
                                                                 <h4>Bachelor's in Networking and Digital Technology</h4>
                                                             </div>
 
-                                                            <div class="col-md-3">
-                                                                <h3>2018</h3>
+                                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                <h3 align="right">2018</h3>
                                                             </div>
                                                         </div>
                                                         <div class="certification-row">
@@ -142,7 +142,7 @@
                                                                 <h4>CCNA</h4>
                                                             </div>
                                                         <div class="col-md-3 col-sm-3 col-xs-3">
-                                                                <h3>2023</h3>
+                                                                <h3 align="right">2023</h3>
                                                             </div>
                                                         </div> 
                                                         <div class="certification-row">
@@ -152,7 +152,7 @@
                                                             </div>
 
                                                         <div class="col-md-3 col-sm-3 col-xs-3">
-                                                                <h3>2023</h3>
+                                                                <h3 align="right">2023</h3>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -222,10 +222,10 @@
                                     <p>I wanted to add an additional feature with lambda/aws, since I wanted to stand out, but I had trouble deciding on the function. I contemplated displaying different days of the week accessed, similar to github's calendar, but ultimately decided something much simpler: time since the last visit. I accomplished this using <b>unix time</b> which is a counter from the beginning of "time" for computers, which is defined as 1/1/1970.</pre>
                                     <h3 class="unixTimeLine"> Current Unix Time: <span id="unixTime" style="color:#20cef5"></h3> 
                                         <p>This <b>unix time</b> is already in seconds (after truncating) and since I'm not dealing with timezones, I simply used this time to find the difference since last visit. I fiddled with javascript to display this cleanly in a weeks, days, hours, minutes, and seconds format, ensuring it properly displayed any spaces and singular/plural units.</p>
-                                    </div>
+                                    
 									<h2>Automating with Terraform</h2>
                                     <p>I chose to use Terraform rather than SAM since it's a bit more flexible with other vendors. I started the process by deploying each service at a time, starting with the buckets. After declaring what types my uploaded files should be and setting an access policy, it went smoothly. Deploying cloudfront also had little issues, but properly getting my HTTPS certificate and dns records had more issues. I found it easier to do some steps manually to better visualize the steps needed for my IAC. After creating the records needing for the DNS verification, I realized I had the same issue as before, my name servers did not match. I changed them manually to verify this was the issue and discovered they recently (6 months ago) added a function to update my registered domain name server's. After automating this with terraforms for loop equivalent, I was pleased to see it update in real time and for my certificate to be automatically validated. After splitting my functions into several files for easier future tweaking, it was time to automate the functions</p>
-
+									</div>
                                 </body>
 
                                 <script>

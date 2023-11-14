@@ -145,6 +145,10 @@ padding: 50px 20px;
     .certifications {
     font-size: 16px;
     }
+	.unixTimeLine{
+		font-size: 20px;
+	}
+	
     }
 
     /* If the screen size is 600px wide or less, resize some fonts */
@@ -152,10 +156,7 @@ padding: 50px 20px;
     .counter {
     font-size: 10px;
     }
-    .certifications {
-    font-size: 12px;
-    }
-    p{
+    .certifications, p, ol {
     font-size: 12px;
     }
     h3{
@@ -189,13 +190,10 @@ padding: 50px 20px;
             text-indent: 2em;
         }
     }
-    h1 {
+    h1, h2 {
     text-align: center;
     }
 
-    h2 {
-    text-align: center;
-    }
 
     hr {
     width: 75%;

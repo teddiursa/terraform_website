@@ -225,7 +225,8 @@
                                     
 									<h2>Automating with Terraform</h2>
                                     <p>I chose to use Terraform rather than SAM since it's a bit more flexible with other vendors. I started the process by deploying each service at a time, starting with the buckets. After declaring what types my uploaded files should be and setting an access policy, it went smoothly. Deploying cloudfront also had little issues, but properly getting my HTTPS certificate and dns records had more issues. I found it easier to do some steps manually to better visualize the steps needed for my IAC. After creating the records needing for the DNS verification, I realized I had the same issue as before, my name servers did not match. I changed them manually to verify this was the issue and discovered they recently (6 months ago) added a function to update my registered domain name server's. After automating this with terraforms for loop equivalent, I was pleased to see it update in real time and for my certificate to be automatically validated. After splitting my functions into several files for easier future tweaking, it was time to automate the functions</p>
-									</div>
+									<h2>Github Actions</h2>
+                                </div>
                                 </body>
 
                                 <script>

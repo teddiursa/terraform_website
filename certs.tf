@@ -8,18 +8,18 @@ resource "aws_route53domains_registered_domain" "domain" {
   #set name servers of registered domain to match hosted zone
   dynamic "name_server" {
     for_each = toset(aws_route53_zone.hostedZone.name_servers)
-    content{
-       name = name_server.value
+    content {
+      name = name_server.value
     }
   }
 
   tags = {
     Environment = "gregchow.net"
   }
-} 
+}
 
 resource "aws_acm_certificate" "cert" {
-  domain_name               = var.domainName
+  domain_name = var.domainName
   #provider                  = aws.acm
   subject_alternative_names = ["www.gregchow.net"]
   validation_method         = "DNS"

@@ -68,9 +68,9 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 
 
 resource "aws_s3_object" "html" {
-  bucket = aws_s3_bucket.terraformBucket.id
-  key    = "home.html"
-  source = "../website/home.html"
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = "home.html"
+  source       = "../website/home.html"
   content_type = "text/html"
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
@@ -79,23 +79,23 @@ resource "aws_s3_object" "html" {
 }
 
 resource "aws_s3_object" "css" {
-  bucket = aws_s3_bucket.terraformBucket.id
-  key    = "home.css"
-  source = "../website/home.css"
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = "home.css"
+  source       = "../website/home.css"
   content_type = "text/css"
 }
 
 resource "aws_s3_object" "js" {
-  bucket = aws_s3_bucket.terraformBucket.id
-  key    = "home.js"
-  source = "../website/home.js"
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = "home.js"
+  source       = "../website/home.js"
   content_type = "text/javascript"
 }
 
 resource "aws_s3_object" "diagramSVG" {
-  bucket = aws_s3_bucket.terraformBucket.id
-  key    = "CloudDiagram.svg"
-  source = "../website/CloudDiagram.svg"
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = "CloudDiagram.svg"
+  source       = "../website/CloudDiagram.svg"
   content_type = "image/svg+xml"
 }
 
@@ -106,21 +106,21 @@ resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
     suffix = "home.html"
   }
   # TODO
-#   error_document {
-#     key = "error.html"
-#   }
+  #   error_document {
+  #     key = "error.html"
+  #   }
 }
 
 resource "aws_s3_bucket_cors_configuration" "myCorsConfig" {
   bucket = aws_s3_bucket.terraformBucket.id
 
-#   cors_rule {
-#     allowed_headers = ["*"]
-#     allowed_methods = ["PUT", "POST"]
-#     allowed_origins = ["https://s3-website-test.hashicorp.com"]
-#     expose_headers  = ["ETag"]
-#     max_age_seconds = 3000
-#   }
+  #   cors_rule {
+  #     allowed_headers = ["*"]
+  #     allowed_methods = ["PUT", "POST"]
+  #     allowed_origins = ["https://s3-website-test.hashicorp.com"]
+  #     expose_headers  = ["ETag"]
+  #     max_age_seconds = 3000
+  #   }
 
   cors_rule {
     allowed_methods = ["GET"]

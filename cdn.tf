@@ -62,11 +62,11 @@ resource "aws_cloudfront_distribution" "distribution" {
     }
   }
 
-    aliases = ["www.gregchow.net", "gregchow.net"]
+  aliases = ["www.gregchow.net", "gregchow.net"]
 
   viewer_certificate {
-    acm_certificate_arn  = aws_acm_certificate_validation.certValidation.certificate_arn#aws_acm_certificate.cert.arn
-    ssl_support_method = "vip"
+    acm_certificate_arn = aws_acm_certificate_validation.certValidation.certificate_arn #aws_acm_certificate.cert.arn
+    ssl_support_method  = "vip"
   }
 
   price_class = "PriceClass_100"
@@ -86,6 +86,6 @@ resource "aws_cloudfront_distribution" "distribution" {
     target_origin_id       = aws_s3_bucket.terraformBucket.bucket_regional_domain_name
   }
   depends_on = [
-    
-    ]
+
+  ]
 }

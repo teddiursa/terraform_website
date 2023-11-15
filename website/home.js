@@ -107,7 +107,7 @@ function secondsToWeeks(input) {
             output += " second";
     }
     //for when refresh is less than a second
-    else{
+    else {
         output += "less than a second"
     }
 

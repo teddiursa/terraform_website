@@ -50,6 +50,7 @@ body {
 #Projects {}
 #Contact {}
 */
+
 /*only format P elements of blogpage*/
 #Blog > p{
     text-indent: 2em;

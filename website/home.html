@@ -272,6 +272,7 @@
         <div class="unixTimeLine">
             <h4>Current Unix Time</h4>
             <h4><span id="unixTime" style="color:#20cef5"></h4>
+        </div>
         <p>This <b>unix time</b> is already in seconds (after truncating) and since I'm not dealing with timezones, I
             simply used this time to find the difference since last visit. I fiddled with javascript to display this
             cleanly in a weeks, days, hours, minutes, and seconds format, ensuring it properly displayed any spaces and
@@ -290,6 +291,7 @@
             validated. After splitting my functions into several files for easier future tweaking, it was time to
             automate the functions</p>
         <h2>Github Actions</h2>
+        <p>Github Actions executes a <i>workflow</i> when a specific events occurs. My workflow updates the files of the S3 bucket when I push changes to my repository. This way my website updates in real time whenever I make changes, instead of having to rerun my terraform code. </p>
     </div>
 </body>
 

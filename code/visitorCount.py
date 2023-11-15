@@ -13,7 +13,7 @@ def lambda_handler(event, context):
     newCount = str(int(oldCount)+1)
     response = table.update_item(
         Key={'id': 'keyCount'},
-        UpdateExpression='set keyCount = :c',
+        UpdateExpression='set itemCount = :c',
         ExpressionAttributeValues={':c': newCount},
         ReturnValues='UPDATED_NEW'
         )

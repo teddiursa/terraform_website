@@ -95,7 +95,7 @@ function secondsToWeeks(input) {
             output += " minute";
         time = time % minuteSeconds;
     }
-    if (time != 0) {
+    if (time >= 1) {
         //add space if already output (not needed for weeks)
         if (output != "")
             output += " and ";
@@ -106,6 +106,10 @@ function secondsToWeeks(input) {
         else
             output += " second";
     }
+    //for when refresh is less than a second
+    if (time >= 0 && time < 1 && output == "") {
+        output += "less than a second"
+    }
 
     return output;
 }
@@ -113,7 +117,7 @@ function secondsToWeeks(input) {
 
 
 //call function to get visitor count from lambda function 
-fetch('https://mjgtu0006j.execute-api.us-east-1.amazonaws.com/visitorCountStage') //get visitor count via lambda function
+fetch('https://s4tdz3jqa7.execute-api.us-east-1.amazonaws.com/visitorCount') //get visitor count via lambda function
     .then(response => response.json())
     .then((data) => {
         document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)  //then add to text of id visitorCount

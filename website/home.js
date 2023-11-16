@@ -117,7 +117,7 @@ function secondsToWeeks(input) {
 
 
 //call function to get visitor count from lambda function 
-fetch('https://s4tdz3jqa7.execute-api.us-east-1.amazonaws.com/visitorCount') //get visitor count via lambda function
+fetch('https://s4tdz3jqa7.execute-api.us-east-1.amazonaws.com/visitorCount/') //get visitor count via lambda function
     .then(response => response.json())
     .then((data) => {
         document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)  //then add to text of id visitorCount

@@ -1,13 +1,9 @@
-<!doctype html>
-<html lang="en">
-
-<head>
+<!DOCTYPE html>
+<html lang="en"><head>
     <!-- linking to bootstrap css-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- linking to font stylesheet-->
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&amp;subset=latin,latin-ext" rel="stylesheet"
-        type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <!-- my css stylesheet-->
     <link rel="stylesheet" type="text/css" href="home.css">
     <!-- tell mobile devices to not adjust-->
@@ -24,16 +20,34 @@
     <button class="tablink" onclick="openPage('Blog', this)">Blog</button>
 
     <!-- Home page-->
-    <div id="Home" class="tabcontent">
-        <h3>Home</h3>
-        <p>Home is where the heart is..</p>
+    <div id="Home" class="tabcontent" style="display: none;">
+       <div class="wall">
+  <div class="wallHeader">
+    <h1 class="wallTitle">Greg Chow</h1>
+    <p class="wallText">Network Engineer</p>
+  </div>
+</div>
+<h6 style="text-align:center">Map by <a href="https://www2.telegeography.com/">Telegeography</a> on <a href="https://www.submarinecablemap.com/">Submarine Cable Map</a></h6>
+<section class="wallContent">
+  <h2>Welcome to my Gregchow.net!</h2>
+  <p>My name is Gregory Chow and I created this created this website in an endeavour to learn and practice cloud technologies.
+  </p><h4>It uses a mix of:</h4>
+    <ul>
+    <li>Web Development: HTML, CSS, and Javascript</li>
+    <li>Automation: Terraform</li>
+    <li>Cloud Engineering: AWS S3, Lambda, and Cloudfront</li>
+    <li>Coding: Python</li>
+  </ul>
+    I hope this website serves as a window into my technological backgrounds and skills.
+  <p></p>
+</section>
     </div>
 
 
     <!-- Resume page-->
-    <div id="Resume" class="tabcontent">
+    <div id="Resume" class="tabcontent" style="display: none;">
 
-        <body>
+        
             <div class="container">
                 <div class="row">
                     <div class="title">
@@ -144,7 +158,7 @@
                     <div class="certifications">
                         <h2 class="text-center">Education and Certifications</h2>
 
-                        <div class="certification-title">
+                        <div class="row certification-title">
                             <div class="certification-row">
                                 <div class="col-md-9 col-sm-9 col-xs-9">
                                     <h3>Univesity of California, Santa Cruz</h3>
@@ -183,9 +197,9 @@
             </div>
 
     </div>
-    </div>
+    
     <!-- Project page -->
-    <div id="Projects" class="tabcontent">
+    <div id="Projects" class="tabcontent" style="display: block;">
         <h3>Projects</h3>
         <h4>My Cloud Resume Project (This website)</h4>
         <p>This project is hosted in an aws S3 bucket and delivered with Cloudfront</p>
@@ -193,15 +207,14 @@
         <p>AWS's Route53 provide DNS resolution and propagates them to other Domain Servers </p>
         <p>This webpage also uses a simple Lambda Function to provide and update it's visitor count, stored in DynamoDB.
             It also accesses this Lambda function with an API gateway</p>
-        <img src="CloudDiagram.svg" alt="diagram" />
+        <img src="CloudDiagram.svg" alt="diagram">
     </div>
 
     <!-- Blog Page-->
-    <div id="Blog" class="tabcontent">
+    <div id="Blog" class="tabcontent" style="display: none;">
 
         <h2>The Challenge</h2>
-        <p>While looking for new technologies to learn, I came across something known as the <a
-                href="https://cloudresumechallenge.dev/">Cloud Resume Challenge</a>. Created by Forrest Brazael, the
+        <p>While looking for new technologies to learn, I came across something known as the <a href="https://cloudresumechallenge.dev/">Cloud Resume Challenge</a>. Created by Forrest Brazael, the
             challenge is a hands-on project designed to help apply knowledge from cloud certifications. While the
             challenge offers variations for each Cloud provider, the project itself remains largely the same. The
             challenge itself is split into several steps:</p>
@@ -215,8 +228,8 @@
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <li>HTTPS: Obtain and apply a valid HTTPS Certificate</li>
-                    <li>DNS: Register a Domain Name/li>
-                    <li>Javascript: Program a visitor counter with javascript</li>
+                    <li>DNS: Register a Domain Name/li&gt;
+                    </li><li>Javascript: Program a visitor counter with javascript</li>
                     <li>Database: Use a cloud database to retrieve and update this counter</li>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3">
@@ -238,8 +251,7 @@
             and I had always enjoyed how responsive web development is compared to traditional software development. I
             started by by finding a sample <a href="https://devsnap.me/html-resume-templates">template</a> online,
             mostly for the dark mode colors, and heavily tweaking it. Funnily enough, I ended up using a different color
-            scheme, specifically facebook's scheme I found in a <a
-                href="https://blog.karenying.com/posts/50-shades-of-dark-mode-gray">website</a> comparing different
+            scheme, specifically facebook's scheme I found in a <a href="https://blog.karenying.com/posts/50-shades-of-dark-mode-gray">website</a> comparing different
             popular darkmode colors. What was most useful was the use of bootstrap grids, something I had not used
             before. I also spent a large amount of time ensuring the website would properly display for mobile devices.
             I also discovered that phones display websites differently unless you specifically indicate the website was
@@ -268,10 +280,10 @@
             deciding on the function. I contemplated displaying different days of the week accessed, similar to github's
             calendar, but ultimately decided something much simpler: time since the last visit. I accomplished this
             using <b>unix time</b> which is a counter from the beginning of "time" for computers, which is defined as
-            1/1/1970.</pre>
-        <div class="unixTimeLine">
+            1/1/1970.
+        </p><div class="unixTimeLine">
             <h4>Current Unix Time</h4>
-            <h4><span id="unixTime" style="color:#20cef5"></h4>
+            <h4><span id="unixTime" style="color:#20cef5">1700093828</span></h4>
         </div>
         <p>This <b>unix time</b> is already in seconds (after truncating) and since I'm not dealing with timezones, I
             simply used this time to find the difference since last visit. I fiddled with javascript to display this
@@ -293,7 +305,7 @@
         <h2>Github Actions</h2>
         <p>Github Actions executes a <i>workflow</i> when a specific events occurs. My workflow updates the files of the S3 bucket when I push changes to my repository. This way my website updates in real time whenever I make changes, instead of having to rerun my terraform code. </p>
     </div>
-</body>
+
 
 <script>
     // Get the element with id="defaultOpen" and click on it
@@ -301,7 +313,7 @@
 </script>
 <!--set id to get count from script, then display as a footer-->
 <div class="counter">
-    <h2>You are the <span id="visitorCount" style="color:#67B868"> </span> Visitor!</h2>
-    <h2>The last visitor was <span id="lastAccessed" style="color:#67B868"></span> ago </h2>
+    <h2>You are the <span id="visitorCount" style="color:#67B868">113th</span> Visitor!</h2>
+    <h2>The last visitor was <span id="lastAccessed" style="color:#67B868"> 1 hour 49 minutes and 5 seconds</span> ago </h2>
     <h5>Created with AWS Lambda and DynamoDB</h5>
-</div>
+</div></body></html>

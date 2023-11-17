@@ -31,7 +31,7 @@
                 <p class="wallText">Network Engineer</p>
             </div>
         </div>
-        <h6 style="text-align:center">Map by <a href="https://www2.telegeography.com/">Telegeography</a> on <a
+        <h6>Map by <a href="https://www2.telegeography.com/">Telegeography</a> on <a
                 href="https://www.submarinecablemap.com/">Submarine Cable Map</a></h6>
         <section class="wallContent">
             <h2>Welcome to Gregchow.net!</h2>
@@ -39,16 +39,16 @@
                 cloud technologies.
             </p>
             <div class="col-md-3 col-sm-3 col-xs-3">
-            <h4>It uses a mix of:</h4>
-        </div>
-        <div class="col-md-9 col-sm-9 col-xs-9">
-            <ul>
-                <li>Web Development: HTML, CSS, and Javascript</li>
-                <li>Automation: Terraform</li>
-                <li>Cloud Engineering: AWS S3, Lambda, and Cloudfront</li>
-                <li>Coding: Python</li>
-            </ul>
-        </div>
+                <h4>It uses a mix of:</h4>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-9">
+                <ul>
+                    <li>Web Development: HTML, CSS, and Javascript</li>
+                    <li>Automation: Terraform</li>
+                    <li>Cloud Engineering: AWS S3, Lambda, and Cloudfront</li>
+                    <li>Coding: Python</li>
+                </ul>
+            </div>
             I hope this website serves as a window into my technological backgrounds and skills.
             <p></p>
         </section>
@@ -214,12 +214,15 @@
         <div class="container">
             <h3>Projects</h3>
             <h4>My Cloud Resume Project (This website)</h4>
-            <p>This project is hosted in an aws S3 bucket and delivered with Cloudfront
-            CloudFront helps deliver the webpage content as well as provide full HTTPS encryption
-            AWS's Route53 provide DNS resolution and propagates them to other Domain Servers 
-            This webpage also uses a simple Lambda Function to provide and update it's visitor count, stored in
-                DynamoDB.
-                It also accesses this Lambda function with an API gateway</p>
+            <li>Web Development: HTML, CSS, and Javascript</li>
+            <li>Automation: Terraform</li>
+            <li>Cloud Engineering: AWS S3, Lambda, and Cloudfront</li>
+            <li>Coding: Python</li>
+            </ul>
+            <p>This project is fully automated with terraform for easy provisiong and destruction of aws resources.
+                Files are hosted in an aws S3 bucket and delivered with Cloudfront. Uses Lambda functions, API gateways,
+                and dynamoDBs to track the number of visitors and time since the last visit. Has full HTTPS encryption
+                and root domain rerouting via Route 53.</p>
             <img src="CloudDiagram.svg" alt="diagram">
         </div>
     </div>

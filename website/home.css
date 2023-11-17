@@ -49,14 +49,31 @@ body {
 #Contact {}
 */
 
-/*only format P elements of blogpage*/
-#Blog > p{
-    text-indent: 2em;
-}
-
-#Projects > h3,h4{
+#Home h6{
     text-align: center;
-}
+  }
+  
+  #Home p{
+    text-indent: 2em;
+  }
+  
+  
+  #Projects h3,h4{
+    text-align: center;
+  }
+  
+  #Projects,#Blog p{
+      text-indent: 2em;
+  }
+  
+  
+  .certifications h4{
+    text-align: left;
+  }
+  .work-experience h4{
+    text-align: left;
+  }
+  
 
 
 /* If the screen size is 601px wide or more, set the font-size of <div> to 16px */

@@ -27,7 +27,7 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 13px 16px;
+    padding: 14px 16px;
     font-size: 17px;
     width: 25%;
 }
@@ -39,7 +39,7 @@ body {
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 50px 20px;
+    padding: 52px 20px;
 }
 
 /*
@@ -277,8 +277,6 @@ hr {
     .work-experience {
         padding: 20px;
 
-
-        /* separate center to apply to just body/p?*/
         .experience-title {
             margin-top: 50px;
             column-count: 2;
@@ -381,10 +379,7 @@ hr {
 .wallContent{
   max-width: 800px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
-  
-
-    
+  padding: .5rem 1.5rem;
 }
 
 /* Main Content [END]

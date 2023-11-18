@@ -100,6 +100,13 @@ resource "aws_s3_object" "diagramSVG" {
 }
 
 
+resource "aws_s3_object" "diagramSVG" {
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = "proxmox.svg"
+  source       = "../website/proxmox.svg"
+  content_type = "image/svg+xml"
+}
+
 resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
   bucket = aws_s3_bucket.terraformBucket.id
   index_document {

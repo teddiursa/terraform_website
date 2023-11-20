@@ -207,8 +207,8 @@
     <!-- Project page -->
     <div id="Projects" class="tabcontent" style="display: none;">
         <div class="container">
-            <h3>Projects</h3>
-            <h4>My Cloud Resume Project (This website)</h4>
+            <h2>Projects</h2>
+            <h3>My Cloud Resume Project (This website)</h3>
 
             
             <p>This project is fully automated with terraform for easy provisiong and destruction of aws resources.
@@ -216,23 +216,37 @@
                 and dynamoDBs to track the number of visitors and time since the last visit. Has full HTTPS encryption
                 and root domain rerouting via Route 53.</p>
             <img src="CloudDiagram.svg" alt="diagram">
+
           <ul>
-                      <li>Web Development: HTML, CSS, and Javascript</li>
-            <li>Automation: Terraform</li>
-            <li>Cloud Engineering: AWS S3, Lambda, and Cloudfront</li>
-            <li>Coding: Python</li>
+                    <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+          <li><b>Web Development</b>: HTML, CSS, and Javascript</li>
+              <li><b>Automation</b >: Terraform</li>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+            <li><b>Cloud Engineering</b>: AWS S3, Lambda, and Cloudfront</li>
+            <li><b>Coding</b>: Python</li>
+                         </div>
+          </div>
           </ul>
-            <h4>Home Lab</h4>
+ 
+            <h3>Home Lab</h3>
           <p>Bare Metal Hypervisor running various virtual machines and containers. While some are primarily for testing and learning, several services are used almost everyday. Pfsense is used as an open source router and firewall, Plex to stream media, and TruNAS scale to host my media files, image iso's, and backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the hosted services and easily manage them via a web UI, including remotely running scripts. VMware's ESXI vSphere hypervisor is virtualized due to it not supporting my network card and hosts commonly used Virtual Machines to help teach differences between the main hypervisor, Proxmox. While Proxmox run it's own LXC containers, Docker runs containers that need a more up to date image than LXC offers. 
           </p>
             <img src="proxmox.svg" alt="diagram">
-          <ul>
-            <li>Hypervisors: Proxmox and VMWare's ESXI</li>
-            <li>Linux Distributions: Debian, Red Hat, TrueNASScale, and Ubuntu</li>
-            <li>Container Runtimes: Docker and LXC</li>
-            <li>Containers: Homer, Olivetin, Ubuntu, and Nginx Proxy Manager </li>
-          </ul>
+
+            <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+            <li><b>Hypervisors</b>: Proxmox and VMWare's ESXI</li>
+            <li><b>Linux Distributions</b>: Debian, Red Hat, TrueNASScale, and Ubuntu</li>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+            <li><b>Container Runtimes</b>: Docker and LXC</li>
+            <li><b>Containers</b>: Homer, Olivetin, Ubuntu, and Nginx Proxy Manager </li>
+                        </div>
         </div>
+          </ul>
+
     </div>
 
     <!-- Blog Page-->

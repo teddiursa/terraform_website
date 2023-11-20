@@ -231,18 +231,18 @@
           </ul>
  
             <h3>Home Lab</h3>
-          <p>Bare Metal Hypervisor running various virtual machines and containers. While some are primarily for testing and learning, several services are used almost everyday. Pfsense is used as an open source router and firewall, Plex to stream media, and TruNAS scale to host my media files, image iso's, and backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the hosted services and easily manage them via a web UI, including remotely running scripts. VMware's ESXI vSphere hypervisor is virtualized due to it not supporting my network card and hosts commonly used Virtual Machines to help teach differences between the main hypervisor, Proxmox. While Proxmox run it's own LXC containers, Docker runs containers that need a more up to date image than LXC offers. 
+          <p>Bare Metal Hypervisor running various virtual machines and containers. While some are primarily for testing and learning, several services are used daily. PfSense is as an open source router and firewall, Plex to stream media, Pi-hole for internal DNS, and TruNAS scale to host: media files, image iso's, and backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the hosted services and easily manage them via a web UI, including remotely running scripts. VMware's ESXI vSphere hypervisor is virtualized due to not supporting my network card and hosts commonly used Virtual Machines to help teach differences between Proxmox and VMware. While Proxmox run it's own LXC containers, Docker runs containers that need a more up to date image than LXC offers. 
           </p>
             <img src="proxmox.svg" alt="diagram">
 
             <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-6">
             <li><b>Hypervisors</b>: Proxmox and VMWare's ESXI</li>
-            <li><b>Linux Distributions</b>: Debian, Red Hat, TrueNASScale, and Ubuntu</li>
+            <li><b>Linux Distributions</b>: Debian, Red Hat, TrueNASScale, pfSense, and Ubuntu</li>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6">
             <li><b>Container Runtimes</b>: Docker and LXC</li>
-            <li><b>Containers</b>: Homer, Olivetin, Ubuntu, and Nginx Proxy Manager </li>
+            <li><b>Containers</b>: Homer, Olivetin, Pi-hole, Ubuntu, and Nginx Proxy Manager </li>
                         </div>
         </div>
           </ul>

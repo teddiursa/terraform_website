@@ -65,11 +65,14 @@ body {
   #Projects p{
       text-indent: 2em;
   }
+  #Projects {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 
   #Blog p{
     text-indent: 2em;
   }
-  
   
   .certifications h4{
     text-align: left;

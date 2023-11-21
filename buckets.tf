@@ -107,6 +107,13 @@ resource "aws_s3_object" "diagramSVG" {
   content_type = "image/svg+xml"
 }
 
+resource "aws_s3_object" "downloadPNG" {
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = "download.png"
+  source       = "../website/download.png"
+  content_type = "image/image+png"
+}
+
 resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
   bucket = aws_s3_bucket.terraformBucket.id
   index_document {

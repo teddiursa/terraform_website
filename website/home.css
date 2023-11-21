@@ -62,8 +62,12 @@ body {
     text-align: center;
   }
   
-  #Projects,#Blog p{
+  #Projects p{
       text-indent: 2em;
+  }
+
+  #Blog p{
+    text-indent: 2em;
   }
   
   

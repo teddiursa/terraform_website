@@ -209,14 +209,7 @@
         <div class="container">
             <h2>Projects</h2>
             <h3>My Cloud Resume Project (This website)</h3>
-
-            
-            <p>This project is fully automated with terraform for easy provisiong and destruction of aws resources.
-                Files are hosted in an aws S3 bucket and delivered with Cloudfront. Uses Lambda functions, API gateways,
-                and dynamoDBs to track the number of visitors and time since the last visit. Has full HTTPS encryption
-                and root domain rerouting via Route 53.</p>
             <img src="CloudDiagram.svg" alt="diagram">
-
           <ul>
                     <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-6">
@@ -229,10 +222,12 @@
                          </div>
           </div>
           </ul>
- 
+             <p>This project is fully automated with terraform for easy provisiong and destruction of aws resources.
+                Files are hosted in an aws S3 bucket and delivered with Cloudfront. Uses Lambda functions, API gateways,
+                and dynamoDBs to track the number of visitors and time since the last visit. Has full HTTPS encryption
+                and root domain rerouting via Route 53.</p>
             <h3>Home Lab</h3>
-          <p>Bare Metal Hypervisor running various virtual machines and containers. While some are primarily for testing and learning, several services are used daily. PfSense is as an open source router and firewall, Plex to stream media, Pi-hole for internal DNS, and TruNAS scale to host: media files, image iso's, and backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the hosted services and easily manage them via a web UI, including remotely running scripts. VMware's ESXI vSphere hypervisor is virtualized due to not supporting my network card and hosts commonly used Virtual Machines to help teach differences between Proxmox and VMware. While Proxmox run it's own LXC containers, Docker runs containers that need a more up to date image than LXC offers. 
-          </p>
+        </p>
             <img src="proxmox.svg" alt="diagram">
 
             <div class="row">
@@ -246,6 +241,8 @@
                         </div>
         </div>
           </ul>
+              <p>Bare Metal Hypervisor running various virtual machines and containers. While some are primarily for testing and learning, several services are used daily. PfSense is as an open source router and firewall, Plex to stream media, Pi-hole for internal DNS, and TruNAS scale to host: media files, image iso's, and backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the hosted services and easily manage them via a web UI, including remotely running scripts. VMware's ESXI vSphere hypervisor is virtualized due to not supporting my network card and hosts commonly used Virtual Machines to help teach differences between Proxmox and VMware. While Proxmox run it's own LXC containers, Docker runs containers that need a more up to date image than LXC offers. 
+          
 
     </div>
 

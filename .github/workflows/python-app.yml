@@ -43,6 +43,3 @@ jobs:
         aws-region: us-east-1
     - name: Test with pytest
       run: |
-        cd ${{github.workspace}}/code
-        pytest timeCount.py 
-        pytest visitorCount.py

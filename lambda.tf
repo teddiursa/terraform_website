@@ -1,6 +1,6 @@
 data "archive_file" "visitorCountPackage" {  
   type = "zip"  
-  source_file = "${path.module}/code/visitorCount.py" 
+  source_file = "${path.module}/src/lambdaFunctions/visitorCount.py" 
   output_path = "visitorCount.zip"
 }
 
@@ -17,7 +17,7 @@ resource "aws_lambda_function" "visitorCountFunction" {
 
 data "archive_file" "timePackage" {  
   type = "zip"  
-  source_file = "${path.module}/code/timeCount.py" 
+  source_file = "${path.module}/src/lambdaFunctions/timeCount.py" 
   output_path = "timeCount.zip"
 }
 

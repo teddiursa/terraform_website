@@ -43,3 +43,4 @@ jobs:
         aws-region: us-east-1
     - name: Test with pytest
       run: |
+        pytest tests

@@ -58,7 +58,7 @@
     <!-- Resume page-->
     <div id="Resume" class="tabcontent" style="display: none;">
 
-    <!-- Title and Links-->
+        <!-- Title and Links-->
         <div class="container">
             <div class="row">
                 <div class="title">
@@ -68,24 +68,17 @@
                             <h4><a href="https://www.gregchow.net">gregchow.net</a></h4>
                         </div>
                     </div>
-                    <h4><a
-                            href="https://drive.google.com/uc?id=1UpkVkYqKiNLRyVP3yCN91paHkqEJbtXV&export=download"
+                    <h4><a href="https://drive.google.com/uc?id=1UpkVkYqKiNLRyVP3yCN91paHkqEJbtXV&export=download"
                             download>Resume
                         </a>
                         |
-                        <a
-                            href="https://github.com/teddiursa/"
-                            >Github
+                        <a href="https://github.com/teddiursa/">Github
                         </a>
                         |
-                        <a
-                            href="https://www.linkedin.com/in/gregory-chow-1b2299a2"
-                            >LinkedIn
+                        <a href="https://www.linkedin.com/in/gregory-chow-1b2299a2">LinkedIn
                         </a>
                         |
-                        <a
-                            href="mailto: greg.choww@gmail.com"
-                            >Email
+                        <a href="mailto: greg.choww@gmail.com">Email
                         </a>
                     </h4>
                     <hr>
@@ -385,19 +378,37 @@
                 process by deploying each service at a time, starting with the buckets. After declaring what types my
                 uploaded files should be and setting an access policy, it went smoothly. Deploying cloudfront also had
                 little issues, but properly getting my HTTPS certificate and dns records had more issues. I found it
-                easier
-                to do some steps manually to better visualize the steps needed for my IAC. After creating the records
+                easier to do some steps manually to better visualize the steps needed for my IAC. After creating the
+                records
                 needing for the DNS verification, I realized I had the same issue as before, my name servers did not
-                match.
-                I changed them manually to verify this was the issue and discovered they recently (6 months ago) added a
+                match. I changed them manually to verify this was the issue and discovered they recently (6 months ago)
+                added a
                 function to update my registered domain name server's. After automating this with terraforms for loop
                 equivalent, I was pleased to see it update in real time and for my certificate to be automatically
                 validated. After splitting my functions into several files for easier future tweaking, it was time to
-                automate the functions</p>
+                automate the functions.</p>
             <h2>Github Actions</h2>
             <p>Github Actions executes a <i>workflow</i> when a specific events occurs. My workflow updates the files of
                 the S3 bucket when I push changes to my repository. This way my website updates in real time whenever I
-                make changes, instead of having to rerun my terraform code. </p>
+                make changes, instead of having to rerun my terraform code.</p>
+            <h2>Testing with pytest</h2>
+            <p></p>
+            <div class="joke">
+                <p>A QA tester walks into a bar and orders:</p>
+                <div class="jokelist">
+                <ul>
+                    <li>a beer</li>
+                    <li>2 beers</li>
+                    <li>0 beers</li>
+                    <li>99999 beers</li>
+                    <li>-1 beers</li>
+                    <li>adjkl beers</li>
+                </ul>
+                </div>
+                <span style="color:#13cf13">Test Successful!</span>
+                <p>A customer walks into the bar and asks where the bathroom is</p>
+                <p>The bar goes up in <span style="color:#ff7e29">flames</span></p>
+                </div>
         </div>
     </div>
 

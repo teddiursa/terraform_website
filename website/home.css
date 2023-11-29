@@ -81,6 +81,18 @@ body {
     text-align: left;
   }
   
+  .joke{
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    width: fit-content;
+    font-size: 18px;
+    .jokelist{
+      text-align: left;
+      margin: auto;
+      width: fit-content;
+    }
+  }
 
 
 /* If the screen size is 601px wide or more, set the font-size of <div> to 16px */

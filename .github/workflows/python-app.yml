@@ -36,7 +36,8 @@ jobs:
         # to install local modules to reference in tests
         pip install -e .   
         #install moto
-        pip install moto[dynamodb mock_lambda]
+        pip install moto[dynamodb]
+        pip install moto[lambda]
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |

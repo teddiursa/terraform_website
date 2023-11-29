@@ -68,7 +68,7 @@
                             <h4><a href="https://www.gregchow.net">gregchow.net</a></h4>
                         </div>
                     </div>
-                    <h4><a href="https://drive.google.com/uc?id=1UpkVkYqKiNLRyVP3yCN91paHkqEJbtXV&export=download"
+                    <h4><a href="https://drive.google.com/uc?id=1WhwB2mOnI9yIUnXM9fnJGgPhJWc0ACav&export=download"
                             download>Resume
                         </a>
                         |
@@ -99,15 +99,15 @@
                         <div class="col-md-3 col-sm-3 col-xs-3">
                             <p>Cisco - CCNA</p>
                             <p>Junos - JNCIA</p>
-                            <p>Python</p>
+                            <p>Cloud - AWS</p>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-3">
-                            <p>LAN/WAN</p>
-                            <p>TCP/IP Networking</p>
+                            <p>Python</p>
+                            <p>Javascript</p>
                             <p>Linux Admin</p>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-3">
-                            <p>Wireshark</p>
+                            <p>TCP/IP Networking</p>
                             <p>HTML/CSS</p>
                             <p>Customer Support</p>
                         </div>
@@ -136,12 +136,12 @@
                     <div class="row experience-summary">
                         <div class="col-md-12">
                             <p>Provided hands-on support for Cisco, Fortinet, and Juniper network devices, ensuring
-                                optimal performance and minimal downtime</p>
+                                optimal performance and minimal downtime.</p>
                             <p>Conducted physical installation, maintenance, and troubleshooting of networking
                                 equipment.</p>
                             <p>Assisted with network configurations and hardware replacements.</p>
                             <p>Collaborated with network engineers to resolve technical issues and implement changes
-                                to the network infrastructure </p>
+                                to the network infrastructure.</p>
                         </div>
                     </div>
                     <!-- Corasent -->
@@ -170,8 +170,6 @@
                             <p>Maintained a high level of customer satisfaction by providing prompt and efficient
                                 support throughout the entire support lifecycle.
                             </p>
-
-
                         </div>
                     </div>
                 </div>
@@ -181,11 +179,10 @@
                 <!-- Education and Certifications -->
                 <div class="certifications">
                     <h2 class="text-center">Education and Certifications</h2>
-
                     <div class="row certification-title">
                         <div class="certification-row">
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                <h3>Univesity of California, Santa Cruz</h3>
+                                <h3>University of California, Santa Cruz</h3>
                                 <h4>Bachelor's in Networking and Digital Technology</h4>
                             </div>
 
@@ -228,7 +225,7 @@
             <h2>Projects</h2>
             <h3>My Cloud Resume Project (This website)</h3>
             <h4><a href="https://github.com/teddiursa/terraform_website">Github Repository</a></h4>
-            <img src="CloudDiagram.svg" alt="diagram">
+            <img src="CloudDiagram.svg" alt="Diagram of AWS Cloud Infrastructure">
             <ul>
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6">
@@ -241,13 +238,13 @@
                     </div>
                 </div>
             </ul>
-            <p>This project is fully automated with terraform for easy provisiong and destruction of aws resources.
-                Files are hosted in an aws S3 bucket and delivered with Cloudfront. Uses Lambda functions, API gateways,
-                and dynamoDBs to track the number of visitors and time since the last visit. Has full HTTPS encryption
-                and root domain rerouting via Route 53.</p>
+            <p>This project is fully automated with Terraform for easy provisiong and destruction of AWS resources.
+                Files are hosted in an AWS S3 bucket and delivered with Cloudfront. Uses Lambda functions, API gateways,
+                and DynamoDB to track the number of visitors and time since the last visit. Has full HTTPS encryption
+                and root domain rerouting via Route 53. Github Actions automatically update S3 files and run python unit tests.</p>
             <h3>Home Lab</h3>
             </p>
-            <img src="proxmox.svg" alt="diagram">
+            <img src="proxmox.svg" style="width:75%" alt="diagram of Proxmox Hypervisor">
             <ul>
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6">
@@ -355,7 +352,7 @@
                 enabling CORS, I was able to successfully update and display my Visitor Counter.</p>
 
             <h2>An Additional Function</h2>
-            <p>I wanted to add an additional feature with lambda/aws, since I wanted to stand out, but I had trouble
+            <p>I wanted to add an additional feature with Lambda/AWS, since I wanted to stand out, but I had trouble
                 deciding on the function. I contemplated displaying different days of the week accessed, similar to
                 github's
                 commit calendar, but ultimately decided something much simpler: time since the last visit. I accomplished this
@@ -417,14 +414,14 @@
                 test for basic functionality and proper output, the major purpose of testing for abnormal inputs is
                 unneccessary. But I did approach it thoroughly to ensure I can scale up my lambda functions and
                 their tests. After some research, I discovered a package that enables me to run my Lambda functions
-                locally, <i>lambda_local</i>. I also used moto to create mock dynamodb tables for my testing. While it's
+                locally, <i>lambda_local</i>. I also used moto to create mock DynamoDB tables for my testing. While it's
                 not necessarily since my functions do not heavily manipulate the table data, I wanted to continue
                 the trend of learning new technologies when possible.
                 Since I was creating my mock tables during testing, I was able know exactly what the table data current
                 was, whether a static value or the current unix time, and test whether the output properly incremented the
                 count or correctly calculated the time difference.
             </p>
-            <img src="testChart.svg" alt="diagram">
+            <img src="testChart.svg" style="width:60%" alt="Time since last visit flowchart">
         </div>
     </div>
 

@@ -1,5 +1,6 @@
 import boto3
 #from moto import dynamodb
+import moto
 from moto import mock_dynamodb
 from moto import mock_lambda
 

@@ -227,6 +227,7 @@
         <div class="container">
             <h2>Projects</h2>
             <h3>My Cloud Resume Project (This website)</h3>
+            <h4><a href="https://github.com/teddiursa/terraform_website">Github Repository</a></h4>
             <img src="CloudDiagram.svg" alt="diagram">
             <ul>
                 <div class="row">
@@ -313,12 +314,12 @@
             <h2>The Website</h2>
             <p>While no Web Designer, I have done some simple web development before, including a javascript
                 visualization,
-                and I had always enjoyed how responsive web development is compared to traditional software development.
+                and I have always enjoyed how responsive web development is compared to traditional software development.
                 I
                 started by by finding a sample <a href="https://devsnap.me/html-resume-templates">template</a> online,
                 mostly for the dark mode colors, and heavily tweaking it. Funnily enough, I ended up using a different
                 color
-                scheme, specifically facebook's scheme I found in a <a
+                scheme, specifically facebook's scheme I found on a <a
                     href="https://blog.karenying.com/posts/50-shades-of-dark-mode-gray">website</a> comparing different
                 popular darkmode colors. What was most useful was the use of bootstrap grids, something I had not used
                 before. I also spent a large amount of time ensuring the website would properly display for mobile
@@ -330,11 +331,11 @@
                 of the user's screen, which helped scale my pictures.</p>
 
             <h2>Deploying on AWS</h2>
-            <p>Creating a simple static website with an S3 bucket was easy. I simply uploaded the relevant files and
+            <p>Creating a simple static website with an S3 bucket was relatively simple. I uploaded the relevant files and
                 enabled
                 it for static website hosting. After purchasing my domain name and configuring route 53 and cloudfront
                 to
-                point my domain name to my website, it still did not propragate after several hours. I discovered the
+                point my domain to my website, it still did not propragate after several hours. I discovered the
                 name
                 servers of my hosted zone and my registered domain did not match. Once I fixed this, my domain resolved
                 properly and the previously requested HTTPS certificate instantly worked as well. Once I checked my root
@@ -343,12 +344,12 @@
                 time to implement some basic web functions.</p>
 
             <h2>Programming with AWS Lambda</h2>
-            <p>One of the good things about this challenge, while it gives you the basics for each steps, it does not
+            <p>One of the good things about this challenge is, while it gives you the basics for each steps, it does not
                 detail
-                how to do it. For example, it simply links to a javescript/python tutorial not how to implement it. The
+                how. For example, it simply links to a javescript/python tutorial not how to implement the specific function. The
                 visitor counter logical was extremely simple, but I had to learn how to reference and update my
                 database.
-                Luckily, it is similar to many programming languages handle inputs, plus some database syntax. After
+                Luckily, it is similar to how many programming languages handle inputs, plus some database syntax. After
                 ensuring the proper permissions between the lambda function, the API gateway, and the database, while
                 also
                 enabling CORS, I was able to successfully update and display my Visitor Counter.</p>
@@ -357,7 +358,7 @@
             <p>I wanted to add an additional feature with lambda/aws, since I wanted to stand out, but I had trouble
                 deciding on the function. I contemplated displaying different days of the week accessed, similar to
                 github's
-                calendar, but ultimately decided something much simpler: time since the last visit. I accomplished this
+                commit calendar, but ultimately decided something much simpler: time since the last visit. I accomplished this
                 using <b>unix time</b> which is a counter from the beginning of "time" for computers, which is defined
                 as
                 1/1/1970.
@@ -366,49 +367,64 @@
                 <h4>Current Unix Time</h4>
                 <h4><span id="unixTime" style="color:#20cef5">1700501528</span></h4>
             </div>
-            <p>This <b>unix time</b> is already in seconds (after truncating) and since I'm not dealing with timezones,
+            <p>This <b>unix time</b> is already in seconds (after truncating) and, since I'm not dealing with timezones,
                 I
-                simply used this time to find the difference since last visit. I fiddled with javascript to display this
+                simply used this to find the difference since last visit. I fiddled with javascript to display this
                 cleanly in a weeks, days, hours, minutes, and seconds format, ensuring it properly displayed any spaces
                 and
-                singular/plural units.</p>
+                singular or plural units.</p>
 
             <h2>Automating with Terraform</h2>
             <p>I chose to use Terraform rather than SAM since it's a bit more flexible with other vendors. I started the
                 process by deploying each service at a time, starting with the buckets. After declaring what types my
                 uploaded files should be and setting an access policy, it went smoothly. Deploying cloudfront also had
-                little issues, but properly getting my HTTPS certificate and dns records had more issues. I found it
-                easier to do some steps manually to better visualize the steps needed for my IAC. After creating the
+                little issues, but properly getting my HTTPS certificate and dns records was a bit trickier. I found it
+                easier to do some steps manually to better visualize the steps needed for my IaC. After creating the
                 records
                 needing for the DNS verification, I realized I had the same issue as before, my name servers did not
-                match. I changed them manually to verify this was the issue and discovered they recently (6 months ago)
+                match. I changed them manually to verify this was the issue and discovered they recently
                 added a
                 function to update my registered domain name server's. After automating this with terraforms for loop
-                equivalent, I was pleased to see it update in real time and for my certificate to be automatically
-                validated. After splitting my functions into several files for easier future tweaking, it was time to
+                equivalent, I was pleased to see it update in real time and for my certificate automatically
+                validated. After splitting my functions into several files for easier future improvements, it was time to
                 automate the functions.</p>
             <h2>Github Actions</h2>
             <p>Github Actions executes a <i>workflow</i> when a specific events occurs. My workflow updates the files of
                 the S3 bucket when I push changes to my repository. This way my website updates in real time whenever I
                 make changes, instead of having to rerun my terraform code.</p>
             <h2>Testing with pytest</h2>
-            <p></p>
-            <div class="joke">
+            <p>I delayed creating unit tests for my Lambda code for a simple reason: there is no input for me to test
+                for. Doing Unit Tests always reminds me of a certain QA joke:</p>
+            <div class="joke">=
                 <p>A QA tester walks into a bar and orders:</p>
                 <div class="jokelist">
-                <ul>
-                    <li>a beer</li>
-                    <li>2 beers</li>
-                    <li>0 beers</li>
-                    <li>99999 beers</li>
-                    <li>-1 beers</li>
-                    <li>adjkl beers</li>
-                </ul>
+                    <ul>
+                        <li>a beer</li>
+                        <li>2 beers</li>
+                        <li>0 beers</li>
+                        <li>99999 beers</li>
+                        <li>-1 beers</li>
+                        <li>adjkl beers</li>
+                    </ul>
                 </div>
                 <span style="color:#13cf13">Test Successful!</span>
                 <p>A customer walks into the bar and asks where the bathroom is</p>
                 <p>The bar goes up in <span style="color:#ff7e29">flames</span></p>
-                </div>
+            </div>
+            <p>A large reason for testing is to ensure that an unexpected input is handled properly and, as the joke
+                eloquently demonstrates, it's not as simple as it might seem.
+                However, my functions call upon values in a database, not directly from the user or code. So, while I can
+                test for basic functionality and proper output, the major purpose of testing for abnormal inputs is
+                unneccessary. But I did approach it thoroughly to ensure I can scale up my lambda functions and
+                their tests. After some research, I discovered a package that enables me to run my Lambda functions
+                locally, <i>lambda_local</i>. I also used moto to create mock dynamodb tables for my testing. While it's
+                not necessarily since my functions do not heavily manipulate the table data, I wanted to continue
+                the trend of learning new technologies when possible.
+                Since I was creating my mock tables during testing, I was able know exactly what the table data current
+                was, whether a static value or the current unix time, and test whether the output properly incremented the
+                count or correctly calculated the time difference.
+            </p>
+            <img src="testChart.svg" alt="diagram">
         </div>
     </div>
 

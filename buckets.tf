@@ -92,20 +92,28 @@ resource "aws_s3_object" "js" {
   content_type = "text/javascript"
 }
 
-resource "aws_s3_object" "diagramSVG" {
+# resource "aws_s3_object" "diagramSVG" {
+#   bucket       = aws_s3_bucket.terraformBucket.id
+#   key          = "CloudDiagram.svg"
+#   source       = "../website/CloudDiagram.svg"
+#   content_type = "image/svg+xml"
+# }
+
+resource "aws_s3_object" "svg" {
+  for_each = fileset("website/", "*.svg")
   bucket       = aws_s3_bucket.terraformBucket.id
-  key          = "CloudDiagram.svg"
-  source       = "../website/CloudDiagram.svg"
+  key          = each.value
+  source       = "website/${each.value}"
   content_type = "image/svg+xml"
 }
 
 
-resource "aws_s3_object" "diagramSVG" {
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = "proxmox.svg"
-  source       = "../website/proxmox.svg"
-  content_type = "image/svg+xml"
-}
+# resource "aws_s3_object" "diagramSVG" {
+#   bucket       = aws_s3_bucket.terraformBucket.id
+#   key          = "proxmox.svg"
+#   source       = "../website/proxmox.svg"
+#   content_type = "image/svg+xml"
+# }
 
 
 resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
@@ -122,13 +130,6 @@ resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
 resource "aws_s3_bucket_cors_configuration" "myCorsConfig" {
   bucket = aws_s3_bucket.terraformBucket.id
 
-  #   cors_rule {
-  #     allowed_headers = ["*"]
-  #     allowed_methods = ["PUT", "POST"]
-  #     allowed_origins = ["https://s3-website-test.hashicorp.com"]
-  #     expose_headers  = ["ETag"]
-  #     max_age_seconds = 3000
-  #   }
 
   cors_rule {
     allowed_methods = ["GET"]

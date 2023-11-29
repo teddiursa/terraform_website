@@ -3,7 +3,7 @@ import boto3
 import boto3.dynamodb.conditions as conditions
 
 import pytest
-
+import moto
 from moto import mock_dynamodb
 
 

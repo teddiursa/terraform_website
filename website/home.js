@@ -107,13 +107,16 @@ function secondsToWeeks(input) {
             output += " second";
     }
     //for when refresh is less than a second
-    else {
+    else if (output != "") {
         output += "less than a second"
     }
 
     return output;
 }
 
+
+//fill text while function waits for output
+document.getElementById('visitorCount').innerText = 'Loading'
 
 
 //call function to get visitor count from lambda function 

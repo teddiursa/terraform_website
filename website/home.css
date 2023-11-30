@@ -7,19 +7,6 @@ body {
     font-size: 16px;
 }
 
-/* resize title for mobile*/
-@media screen and (min-width: 601px) {
-    h1 {
-        font-size: 32px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    h1 {
-        font-size: 20px;
-    }
-}
-
 /* Style tab links */
 .tablink {
     background-color: #242526;
@@ -42,80 +29,101 @@ body {
     padding: 52px 20px;
 }
 
-/*
-#Home {}
-#Resume {}
-#Projects {}
-#Contact {}
-*/
+#Resume {
+    .container {
+        .title {
 
-#Home h6{
-    text-align: center;
-  }
-  
-  #Home p{
-    text-indent: 2em;
-  }
-  
-  
-  #Projects h3,h4{
-    text-align: center;
-  }
-  
-  #Projects p{
-      text-indent: 2em;
-  }
-  #Projects img{
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
+            h1,
+            h4 {
+                text-align: center;
+            }
 
-  #Blog p{
-    text-indent: 2em;
-  }
-  
-  .certifications h4{
-    text-align: left;
-  }
-  .work-experience h4{
-    text-align: left;
-  }
-  
-  .joke{
-    margin: auto;
-    align-content: center;
-    text-align: center;
-    width: fit-content;
-    font-size: 18px;
-    .jokelist{
-      text-align: left;
-      margin: auto;
-      width: fit-content;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        hr {
+            width: 75%;
+        }
+
+        .separator {
+            width: 30%;
+        }
     }
-  }
-
-
-/* If the screen size is 601px wide or more, set the font-size of <div> to 16px */
-@media screen and (min-width: 601px) {
-    .skills {
-        font-size: 16px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .skills {
-        font-size: 12px;
-    }
-}
-
-.title {
-    margin-top: 50px;
-    margin-bottom: 10px;
-    text-align: left;
-    font-size: 10px;
 
 }
 
+#Projects {
+    .container {
+
+        h2,
+        h3,
+        h4 {
+            text-align: center;
+        }
+
+        img {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            text-indent: 2em;
+        }
+    }
+}
+
+#Blog {
+    .container {
+
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        p {
+            text-indent: 2em;
+        }
+
+        .unixTimeLine {
+            text-align: center;
+        }
+
+        .joke {
+            margin: auto;
+            text-align: center;
+            width: fit-content;
+
+            @media screen and (min-width: 601px) {
+                font-size: 18px;
+            }
+
+            @media screen and (max-width: 600px) {
+                font-size: 12px;
+            }
+
+            .jokelist {
+                text-align: left;
+                margin: auto;
+                width: fit-content;
+            }
+
+        }
+    }
+}
+
+.counter {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-color: #242526;
+    width: 100%;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+}
 
 .link {
     color: #DB4D57;
@@ -126,7 +134,6 @@ body {
         font-weight: bold;
     }
 }
-
 
 .topnav {
     overflow: hidden;
@@ -195,18 +202,25 @@ img {
     margin-right: auto;
 }
 
+/* Mobile resizing*/
+
 /* If the screen size is 601px wide or more, resize some fonts */
 @media screen and (min-width: 601px) {
     .counter {
         font-size: 14px;
     }
 
-    .certifications {
+    .certifications,
+    .skills {
         font-size: 16px;
     }
 
     .unixTimeLine {
         font-size: 20px;
+    }
+
+    h1 {
+        font-size: 32px;
     }
 
 }
@@ -219,7 +233,9 @@ img {
 
     .certifications,
     p,
-    ol {
+    ol,
+    .skills,
+    li {
         font-size: 12px;
     }
 
@@ -231,175 +247,99 @@ img {
         font-size: 16px;
     }
 
-}
-
-.counter {
-    position: relative;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
-    background-color: #242526;
-    width: 100%;
-
-    text-align: center;
-    font-family: 'Josefin Sans', sans-serif;
-}
-
-/* align the unix time header*/
-.unixTimeLine {
-    text-align: center;
-}
-
-
-h1,
-h2 {
-    text-align: center;
-}
-
-
-hr {
-    width: 75%;
-}
-
-.separator {
-    width: 30%;
-}
-
-.title {
-    margin-top: 50px;
-    margin-bottom: 10px;
-    text-align: center;
-
-
-
-    .link {
-        color: #DB4D57;
-        text-align: center;
-
-        :hover {
-            text-decoration: none;
-            font-weight: bold;
-        }
-    }
-
-    .summary {
-        padding: 20px;
-
-        .skills {
-            column-count: 2;
-            display: flex;
-            justify-content: space-between;
-        }
-    }
-
-
-    .work-experience {
-        padding: 20px;
-
-        .experience-title {
-            margin-top: 50px;
-            column-count: 2;
-            display: flex;
-            justify-content: space-between;
-
-            /* align some of the headers*/
-
-            h2 {
-                text-align: center;
-            }
-
-            h3,
-            h4 {
-                text-align: left;
-            }
-
-        }
-
-        .experience-summary {
-            margin-top: 30px;
-            margin-bottom: 50px;
-        }
-
-    }
-
-
-    .certifications {
-        padding: 20px;
-
-        .certification-title {
-            margin-top: 50px;
-            text-align: left;
-        }
-
-        .certification-row {
-            column-count: 2;
-            column-gap: 50px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-
+    h1 {
+        font-size: 20px;
     }
 }
 
+/*Home page*/
 
 /* Wall
------------------------------------------------------------ */
+    ----------------------------------------------------------- */
 
-.wall{
-  width: 100%;
-  padding-bottom: 52.5%;
-  position: relative;
-  background-image: url('https://i.imgur.com/4lJzerg.png');
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  
-  &:before{
-    content: '';
-    background-color: rgba(0,0,0,0.35);
-    display: block;
+.wall {
     width: 100%;
-    height: 100%;
-    position: absolute;
-  }
-  
-  .wallHeader{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    padding: 2rem;
-    width: 100%;
-  }
-  
-  .wallTitle{
-    font-size: 4em;
-    margin-bottom: 1rem;
-    color: #E4E6EB;
+    padding-bottom: 52.5%;
+    position: relative;
+    background-image: url('https://i.imgur.com/4lJzerg.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 
-  }
-  
-  .wallText{
-    
-    font-size: 1.8em;
-    color: #E4E6EB;
-  }
+    &:before {
+        content: '';
+        background-color: rgba(0, 0, 0, 0.35);
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
+    .wallHeader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        padding: 2rem;
+        width: 100%;
+    }
+
+    .wallTitle {
+        margin-bottom: 1rem;
+        color: #E4E6EB;
+    }
+
+    .wallText {
+        text-align: center;
+        color: #E4E6EB;
+    }
+
+    /* resize title for mobile*/
+    @media screen and (min-width: 601px) {
+        .wallTitle {
+            font-size: 4em;
+        }
+
+        .wallText {
+            font-size: .8em;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .wallTitle {
+            font-size: 2em;
+        }
+
+        .wallText {
+            font-size: .8em;
+        }
+    }
 }
 
 /* Wall [END]
------------------------------------------------------------ */
+    ----------------------------------------------------------- */
 
 /* Main Content
------------------------------------------------------------ */
+    ----------------------------------------------------------- */
 
-.wallContent{
-  max-width: 800px;
-  margin: 0 auto;
-  padding: .5rem 1.5rem;
+.wallContent {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: .5rem 1.5rem;
+
+    h2,
+    h4,
+    h6 {
+        text-align: center;
+    }
+
+    p {
+        text-indent: 2em;
+    }
+
 }
 
 /* Main Content [END]
------------------------------------------------------------ */
+    ----------------------------------------------------------- */

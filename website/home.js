@@ -107,7 +107,7 @@ function secondsToWeeks(input) {
             output += " second";
     }
     //for when refresh is less than a second
-    else if (output != "") {
+    else if (output == "") {
         output += "less than a second"
     }
 
@@ -116,7 +116,7 @@ function secondsToWeeks(input) {
 
 
 //fill text while function waits for output
-document.getElementById('visitorCount').innerText = "Loading"
+//document.getElementById('visitorCount').innerText = "Loading"
 
 
 //call function to get visitor count from lambda function 
@@ -124,7 +124,10 @@ fetch('https://mjgtu0006j.execute-api.us-east-1.amazonaws.com/visitorCountStage/
     .then(response => response.json())
     .then((data) => {
         document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)  //then add to text of id visitorCount
+        document.getElementById('visitorLoad').style.display= "none"
+        document.getElementById('visitorShow').style.display= "block"
     })
+
 
 fetch('https://rma0hn88p2.execute-api.us-east-1.amazonaws.com/websiteTime/') //get last time via lambda function
     .then(response => response.json())

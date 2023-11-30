@@ -116,7 +116,7 @@ function secondsToWeeks(input) {
 
 
 //fill text while function waits for output
-document.getElementById('visitorCount').innerText = 'Loading'
+document.getElementById('visitorCount').innerText = "Loading"
 
 
 //call function to get visitor count from lambda function 

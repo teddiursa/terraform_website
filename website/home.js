@@ -126,7 +126,7 @@ fetch('https://mjgtu0006j.execute-api.us-east-1.amazonaws.com/visitorCountStage/
         //then add to text of id visitorCount
         document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)  
         //display block after loading
-        document.getElementByClass('counter').style.display= "block"
+        document.getElementsByClassName('counter').style.display= "block"
     })
 
 

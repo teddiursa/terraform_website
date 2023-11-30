@@ -123,17 +123,19 @@ function secondsToWeeks(input) {
 fetch('https://mjgtu0006j.execute-api.us-east-1.amazonaws.com/visitorCountStage/') //get visitor count via lambda function
     .then(response => response.json())
     .then((data) => {
-        document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)  //then add to text of id visitorCount
-        document.getElementById('visitorLoad').style.display= "none"
-        document.getElementById('visitorShow').style.display= "block"
+        //then add to text of id visitorCount
+        document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)  
+        //display block after loading
+        document.getElementById('Counter').style.display= "block"
     })
 
 
 fetch('https://rma0hn88p2.execute-api.us-east-1.amazonaws.com/websiteTime/') //get last time via lambda function
     .then(response => response.json())
     .then((data) => {
+        //then add to text of id "time" 
         document.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time)
-    })//then add to text of id "time" 
+    })
 
 setInterval(function () {
     document.getElementById('unixTime').innerText = Math.floor(Date.now() / 1000)

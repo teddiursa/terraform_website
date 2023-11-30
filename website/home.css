@@ -115,6 +115,7 @@ body {
 }
 
 .counter {
+    display: none;
     position: relative;
     left: 0;
     bottom: 0;
@@ -126,13 +127,6 @@ body {
     h2{
     margin-top: 10px;
     }
-}
-
-#visitorLoad{
-    display:block;
-}
-#visitorShow{
-    display:none;
 }
 
 .link {
@@ -341,7 +335,7 @@ img {
 
     h2,
     h4,
-    h6 {
+    h6{
         text-align: center;
     }
 

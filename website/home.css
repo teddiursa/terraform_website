@@ -29,89 +29,79 @@ body {
     padding: 52px 20px;
 }
 
-#Resume {
-    .container {
-        .title {
-
-            h1,
-            h4 {
-                text-align: center;
-            }
-
-        }
-
-        h2 {
-            text-align: center;
-        }
-
-        hr {
-            width: 75%;
-        }
-
-        .separator {
-            width: 30%;
-        }
-    }
-
+#Home h6,
+h2 {
+    text-align: center;
 }
 
-#Projects {
-    .container {
-
-        h2,
-        h3,
-        h4 {
-            text-align: center;
-        }
-
-        img {
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-
-        p {
-            text-indent: 2em;
-        }
-    }
+#Home p {
+    text-indent: 2em;
 }
 
-#Blog {
-    .container {
+#Resume h1,
+h2 {
+    text-align: center;
+}
 
-        h1,
-        h2 {
-            text-align: center;
-        }
+.title h4 {
+    text-align: center;
+}
 
-        p {
-            text-indent: 2em;
-        }
+#Resume hr {
+    width: 75%;
+}
 
-        .unixTimeLine {
-            text-align: center;
-        }
+#Resume .separator {
+    width: 30%;
+}
 
-        .joke {
-            margin: auto;
-            text-align: center;
-            width: fit-content;
+#Projects h2,
+h3,
+h4 {
+    text-align: center;
+}
 
-            @media screen and (min-width: 601px) {
-                font-size: 18px;
-            }
+#Projects img {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 
-            @media screen and (max-width: 600px) {
-                font-size: 12px;
-            }
+#Projects p {
+    text-indent: 2em;
+}
 
-            .jokelist {
-                text-align: left;
-                margin: auto;
-                width: fit-content;
-            }
+#Blog h1,
+h2 {
+    text-align: center;
+}
 
-        }
+#Blog p {
+    text-indent: 2em;
+}
+
+.unixTimeLine {
+    text-align: center;
+}
+
+.joke {
+    margin: auto;
+    text-align: center;
+    width: fit-content;
+
+    @media screen and (min-width: 601px) {
+        font-size: 18px;
     }
+
+    @media screen and (max-width: 600px) {
+        font-size: 12px;
+    }
+
+    .jokelist {
+        text-align: left;
+        margin: auto;
+        width: fit-content;
+    }
+
 }
 
 .counter {
@@ -324,27 +314,4 @@ img {
 }
 
 /* Wall [END]
-    ----------------------------------------------------------- */
-
-/* Main Content
-    ----------------------------------------------------------- */
-
-.wallContent {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: .5rem 1.5rem;
-
-    h2,
-    h4,
-    h6 {
-        text-align: center;
-    }
-
-    p {
-        text-indent: 2em;
-    }
-
-}
-
-/* Main Content [END]
     ----------------------------------------------------------- */

@@ -29,8 +29,12 @@ body {
     padding: 52px 20px;
 }
 
-#Home h6,
-h2 {
+.wallcontent{
+    width: 800px;
+    margin: auto;
+}
+
+#Home h6, h2 {
     text-align: center;
 }
 
@@ -39,10 +43,23 @@ h2 {
     text-indent: 2em;
 }
 
+#Home .row{
+    margin: auto;
+    width: 800px;
+}
+
+
 #Resume h1,
 h2 {
     text-align: center;
 }
+#Resume h3{
+    text-align: left;
+}
+#Resume h3{
+    text-align: left;
+}
+
 
 .title h4 {
     text-align: center;
@@ -56,9 +73,10 @@ h2 {
     width: 30%;
 }
 
-#Projects h2,
-h3,
-h4 {
+#Projects h2, h3{
+    text-align: center;
+}
+#Projects h4{
     text-align: center;
 }
 
@@ -71,8 +89,7 @@ h4 {
     text-indent: 2em;
 }
 
-#Blog h1,
-h2 {
+#Blog h1, h2 {
     text-align: center;
 }
 

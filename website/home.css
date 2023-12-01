@@ -35,6 +35,7 @@ h2 {
 }
 
 #Home p {
+    text-align: center;
     text-indent: 2em;
 }
 
@@ -105,7 +106,8 @@ h2 {
 }
 
 .counter {
-    display: none;
+    /*hide text off screen while loading*/
+    text-indent: -5000px;
     position: relative;
     left: 0;
     bottom: 0;

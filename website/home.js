@@ -129,7 +129,7 @@ fetch('https://rma0hn88p2.execute-api.us-east-1.amazonaws.com/websiteTime/') //g
         //then add to text of id "time" 
         document.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time)
         //display block after loading
-        document.getElementById('counterID').style.display = "block"
+        document.getElementById('counterID').style.textIndent = "0px";
     })
 
 setInterval(function () {

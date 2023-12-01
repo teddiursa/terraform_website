@@ -72,10 +72,7 @@ resource "aws_s3_object" "html" {
   key          = "home.html"
   source       = "../website/home.html"
   content_type = "text/html"
-  # The filemd5() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-  # etag = "${md5(file("path/to/file"))}"
-  #etag = filemd5("path/to/file")
+
 }
 
 resource "aws_s3_object" "css" {
@@ -92,12 +89,7 @@ resource "aws_s3_object" "js" {
   content_type = "text/javascript"
 }
 
-# resource "aws_s3_object" "diagramSVG" {
-#   bucket       = aws_s3_bucket.terraformBucket.id
-#   key          = "CloudDiagram.svg"
-#   source       = "../website/CloudDiagram.svg"
-#   content_type = "image/svg+xml"
-# }
+
 
 resource "aws_s3_object" "svg" {
   for_each = fileset("website/", "*.svg")
@@ -121,6 +113,8 @@ resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
   index_document {
     suffix = "home.html"
   }
+
+  
   # TODO
   #   error_document {
   #     key = "error.html"
@@ -135,4 +129,30 @@ resource "aws_s3_bucket_cors_configuration" "myCorsConfig" {
     allowed_methods = ["GET"]
     allowed_origins = ["*"]
   }
+}
+
+
+#errors
+resource "aws_s3_object" "htmlError" {
+  for_each     = fileset("errors/", "*.html")
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = each.value
+  source       = "errors/${each.value}"
+  content_type = "text/html"
+}
+
+resource "aws_s3_object" "cssRrror" {
+  for_each     = fileset("errors/", "*.css")
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = each.value
+  source       = "errors/${each.value}"
+  content_type = "text/css"
+}
+
+resource "aws_s3_object" "javascriptError" {
+  for_each     = fileset("errors/", "*.js")
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = each.value
+  source       = "errors/${each.value}"
+  content_type = "text/javascript"
 }

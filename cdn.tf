@@ -60,9 +60,18 @@ resource "aws_cloudfront_distribution" "distribution" {
         "TLSv1.2",
       ]
     }
+    
   }
 
   aliases = ["www.gregchow.net", "gregchow.net"]
+
+  custom_error_response {
+    error_code = "404"
+    error_caching_min_ttl = "10"
+    response_code = "404"
+    response_page_path = "/404.html"
+
+  }
 
   viewer_certificate {
     acm_certificate_arn = aws_acm_certificate_validation.certValidation.certificate_arn #aws_acm_certificate.cert.arn

@@ -1,0 +1,35 @@
+body {
+    background: #18191A;
+    color: #E4E6EB;
+    max-width: 1800px;
+    font-family: 'Josefin Sans', sans-serif;
+    margin: auto;
+    font-size: 18px;
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 30px;
+}
+
+#status {
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.status-up {
+    color: #13cf13;
+  font-size: 32px;
+}
+
+.status-down {
+    color: #cf1313;
+  font-size: 32px;
+}

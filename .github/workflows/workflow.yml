@@ -18,6 +18,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
     - name: Deploy static site to S3 bucket
-      run: aws s3 sync ./website/ s3://www.gregchow.net --delete
+      run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude ".vs*" --exclude "desktop.ini"
     - name: copy error files to S3 buck
-      run: aws s3 cp ./errors/ s3://www.gregchow.net
+      run: aws s3 cp ./errors/ s3://www.gregchow.net --recursive

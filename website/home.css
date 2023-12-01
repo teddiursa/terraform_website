@@ -54,7 +54,7 @@ h2 {
     text-align: center;
 }
 #Resume h3{
-    text-align: right;
+    text-align: left;
 }
 
 #Resume .container{
@@ -73,6 +73,9 @@ h2 {
     width: 30%;
 }
 
+#Resume #date {
+    text-align: right;
+}
 #Projects h2, h3{
     text-align: center;
 }

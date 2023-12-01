@@ -54,12 +54,12 @@ h2 {
     text-align: center;
 }
 #Resume h3{
-    text-align: left;
-}
-#Resume h3{
-    text-align: left;
+    text-align: right;
 }
 
+#Resume .container{
+    max-width: 800px;
+}
 
 .title h4 {
     text-align: center;

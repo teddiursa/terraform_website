@@ -20,4 +20,4 @@ jobs:
     - name: Deploy static site to S3 bucket
       run: aws s3 sync ./website/ s3://www.gregchow.net --delete
     - name: copy error files to S3 buck
-      run: aws cp ./errors/ s3://www.gregchow.net
+      run: aws s3 cp ./errors/ s3://www.gregchow.net

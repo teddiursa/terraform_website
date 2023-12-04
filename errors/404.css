@@ -4,13 +4,11 @@ body {
     max-width: 1800px;
     font-family: 'Josefin Sans', sans-serif;
     margin: auto;
-    font-size: 18px;
     text-align: center;
     padding: 50px;
 }
 
 h1 {
-    font-size: 4em;
     margin-bottom: 20px;
 }
 
@@ -21,15 +19,62 @@ p {
 #status {
     margin-bottom: 30px;
     font-weight: bold;
-    font-size: 36px;
 }
 
 .status-up {
     color: #13cf13;
-  font-size: 42px;
 }
 
 .status-down {
     color: #cf1313;
-  font-size: 42px;
+}
+
+/* text size adjustments for mobile */
+@media screen and (min-width: 601px) {
+
+    body {
+        font-size: 22px;
+    }
+
+    h1 {
+        font-size: 4em;
+    }
+
+    #status {
+        font-size: 36px;
+    }
+
+    .status-up {
+        font-size: 42px;
+    }
+
+    .status-down {
+        font-size: 42px;
+    }
+
+
+}
+
+@media screen and (max-width: 600px) {
+
+    body {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    #status {
+        font-size: 28px;
+    }
+
+    .status-up {
+        font-size: 32px;
+    }
+
+    .status-down {
+        font-size: 32px;
+    }
+
 }

@@ -66,20 +66,21 @@ resource "aws_route53_record" "rootRecord6" {
 
 
 #records for home lab server nginx reverse proxy
-resource "aws_route53_record" "nginxRecord" {
-  zone_id = aws_route53_zone.hostedZone.zone_id
-  name    = "*.gregchow.net"
-  type    = "A"
-  ttl     = "60"
-  records = ["192.168.55.15"]
- }
+# costs  $$$$$
+# resource "aws_route53_record" "nginxRecord" {
+#   zone_id = aws_route53_zone.hostedZone.zone_id
+#   name    = "*.gregchow.net"
+#   type    = "A"
+#   ttl     = "60"
+#   records = ["192.168.55.15"]
+#  }
 
-resource "aws_route53_record" "proxmoxRecord" {
-  zone_id = aws_route53_zone.hostedZone.zone_id
-  name    = "promxox.gregchow.net"
-  type    = "A"
-  ttl     = "60"
-  records = ["192.168.55.5"]
-}
+# resource "aws_route53_record" "proxmoxRecord" {
+#   zone_id = aws_route53_zone.hostedZone.zone_id
+#   name    = "promxox.gregchow.net"
+#   type    = "A"
+#   ttl     = "60"
+#   records = ["192.168.55.5"]
+# }
 
 

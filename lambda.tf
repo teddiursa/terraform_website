@@ -30,3 +30,19 @@ resource "aws_lambda_function" "timeFunction" {
         handler       = "timeCount.lambda_handler"
         timeout       = 10
 }
+
+data "archive_file" "statusPackage" {  
+  type = "zip"  
+  source_file = "${path.module}/src/lambdaFunctions/getStatus.py" 
+  output_path = "getStatus.zip"
+}
+
+resource "aws_lambda_function" "statusFunction" {
+        function_name = "getStatus"
+        filename      = "getStatus.zip"
+        source_code_hash = data.archive_file.timePackage.output_base64sha256
+        role          = aws_iam_role.lambdaRole.arn
+        runtime       = "python3.11"
+        handler       = "getStatus.lambda_handler"
+        timeout       = 10
+}

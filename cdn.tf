@@ -65,12 +65,18 @@ resource "aws_cloudfront_distribution" "distribution" {
 
   aliases = ["www.gregchow.net", "gregchow.net"]
 
+  #customer error pages/responses for 404 and 403 errors
   custom_error_response {
     error_code = "404"
     error_caching_min_ttl = "10"
     response_code = "404"
     response_page_path = "/404.html"
-
+  }
+  custom_error_response {
+    error_code = "403"
+    error_caching_min_ttl = "10"
+    response_code = "404"
+    response_page_path = "/404.html"
   }
 
   viewer_certificate {

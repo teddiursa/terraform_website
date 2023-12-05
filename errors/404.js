@@ -28,3 +28,4 @@ fetch('https://aht00u6882.execute-api.us-east-1.amazonaws.com/getStatus/') //get
             document.getElementById("status").innerHTML = 'www.gregchow.net is currently: <span class="status-down">down</span>';
         }
     })
+}

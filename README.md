@@ -1,7 +1,51 @@
-# terraform_website
-Website hosted on AWS, launched by terraform.
+# Cloud Website
+Website hosted on AWS, managed by Terraform.
 
-www.gregchow.net
+[www.gregchow.net](https://gregchow.net)
+[!Diagram of Cloud Infrastructure](https://raw.githubusercontent.com/teddiursa/terraform_website/3988fff88e46e8e2fad7b796fe2048ab833dc0b9/website/CloudDiagram.svg)
+<p align="center">
+  <img src="./website/CloudDiagram.svg" alt="Diagram of Cloud Infrastructure" width="738">
+</p>
 
 Originally created for the cloud resume challenge, this repo hosts files needed to launch and host the relevant files in AWS.
-It uses terraform to automatically create, provision, and destroy the necessary services. It utilizes some basic Lambda Functions and DynamoDB to display the visitor count and time since last visit. Has working python tests using moto to Mock dyanmoDB tables. Automatically updates S3 bucket items using Github actions.
+It uses Terraform to automatically create, provision, and destroy the necessary services. It utilizes some basic Lambda Functions and DynamoDB to display the visitor count and time since last visit. Has working python tests using moto to Mock dyanmoDB tables. Automatically updates S3 bucket items using Github actions.
+
+## Terraform Automation
+Terraform code automates creating and destroying AWS infrastructure for streamlined configuration.
+Uses [Environmental Variables](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables) to securely store credentials.
+Code is organized into several separate files based on infrastructure type: [S3 buckets](https://github.com/teddiursa/terraform_website/blob/main/buckets.tf), [CloudFront Distributions](https://github.com/teddiursa/terraform_website/blob/main/cdn.tf), [DynamoDB](https://github.com/teddiursa/terraform_website/blob/main/dynamoDB.tf)[Route 53 Certificates](https://github.com/teddiursa/terraform_website/blob/main/certs.tf), [IAM Roles](https://github.com/teddiursa/terraform_website/blob/main/iam.tf), [Lambda Functions](https://github.com/teddiursa/terraform_website/blob/main/lambda.tf), and [Route 53 DNS Records](https://github.com/teddiursa/terraform_website/blob/main/records.tf).
+
+Terraform automatically upload/update files on 'terraform apply', ensuring cloud infrastructure stays up to date.
+
+## Website Files
+The Website files are stored under:
+'''
+[/website](https://github.com/teddiursa/terraform_website/tree/main/website) and [/errors](https://github.com/teddiursa/terraform_website/tree/main/errors) 
+'''
+Which include the ***Home*** website files and the ***404*** error page files respectively
+
+## Lambda  Functions
+The Lambda Python functions are stored under:
+'''
+[/src/lambdaFunctions](https://github.com/teddiursa/terraform_website/tree/main/src/lambdaFunctions)
+'''
+Uses DynamoDB to store values and are referenced using AWS's API Gateway.
+
+## Python Unit Tests
+Their respective tests are stored under:
+'''
+[/tests](https://github.com/teddiursa/terraform_website/tree/main/src/lambdaFunctions)
+'''
+
+Uses [Moto](https://docs.getmoto.org/en/latest/) to mock AWS services and [python-lamdba-local](https://pypi.org/project/python-lambda-local/) to locally run lambda functions for testing.
+
+Uses [pytest](https://docs.pytest.org/en/7.4.x/) to help scale testing and uses dummy information set in [conftest.py](https://github.com/teddiursa/terraform_website/blob/main/tests/conftest.py)
+
+## Github Actions
+Github actions workflows are stored in:
+'''
+[.gitHub/workflows](https://github.com/teddiursa/terraform_website/blob/main/.github/workflows)
+'''
+Automates [Python tests](https://github.com/teddiursa/terraform_website/blob/main/.github/workflows/python-app.yml) and [S3 Bucket changes](https://github.com/teddiursa/terraform_website/blob/main/.github/workflows/workflow.yml) on 'git push', ensuring deployed website files stay current and non-functional python functions get flagged.
+
+

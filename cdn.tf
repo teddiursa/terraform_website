@@ -81,7 +81,7 @@ resource "aws_cloudfront_distribution" "distribution" {
 
   viewer_certificate {
     acm_certificate_arn = aws_acm_certificate_validation.certValidation.certificate_arn #aws_acm_certificate.cert.arn
-    ssl_support_method  = "vip"
+    ssl_support_method  = "sni-only"
   }
 
   price_class = "PriceClass_100"

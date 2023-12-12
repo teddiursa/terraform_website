@@ -24,4 +24,12 @@ def lambda_handler(event, context):
         )
     
 
-    return {'Time':timeSince}
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": json.dumps({
+            'Time': timeSince
+        })
+    }

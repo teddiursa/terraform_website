@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "terraformBucket" {
-  bucket = "www.gregchow.net"
+  bucket = var.fullDomainName
+  #bucket = "www.gregchow.net"
   #acl = ""
   tags = {
     Name        = "terraformBucket"
@@ -9,7 +10,8 @@ resource "aws_s3_bucket" "terraformBucket" {
 
 #root bucket for redirection
 resource "aws_s3_bucket" "rootBucket" {
-  bucket = "gregchow.net"
+  bucket = var.domainName
+  #bucket = "gregchow.net"
   #acl = ""
   tags = {
     Name        = "terraformBucket"

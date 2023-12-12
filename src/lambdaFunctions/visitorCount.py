@@ -18,4 +18,12 @@ def lambda_handler(event, context):
         ReturnValues='UPDATED_NEW'
         )
 
-    return {'Count':newCount}
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": json.dumps({
+            'Time': newCount
+        })
+    }

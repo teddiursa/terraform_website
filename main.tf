@@ -6,7 +6,13 @@ variable "domainName" {
   default = "gregchow.net"
 }
 
+variable "fullDomainName" {
+  default = "www.gregchow.net"
+}
 
+variable "accountId" {
+  default = "661250114429"
+}
 
 ##outputs
 output "s3_url" {
@@ -21,4 +27,17 @@ output "website_url" {
 
 output "validation" {
   value = aws_route53_record.record.*.fqdn
+}
+
+output "status_API_Gateway" {
+  value = "${aws_api_gateway_deployment.statusDeployment.invoke_url}"
+}
+
+output "iam"{
+  value = "arn:aws:execute-api:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.statusApi.id}/*/${aws_api_gateway_method.statusProxyRoot.http_method}${aws_api_gateway_resource.statusProxy.path}"
+}
+
+
+output "iamTime"{
+  value = "arn:aws:execute-api:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.timeApi.id}/*/${aws_api_gateway_method.timeProxyRoot.http_method}${aws_api_gateway_resource.timeProxy.path}"
 }

@@ -3,7 +3,8 @@ resource "aws_route53_zone" "hostedZone" {
 }
 
 resource "aws_route53domains_registered_domain" "domain" {
-  domain_name = "gregchow.net"
+  domain_name = var.domainName
+  #domain_name = "gregchow.net"
 
   #set name servers of registered domain to match hosted zone
   dynamic "name_server" {
@@ -14,14 +15,16 @@ resource "aws_route53domains_registered_domain" "domain" {
   }
 
   tags = {
-    Environment = "gregchow.net"
+    #Environment = "gregchow.net"
+    Environment = var.domainName
   }
 }
 
 resource "aws_acm_certificate" "cert" {
   domain_name = var.domainName
   #provider                  = aws.acm
-  subject_alternative_names = ["www.gregchow.net"]
+  #subject_alternative_names = ["www.gregchow.net"]
+  subject_alternative_names = [var.fullDomainName]
   validation_method         = "DNS"
   tags = {
     Name : var.domainName

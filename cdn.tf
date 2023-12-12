@@ -63,7 +63,8 @@ resource "aws_cloudfront_distribution" "distribution" {
     
   }
 
-  aliases = ["www.gregchow.net", "gregchow.net"]
+  #aliases = ["www.gregchow.net", "gregchow.net"]
+  aliases = [var.fullDomainName, var.domainName]
 
   #customer error pages/responses for 404 and 403 errors
   custom_error_response {

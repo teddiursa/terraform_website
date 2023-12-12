@@ -1,4 +1,5 @@
 import http.client
+import json
 
 OK = int(200)
 
@@ -7,7 +8,17 @@ def lambda_handler(event, context):
     conn.request("GET","/")
     response = conn.getresponse()
     if response.status is OK:
-        return {'Status': 'Up'}
+        responseCode = 'Up'
     else:
-        return {'Status': 'Down'}
-
+        responseCode = 'Down'
+    
+    return {
+        "statusCode": OK,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": json.dumps({
+            'Status': responseCode
+        })
+    }
+    

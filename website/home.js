@@ -124,7 +124,7 @@ fetch('https://mjgtu0006j.execute-api.us-east-1.amazonaws.com/visitorCountStage/
 
 
 
-fetch('https://rma0hn88p2.execute-api.us-east-1.amazonaws.com/websiteTime/') //get last time via lambda function
+fetch('https://98aslfmlah.execute-api.us-east-1.amazonaws.com/countStage/') //get last time via lambda function
     .then(response => response.json())
     .then((data) => {
         //then add to text of id "time" 

@@ -121,7 +121,9 @@ fetch('https://c2vjc2w3x1.execute-api.us-east-1.amazonaws.com/countStage/') //ge
         //then add to text of id visitorCount
         document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)
         //display block after loading
-        document.getElementById('counterID').style.textIndent = "0px";
+        setTimeout(function() {
+            document.getElementById('counterID').style.textIndent = "0px";
+          }, 300);
     })
 
 
@@ -130,6 +132,7 @@ fetch('https://qqipovd6o9.execute-api.us-east-1.amazonaws.com/timeStage/') //get
     .then(response => response.json())
     .then((data) => {
         //then add to text of id "time" 
+        
         document.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time)
     })
 

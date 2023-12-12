@@ -27,7 +27,9 @@ def lambda_handler(event, context):
     return {
         "statusCode": 200,
         "headers": {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Access-Control-Allow-Origin': 'https://www.gregchow.net',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
         "body": json.dumps({
             'Time': timeSince

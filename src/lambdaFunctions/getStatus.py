@@ -15,7 +15,9 @@ def lambda_handler(event, context):
     return {
         "statusCode": OK,
         "headers": {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Access-Control-Allow-Origin': 'https://www.gregchow.net',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
         "body": json.dumps({
             'Status': responseCode

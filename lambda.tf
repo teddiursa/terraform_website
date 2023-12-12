@@ -57,3 +57,30 @@ resource "aws_lambda_function" "statusFunction" {
 #   # within the API Gateway "REST API".
 #   source_arn = "${aws_api_gateway_rest_api.statusApi.execution_arn}/*/*"
 # }
+
+resource "aws_lambda_permission" "allowStatus" {
+  statement_id  = "AllowApiStatusGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.statusFunction.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = "arn:aws:events:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.statusApi.id}/*/*/*"
+  #qualifier     = aws_lambda_alias.test_alias.name
+}
+
+resource "aws_lambda_permission" "allowCount" {
+  statement_id  = "AllowApicountGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.visitorCountFunction.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = "arn:aws:events:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.countApi.id}/*/*/*"
+  #qualifier     = aws_lambda_alias.test_alias.name
+}
+
+resource "aws_lambda_permission" "allowTime" {
+  statement_id  = "AllowApitimeGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.timeFunction.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = "arn:aws:events:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.timeApi.id}/*/*/*"
+  #qualifier     = aws_lambda_alias.test_alias.name
+}

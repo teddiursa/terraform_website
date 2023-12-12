@@ -19,7 +19,7 @@ function checkStatus() {
 
 // Check with lambda for better compatability
 
-fetch('https://tnrmxb93sk.execute-api.us-east-1.amazonaws.com/statusStage/') //get last time via lambda function
+fetch('https://qqipovd6o9.execute-api.us-east-1.amazonaws.com/timeStage/') //get last time via lambda function
     .then(response => response.json())
     .then((data) => {
         if (data.Status == 'Up') {

@@ -115,7 +115,7 @@ function secondsToWeeks(input) {
 }
 
 //call function to get visitor count from lambda function 
-fetch('https://mjgtu0006j.execute-api.us-east-1.amazonaws.com/visitorCountStage/') //get visitor count via lambda function
+fetch('https://c2vjc2w3x1.execute-api.us-east-1.amazonaws.com/countStage/') //get visitor count via lambda function
     .then(response => response.json())
     .then((data) => {
         //then add to text of id visitorCount
@@ -124,7 +124,7 @@ fetch('https://mjgtu0006j.execute-api.us-east-1.amazonaws.com/visitorCountStage/
 
 
 
-fetch('https://98aslfmlah.execute-api.us-east-1.amazonaws.com/countStage/') //get last time via lambda function
+fetch('https://qqipovd6o9.execute-api.us-east-1.amazonaws.com/timeStage/') //get last time via lambda function
     .then(response => response.json())
     .then((data) => {
         //then add to text of id "time" 

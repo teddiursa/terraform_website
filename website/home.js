@@ -114,28 +114,26 @@ function secondsToWeeks(input) {
     return output;
 }
 
-function loadCounter() {
-    //call function to get visitor count from lambda function 
-    fetch('https://c2vjc2w3x1.execute-api.us-east-1.amazonaws.com/countStage/') //get visitor count via lambda function
-        .then(response => response.json())
-        .then((data) => {
-            //then add to text of id visitorCount
-            document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)
-        })
+//call function to get visitor count from lambda function 
+fetch('https://c2vjc2w3x1.execute-api.us-east-1.amazonaws.com/countStage/') //get visitor count via lambda function
+    .then(response => response.json())
+    .then((data) => {
+        //then add to text of id visitorCount
+        document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)
+        //display block after loading
+        setTimeout(function() {
+            document.getElementById('counterID').style.textIndent = "0px";
+          }, 100);
+    })
 
 
-    //call function to get access time from lambda function
-    fetch('https://qqipovd6o9.execute-api.us-east-1.amazonaws.com/timeStage/') //get last time via lambda function
-        .then(response => response.json())
-        .then((data) => {
-            //then add to text of id "time"        
-            document.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time)
-        })
-    //display block after loading
-
-    document.getElementById('counterID').style.textIndent = "0px";
-
-}
+//call function to get access time from lambda function
+fetch('https://qqipovd6o9.execute-api.us-east-1.amazonaws.com/timeStage/') //get last time via lambda function
+    .then(response => response.json())
+    .then((data) => {
+        //then add to text of id "time"        
+        document.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time)
+    })
 
 setInterval(function () {
     document.getElementById('unixTime').innerText = Math.floor(Date.now() / 1000)

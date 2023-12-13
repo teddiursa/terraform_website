@@ -167,6 +167,19 @@ resource "aws_s3_bucket" "jsonBucket" {
     Name        = "terraformBucket"
     Environment = "Prod"
   }
+  
+}
+
+#enable cors from www.gregchow.net
+resource "aws_s3_bucket_cors_configuration" "jsonCors" {
+  bucket = aws_s3_bucket.jsonBucket.id
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "HEAD"]
+    allowed_origins = ["https://www.gregchow.net"]
+    expose_headers  = []
+    max_age_seconds = 3000
+  }
 }
 
 #json bucket ownership

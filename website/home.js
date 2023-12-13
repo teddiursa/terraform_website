@@ -153,7 +153,8 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     .then(data => {
         // Work with the JSON data here
         console.log(data); // Display the retrieved JSON data
-        urls = JSON.parse(data);
+        const jsonObject = json.parse(data);
+        //document.getElementById('test').innerHTML = jsonObject.urlCount;
     })
     .catch(error => {
         // Handle any errors that occurred during the fetch

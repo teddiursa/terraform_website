@@ -121,10 +121,12 @@ fetch('https://c2vjc2w3x1.execute-api.us-east-1.amazonaws.com/countStage/') //ge
         //then add to text of id visitorCount
         document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)
         //display block after loading
-        setTimeout(function() {
+        setTimeout(function () {
             document.getElementById('counterID').style.textIndent = "0px";
-          }, 100);
+        }, 100);
+
     })
+    .catch(error => console.error('Error fetching Count Lambda:', error));
 
 
 //call function to get access time from lambda function
@@ -134,8 +136,26 @@ fetch('https://qqipovd6o9.execute-api.us-east-1.amazonaws.com/timeStage/') //get
         //then add to text of id "time"        
         document.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time)
     })
+    .catch(error => console.error('Error fetching Time Lambda:', error));
 
 setInterval(function () {
     document.getElementById('unixTime').innerText = Math.floor(Date.now() / 1000)
 },
     1000);
+
+fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Work with the JSON data here
+        console.log(data); // Display the retrieved JSON data
+        urls = JSON.parse(data);
+    })
+    .catch(error => {
+        // Handle any errors that occurred during the fetch
+        console.error('There was a problem fetching the data:', error);
+    });

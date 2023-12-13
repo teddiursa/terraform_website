@@ -176,6 +176,35 @@ resource "aws_s3_bucket_ownership_controls" "jsonOwnership" {
     object_ownership = "BucketOwnerPreferred"
   }
 }
+# allow bucket access
+resource "aws_s3_bucket_public_access_block" "pbJson" {
+  bucket = aws_s3_bucket.terraformBucket.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+
+resource "aws_s3_bucket_policy" "policyJson" {
+  bucket = aws_s3_bucket.jsonBucket.id
+  policy = jsonencode(
+    {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "PublicReadGetObject",
+          "Effect" : "Allow",
+          "Principal" : "*",
+          "Action" : "s3:GetObject",
+          "Resource" : "arn:aws:s3:::${aws_s3_bucket.jsonBucket.id}/*"
+        }
+      ]
+    }
+  )
+}
+
 
 # Render the template
 data "template_file" "urlTemplate" {
@@ -187,36 +216,9 @@ data "template_file" "urlTemplate" {
   }
 }
 
-# resource "local_file" "urlFile" {
-#   filename = "links.json"
-#   content  = data.template_file.urlTemplate.rendered
-# }
-
-
 resource "aws_s3_object" "jsonCount" {
   bucket       = aws_s3_bucket.jsonBucket.id
   key          = "links.json"
   content = data.template_file.urlTemplate.rendered #templatefile("jsonFiles/links.conf.tpl", local.template_vars)
   content_type = "application/json"
 }
-
-# # Render the template
-# data "template_file" "app_config_template" {
-#   template = file("template.tpl")
-#   vars = {
-#     app_config = jsonencode(var.app_config)
-#   }
-# }
-
-# # Create a local file to save the generated JSON config
-# resource "local_file" "app_config" {
-#   filename = "app_config.json"
-#   content  = data.template_file.app_config_template.rendered
-# }
-
-
-# resource "aws_s3_bucket_object" "whatever-server" {
-#   bucket = aws_s3_bucket.dataflow.id
-#   acl    = "private"
-#   key    = "config/server-${var.farm}.conf"
-#   content = templatefile("filestore/server-farm.conf.tpl", local.template_vars)

@@ -118,7 +118,7 @@ function secondsToWeeks(input) {
 let urlCount = "";
 let urlTime = "";
 
-/ fetch JSON data containing urls, then fetch data from urls
+// fetch JSON data containing urls, then fetch data from urls
 fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
   .then(response => {
     if (!response.ok) {

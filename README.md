@@ -1,6 +1,8 @@
 # Cloud Website
-<h2 align="center">[www.gregchow.net](https://gregchow.net)<h2>
-<p align="center">
+<h2 align="center">
+www.GregChow.net
+</h2>
+  <p align="center">
   <img src="./website/CloudDiagram.svg" alt="Diagram of Cloud Infrastructure" width="738">
 </p>
 <h3 align="center">Website hosted on AWS, managed by Terraform.
@@ -16,34 +18,26 @@ Code is organized into several separate files based on infrastructure type: [S3 
 Terraform automatically upload/update files on `terraform apply`, ensuring cloud infrastructure stays up to date.
 
 ## Website Files
-The Website files are stored under:
-```
-[/website](https://github.com/teddiursa/terraform_website/tree/main/website) and [/errors](https://github.com/teddiursa/terraform_website/tree/main/errors) 
-```
-Which include the ***Home*** website files and the ***404*** error page files respectively
+The Website files are stored under the [website](/website) and [errors](/errors) folders.
+
+Which include the ***Home*** website files and the ***404*** error page files respectively.
+
+Main website files are: [html](/website/home.html), [css](/website/home.css), and [Javascript](/website/home.js) files
 
 ## Lambda  Functions
-The Lambda Python functions are stored under:
-```
-[/src/lambdaFunctions](https://github.com/teddiursa/terraform_website/tree/main/src/lambdaFunctions)
-```
+The Lambda Python functions are stored under the [src/lambdaFunctions](/src/lambdaFunctions) folder.
+
 Uses DynamoDB to store values and are referenced using AWS's API Gateway.
 
 ## Python Unit Tests
-Their respective tests are stored under:
-```
-[/tests](https://github.com/teddiursa/terraform_website/tree/main/src/lambdaFunctions)
-```
+Their respective tests are stored under the [tests](/tests) folder.
 
 Uses [Moto](https://docs.getmoto.org/en/latest/) to mock AWS services and [python-lamdba-local](https://pypi.org/project/python-lambda-local/) to locally run lambda functions for testing.
-
 Uses [pytest](https://docs.pytest.org/en/7.4.x/) to help scale testing and uses dummy information set in [conftest.py](https://github.com/teddiursa/terraform_website/blob/main/tests/conftest.py)
 
 ## Github Actions
-Github actions workflows are stored in:
-```
-[.gitHub/workflows](https://github.com/teddiursa/terraform_website/blob/main/.github/workflows)
-```
-Automates [Python tests](https://github.com/teddiursa/terraform_website/blob/main/.github/workflows/python-app.yml) and [S3 Bucket changes](https://github.com/teddiursa/terraform_website/blob/main/.github/workflows/workflow.yml) on `git push``, ensuring deployed website files stay current and non-functional python functions get flagged.
+Github actions workflows are stored in the [.gitHub/workflows](/.github/workflows) directory.
+
+Automates [Python tests](/.github/workflows/python-app.yml) and [S3 Bucket changes](/.github/workflows/workflow.yml) on `git push``, ensuring deployed website files stay current and non-functional python functions get flagged.
 
 

@@ -158,3 +158,65 @@ resource "aws_s3_object" "javascriptError" {
   source       = "errors/${each.value}"
   content_type = "text/javascript"
 }
+
+#bucket to pass api gateway url to javascript
+
+resource "aws_s3_bucket" "jsonBucket" {
+  bucket = "gregchow.jsonbucket"
+  tags = {
+    Name        = "terraformBucket"
+    Environment = "Prod"
+  }
+}
+
+#json bucket ownership
+resource "aws_s3_bucket_ownership_controls" "jsonOwnership" {
+  bucket = aws_s3_bucket.jsonBucket.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+# Render the template
+data "template_file" "urlTemplate" {
+  template = file("jsonFiles/links.tpl")
+  vars = {
+    urlCountVar = "${aws_api_gateway_deployment.countDeployment.invoke_url}"
+    urlTimeVar = "${aws_api_gateway_deployment.timeDeployment.invoke_url}"
+    urlStatusVar = "${aws_api_gateway_deployment.statusDeployment.invoke_url}"
+  }
+}
+
+# resource "local_file" "urlFile" {
+#   filename = "links.json"
+#   content  = data.template_file.urlTemplate.rendered
+# }
+
+
+resource "aws_s3_object" "jsonCount" {
+  bucket       = aws_s3_bucket.jsonBucket.id
+  key          = "links.json"
+  content = data.template_file.urlTemplate.rendered #templatefile("jsonFiles/links.conf.tpl", local.template_vars)
+  content_type = "application/json"
+}
+
+# # Render the template
+# data "template_file" "app_config_template" {
+#   template = file("template.tpl")
+#   vars = {
+#     app_config = jsonencode(var.app_config)
+#   }
+# }
+
+# # Create a local file to save the generated JSON config
+# resource "local_file" "app_config" {
+#   filename = "app_config.json"
+#   content  = data.template_file.app_config_template.rendered
+# }
+
+
+# resource "aws_s3_bucket_object" "whatever-server" {
+#   bucket = aws_s3_bucket.dataflow.id
+#   acl    = "private"
+#   key    = "config/server-${var.farm}.conf"
+#   content = templatefile("filestore/server-farm.conf.tpl", local.template_vars)

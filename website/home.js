@@ -37,13 +37,13 @@ function ordinalSuffix(i) {
     return i + "th";
 }
 
-
+// Constants for conversion from seconds
 const weekSeconds = 604800;
 const daySeconds = 86400;
 const hourSeconds = 3600;
 const minuteSeconds = 60;
 
-//convert hours to weeks, days, and hours
+// Converts seconds to weeks, days, hours, and minutes
 //make sure to use plural or singular as necessary
 function secondsToWeeks(input) {
     time = input;
@@ -114,50 +114,54 @@ function secondsToWeeks(input) {
     return output;
 }
 
-//call function to get visitor count from lambda function 
-fetch('https://c2vjc2w3x1.execute-api.us-east-1.amazonaws.com/countStage/') //get visitor count via lambda function
-    .then(response => response.json())
-    .then((data) => {
-        //then add to text of id visitorCount
-        document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count)
-        //display block after loading
-        setTimeout(function () {
-            document.getElementById('counterID').style.textIndent = "0px";
-        }, 100);
+// varaibles for JSON url data
+let urlCount = "";
+let urlTime = "";
 
-    })
-    .catch(error => console.error('Error fetching Count Lambda:', error));
+/ fetch JSON data containing urls, then fetch data from urls
+fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Stores json urls into variables
+    urlCount = data.urlCount;
+    urlTime = data.urlTime;
 
+    // Call function to get visitor count from lambda function 
+    return fetch(urlCount); 
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then((data) => {
+    // update visitor Count
+    document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count);
+    // Call function to get access time from lambda function
+    return fetch(urlTime); 
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then((data) => {
+    // update time        
+    document.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time);
+    //display block after loading
+    document.getElementById('counterID').style.textIndent = "0px";
+  })
+  .catch(error => console.error('Error:', error));
 
-//call function to get access time from lambda function
-fetch('https://qqipovd6o9.execute-api.us-east-1.amazonaws.com/timeStage/') //get last time via lambda function
-    .then(response => response.json())
-    .then((data) => {
-        //then add to text of id "time"        
-        document.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time)
-    })
-    .catch(error => console.error('Error fetching Time Lambda:', error));
-
+// function to iterate unix timer
 setInterval(function () {
     document.getElementById('unixTime').innerText = Math.floor(Date.now() / 1000)
 },
     1000);
-
-fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Work with the JSON data here
-        console.log(data); // Display the retrieved JSON data
-        const jsonObject = JSON.parse(data);
-        //document.getElementById('test').innerHTML = jsonObject.urlCount;
-        console.log(jsonObject.urlCount);
-    })
-    .catch(error => {
-        // Handle any errors that occurred during the fetch
-        console.error('There was a problem fetching the data:', error);
-    });

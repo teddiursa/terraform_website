@@ -28,6 +28,7 @@ Main website files are: [html](/website/home.html), [css](/website/home.css), an
 The Lambda Python functions are stored under the [src/lambdaFunctions](/src/lambdaFunctions) folder.
 
 Uses DynamoDB to store values and are referenced using AWS's API Gateway.
+API Gateway Invoke Urls are store as a json file in an S3 bucket, to allow javascript to invoke the correct Url between different Terraform deployments.
 
 ## Python Unit Tests
 Their respective tests are stored under the [tests](/tests) folder.

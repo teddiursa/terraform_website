@@ -381,7 +381,6 @@
                 cleanly in a weeks, days, hours, minutes, and seconds format, ensuring it properly displayed any spaces
                 and
                 singular or plural units.</p>
-
             <h2>Automating with Terraform</h2>
             <p>I chose to use Terraform rather than SAM since it's a bit more flexible with other vendors. I started the
                 process by deploying each service at a time, starting with the buckets. After declaring what types my
@@ -436,6 +435,18 @@
                 count or correctly calculated the time difference.
             </p>
             <img src="testChart.svg" style="width:60%" alt="Time since last visit flowchart">
+            <h2>Passing API urls from Terraform</h2>
+            <p>An Issue I discovered from Terraform automation is the API gateway urls changed every deployment. Which
+                would break the javascript lambda calls unless they were manually added. I decided to resolve this in a
+                Cloud CI/CD way:
+            <ul>
+                <li>Have terraform create a JSON file with the API gateway invoke urls</li>
+                <li>Store the JSON file in an S3 bucket</li>
+                <li>Have the javascript retrieve the JSON file and use the URLs to invoke the Lambda Function</li>
+            </ul>
+            I had the fetches happened synchronously, since they depended on the JSON fetch, which increased the load
+            time. I also had the Lambda display not load until they were completed, with a text-indent, to ensure the
+            old values would never be displayed.
             <h2>Error Page</h2>
             <p>To replace the generic <a style="color:#cf1313">404</a> and <a style="color:#cf1313">403</a> error pages,
                 I created a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>
@@ -444,7 +455,6 @@
                 sometimes blocked. I contemplated having this error page be hosted in a separate S3 bucket, in case I
                 had torn down the website using Terraform. However, Terraform would also destroy the CloudFront
                 distribution, which would cause the error page to be accessible anyways.
-
             </p>
         </div>
     </div>

@@ -7,6 +7,27 @@ body {
     font-size: 16px;
 }
 
+/* style scrollbar*/
+/* width */
+::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #242526;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
 /* Style tab links */
 .tablink {
     background-color: #242526;
@@ -29,12 +50,13 @@ body {
     padding: 52px 20px;
 }
 
-.wallcontent{
+.wallcontent {
     width: 800px;
     margin: auto;
 }
 
-#Home h6, h2 {
+#Home h6,
+h2 {
     text-align: center;
 }
 
@@ -43,7 +65,7 @@ body {
     text-indent: 2em;
 }
 
-#Home .row{
+#Home .row {
     margin: auto;
     width: 800px;
 }
@@ -53,11 +75,12 @@ body {
 h2 {
     text-align: center;
 }
-#Resume h3{
+
+#Resume h3 {
     text-align: left;
 }
 
-#Resume .container{
+#Resume .container {
     max-width: 800px;
 }
 
@@ -76,10 +99,13 @@ h2 {
 #Resume #date {
     text-align: right;
 }
-#Projects h2, h3{
+
+#Projects h2,
+h3 {
     text-align: center;
 }
-#Projects h4{
+
+#Projects h4 {
     text-align: center;
 }
 
@@ -92,7 +118,8 @@ h2 {
     text-indent: 2em;
 }
 
-#Blog h1, h2 {
+#Blog h1,
+h2 {
     text-align: center;
 }
 
@@ -138,11 +165,13 @@ h2 {
     font-family: 'Josefin Sans', sans-serif;
     row-gap: 0px;
     margin: 0px;
+
     h2 {
         margin-top: 10px;
         margin-bottom: 0px;
     }
-    h5{
+
+    h5 {
         margin: 0px;
     }
 }

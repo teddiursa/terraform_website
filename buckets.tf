@@ -143,7 +143,7 @@ resource "aws_s3_object" "htmlError" {
   content_type = "text/html"
 }
 
-resource "aws_s3_object" "cssRrror" {
+resource "aws_s3_object" "cssError" {
   for_each     = fileset("errors/", "*.css")
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = each.value

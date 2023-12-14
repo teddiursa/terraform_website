@@ -121,51 +121,51 @@ let counter = '<h2>You are the <span style="color:#67B868">'
 
 // fetch JSON data containing urls, then fetch data from urls
 fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Stores json urls into variables
-    urlCount = data.urlCount;
-    urlTime = data.urlTime;
-	
-	//increment loading text
-	document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Stores json urls into variables
+        urlCount = data.urlCount;
+        urlTime = data.urlTime;
 
-    // Call function to get visitor count from lambda function 
-    return fetch(urlCount); 
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then((data) => {
-    // update visitor Count
-    counter += ordinalSuffix(data.Count) + '</span> Visitor!</h2><h2>The last visitor was <span style="color:#67B868">'
-	
-		//increment loading text
-	document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
-    // Call function to get access time from lambda function
-    return fetch(urlTime); 
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then((data) => {
-    // update time        
-    counter += secondsToWeeks(data.Time) + '</span>            ago </h2>        <h5>Created with AWS Lambda and DynamoDB</h5>'
-    //display block after loading
-    document.getElementById('counterID').innerHTML = counter;
-  })
-  .catch(error => console.error('Error:', error));
+        //increment loading text
+        document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
+
+        // Call function to get visitor count from lambda function 
+        return fetch(urlCount);
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then((data) => {
+        // update visitor Count
+        counter += ordinalSuffix(data.Count) + '</span> Visitor!</h2><h2>The last visitor was <span style="color:#67B868">'
+
+        //increment loading text
+        document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
+        // Call function to get access time from lambda function
+        return fetch(urlTime);
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then((data) => {
+        // update time        
+        counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>'
+        //display block after loading
+        document.getElementById('counterID').innerHTML = counter;
+    })
+    .catch(error => console.error('Error:', error));
 
 // function to iterate unix timer
 setInterval(function () {

@@ -1,5 +1,5 @@
 {
     "urlCount": "${urlCountVar}",
     "urlTime": "${urlTimeVar}",
-    "urtStatus": "${urlStatusVar}"
+    "urlStatus": "${urlStatusVar}"
   }

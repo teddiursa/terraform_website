@@ -164,6 +164,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     counter.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time);
     //display block after loading
     document.getElementById('counterID').innerHTML = counter;
+  })
   .catch(error => console.error('Error:', error));
 
 // function to iterate unix timer

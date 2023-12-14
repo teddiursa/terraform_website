@@ -126,8 +126,6 @@ h2 {
 }
 
 .counter {
-    /*hide text off screen while loading*/
-    text-indent: -5000px;
     position: relative;
     left: 0;
     bottom: 0;

@@ -117,6 +117,10 @@ function secondsToWeeks(input) {
 // varaibles for JSON url data
 let urlCount = "";
 let urlTime = "";
+let counter = "<h2>You are the <span id="visitorCount" style="color:#67B868">105th</span> Visitor!</h2>
+        <h2>The last visitor was <span id="lastAccessed" style="color:#67B868">50 seconds</span>
+            ago </h2>
+        <h5>Created with AWS Lambda and DynamoDB</h5>"
 
 // fetch JSON data containing urls, then fetch data from urls
 fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
@@ -130,6 +134,9 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     // Stores json urls into variables
     urlCount = data.urlCount;
     urlTime = data.urlTime;
+	
+	//increment loading text
+	document.getElementById('counterID').innerHTML = "<h2>Loading..</h2>"
 
     // Call function to get visitor count from lambda function 
     return fetch(urlCount); 
@@ -142,7 +149,10 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
   })
   .then((data) => {
     // update visitor Count
-    document.getElementById('visitorCount').innerText = ordinalSuffix(data.Count);
+    counter.getElementById('visitorCount').innerText = ordinalSuffix(data.Count);
+	
+		//increment loading text
+	document.getElementById('counterID').innerHTML = "<h2>Loading...</h2>"
     // Call function to get access time from lambda function
     return fetch(urlTime); 
   })
@@ -154,10 +164,9 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
   })
   .then((data) => {
     // update time        
-    document.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time);
+    counter.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time);
     //display block after loading
-    document.getElementById('counterID').style.textIndent = "0px";
-  })
+    document.getElementById('counterID').innerHTML = counter;
   .catch(error => console.error('Error:', error));
 
 // function to iterate unix timer

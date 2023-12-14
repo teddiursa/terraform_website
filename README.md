@@ -39,6 +39,6 @@ Uses [pytest](https://docs.pytest.org/en/7.4.x/) to help scale testing and uses 
 ## Github Actions
 Github actions workflows are stored in the [.gitHub/workflows](/.github/workflows) directory.
 
-Automates [Python tests](/.github/workflows/python-app.yml) and [S3 Bucket changes](/.github/workflows/workflow.yml) on `git push``, ensuring deployed website files stay current and non-functional python functions get flagged.
+Automates [Python tests](/.github/workflows/python-app.yml) and [S3 Bucket changes](/.github/workflows/workflow.yml) on `git push`, ensuring deployed website files stay current and non-functional python functions get flagged.
 
 

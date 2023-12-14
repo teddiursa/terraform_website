@@ -117,7 +117,7 @@ function secondsToWeeks(input) {
 // varaibles for JSON url data
 let urlCount = "";
 let urlTime = "";
-let counter = '<h2>You are the <span id="visitorCount" style="color:#67B868">105th</span> Visitor!</h2>        <h2>The last visitor was <span id="lastAccessed" style="color:#67B868">50 seconds</span>            ago </h2>        <h5>Created with AWS Lambda and DynamoDB</h5>'
+let counter = '<h2>You are the <span style="color:#67B868">'
 
 // fetch JSON data containing urls, then fetch data from urls
 fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
@@ -133,7 +133,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     urlTime = data.urlTime;
 	
 	//increment loading text
-	document.getElementById('counterID').innerHTML = "<h2>Loading..</h2>"
+	document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
 
     // Call function to get visitor count from lambda function 
     return fetch(urlCount); 
@@ -146,10 +146,10 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
   })
   .then((data) => {
     // update visitor Count
-    counter.getElementById('visitorCount').innerText = ordinalSuffix(data.Count);
+    counter += ordinalSuffix(data.Count) + '</span> Visitor!</h2><h2>The last visitor was <span style="color:#67B868">'
 	
 		//increment loading text
-	document.getElementById('counterID').innerHTML = "<h2>Loading...</h2>"
+	document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
     // Call function to get access time from lambda function
     return fetch(urlTime); 
   })
@@ -161,7 +161,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
   })
   .then((data) => {
     // update time        
-    counter.getElementById('lastAccessed').innerText = secondsToWeeks(data.Time);
+    counter += secondsToWeeks(data.Time) + '</span>            ago </h2>        <h5>Created with AWS Lambda and DynamoDB</h5>'
     //display block after loading
     document.getElementById('counterID').innerHTML = counter;
   })

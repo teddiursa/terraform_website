@@ -125,20 +125,32 @@ h2 {
 
 }
 
+
 .counter {
     position: relative;
-    left: 0;
-    bottom: 0;
     overflow: hidden;
     background-color: #242526;
+    display: grid;
+    align-items: center;
+    height: 140px;
     width: 100%;
     text-align: center;
     font-family: 'Josefin Sans', sans-serif;
-
+    row-gap: 0px;
+    margin: 0px;
     h2 {
         margin-top: 10px;
+        margin-bottom: 0px;
+    }
+    h5{
+        margin: 0px;
     }
 }
+
+
+
+
+
 
 .link {
     color: #DB4D57;

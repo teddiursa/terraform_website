@@ -117,10 +117,7 @@ function secondsToWeeks(input) {
 // varaibles for JSON url data
 let urlCount = "";
 let urlTime = "";
-let counter = "<h2>You are the <span id="visitorCount" style="color:#67B868">105th</span> Visitor!</h2>
-        <h2>The last visitor was <span id="lastAccessed" style="color:#67B868">50 seconds</span>
-            ago </h2>
-        <h5>Created with AWS Lambda and DynamoDB</h5>"
+let counter = '<h2>You are the <span id="visitorCount" style="color:#67B868">105th</span> Visitor!</h2>        <h2>The last visitor was <span id="lastAccessed" style="color:#67B868">50 seconds</span>            ago </h2>        <h5>Created with AWS Lambda and DynamoDB</h5>'
 
 // fetch JSON data containing urls, then fetch data from urls
 fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')

@@ -15,15 +15,12 @@ resource "aws_route53domains_registered_domain" "domain" {
   }
 
   tags = {
-    #Environment = "gregchow.net"
     Environment = var.domainName
   }
 }
 
 resource "aws_acm_certificate" "cert" {
-  domain_name = var.domainName
-  #provider                  = aws.acm
-  #subject_alternative_names = ["www.gregchow.net"]
+  domain_name               = var.domainName
   subject_alternative_names = [var.fullDomainName]
   validation_method         = "DNS"
   tags = {

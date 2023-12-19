@@ -1,9 +1,7 @@
-// Check with lambda for better compatability
-
-// varaibles for JSON url data
+// Variable for JSON url data
 let urlStatus = "";
 
-// fetch JSON data containing urls, then fetch data from url
+// Fetch JSON data containing urls, then fetch data from url
 fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
   .then(response => {
     if (!response.ok) {
@@ -25,11 +23,11 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     return response.json();
   })
   .then((data) => {
-    // update status Count
+    // Update status HTML
     if (data.Status == 'Up') {
-        document.getElementById("status").innerHTML = 'www.gregchow.net is currently: <span class="status-up">up</span>';
+        document.getElementById("status").innerHTML = 'GregChow.net is currently <span class="status-up">up</span>';
     } else {
-        document.getElementById("status").innerHTML = 'www.gregchow.net is currently: <span class="status-down">down</span>';
+        document.getElementById("status").innerHTML = 'GregChow.net is currently <span class="status-down">down</span>';
     }
   })
   .catch(error => console.error('Error:', error));

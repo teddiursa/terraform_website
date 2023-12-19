@@ -1,5 +1,4 @@
 import boto3
-#from moto import dynamodb
 import moto
 from moto import mock_dynamodb
 from moto import mock_lambda
@@ -15,11 +14,11 @@ from lambdaFunctions.visitorCount import lambda_handler
 
 context = Context(5)  
 
+# Function to create Mock table of Visitor Count Table.
 @mock_dynamodb
 def test_createmockTimeTable():
     dynamodb = boto3.resource('dynamodb')
     myTable = 'visitorCountTable'
-    #create mock table
     table = dynamodb.create_table(TableName=myTable,
         KeySchema=[{'AttributeName': 'id','KeyType': 'HASH'}],
         AttributeDefinitions=[
@@ -31,6 +30,7 @@ def test_createmockTimeTable():
 
 @pytest.fixture(scope='function')
 def test_mockTimeTable(eventDummyInfo):
+    # Fill the mock table with Dummy Value.
     table = test_createmockTimeTable()
     myTable = 'timeTable'
     dummyCount = 100
@@ -43,9 +43,8 @@ def test_mockTimeTable(eventDummyInfo):
     )
     result = call(lambda_handler, eventDummyInfo, context)
 
-    # expect to get 1 second as response
+    # Test actual response with expected value. 
     expected_response = ({'Time': dummyCount + 1}, None)
-
     assert result == expected_response
 
 

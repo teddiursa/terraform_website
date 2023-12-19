@@ -21,8 +21,7 @@ resource "aws_route53_record" "certRecord" {
 #www  cert
 resource "aws_route53_record" "record" {
   zone_id = aws_route53_zone.hostedZone.zone_id
-  #name    = "www.gregchow.net"
-  name = var.fullDomainName
+  name    = var.fullDomainName
   type    = "A"
   alias {
     name                   = aws_cloudfront_distribution.distribution.domain_name
@@ -34,8 +33,7 @@ resource "aws_route53_record" "record" {
 #root cert
 resource "aws_route53_record" "rootRecord" {
   zone_id = aws_route53_zone.hostedZone.zone_id
-  name = var.domainName
-  #name    = "gregchow.net"
+  name    = var.domainName
   type    = "A"
   alias {
     name                   = aws_cloudfront_distribution.rootDistribution.domain_name
@@ -46,8 +44,7 @@ resource "aws_route53_record" "rootRecord" {
 
 resource "aws_route53_record" "record6" {
   zone_id = aws_route53_zone.hostedZone.zone_id
-  name = var.fullDomainName
-  #name    = "www.gregchow.net"
+  name    = var.fullDomainName
   type    = "AAAA"
   alias {
     name                   = aws_cloudfront_distribution.distribution.domain_name
@@ -58,9 +55,8 @@ resource "aws_route53_record" "record6" {
 
 resource "aws_route53_record" "rootRecord6" {
   zone_id = aws_route53_zone.hostedZone.zone_id
-  name = var.domainName
-  #name    = "gregchow.net"
-  type    = "AAAA"
+  name    = var.domainName
+  type = "AAAA"
   alias {
     name                   = aws_cloudfront_distribution.rootDistribution.domain_name
     zone_id                = aws_cloudfront_distribution.rootDistribution.hosted_zone_id
@@ -68,23 +64,5 @@ resource "aws_route53_record" "rootRecord6" {
   }
 }
 
-
-#records for home lab server nginx reverse proxy
-# costs  $$$$$
-# resource "aws_route53_record" "nginxRecord" {
-#   zone_id = aws_route53_zone.hostedZone.zone_id
-#   name    = "*.gregchow.net"
-#   type    = "A"
-#   ttl     = "60"
-#   records = ["192.168.55.15"]
-#  }
-
-# resource "aws_route53_record" "proxmoxRecord" {
-#   zone_id = aws_route53_zone.hostedZone.zone_id
-#   name    = "promxox.gregchow.net"
-#   type    = "A"
-#   ttl     = "60"
-#   records = ["192.168.55.5"]
-# }
 
 

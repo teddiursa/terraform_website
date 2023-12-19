@@ -152,7 +152,6 @@ h2 {
 
 }
 
-
 .counter {
     position: relative;
     overflow: hidden;
@@ -175,11 +174,6 @@ h2 {
         margin: 0px;
     }
 }
-
-
-
-
-
 
 .link {
     color: #DB4D57;
@@ -307,8 +301,6 @@ img {
         font-size: 20px;
     }
 }
-
-/*Home page*/
 
 /* Wall
     ----------------------------------------------------------- */

@@ -60,28 +60,27 @@ resource "aws_cloudfront_distribution" "distribution" {
         "TLSv1.2",
       ]
     }
-    
+
   }
 
-  #aliases = ["www.gregchow.net", "gregchow.net"]
   aliases = [var.fullDomainName, var.domainName]
 
   #customer error pages/responses for 404 and 403 errors
   custom_error_response {
-    error_code = "404"
+    error_code            = "404"
     error_caching_min_ttl = "10"
-    response_code = "404"
-    response_page_path = "/404.html"
+    response_code         = "404"
+    response_page_path    = "/404.html"
   }
   custom_error_response {
-    error_code = "403"
+    error_code            = "403"
     error_caching_min_ttl = "10"
-    response_code = "404"
-    response_page_path = "/404.html"
+    response_code         = "404"
+    response_page_path    = "/404.html"
   }
 
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate_validation.certValidation.certificate_arn #aws_acm_certificate.cert.arn
+    acm_certificate_arn = aws_acm_certificate_validation.certValidation.certificate_arn
     ssl_support_method  = "sni-only"
   }
 

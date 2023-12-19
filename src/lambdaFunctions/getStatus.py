@@ -1,19 +1,21 @@
 import http.client
 import json
 
-OK = int(200)
 
+# Function to check if website is currently up.
 def lambda_handler(event, context):
     conn = http.client.HTTPSConnection("gregchow.net")
     conn.request("GET","/")
     response = conn.getresponse()
-    if response.status is OK:
+    # Check if website is current responding with HTTP OK.
+    if response.status is 200:
         responseCode = 'Up'
     else:
         responseCode = 'Down'
     
+    # Return valid HTTP response with CORS.
     return {
-        "statusCode": OK,
+        "statusCode": 200,
         "headers": {
             "Content-Type": "application/json",
             'Access-Control-Allow-Origin': '*',

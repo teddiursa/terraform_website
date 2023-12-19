@@ -1,7 +1,5 @@
 resource "aws_s3_bucket" "terraformBucket" {
   bucket = var.fullDomainName
-  #bucket = "www.gregchow.net"
-  #acl = ""
   tags = {
     Name        = "terraformBucket"
     Environment = "Prod"
@@ -11,8 +9,6 @@ resource "aws_s3_bucket" "terraformBucket" {
 #root bucket for redirection
 resource "aws_s3_bucket" "rootBucket" {
   bucket = var.domainName
-  #bucket = "gregchow.net"
-  #acl = ""
   tags = {
     Name        = "terraformBucket"
     Environment = "Prod"
@@ -24,7 +20,6 @@ resource "aws_s3_bucket_website_configuration" "rootWebsite" {
   bucket = aws_s3_bucket.rootBucket.id
   redirect_all_requests_to {
     host_name = aws_s3_bucket_website_configuration.terraformWebsite.website_endpoint
-    #protocol = http
   }
 }
 
@@ -44,12 +39,6 @@ resource "aws_s3_bucket_public_access_block" "pb" {
   restrict_public_buckets = false
 }
 
-# resource "aws_s3_bucket_acl" "acl" {
-#   depends_on = [aws_s3_bucket_ownership_controls.ownership]
-#   bucket = aws_s3_bucket.terraformBucket.id
-#   acl    = "private"
-# }
-
 resource "aws_s3_bucket_policy" "bucket_policy" {
   bucket = aws_s3_bucket.terraformBucket.id
   policy = jsonencode(
@@ -67,7 +56,6 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
     }
   )
 }
-
 
 resource "aws_s3_object" "html" {
   bucket       = aws_s3_bucket.terraformBucket.id
@@ -94,20 +82,12 @@ resource "aws_s3_object" "js" {
 
 
 resource "aws_s3_object" "svg" {
-  for_each = fileset("website/", "*.svg")
+  for_each     = fileset("website/", "*.svg")
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = each.value
   source       = "website/${each.value}"
   content_type = "image/svg+xml"
 }
-
-
-# resource "aws_s3_object" "diagramSVG" {
-#   bucket       = aws_s3_bucket.terraformBucket.id
-#   key          = "proxmox.svg"
-#   source       = "../website/proxmox.svg"
-#   content_type = "image/svg+xml"
-# }
 
 
 resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
@@ -116,11 +96,6 @@ resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
     suffix = "home.html"
   }
 
-  
-  # TODO
-  #   error_document {
-  #     key = "error.html"
-  #   }
 }
 
 resource "aws_s3_bucket_cors_configuration" "myCorsConfig" {
@@ -167,7 +142,7 @@ resource "aws_s3_bucket" "jsonBucket" {
     Name        = "terraformBucket"
     Environment = "Prod"
   }
-  
+
 }
 
 #enable cors from www.gregchow.net
@@ -230,8 +205,8 @@ resource "aws_s3_bucket_policy" "policyJson" {
 data "template_file" "urlTemplate" {
   template = file("jsonFiles/links.tpl")
   vars = {
-    urlCountVar = "${aws_api_gateway_deployment.countDeployment.invoke_url}"
-    urlTimeVar = "${aws_api_gateway_deployment.timeDeployment.invoke_url}"
+    urlCountVar  = "${aws_api_gateway_deployment.countDeployment.invoke_url}"
+    urlTimeVar   = "${aws_api_gateway_deployment.timeDeployment.invoke_url}"
     urlStatusVar = "${aws_api_gateway_deployment.statusDeployment.invoke_url}"
   }
 }
@@ -239,6 +214,6 @@ data "template_file" "urlTemplate" {
 resource "aws_s3_object" "jsonCount" {
   bucket       = aws_s3_bucket.jsonBucket.id
   key          = "links.json"
-  content = data.template_file.urlTemplate.rendered #templatefile("jsonFiles/links.conf.tpl", local.template_vars)
+  content      = data.template_file.urlTemplate.rendered #templatefile("jsonFiles/links.conf.tpl", local.template_vars)
   content_type = "application/json"
 }

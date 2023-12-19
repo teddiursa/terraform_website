@@ -1,15 +1,3 @@
-# data "aws_iam_policy_document" "lambdaPolicy"{
-#   statement {
-#     effect  = "Allow"
-#     actions = ["sts:AssumeRole"]
-#     principals {
-#       type        = "Service"
-#       identifiers = ["lambda.amazonaws.com"]
-#     }
-#   }
-# }
-
-
 resource "aws_iam_role" "lambdaRole" {  
   name = "lambda-lambdaRole-terraform"  
   assume_role_policy = jsonencode({
@@ -75,13 +63,6 @@ resource "aws_iam_role_policy" "dynamodbPolicy" {
                 "dynamodb:UpdateTable",
                 "lambda:GetPolicy"
             ],
-            # "Resource": [
-            #     "arn:aws:dynamodb:us-east-1:661250114429:table/*",
-            #     "arn:aws:lambda:*:661250114429:function:*",
-            #     "arn:aws:iam::661250114429:role/*",
-            #     "arn:aws:iam::661250114429:policy/*",
-            #     "arn:aws:iam::661250114429:user/*"
-            # ]
               "Resource": [
                 "arn:aws:dynamodb:us-east-1:${var.accountId}:table/*",
                 "arn:aws:lambda:*:${var.accountId}:function:*",
@@ -93,8 +74,6 @@ resource "aws_iam_role_policy" "dynamodbPolicy" {
                 "arn:aws:execute-api:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.timeApi.id}/*/${aws_api_gateway_method.timeProxyRoot.http_method}${aws_api_gateway_resource.timeProxy.path}",
                 "arn:aws:execute-api:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.countApi.id}/*/${aws_api_gateway_method.countProxyRoot.http_method}${aws_api_gateway_resource.countProxy.path}"
             ]
-            #  source_arn = "arn:aws:execute-api:${var.myregion}:${var.accountId}:${aws_api_gateway_rest_api.api.id}/*/${aws_api_gateway_method.method.http_method}${aws_api_gateway_resource.resource.path}"
-
         },
         {
             "Sid": "VisualEditor1",

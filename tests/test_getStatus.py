@@ -1,11 +1,3 @@
-# import boto3
-# #from moto import dynamodb
-# import moto
-# from moto import mock_dynamodb
-# from moto import mock_lambda
-
-# from collections import namedtuple
-
 import pytest
 import time
 
@@ -15,14 +7,13 @@ from lambdaFunctions.getStatus import lambda_handler
 
 context = Context(5)  
 
-
 @pytest.fixture(scope='function')
 def test_getStatus(eventDummyInfo):
     result = call(lambda_handler, eventDummyInfo, context)
 
-    # expect to get a status of "UP"
+    # Expect to get a status of UP.
     expected_response = ({'Status': 'Up'}, None)
-    # wait for website to load
+    # Wait for website to load for set time
     wait = 1
     time.sleep(wait)
 

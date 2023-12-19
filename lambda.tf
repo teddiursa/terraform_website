@@ -47,24 +47,12 @@ resource "aws_lambda_function" "statusFunction" {
         timeout       = 10
 }
 
-# resource "aws_lambda_permission" "apigw" {
-#   statement_id  = "AllowAPIGatewayInvoke"
-#   action        = "lambda:InvokeFunction"
-#   function_name = "${aws_lambda_function.statusFunction.function_name}"
-#   principal     = "apigateway.amazonaws.com"
-
-#   # The /*/* portion grants access from any method on any resource
-#   # within the API Gateway "REST API".
-#   source_arn = "${aws_api_gateway_rest_api.statusApi.execution_arn}/*/*"
-# }
-
 resource "aws_lambda_permission" "allowStatus" {
   statement_id  = "AllowApiStatusGateway"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.statusFunction.function_name
   principal     = "events.amazonaws.com"
   source_arn    = "arn:aws:events:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.statusApi.id}/*/*/*"
-  #qualifier     = aws_lambda_alias.test_alias.name
 }
 
 resource "aws_lambda_permission" "allowCount" {
@@ -73,7 +61,6 @@ resource "aws_lambda_permission" "allowCount" {
   function_name = aws_lambda_function.visitorCountFunction.function_name
   principal     = "events.amazonaws.com"
   source_arn    = "arn:aws:events:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.countApi.id}/*/*/*"
-  #qualifier     = aws_lambda_alias.test_alias.name
 }
 
 resource "aws_lambda_permission" "allowTime" {
@@ -82,5 +69,4 @@ resource "aws_lambda_permission" "allowTime" {
   function_name = aws_lambda_function.timeFunction.function_name
   principal     = "events.amazonaws.com"
   source_arn    = "arn:aws:events:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.timeApi.id}/*/*/*"
-  #qualifier     = aws_lambda_alias.test_alias.name
 }

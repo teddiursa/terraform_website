@@ -8,7 +8,7 @@ def lambda_handler(event, context):
     conn.request("GET","/")
     response = conn.getresponse()
     # Check if website is current responding with HTTP OK.
-    if response.status is 200:
+    if response.status == 200:
         responseCode = 'Up'
     else:
         responseCode = 'Down'

@@ -148,7 +148,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     })
     .then((data) => {
         // Increment loading text
-        document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
+        document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
         counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>'
         //display block after loading
         document.getElementById('counterID').innerHTML = counter;

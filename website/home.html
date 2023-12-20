@@ -30,14 +30,14 @@
         <div class="wall">
             <div class="wallHeader">
                 <h1 class="wallTitle">Greg Chow</h1>
-                <h4 class="wallText">Network Engineer</h4>
+                <h4 class="wallText">Junior Network Engineer</h4>
             </div>
         </div>
 
         <section class="wallContent">
             <h6>Map by <a href="https://www2.telegeography.com/">Telegeography</a> on <a
                     href="https://www.submarinecablemap.com/">Submarine Cable Map</a></h6>
-            <h2>Welcome to GregDhow.net!</h2>
+            <h2>Welcome to GregChow.net!</h2>
             <p>My name is Gregory Chow and I created this website in an endeavour to learn and practice
                 cloud technologies.
             </p>
@@ -59,7 +59,6 @@
         </section>
     </div>
 
-
     <!-- Resume page-->
     <div id="Resume" class="tabcontent" style="display: none;">
 
@@ -67,14 +66,8 @@
         <div class="container">
             <div class="row">
                 <div class="title">
-                    <div>
-                        <h1>Gregory Chow</h1>
-                        <div class="link">
-                            <h4><a href="https://www.gregchow.net">gregchow.net</a></h4>
-                        </div>
-                    </div>
                     <h4><a href="https://drive.google.com/uc?id=129V-ZACb3AiKVneT8LUG7Wnu75-aBCrX&export=download"
-                            download>Resume
+                            download>Resume Download
                         </a>
                         |
                         <a href="https://github.com/teddiursa/">GitHub
@@ -83,7 +76,7 @@
                         <a href="https://www.linkedin.com/in/gregory-chow-1b2299a2">LinkedIn
                         </a>
                         |
-                        <a href="mailto: greg.choww@gmail.com">Email
+                        <a href="mailto: greg.choww@gmail.com">greg.choww@gmail.com
                         </a>
                     </h4>
                     <hr>
@@ -246,7 +239,7 @@
                 with a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>.
                 Files are hosted in an AWS S3 bucket and delivered with Cloudfront. Uses Lambda functions, API gateways,
                 and DynamoDB to track the number of visitors and time since the last visit. Has full HTTPS encryption
-                and root domain rerouting via Route 53. Github Actions automatically update S3 files and run python unit
+                and root domain rerouting via Route 53. GitHub Actions automatically update S3 files and run python unit
                 tests.</p>
             <h3>Home Lab</h3>
             </p>
@@ -308,9 +301,9 @@
                         <li>Infrastructure as Code: deploy API resources with terraform (or SAM)</li>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-3">
-                        <li>Source Control: Automate code changes with github</li>
-                        <li>CI/CD Back end: Set up Github to test and deploy backend functions</li>
-                        <li>CD/CD Front End: Set up github actions to update the websites files</li>
+                        <li>Source Control: Automate code changes with GitHub</li>
+                        <li>CI/CD Back end: Set up GitHub to test and deploy backend functions</li>
+                        <li>CD/CD Front End: Set up GitHub actions to update the websites files</li>
                         <li>Blog Post: Make a blog post describing what was learned</li>
                     </div>
                 </div>
@@ -364,7 +357,7 @@
             <h2>An Additional Function</h2>
             <p>I wanted to add an additional feature with Lambda/AWS, since I wanted to stand out, but I had trouble
                 deciding on the function. I contemplated displaying different days of the week accessed, similar to
-                github's
+                GitHub's
                 commit calendar, but ultimately decided something much simpler: time since the last visit. I
                 accomplished this
                 using <b>unix time</b> which is a counter from the beginning of "time" for computers, which is defined
@@ -393,11 +386,20 @@
                 added a
                 function to update my registered domain name server's. After automating this with terraforms for loop
                 equivalent, I was pleased to see it update in real time and for my certificate automatically
-                validated. After splitting my functions into several files for easier future improvements, it was time
-                to
-                automate the functions.</p>
-            <h2>Github Actions</h2>
-            <p>Github Actions executes a <i>workflow</i> when a specific events occurs. My workflow updates the files of
+                validated.</p>
+                <h2>Passing API urls from Terraform</h2>
+                <p>An Issue I discovered from Terraform automation is the API gateway urls changed every deployment. Which
+                    would break the javascript lambda calls unless they were manually added. I decided to resolve this in a
+                    Cloud CI/CD way:
+                <ul>
+                    <li>Have terraform create a JSON file with the API gateway invoke urls</li>
+                    <li>Store the JSON file in an S3 bucket</li>
+                    <li>Have the javascript retrieve the JSON file and use the URLs to invoke the Lambda Function</li>
+                </ul>
+                I had the fetches happened synchronously, since they depended on the JSON fetch, which increased the load
+                time. I also had the Lambda display not load until they were completed and instead display incrementing loading text.
+            <h2>GitHub Actions</h2>
+            <p>GitHub Actions executes a <i>workflow</i> when a specific events occurs. My workflow updates the files of
                 the S3 bucket when I push changes to my repository. This way my website updates in real time whenever I
                 make changes, instead of having to rerun my terraform code.</p>
             <h2>Testing with pytest</h2>
@@ -435,18 +437,6 @@
                 count or correctly calculated the time difference.
             </p>
             <img src="testChart.svg" style="width:60%" alt="Time since last visit flowchart">
-            <h2>Passing API urls from Terraform</h2>
-            <p>An Issue I discovered from Terraform automation is the API gateway urls changed every deployment. Which
-                would break the javascript lambda calls unless they were manually added. I decided to resolve this in a
-                Cloud CI/CD way:
-            <ul>
-                <li>Have terraform create a JSON file with the API gateway invoke urls</li>
-                <li>Store the JSON file in an S3 bucket</li>
-                <li>Have the javascript retrieve the JSON file and use the URLs to invoke the Lambda Function</li>
-            </ul>
-            I had the fetches happened synchronously, since they depended on the JSON fetch, which increased the load
-            time. I also had the Lambda display not load until they were completed, with a text-indent, to ensure the
-            old values would never be displayed.
             <h2>Error Page</h2>
             <p>To replace the generic <a style="color:#cf1313">404</a> and <a style="color:#cf1313">403</a> error pages,
                 I created a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>

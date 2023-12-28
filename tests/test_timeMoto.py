@@ -1,9 +1,5 @@
 import boto3
-import moto
 from moto import mock_dynamodb
-from moto import mock_lambda
-
-from collections import namedtuple
 
 import pytest
 import time
@@ -13,21 +9,24 @@ from lambda_local.main import call
 from lambda_local.context import Context
 from lambdaFunctions.timeCount import lambda_handler
 
-context = Context(5)  
+context = Context(5)
+
 
 # Function to create mock table of Visitor Time Table.
 @mock_dynamodb
 def test_createmockTimeTable():
     dynamodb = boto3.resource('dynamodb')
     myTable = 'timeTable'
-    table = dynamodb.create_table(TableName=myTable,
+    table = dynamodb.create_table(
+        TableName=myTable,
         KeySchema=[{'AttributeName': 'id','KeyType': 'HASH'}],
         AttributeDefinitions=[
             {'AttributeName': 'id','AttributeType': 'S'}
             ],
-        BillingMode = "PAY_PER_REQUEST"    
+        BillingMode="PAY_PER_REQUEST"
         )
     assert table
+
 
 @pytest.fixture(scope='function')
 def test_mockTimeTable(eventDummyInfo):
@@ -38,11 +37,11 @@ def test_mockTimeTable(eventDummyInfo):
     table.put_item(
         TableName=myTable,
         Item={
-            'id' : 'keyTime',
-            'itemTime':currTime,
+            'id': 'keyTime',
+            'itemTime': currTime,
         }
     )
-    wait = 1;
+    wait = 1
     # Wait for set time.
     time.sleep(wait)
     result = call(lambda_handler, eventDummyInfo, context)
@@ -51,7 +50,3 @@ def test_mockTimeTable(eventDummyInfo):
     expected_response = ({'Time': wait}, None)
 
     assert result == expected_response
-
-
-
-

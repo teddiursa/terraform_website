@@ -1,16 +1,12 @@
 import os
-import boto3
-import boto3.dynamodb.conditions as conditions
-
 import pytest
-import moto
 
 # Dummy info for calling lambda functions.
 
 @pytest.fixture(scope="module")
 def eventDummyInfo():
     return {
-        "dummy " : "info" 
+        "dummy ": "info"
     }
 
 @pytest.fixture

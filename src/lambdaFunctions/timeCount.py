@@ -9,10 +9,12 @@ dynamodb = boto3.resource('dynamodb')
 ddbTableName = 'timeTable'
 table = dynamodb.Table(ddbTableName)
 
-# Function to get the time the website was last accessed, compare it to the current time,
-# update the stored time to current time, and return the time difference. 
+
+# Function to get the time the website was last accessed, compare it to the
+# current time,
+# update the stored time to current time, and return the time difference.
 def lambda_handler(event, context):
-    response = table.get_item(Key= {'id' : 'keyTime'} )
+    response = table.get_item(Key={'id': 'keyTime'})
     oldTime = Decimal(response["Item"]["itemTime"])
     currTime = Decimal(datetime.now().timestamp())
 
@@ -26,13 +28,12 @@ def lambda_handler(event, context):
         ExpressionAttributeValues={':c': currTime},
         ReturnValues='UPDATED_NEW'
         )
-    
-    # Return valid HTTP response with CORS.
+# Return valid HTTP response with CORS.
     return {
         "statusCode": 200,
         "headers": {
             "Content-Type": "application/json",
-            'Access-Control-Allow-Origin': '*', 
+            'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
         "body": json.dumps({

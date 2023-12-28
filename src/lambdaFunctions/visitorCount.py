@@ -6,10 +6,12 @@ dynamodb = boto3.resource('dynamodb')
 ddbTableName = 'visitorCountTable'
 table = dynamodb.Table(ddbTableName)
 
-# Function to get the current website visitor count, increment it, and return the current count.
+
+# Function to get the current website visitor count, increment it, and
+# return current count.
 def lambda_handler(event, context):
     # Get current visitor count.
-    response = table.get_item(Key= {'id' : 'keyCount'} )
+    response = table.get_item(Key={'id': 'keyCount'})
     oldCount = response["Item"]["itemCount"]
     # Increment count and update the table.
     newCount = str(int(oldCount)+1)

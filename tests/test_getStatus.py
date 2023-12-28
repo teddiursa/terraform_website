@@ -1,11 +1,12 @@
 import pytest
 import time
 
-from lambda_local.main import call  
+from lambda_local.main import call
 from lambda_local.context import Context
 from lambdaFunctions.getStatus import lambda_handler
 
-context = Context(5)  
+context = Context(5)
+
 
 @pytest.fixture(scope='function')
 def test_getStatus(eventDummyInfo):
@@ -18,4 +19,3 @@ def test_getStatus(eventDummyInfo):
     time.sleep(wait)
 
     assert result == expected_response
-

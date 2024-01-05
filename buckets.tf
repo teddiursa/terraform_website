@@ -208,6 +208,7 @@ data "template_file" "urlTemplate" {
     urlCountVar  = "${aws_api_gateway_deployment.countDeployment.invoke_url}"
     urlTimeVar   = "${aws_api_gateway_deployment.timeDeployment.invoke_url}"
     urlStatusVar = "${aws_api_gateway_deployment.statusDeployment.invoke_url}"
+    urlCacheVar = "${aws_api_gateway_deployment.cacheDeployment.invoke_url}"
   }
 }
 

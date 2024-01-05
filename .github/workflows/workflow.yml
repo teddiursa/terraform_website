@@ -21,3 +21,16 @@ jobs:
       run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude ".vs*" --exclude "desktop.ini"
     - name: copy error files to S3 bucket
       run: aws s3 cp ./errors/ s3://www.gregchow.net --recursive
+
+
+    - name: Get url for the Cloudfront cache refresh Lambda Functio
+      id: get-urlCache
+      run: |
+        urlCache=$(curl -s https://s3.amazonaws.com/gregchow.jsonbucket/links.json | jq -r '.urlCache')
+        echo "::set-output name=urlCache::$urlCache"
+
+    - name: Perform HTTP GET request to refresh CloudFront Distribution
+      run: |
+        urlCache=${{ steps.get-urlCache.outputs.urlCache }}
+        response=$(curl -s -o /dev/null -w "%{http_code}" $urlCache)
+        echo "HTTP GET request response code: $response"

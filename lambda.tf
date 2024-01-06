@@ -64,7 +64,7 @@ data "archive_file" "cachePackage" {
 resource "aws_lambda_function" "cacheFunction" {
         function_name = "clearCache"
         filename      = "clearCache.zip"
-        source_code_hash = data.archive_file.statusPackage.output_base64sha256
+        source_code_hash = data.archive_file.cachePackage.output_base64sha256
         role          = aws_iam_role.cacheRole.arn
         runtime       = "python3.11"
         handler       = "clearCache.lambda_handler"
@@ -72,7 +72,7 @@ resource "aws_lambda_function" "cacheFunction" {
 }
 
 resource "aws_lambda_permission" "allowCache" {
-  statement_id  = "AllowApiStatusGateway"
+  statement_id  = "AllowApiCacheGateway"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.cacheFunction.function_name
   principal     = "events.amazonaws.com"

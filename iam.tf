@@ -14,8 +14,6 @@ resource "aws_iam_role" "lambdaRole" {
   })
 }
 
-
-
 resource "aws_iam_role_policy" "dynamodbPolicy" {
   name = "dynamodbPolicy"
   role = aws_iam_role.lambdaRole.id
@@ -117,49 +115,37 @@ resource "aws_iam_role_policy" "cachePolicy" {
       "Version" : "2012-10-17",
       "Statement" : [
         {
-          "Sid" : "cfflistbuckets",
-          "Action" : [
-            "s3:ListAllMyBuckets"
-          ],
+          "Sid" : "AllowLambdaAndApiGatewayAccess",
           "Effect" : "Allow",
-          "Resource" : "arn:aws:s3:::*"
+          "Action" : [
+            "lambda:*",
+            "apigateway:*",
+            "iam:*"
+          ],
+          "Resource" : [
+            "arn:aws:lambda:*:${var.accountId}:function:*",
+            "arn:aws:iam::${var.accountId}:role/*",
+            "arn:aws:iam::${var.accountId}:policy/*",
+            "arn:aws:iam::${var.accountId}:user/*",
+            "arn:aws:apigateway:us-east-1::/restapis/*",
+            "arn:aws:execute-api:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.cacheApi.id}/*/${aws_api_gateway_method.cacheProxyRoot.http_method}${aws_api_gateway_resource.cacheProxy.path}"
+          ]
         },
         {
-          "Sid" : "cffullaccess",
-          "Action" : [
-            "acm:ListCertificates",
-            "cloudfront:*",
-            "cloudfront-keyvaluestore:*",
-            "iam:ListServerCertificates",
-            "waf:ListWebACLs",
-            "waf:GetWebACL",
-            "wafv2:ListWebACLs",
-            "wafv2:GetWebACL",
-            "kinesis:ListStreams"
-          ],
+          "Sid" : "AllowApiGatewayInvoke",
           "Effect" : "Allow",
+          "Action" : "lambda:InvokeFunction",
+          "Resource" :  "arn:aws:execute-api:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.cacheApi.id}/*/${aws_api_gateway_method.cacheProxyRoot.http_method}${aws_api_gateway_resource.cacheProxy.path}"
+        },
+        {
+          "Sid" : "AllowCloudFrontAccess",
+          "Effect" : "Allow",
+          "Action" : [
+            "cloudfront:*"
+          ],
           "Resource" : "*"
-        },
-        {
-          "Sid" : "cffdescribestream",
-          "Action" : [
-            "kinesis:DescribeStream"
-          ],
-          "Effect" : "Allow",
-          "Resource" : "arn:aws:kinesis:*:*:*"
-        },
-        {
-          "Sid" : "cfflistroles",
-          "Action" : [
-            "iam:ListRoles"
-          ],
-          "Effect" : "Allow",
-          "Resource" : "arn:aws:iam::*:*"
         }
       ]
     }
   )
 }
-
-
-

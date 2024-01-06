@@ -158,7 +158,7 @@ resource "aws_s3_bucket_cors_configuration" "jsonCors" {
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["GET", "HEAD"]
-    allowed_origins = ["https://gregchow.net"]
+    allowed_origins = ["https://www.gregchow.net"]
     expose_headers  = []
     max_age_seconds = 3000
   }

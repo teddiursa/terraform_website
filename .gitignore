@@ -1,0 +1,16 @@
+# cache files
+__pycache__/
+# vs code files
+.vscode/
+website/.vs/
+
+#Terraform files
+*.hcl
+*.zip
+*.tfstate
+*.zip
+*.backup
+*.terraform/
+
+# Lambda Function Files
+src/lambdaFunctions.egg-info/

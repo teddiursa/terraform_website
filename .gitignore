@@ -1,5 +1,6 @@
 # cache files
 __pycache__/
+.pytest_cache/
 # vs code files
 .vscode/
 website/.vs/

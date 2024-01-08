@@ -5,7 +5,7 @@ import pytest
 import time
 import math
 
-from lambda_local.main import call  
+from lambda_local.main import call
 from lambda_local.context import Context
 from lambdaFunctions.timeCount import lambda_handler
 
@@ -19,9 +19,9 @@ def test_createmockTimeTable():
     myTable = 'timeTable'
     table = dynamodb.create_table(
         TableName=myTable,
-        KeySchema=[{'AttributeName': 'id','KeyType': 'HASH'}],
+        KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
         AttributeDefinitions=[
-            {'AttributeName': 'id','AttributeType': 'S'}
+            {'AttributeName': 'id', 'AttributeType': 'S'}
             ],
         BillingMode="PAY_PER_REQUEST"
         )

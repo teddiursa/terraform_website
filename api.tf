@@ -1,9 +1,6 @@
 resource "aws_api_gateway_rest_api" "statusApi" {
   name        = "statusGateway"
   description = "API gateway for get Status Lambda Function"
-  depends_on = [
-    aws_lambda_permission.allowStatus
-  ]
 }
 
 resource "aws_api_gateway_resource" "statusProxy" {
@@ -60,9 +57,6 @@ resource "aws_api_gateway_deployment" "statusDeployment" {
 resource "aws_api_gateway_rest_api" "countApi" {
   name        = "countGateway"
   description = "API gateway for get count Lambda Function"
-  depends_on = [
-    aws_lambda_permission.allowCount
-  ]
 }
 
 resource "aws_api_gateway_resource" "countProxy" {
@@ -119,9 +113,6 @@ resource "aws_api_gateway_deployment" "countDeployment" {
 resource "aws_api_gateway_rest_api" "timeApi" {
   name        = "timeGateway"
   description = "API gateway for get time Lambda Function"
-  depends_on = [
-    aws_lambda_permission.allowTime
-  ]
 }
 
 resource "aws_api_gateway_resource" "timeProxy" {
@@ -179,9 +170,6 @@ resource "aws_api_gateway_deployment" "timeDeployment" {
 resource "aws_api_gateway_rest_api" "cacheApi" {
   name        = "cacheGateway"
   description = "API gateway for get cache Lambda Function"
-  depends_on = [
-    aws_lambda_permission.allowCache
-  ]
 }
 
 resource "aws_api_gateway_resource" "cacheProxy" {

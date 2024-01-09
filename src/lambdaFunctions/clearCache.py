@@ -1,5 +1,6 @@
 import boto3
 import json
+import time
 
 
 def lambda_handler(event, context):
@@ -8,6 +9,9 @@ def lambda_handler(event, context):
 
     # Get a list of CloudFront distributions
     distributions = cloudfront_client.list_distributions()
+
+    # Generate a unique CallerReference using timestamp
+    caller_reference = str(int(time.time()))
 
     # Loop through the distributions and clear their caches
     for distribution in distributions['DistributionList']['Items']:
@@ -20,8 +24,10 @@ def lambda_handler(event, context):
                     'Quantity': 1,
                     'Items': ['/*']
                 },
-                'CallerReference': 'lambda-invalidation'
-            }
+                # Use the unique CallerReference
+                'CallerReference': "lambda function cleared at: "
+                + caller_reference
+                }
         )
 
     # Return valid HTTP response with CORS.

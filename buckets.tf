@@ -105,14 +105,6 @@ resource "aws_s3_object" "ico" {
   content_type = "image/x-icon"
 }
 
-resource "aws_s3_object" "svg" {
-  for_each     = fileset("website/", "*.svg")
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = each.value
-  source       = "website/${each.value}"
-  content_type = "image/svg+xml"
-}
-
 resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
   bucket = aws_s3_bucket.terraformBucket.id
   index_document {

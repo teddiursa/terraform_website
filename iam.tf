@@ -135,13 +135,14 @@ resource "aws_iam_role_policy" "cachePolicy" {
           "Sid" : "AllowApiGatewayInvoke",
           "Effect" : "Allow",
           "Action" : "lambda:InvokeFunction",
-          "Resource" :  "arn:aws:execute-api:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.cacheApi.id}/*/${aws_api_gateway_method.cacheProxyRoot.http_method}${aws_api_gateway_resource.cacheProxy.path}"
+          "Resource" : "arn:aws:execute-api:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.cacheApi.id}/*/${aws_api_gateway_method.cacheProxyRoot.http_method}${aws_api_gateway_resource.cacheProxy.path}"
         },
         {
           "Sid" : "AllowCloudFrontAccess",
           "Effect" : "Allow",
           "Action" : [
-            "cloudfront:*"
+            "cloudfront:CreateInvalidation",
+            "cloudfront:ListDistributions"
           ],
           "Resource" : "*"
         }

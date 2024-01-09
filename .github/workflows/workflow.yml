@@ -31,7 +31,7 @@ jobs:
 
     - name: Perform HTTP GET request to refresh CloudFront Distribution
       run: |
-        urlCache=${{ steps.get-urlCache.outputs.urlCache }}
-        response=$(curl -s -o /dev/null -w "%{http_code}" $urlCache)
+        urlCache="${{ steps.get-urlCache.outputs.urlCache }}"
+        response=$(curl -s -o /dev/null -w "%{http_code}" "$urlCache")
         echo "HTTP GET request response code: $response"
         curl -X GET "https://www.gregchow.net"

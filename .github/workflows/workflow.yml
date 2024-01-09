@@ -34,3 +34,4 @@ jobs:
         urlCache="${{ steps.get-urlCache.outputs.urlCache }}"
         curl -s -o /dev/null $urlCache
         curl -s -o /dev/null https://gregchow.net
+        

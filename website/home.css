@@ -128,10 +128,18 @@ h3 {
 }
 
 .cloudDiagram>img {
-    padding-top: 10px;
     transition: transform 0.25s ease;
     z-index: 1;
+    
+    @media screen and (min-width: 601px) {
+        padding-top: 10px;
+    }
+
+    @media screen and (max-width: 600px) {
+        padding-top: 0px;
+    }
 }
+
 
 .cloudDiagram>img:hover {
     -webkit-transform: scale(1.5);

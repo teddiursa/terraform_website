@@ -275,11 +275,12 @@
                 containers that need a more up to date image than LXC offers. Nginx has a valid HTTPS certificate for
                 *.teddiursa.net, which allows for all hosts to have a valid HTTPS certificate with no browser warnings.
             </p>
+            <div class="dashboard"> <img src="grafana.png" alt="Grafana Dashboard"></div>
             <h4>Monitoring with Grafana and Prometheus</h4>
             <p>While Proxmox and ESXI have their own internal monitoring, Prometheus consolidates these hypervisors,
                 along with Docker, and Grafana helps visualize their statitics. I also use Docker Exporter to expose my
                 docker statistics, netdata to export my TrueNAS scale data, and Uptime Kuma to monitor my services, nodes, and this website.</p>
-                <img src="grafana.png" alt="Grafana Dashboard">
+
         </div>
     </div>
 

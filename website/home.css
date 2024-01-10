@@ -126,6 +126,15 @@ h3 {
     transform:scale(1.5);
 }
 
+.cloudDiagram > img{
+    transition: transform 0.25s ease;
+}
+.cloudDiagram > img:hover {
+    -webkit-transform:scale(1.5);
+    transform:scale(1.5);
+}
+
+
 #Blog h1,
 h2 {
     text-align: center;

@@ -229,7 +229,9 @@
             <h2>Projects</h2>
             <h3>My Cloud Resume Project (This website)</h3>
             <h4><a href="https://github.com/teddiursa/terraform_website">GitHub Repository</a></h4>
-            <img src="CloudDiagram.svg" alt="Diagram of AWS Cloud Infrastructure">
+            <div class="CloudDiagram">
+                <img src="CloudDiagram.svg" alt="Diagram of AWS Cloud Infrastructure">
+            </div>
             <ul>
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6">
@@ -267,7 +269,8 @@
             </ul>
             <p>Bare-Metal Hypervisor running various virtual machines and containers. While some are primarily for
                 testing and learning, several services are used daily. PfSense as an open source router and firewall,
-                Plex to stream media, Pi-hole for internal DNS, Vault Warden to manage passwords, and TruNAS scale to host: media files and
+                Plex to stream media, Pi-hole for internal DNS, Vault Warden to manage passwords, and TruNAS scale to
+                host: media files and
                 backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the services and monitor
                 their usage. VMware's ESXI vSphere hypervisor is
                 virtualized due to not supporting my network card and hosts commonly used Virtual Machines to help teach
@@ -279,7 +282,8 @@
             <h4>Monitoring with Grafana and Prometheus</h4>
             <p>While Proxmox and ESXI have their own internal monitoring, Prometheus consolidates these hypervisors,
                 along with Docker, and Grafana helps visualize their statitics. I also use Docker Exporter to expose my
-                docker statistics, netdata to export my TrueNAS scale data, and Uptime Kuma to monitor my services, nodes, and this website.</p>
+                docker statistics, netdata to export my TrueNAS scale data, and Uptime Kuma to monitor my services,
+                nodes, and this website.</p>
 
         </div>
     </div>

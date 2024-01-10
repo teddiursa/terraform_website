@@ -196,22 +196,20 @@ h2 {
     position: relative;
     overflow: hidden;
     background-color: #242526;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: 140px;
+    height: 10em;
     width: 100%;
     text-align: center;
     font-family: 'Josefin Sans', sans-serif;
-    row-gap: 0px;
-    margin: 0px;
+    padding: 1em 0;
+    margin: 0;
 
     h2 {
-        margin-top: 10px;
-        margin-bottom: 0px;
-    }
-
-    h5 {
-        margin: 0px;
+        margin: 0;
+        margin-bottom: 0.2em
     }
 }
 

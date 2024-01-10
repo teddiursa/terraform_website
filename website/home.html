@@ -17,14 +17,10 @@
     <!-- link to external javascript file-->
     <script src="home.js"></script>
     <!-- icons-->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144"
-        href="/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="152x152"
-        href="/apple-touch-icon-152x152.png" />
-    <link rel="icon" type="image/png" href="/favicon-32x32.png"
-        sizes="32x32" />
-    <link rel="icon" type="image/png" href="/favicon-16x16.png"
-        sizes="16x16" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
     <meta name="application-name" content="&nbsp;" />
     <meta name="msapplication-TileColor" content="#18191A" />
     <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
@@ -264,21 +260,26 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <li><b>Container Runtimes</b>: Docker and LXC</li>
-                        <li><b>Containers</b>: Homer, Olivetin, Pi-hole, Ubuntu, and Nginx Proxy Manager </li>
+                        <li><b>Containers</b>: Grafana, Prometheus, Vault Warden, Homer, Olivetin, Pi-hole, Ubuntu, and
+                            Nginx Proxy Manager </li>
                     </div>
                 </div>
             </ul>
             <p>Bare-Metal Hypervisor running various virtual machines and containers. While some are primarily for
-                testing and learning, several services are used daily. PfSense is as an open source router and firewall,
-                Plex to stream media, Pi-hole for internal DNS, and TruNAS scale to host: media files, linux images, and
-                backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the hosted services and
-                easily manage them via a web UI, including remotely running scripts. VMware's ESXI vSphere hypervisor is
+                testing and learning, several services are used daily. PfSense as an open source router and firewall,
+                Plex to stream media, Pi-hole for internal DNS, Vault Warden to manage passwords, and TruNAS scale to host: media files and
+                backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the services and monitor
+                their usage. VMware's ESXI vSphere hypervisor is
                 virtualized due to not supporting my network card and hosts commonly used Virtual Machines to help teach
                 differences between Proxmox and VMware. While Proxmox run it's own LXC containers, Docker runs
                 containers that need a more up to date image than LXC offers. Nginx has a valid HTTPS certificate for
-                *.teddiursa.net, which allows for all hosts to have a valid HTTPS certificate with no browser warning.
+                *.teddiursa.net, which allows for all hosts to have a valid HTTPS certificate with no browser warnings.
             </p>
-
+            <h4>Monitoring with Grafana and Prometheus</h4>
+            <p>While Proxmox and ESXI have their own internal monitoring, Prometheus consolidates these hypervisors,
+                along with Docker, and Grafana helps visualize their statitics. I also use Docker Exporter to expose my
+                docker statistics, netdata to export my TrueNAS scale data, and Uptime Kuma to monitor my services, nodes, and this website.</p>
+                <img src="grafana.png" alt="Grafana Dashboard">
         </div>
     </div>
 

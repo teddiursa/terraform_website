@@ -48,7 +48,6 @@ body {
 .tabcontent {
     display: none;
     padding: 52px 20px;
-    min-height: 90vh;
 }
 
 .wallcontent {
@@ -143,9 +142,11 @@ h3 {
 
 
 .cloudDiagram>img:hover {
+    @media screen and (min-width: 601px) {    
     -webkit-transform: scale(1.5);
     transform: scale(1.5);
     z-index: 2;
+}
 }
 
 .dashboard>img {
@@ -153,8 +154,10 @@ h3 {
 }
 
 .dashboard>img:hover {
+    @media screen and (min-width: 601px) {
     -webkit-transform: scale(1.5);
     transform: scale(1.5);
+    }
 }
 
 #Blog h1,

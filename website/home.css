@@ -11,22 +11,22 @@ body {
 /* width */
 ::-webkit-scrollbar {
     width: 12px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     background: #242526;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: #888;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
+}
 
 /* Style tab links */
 .tablink {
@@ -88,10 +88,13 @@ h2 {
     margin: 20px;
 }
 
-#Resume .skills .col-md-3, .col-sm-3, .col-xs-3{
+#Resume .skills .col-md-3,
+.col-sm-3,
+.col-xs-3 {
     padding-left: 5px;
     padding-right: 5px;
 }
+
 #Resume .separator {
     width: 30%;
 }
@@ -118,22 +121,30 @@ h3 {
     text-indent: 2em;
 }
 
-.dashboard > img{
-    transition: transform 0.25s ease;
-}
-.dashboard > img:hover {
-    -webkit-transform:scale(1.5);
-    transform:scale(1.5);
+#Projects ul {
+    position: relative;
+    z-index: -1;
 }
 
-.cloudDiagram > img{
+.cloudDiagram>img {
     transition: transform 0.25s ease;
-}
-.cloudDiagram > img:hover {
-    -webkit-transform:scale(1.5);
-    transform:scale(1.5);
+    z-index: 1;
 }
 
+.cloudDiagram>img:hover {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    z-index: 2;
+}
+
+.dashboard>img {
+    transition: transform 0.25s ease;
+}
+
+.dashboard>img:hover {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+}
 
 #Blog h1,
 h2 {
@@ -305,6 +316,7 @@ img {
     li {
         font-size: 12px;
     }
+
     h4 {
         font-size: 12px;
     }

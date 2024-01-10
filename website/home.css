@@ -105,11 +105,9 @@ h2 {
 }
 
 #Projects h2,
-h3 {
-    text-align: center;
-}
-
-#Projects h4 {
+h3,
+h4,
+h6 {
     text-align: center;
 }
 
@@ -142,11 +140,11 @@ h3 {
 
 
 .cloudDiagram>img:hover {
-    @media screen and (min-width: 601px) {    
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5);
-    z-index: 2;
-}
+    @media screen and (min-width: 601px) {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        z-index: 2;
+    }
 }
 
 .dashboard>img {
@@ -155,8 +153,8 @@ h3 {
 
 .dashboard>img:hover {
     @media screen and (min-width: 601px) {
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5);
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
     }
 }
 

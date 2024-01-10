@@ -83,9 +83,10 @@ h2 {
     max-width: 800px;
 }
 
-.title h4 {
+#Resume .title h4 {
     text-align: center;
     margin: 20px;
+    margin-top: 30px;
 }
 
 #Resume .skills .col-md-3,
@@ -127,6 +128,7 @@ h3 {
 }
 
 .cloudDiagram>img {
+    padding-top: 10px;
     transition: transform 0.25s ease;
     z-index: 1;
 }

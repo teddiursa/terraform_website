@@ -17,8 +17,10 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-    - name: Deploy static site to S3 bucket
-      run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude ".vs*" --exclude "desktop.ini" --cache-control "max-age=86400"
+    - name: Deploy image files to S3 without gzip
+      run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude "*" --include "*.png" --include "*.webp" --include "*.ico" --cache-control "max-age=86400" --metadata "Content-Encoding="
+    - name: Deploy other files with gzip, excluding image files
+      run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude ".vs*" --exclude "desktop.ini" --exclude "*.png" --exclude "*.webp" --exclude "*.ico" --cache-control "max-age=86400" --metadata "Content-Encoding=gzip"
     - name: copy error files to S3 bucket
       run: aws s3 cp ./errors/ s3://www.gregchow.net --recursive
 

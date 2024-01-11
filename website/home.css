@@ -341,7 +341,7 @@ img {
 
 .wall {
     width: 100%;
-    padding-bottom: 52.5%;
+    padding-bottom: 50%;
     position: relative;
     background-image: url('https://i.imgur.com/4lJzerg.png');
     background-repeat: no-repeat;

@@ -247,7 +247,7 @@
                 with a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>.
                 Files are hosted in an AWS S3 bucket and delivered with Cloudfront. Uses Lambda functions, API gateways,
                 and DynamoDB to track the number of visitors and time since the last visit. Has full HTTPS encryption
-                and root domain rerouting via Route 53. GitHub Actions automatically update S3 files and run python unit
+                and root domain rerouting via Route 53. GitHub Actions automatically update S3 files and run Python unit
                 tests.</p>
             <h3>Home Lab</h3>
             </p>
@@ -361,7 +361,7 @@
             <h2>Programming with AWS Lambda</h2>
             <p>One of the good things about this challenge is, while it gives you the basics for each steps, it does not
                 detail
-                how. For example, it simply links to a javescript/python tutorial not how to implement the specific
+                how. For example, it simply links to a Javascript/Python tutorial not how to implement the specific
                 function. The
                 visitor counter logical was extremely simple, but I had to learn how to reference and update my
                 database.
@@ -458,7 +458,7 @@
             <p>To replace the generic <a style="color:#cf1313">404</a> and <a style="color:#cf1313">403</a> error pages,
                 I created a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>
                 complete with a Javascript function to display the current status of the website. The Javascript
-                calls on a python Lambda Function to ensure compatibility, as client-side Javascript checks are
+                calls on a Python Lambda Function to ensure compatibility, as client-side Javascript checks are
                 sometimes blocked. I contemplated having this error page be hosted in a separate S3 bucket, in case I
                 had torn down the website using Terraform. However, Terraform would also destroy the CloudFront
                 distribution, which would cause the error page to be accessible anyways.
@@ -470,7 +470,7 @@
                 automate this process.
                 First I simply found the AWS CLI commands to do and test this. While I could have just make a simple
                 script and invoked it using GitHub actions, I decided to do this via
-                a Lambda Function. I implemented a python function to list my CloudFront distributions and invoke a call
+                a Lambda Function. I implemented a Python function to list my CloudFront distributions and invoke a call
                 to invalidate all files in the wild card path <b>/*</b>. After testing I then:
             <ul>
                 <li>
@@ -485,7 +485,7 @@
                 </li>
             </ul>
             I also made sure to check I wouldn't accidentally go out of the AWS free tier. But as long as I don't push
-            to my GitHub Repository 10,000 times a month, it will stay free.
+            to my GitHub Repository more than 10,000 times a month, it will stay free.
             </p>
         </div>
     </div>

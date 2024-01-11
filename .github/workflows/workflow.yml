@@ -22,7 +22,6 @@ jobs:
     - name: Deploy other files with gzip
       run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude ".vs*" --exclude "desktop.ini" --exclude "*.png" --exclude "*.webp" --exclude "*.ico" --cache-control "max-age=86400" --metadata "Content-Encoding=gzip"
 
-
     - name: Get url for the Cloudfront cache refresh Lambda Functio
       id: get-urlCache
       run: |

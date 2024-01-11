@@ -19,10 +19,8 @@ jobs:
         aws-region: us-east-1
     - name: Deploy image files to S3 without gzip
       run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude "*" --include "*.png" --include "*.webp" --include "*.ico" --cache-control "max-age=86400" --metadata "Content-Encoding="
-    - name: Deploy other files with gzip, excluding image files
+    - name: Deploy other files with gzip
       run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude ".vs*" --exclude "desktop.ini" --exclude "*.png" --exclude "*.webp" --exclude "*.ico" --cache-control "max-age=86400" --metadata "Content-Encoding=gzip"
-    - name: copy error files to S3 bucket
-      run: aws s3 cp ./errors/ s3://www.gregchow.net --recursive
 
 
     - name: Get url for the Cloudfront cache refresh Lambda Functio

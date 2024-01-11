@@ -343,7 +343,7 @@ img {
     width: 100%;
     padding-bottom: 50%;
     position: relative;
-    background-image: url('/map.png');
+    background-image: url('/map.webp');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% auto;

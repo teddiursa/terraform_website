@@ -129,6 +129,20 @@ resource "aws_s3_object" "ico" {
   }
 }
 
+}
+
+resource "aws_s3_object" "webp" {
+  for_each     = fileset("website/", "*.webp")
+  bucket       = aws_s3_bucket.terraformBucket.id
+  key          = each.value
+  source       = "website/${each.value}"
+  content_type = "image/webp"
+
+  metadata = {
+    "cache-control" = "max-age=86400, public"
+  }
+}
+
 resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
   bucket = aws_s3_bucket.terraformBucket.id
   index_document {

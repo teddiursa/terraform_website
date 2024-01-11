@@ -129,8 +129,6 @@ resource "aws_s3_object" "ico" {
   }
 }
 
-}
-
 resource "aws_s3_object" "webp" {
   for_each     = fileset("website/", "*.webp")
   bucket       = aws_s3_bucket.terraformBucket.id

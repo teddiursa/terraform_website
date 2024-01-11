@@ -63,6 +63,10 @@ resource "aws_s3_object" "html" {
   source       = "../website/home.html"
   content_type = "text/html"
 
+  metadata = {
+    "cache-control" = "max-age=86400, public"
+  }
+
 }
 
 resource "aws_s3_object" "css" {
@@ -70,6 +74,10 @@ resource "aws_s3_object" "css" {
   key          = "home.css"
   source       = "../website/home.css"
   content_type = "text/css"
+
+  metadata = {
+    "cache-control" = "max-age=86400, public"
+  }
 }
 
 resource "aws_s3_object" "js" {
@@ -77,6 +85,10 @@ resource "aws_s3_object" "js" {
   key          = "home.js"
   source       = "../website/home.js"
   content_type = "text/javascript"
+
+  metadata = {
+    "cache-control" = "max-age=86400, public"
+  }
 }
 
 
@@ -87,6 +99,10 @@ resource "aws_s3_object" "svg" {
   key          = each.value
   source       = "website/${each.value}"
   content_type = "image/svg+xml"
+
+  metadata = {
+    "cache-control" = "max-age=86400, public"
+  }
 }
 
 resource "aws_s3_object" "png" {
@@ -95,6 +111,10 @@ resource "aws_s3_object" "png" {
   key          = each.value
   source       = "website/${each.value}"
   content_type = "image/png"
+
+  metadata = {
+    "cache-control" = "max-age=86400, public"
+  }
 }
 
 resource "aws_s3_object" "ico" {
@@ -103,6 +123,10 @@ resource "aws_s3_object" "ico" {
   key          = each.value
   source       = "website/${each.value}"
   content_type = "image/x-icon"
+
+  metadata = {
+    "cache-control" = "max-age=86400, public"
+  }
 }
 
 resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
@@ -223,7 +247,7 @@ data "template_file" "urlTemplate" {
     urlCountVar  = "${aws_api_gateway_deployment.countDeployment.invoke_url}"
     urlTimeVar   = "${aws_api_gateway_deployment.timeDeployment.invoke_url}"
     urlStatusVar = "${aws_api_gateway_deployment.statusDeployment.invoke_url}"
-    urlCacheVar = "${aws_api_gateway_deployment.cacheDeployment.invoke_url}"
+    urlCacheVar  = "${aws_api_gateway_deployment.cacheDeployment.invoke_url}"
   }
 }
 
@@ -232,4 +256,8 @@ resource "aws_s3_object" "jsonCount" {
   key          = "links.json"
   content      = data.template_file.urlTemplate.rendered #templatefile("jsonFiles/links.conf.tpl", local.template_vars)
   content_type = "application/json"
+
+  metadata = {
+    "cache-control" = "max-age=86400, public"
+  }
 }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="home.css">
     <!-- tell mobile devices to not adjust-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- link to external javascript file-->
+    <!-- link to external Javascript file-->
     <script src="home.js"></script>
     <!-- icons-->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png" />
@@ -280,7 +280,7 @@
             <div class="dashboard"> <img src="grafana.png" alt="Grafana Dashboard"></div>
             <h6>Based on <a href="https://grafana.com/grafana/dashboards/10347-proxmox-via-prometheus/">dashboard</a> by Pietro Saccardi</h6>
             <p>While Proxmox and ESXI have their own internal monitoring, Prometheus consolidates these hypervisors,
-                along with Docker, and Grafana helps visualize theidata. I also use Docker Exporter to expose my
+                along with Docker, and Grafana helps visualize the data. I also use Docker Exporter to expose my
                 docker statistics, netdata to export my TrueNAS scale data, and Uptime Kuma to monitor my services,
                 nodes, and this website. I also implemented a GitHub commit tracker using the GitHub API.</p>
         </div>
@@ -307,7 +307,7 @@
                         <li>HTTPS: Obtain and apply a valid HTTPS Certificate</li>
                         <li>DNS: Register a Domain Name/li&gt;
                         </li>
-                        <li>Javascript: Program a visitor counter with javascript</li>
+                        <li>Javascript: Program a visitor counter with Javascript</li>
                         <li>Database: Use a cloud database to retrieve and update this counter</li>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-3">
@@ -325,7 +325,7 @@
                 </div>
             </ol>
             <h2>The Website</h2>
-            <p>While I'm no Web Designer, I have done some simple web development before, including a javascript
+            <p>While I'm no Web Designer, I have done some simple web development before, including a Javascript
                 visualization,
                 and I have always enjoyed how responsive web development is compared to traditional software
                 development.
@@ -348,9 +348,9 @@
             <p>Creating a simple static website with an S3 bucket was relatively simple. I uploaded the relevant files
                 and
                 enabled
-                it for static website hosting. After purchasing my domain name and configuring route 53 and cloudfront
+                it for static website hosting. After purchasing my domain name and configuring route 53 and CloudFront
                 to
-                point my domain to my website, it still did not propragate after several hours. I discovered the
+                point my domain to my website, it still did not propagate after several hours. I discovered the
                 name
                 servers of my hosted zone and my registered domain did not match. Once I fixed this, my domain resolved
                 properly and the previously requested HTTPS certificate instantly worked as well. Once I checked my root
@@ -376,7 +376,7 @@
                 GitHub's
                 commit calendar, but ultimately decided something much simpler: time since the last visit. I
                 accomplished this
-                using <b>unix time</b> which is a counter from the beginning of "time" for computers, which is defined
+                using <b>Unix time</b> which is a counter from the beginning of "time" for computers, which is defined
                 as
                 1/1/1970.
             </p>
@@ -384,33 +384,33 @@
                 <h4>Current Unix Time</h4>
                 <h4><span id="unixTime" style="color:#20cef5">1700501528</span></h4>
             </div>
-            <p>This <b>unix time</b> is already in seconds (after truncating) and, since I'm not dealing with timezones,
+            <p>This <b>Unix time</b> is already in seconds (after truncating) and, since I'm not dealing with timezones,
                 I
-                simply used this to find the difference since last visit. I fiddled with javascript to display this
+                simply used this to find the difference since last visit. I fiddled with Javascript to display this
                 cleanly in a weeks, days, hours, minutes, and seconds format, ensuring it properly displayed any spaces
                 and
                 singular or plural units.</p>
             <h2>Automating with Terraform</h2>
             <p>I chose to use Terraform rather than SAM since it's a bit more flexible with other vendors. I started the
                 process by deploying each service at a time, starting with the buckets. After declaring what types my
-                uploaded files should be and setting an access policy, it went smoothly. Deploying cloudfront also had
+                uploaded files should be and setting an access policy, it went smoothly. Deploying CloudFront also had
                 little issues, but properly getting my HTTPS certificate and dns records was a bit trickier. I found it
                 easier to do some steps manually to better visualize the steps needed for my IaC. After creating the
                 records
                 needing for the DNS verification, I realized I had the same issue as before, my name servers did not
                 match. I changed them manually to verify this was the issue and discovered they recently
                 added a
-                function to update my registered domain name server's. After automating this with terraforms for loop
+                function to update my registered domain name server's. After automating this with Terraform's for loop
                 equivalent, I was pleased to see it update in real time and for my certificate automatically
                 validated.</p>
-            <h2>Passing API urls from Terraform</h2>
-            <p>An Issue I discovered from Terraform automation is the API gateway urls changed every deployment. Which
-                would break the javascript lambda calls unless they were manually added. I decided to resolve this in a
+            <h2>Passing API URLs from Terraform</h2>
+            <p>An Issue I discovered from Terraform automation is the API gateway URLs changed every deployment. Which
+                would break the Javascript lambda calls unless they were manually added. I decided to resolve this in a
                 Cloud CI/CD way:
             <ul>
-                <li>Have terraform create a JSON file with the API gateway invoke urls</li>
+                <li>Have Terraform create a JSON file with the API gateway invoke URLs</li>
                 <li>Store the JSON file in an S3 bucket</li>
-                <li>Have the javascript retrieve the JSON file and use the URLs to invoke the Lambda Function</li>
+                <li>Have the Javascript retrieve the JSON file and use the URLs to invoke the Lambda Function</li>
             </ul>
             I had the fetches happened synchronously, since they depended on the JSON fetch, which increased the load
             time. I also had the Lambda display not load until they were completed and instead display incrementing
@@ -418,7 +418,7 @@
             <h2>GitHub Actions</h2>
             <p>GitHub Actions executes a <i>workflow</i> when a specific events occurs. My workflow updates the files of
                 the S3 bucket when I push changes to my repository. This way my website updates in real time whenever I
-                make changes, instead of having to rerun my terraform code.</p>
+                make changes, instead of having to rerun my Terraform code.</p>
             <h2>Testing with pytest</h2>
             <p>I delayed creating unit tests for my Lambda code for a simple reason: there is no input for me to test
                 for. Doing Unit Tests always reminds me of a certain QA joke:</p>
@@ -443,13 +443,13 @@
                 However, my functions call upon values in a database, not directly from the user or code. So, while I
                 can
                 test for basic functionality and proper output, the major purpose of testing for abnormal inputs is
-                unneccessary. But I did approach it thoroughly to ensure I can scale up my lambda functions and
+                unnecessary. But I did approach it thoroughly to ensure I can scale up my lambda functions and
                 their tests. After some research, I discovered a package that enables me to run my Lambda functions
                 locally, <i>lambda_local</i>. I also used moto to create mock DynamoDB tables for my testing. While it's
                 not necessarily since my functions do not heavily manipulate the table data, I wanted to continue
                 the trend of learning new technologies when possible.
                 Since I was creating my mock tables during testing, I was able know exactly what the table data
-                was, whether a static value or the current unix time, and test whether the output properly incremented
+                was, whether a static value or the current Unix time, and test whether the output properly incremented
                 the
                 count or correctly calculated the time difference.
             </p>
@@ -457,8 +457,8 @@
             <h2>Error Page</h2>
             <p>To replace the generic <a style="color:#cf1313">404</a> and <a style="color:#cf1313">403</a> error pages,
                 I created a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>
-                complete with a javascript function to display the current status of the website. The Javascript
-                calls on a python Lambda Function to ensure compatibility, as client-side javascript checks are
+                complete with a Javascript function to display the current status of the website. The Javascript
+                calls on a python Lambda Function to ensure compatibility, as client-side Javascript checks are
                 sometimes blocked. I contemplated having this error page be hosted in a separate S3 bucket, in case I
                 had torn down the website using Terraform. However, Terraform would also destroy the CloudFront
                 distribution, which would cause the error page to be accessible anyways.
@@ -469,8 +469,8 @@
                 when I update the S3 files. While I could do this manually via the AWS GUI, I utilized what I learned to
                 automate this process.
                 First I simply found the AWS CLI commands to do and test this. While I could have just make a simple
-                script and invoked it using github actions, I decided to do this via
-                a Lambda Function. I implemented a python function to list my CloudFront distribitions and invoke a call
+                script and invoked it using GitHub actions, I decided to do this via
+                a Lambda Function. I implemented a python function to list my CloudFront distributions and invoke a call
                 to invalidate all files in the wild card path <b>/*</b>. After testing I then:
             <ul>
                 <li>
@@ -480,7 +480,7 @@
                     Added the API URL to my JSON File/URL bucket, to ensure it works between Terraform deployments.
                 </li>
                 <li>
-                    Used Github actions to parse through the JSON file and do a simple HTTP GET request to the API URL,
+                    Used GitHub actions to parse through the JSON file and do a simple HTTP GET request to the API URL,
                     clearing my cache on every git push.
                 </li>
             </ul>

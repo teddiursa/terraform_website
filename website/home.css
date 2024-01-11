@@ -55,8 +55,12 @@ body {
     margin: auto;
 }
 
-#Home h6,
-h2 {
+#Home h6
+{
+    text-align: center;
+}
+
+#Home h2 {
     text-align: center;
 }
 
@@ -70,11 +74,14 @@ h2 {
     max-width: 800px;
 }
 
-#Resume h1,
-h2 {
+#Resume h1
+{
     text-align: center;
 }
 
+#Resume h2{
+    text-align: center;
+}
 #Resume h3 {
     text-align: left;
 }
@@ -105,12 +112,11 @@ h2 {
 }
 
 #Projects h2,
-h3,
-h4,
-h6 {
+#Projects h3,
+#Projects h4,
+#Projects h6 {
     text-align: center;
 }
-
 #Projects img {
     margin-top: 15px;
     margin-bottom: 15px;

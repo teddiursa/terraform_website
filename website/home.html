@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- linking to font stylesheet-->
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&amp;subset=latin,latin-ext" rel="stylesheet"
-        type="text/css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&amp;subset=latin,latin-ext" rel="stylesheet"
+        type="text/css">  -->
     <!-- my css stylesheet-->
     <link rel="stylesheet" type="text/css" href="home.css">
     <!-- tell mobile devices to not adjust-->
@@ -26,6 +26,25 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
 
 </head>
+<style>
+    /* Inline Google Fonts CSS */
+    @font-face {
+        font-family: 'Josefin Sans';
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://fonts.gstatic.com/s/josefinsans/v32/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMhhLzTs.woff2) format('woff2');
+        unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+        font-family: 'Josefin Sans';
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://fonts.gstatic.com/s/josefinsans/v32/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+</style>
 
 <body>
     <!-- Buttons to split into multiple pages-->
@@ -278,7 +297,8 @@
             </p>
             <h4>Monitoring with Grafana and Prometheus</h4>
             <div class="dashboard"> <img src="grafana.webp" alt="Grafana Dashboard"></div>
-            <h6>Based on <a href="https://grafana.com/grafana/dashboards/10347-proxmox-via-prometheus/">dashboard</a> by Pietro Saccardi</h6>
+            <h6>Based on <a href="https://grafana.com/grafana/dashboards/10347-proxmox-via-prometheus/">dashboard</a> by
+                Pietro Saccardi</h6>
             <p>While Proxmox and ESXI have their own internal monitoring, Prometheus consolidates these hypervisors,
                 along with Docker, and Grafana helps visualize the data. I also use Docker Exporter to expose my
                 docker statistics, netdata to export my TrueNAS scale data, and Uptime Kuma to monitor my services,
@@ -484,8 +504,9 @@
                     clearing my cache on every git push.
                 </li>
             </ul>
-            <p>I also made sure to check I wouldn't accidentally go out of the AWS free tier. But as long as I don't push
-            to my Repository more than 10,000 times a month, it will stay free.</p>
+            <p>I also made sure to check I wouldn't accidentally go out of the AWS free tier. But as long as I don't
+                push
+                to my Repository more than 10,000 times a month, it will stay free.</p>
             </p>
         </div>
     </div>

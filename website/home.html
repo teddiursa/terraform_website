@@ -355,7 +355,7 @@
                 started by finding a sample <a href="https://devsnap.me/html-resume-templates">template</a> online,
                 mostly for the dark mode colors, and heavily tweaking it. Funnily enough, I ended up using a different
                 color
-                scheme, specifically facebook's scheme I found on a <a
+                scheme, specifically Facebook's scheme I found on a <a
                     href="https://blog.karenying.com/posts/50-shades-of-dark-mode-gray">website</a> comparing different
                 popular darkmode colors. What was most useful was the use of bootstrap grids, something I had not used
                 before. I also spent a large amount of time ensuring the website would properly display for mobile
@@ -381,7 +381,7 @@
                 time to implement some basic web functions.</p>
 
             <h2>Programming with AWS Lambda</h2>
-            <p>One of the good things about this challenge is, while it gives you the basics for each steps, it does not
+            <p>One of the good things about this challenge is, while it gives you the basics for each step, it does not
                 detail
                 how. For example, it simply links to a Javascript/Python tutorial not how to implement the specific
                 function. The
@@ -406,17 +406,15 @@
                 <h4>Current Unix Time</h4>
                 <h4><span id="unixTime" style="color:#20cef5">1700501528</span></h4>
             </div>
-            <p>This <b>Unix time</b> is already in seconds (after truncating) and, since I'm not dealing with timezones,
+            <p>This <b>Unix time</b> is already in seconds (after truncating) and, since I'm not dealing with Time Zones,
                 I
                 simply used this to find the difference since last visit. I fiddled with Javascript to display this
-                cleanly in a weeks, days, hours, minutes, and seconds format, ensuring it properly displayed any spaces
-                and
-                singular or plural units.</p>
+                cleanly in a proper time format, ensuring it properly displayed any spaces and correct unit(s)</p>
             <h2>Automating with Terraform</h2>
             <p>I chose to use Terraform rather than SAM since it's a bit more flexible with other vendors. I started the
                 process by deploying each service at a time, starting with the buckets. After declaring what types my
                 uploaded files should be and setting an access policy, it went smoothly. Deploying CloudFront also had
-                little issues, but properly getting my HTTPS certificate and dns records was a bit trickier. I found it
+                little issues, but properly getting my HTTPS certificate and DNS records was a bit trickier. I found it
                 easier to do repeat steps manually to better visualize the steps needed for my IaC. After creating the
                 records
                 needed for the DNS verification, I realized I had the same issue as before" my name servers did not
@@ -439,7 +437,7 @@
             time. I also had the Lambda display not load until they were completed, instead display incrementing
             loading text.
             <h2>GitHub Actions</h2>
-            <p>GitHub Actions executes a <i>workflow</i> when a specific events occurs. My workflow updates the files of
+            <p>GitHub Actions executes a <i>workflow</i> when a specific event occurs. My workflow updates the files of
                 the S3 bucket when I push changes to my repository. This way my website updates in real time whenever I
                 make changes, instead of having to rerun my Terraform code.</p>
             <h2>Testing with pytest</h2>
@@ -495,7 +493,7 @@
                 First I simply found the AWS CLI commands to do and test this. While I could have just make a simple
                 script and invoked it using GitHub actions, I decided to do this via
                 a Lambda Function. I implemented a Python function to list my CloudFront distributions and invoke a call
-                to invalidate all files in the wild card path <b>/*</b>. After testing I then:
+                to invalidate all files in the wild card path <b>/*</b>. After testing, I then:
             <div class="list">
                 <ul>
                     <li>

@@ -62,7 +62,7 @@
             <h6>Map by <a href="https://www2.telegeography.com/">Telegeography</a> on <a
                     href="https://www.submarinecablemap.com/">Submarine Cable Map</a></h6>
             <h2>Welcome to gregchow.net!</h2>
-            <p>My name is Gregory Chow and I created this website in an endeavour to learn and practice
+            <p>My name is Gregory Chow and I created this website in an endeavor to learn and practice
                 cloud technologies.
             </p>
             <div class="row">
@@ -408,7 +408,7 @@
             </div>
             <p>This <b>Unix time</b> is already in seconds (after truncating) and, since I'm not dealing with Time Zones,
                 I
-                simply used this to find the difference since last visit. I fiddled with Javascript to display this
+                simply used this to find the difference since the last visit. I fiddled with Javascript to display this
                 cleanly in a proper time format, ensuring it properly displayed any spaces and correct unit(s)</p>
             <h2>Automating with Terraform</h2>
             <p>I chose to use Terraform rather than SAM since it's a bit more flexible with other vendors. I started the
@@ -420,7 +420,7 @@
                 needed for the DNS verification, I realized I had the same issue as before" my name servers did not
                 match. I changed them manually to verify this was the issue and then discovered they recently
                 added a
-                function to update my registered domain name server's. After automating this with Terraform's for loop
+                function to update my registered domain name servers. After automating this with Terraform's for loop
                 equivalent, I was pleased to see it update in real time and for my certificate automatically
                 validated.</p>
             <h2>Passing API URLs from Terraform</h2>
@@ -486,7 +486,7 @@
                 distribution, which would cause the error page to be inaccessible anyways.
             </p>
             <h2>Automating Cache Invalidation</h2>
-            <p>CloudFront cache's the website files at Edge Locations to reduce latency and load. While this is great,
+            <p>CloudFront caches the website files at Edge Locations to reduce latency and load. While this is great,
                 since it prevents users from accessing the S3 bucket website directly, it does need to be told
                 when I update the S3 files. While I could do this manually via the AWS GUI, I utilized what I learned to
                 automate this process.

@@ -417,17 +417,18 @@
                 process by deploying each service at a time, starting with the buckets. After declaring what types my
                 uploaded files should be and setting an access policy, it went smoothly. Deploying CloudFront also had
                 little issues, but properly getting my HTTPS certificate and dns records was a bit trickier. I found it
-                easier to do some steps manually to better visualize the steps needed for my IaC. After creating the
+                easier to do repeat steps manually to better visualize the steps needed for my IaC. After creating the
                 records
-                needing for the DNS verification, I realized I had the same issue as before, my name servers did not
-                match. I changed them manually to verify this was the issue and discovered they recently
+                needed for the DNS verification, I realized I had the same issue as before" my name servers did not
+                match. I changed them manually to verify this was the issue and then discovered they recently
                 added a
                 function to update my registered domain name server's. After automating this with Terraform's for loop
                 equivalent, I was pleased to see it update in real time and for my certificate automatically
                 validated.</p>
             <h2>Passing API URLs from Terraform</h2>
-            <p>An Issue I discovered from Terraform automation is the API gateway URLs changed every deployment. Which
-                would break the Javascript lambda calls unless they were manually added. I decided to resolve this in a
+            <p>An Issue I discovered from Terraform automation is the API gateway URLs changed every deployment, which
+                would break the Javascript lambda calls unless they were manually changed each time. I decided to
+                resolve this in a
                 Cloud CI/CD way:
             <ul>
                 <li>Have Terraform create a JSON file with the API gateway invoke URLs</li>
@@ -435,7 +436,7 @@
                 <li>Have the Javascript retrieve the JSON file and use the URLs to invoke the Lambda Function</li>
             </ul>
             I had the fetches happened synchronously, since they depended on the JSON fetch, which increased the load
-            time. I also had the Lambda display not load until they were completed and instead display incrementing
+            time. I also had the Lambda display not load until they were completed, instead display incrementing
             loading text.
             <h2>GitHub Actions</h2>
             <p>GitHub Actions executes a <i>workflow</i> when a specific events occurs. My workflow updates the files of
@@ -466,9 +467,10 @@
                 can
                 test for basic functionality and proper output, the major purpose of testing for abnormal inputs is
                 unnecessary. But I did approach it thoroughly to ensure I can scale up my lambda functions and
-                their tests. After some research, I discovered a package that enables me to run my Lambda functions
-                locally, <i>lambda_local</i>. I also used moto to create mock DynamoDB tables for my testing. While it's
-                not necessarily since my functions do not heavily manipulate the table data, I wanted to continue
+                their tests for future additions. After some research, I discovered a package that enables me to run my
+                Lambda functions
+                locally, <i>lambda_local</i>. I also used moto to create mock AWS resources for my testing. While it's
+                not necessary since my functions do not heavily manipulate the table data, I wanted to continue
                 the trend of learning new technologies when possible.
                 Since I was creating my mock tables during testing, I was able know exactly what the table data
                 was, whether a static value or the current Unix time, and test whether the output properly incremented
@@ -483,7 +485,7 @@
                 calls on a Python Lambda Function to ensure compatibility, as client-side Javascript checks are
                 sometimes blocked. I contemplated having this error page be hosted in a separate S3 bucket, in case I
                 had torn down the website using Terraform. However, Terraform would also destroy the CloudFront
-                distribution, which would cause the error page to be accessible anyways.
+                distribution, which would cause the error page to be inaccessible anyways.
             </p>
             <h2>Automating Cache Invalidation</h2>
             <p>CloudFront cache's the website files at Edge Locations to reduce latency and load. While this is great,

@@ -66,10 +66,10 @@
                 cloud technologies.
             </p>
             <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-3">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <h4>It uses a mix of:</h4>
                 </div>
-                <div class="col-md-9 col-sm-9 col-xs-9">
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-xs-9">
                     <ul>
                         <li>Web Development: HTML, CSS, and Javascript</li>
                         <li>Automation: Terraform</li>
@@ -314,25 +314,25 @@
                 challenge itself is split into several steps:</p>
             <ol>
                 <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-3">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
                         <li>Certification: Get a Cloud Certification</li>
                         <li>HTML: Create an HTML Resume</li>
                         <li>CSS: Style it with CSS</li>
                         <li>Static Website: Deploy it on the cloud (S3 bucket)</li>
                     </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
                         <li>HTTPS: Obtain and apply a valid HTTPS Certificate</li>
                         <li>DNS: Register a Domain Name</li>
                         <li>Javascript: Program a visitor counter with Javascript</li>
                         <li>Database: Use a cloud database to retrieve and update this counter</li>
                     </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
                         <li>API: Create an API for backend communication</li>
                         <li>Python: Create a Lambda Function for the API</li>
                         <li>Tests: Create some Python tests</li>
                         <li>Infrastructure as Code: deploy API resources with terraform (or SAM)</li>
                     </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
                         <li>Source Control: Automate code changes with GitHub</li>
                         <li>CI/CD Back end: Set up GitHub to test and deploy backend functions</li>
                         <li>CD/CD Front End: Set up GitHub actions to update the websites files</li>
@@ -488,7 +488,8 @@
                 script and invoked it using GitHub actions, I decided to do this via
                 a Lambda Function. I implemented a Python function to list my CloudFront distributions and invoke a call
                 to invalidate all files in the wild card path <b>/*</b>. After testing I then:
-            <ul>
+            <div class="list">
+                <ul>
                 <li>
                     Created an API gateway linking to the clearCache Lambda Function.
                 </li>
@@ -500,6 +501,7 @@
                     clearing my cache on every git push.
                 </li>
             </ul>
+        </div>
             <p>I also made sure to check I wouldn't accidentally go out of the AWS free tier. But as long as I don't
                 push
                 to my Repository more than 10,000 times a month, it will stay free.</p>

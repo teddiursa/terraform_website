@@ -59,6 +59,10 @@ body {
     text-align: center;
 }
 
+#Home h4 {
+    text-align: center;
+}
+
 #Home h2 {
     text-align: center;
 }
@@ -143,18 +147,28 @@ body {
 }
 
 @media screen and (min-width: 601px) {
-    #list1, #list2, #list3, #list4{
+
+    #list1,
+    #list2,
+    #list3,
+    #list4 {
         display: block;
     }
+
     #mobileList {
         display: none;
     }
 }
 
 @media screen and (max-width: 600px) {
-    #list1, #list2, #list3, #list4{
+
+    #list1,
+    #list2,
+    #list3,
+    #list4 {
         display: none;
     }
+
     #mobileList {
         display: block;
     }

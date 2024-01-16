@@ -313,7 +313,7 @@
                 challenge offers variations for each Cloud provider, the project itself remains largely the same. The
                 challenge itself is split into several steps:</p>
             <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 d-none d-sm-block">
                     <ol>
                         <li>Certification: Get a Cloud Certification</li>
                         <li>HTML: Create an HTML Resume</li>
@@ -321,7 +321,7 @@
                         <li>Static Website: Deploy it on the cloud (S3 bucket)</li>
                     </ol>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 d-none d-sm-block">
                     <ol start="5">
                         <li>HTTPS: Obtain and apply a valid HTTPS Certificate</li>
                         <li>DNS: Register a Domain Name</li>
@@ -329,16 +329,36 @@
                         <li>Database: Use a cloud database to retrieve and update this counter</li>
                     </ol>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <ol start=9>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 d-none d-sm-block">
+                    <ol start="9">
                         <li>API: Create an API for backend communication</li>
                         <li>Python: Create a Lambda Function for the API</li>
                         <li>Tests: Create some Python tests</li>
                         <li>Infrastructure as Code: deploy API resources with terraform (or SAM)</li>
                     </ol>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <ol start=13>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 d-none d-sm-block">
+                    <ol start="13">
+                        <li>Source Control: Automate code changes with GitHub</li>
+                        <li>CI/CD Back end: Set up GitHub to test and deploy backend functions</li>
+                        <li>CD/CD Front End: Set up GitHub actions to update the websites files</li>
+                        <li>Blog Post: Make a blog post describing what was learned</li>
+                    </ol>
+                </div>
+                <div class="col-12 d-sm-none">
+                    <ol>
+                        <li>Certification: Get a Cloud Certification</li>
+                        <li>HTML: Create an HTML Resume</li>
+                        <li>CSS: Style it with CSS</li>
+                        <li>Static Website: Deploy it on the cloud (S3 bucket)</li>
+                        <li>HTTPS: Obtain and apply a valid HTTPS Certificate</li>
+                        <li>DNS: Register a Domain Name</li>
+                        <li>Javascript: Program a visitor counter with Javascript</li>
+                        <li>Database: Use a cloud database to retrieve and update this counter</li>
+                        <li>API: Create an API for backend communication</li>
+                        <li>Python: Create a Lambda Function for the API</li>
+                        <li>Tests: Create some Python tests</li>
+                        <li>Infrastructure as Code: deploy API resources with terraform (or SAM)</li>
                         <li>Source Control: Automate code changes with GitHub</li>
                         <li>CI/CD Back end: Set up GitHub to test and deploy backend functions</li>
                         <li>CD/CD Front End: Set up GitHub actions to update the websites files</li>
@@ -406,7 +426,8 @@
                 <h4>Current Unix Time</h4>
                 <h4><span id="unixTime" style="color:#20cef5">1700501528</span></h4>
             </div>
-            <p>This <b>Unix time</b> is already in seconds (after truncating) and, since I'm not dealing with Time Zones,
+            <p>This <b>Unix time</b> is already in seconds (after truncating) and, since I'm not dealing with Time
+                Zones,
                 I
                 simply used this to find the difference since the last visit. I fiddled with Javascript to display this
                 cleanly in a proper time format, ensuring it properly displayed any spaces and correct unit(s)</p>

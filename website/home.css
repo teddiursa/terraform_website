@@ -142,6 +142,24 @@ body {
     }
 }
 
+@media screen and (min-width: 601px) {
+    #list1, #list2, #list3, #list4{
+        display: block;
+    }
+    #mobileList {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #list1, #list2, #list3, #list4{
+        display: none;
+    }
+    #mobileList {
+        display: block;
+    }
+}
+
 #Blog h1,
 h2 {
     text-align: center;

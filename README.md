@@ -6,9 +6,9 @@ www.GregChow.net
   <img src="./website/CloudDiagram.svg" alt="Diagram of Cloud Infrastructure" width="738">
 </p>
 <h3 align="center">Website hosted on AWS, managed by Terraform.
-<h3>
-Originally created for the cloud resume challenge, this repo hosts files needed to launch and host the relevant files in AWS.
-It uses Terraform to automatically create, provision, and destroy the necessary services. It utilizes Lambda Functions and DynamoDB to display the visitor count and time since last visit. Has python tests using moto to Mock dynamoDB tables and other AWS resources. Automatically updates S3 bucket items and invalidates CloudFront Cache using Github actions.
+</h3>
+<p>Originally created for the cloud resume challenge, this repo hosts files needed to launch and host the relevant files in AWS.
+It uses Terraform to automatically create, provision, and destroy the necessary services. It utilizes Lambda Functions and DynamoDB to display the visitor count and time since last visit. Has python tests using moto to Mock dynamoDB tables and other AWS resources. Automatically updates S3 bucket items and invalidates CloudFront Cache using Github actions.</p>
 
 ## Terraform Automation
 Terraform code automates creating and destroying AWS infrastructure for streamlined configuration.

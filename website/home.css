@@ -139,13 +139,6 @@ body {
     transition: transform 0.25s ease;
 }
 
-.dashboard>img:hover {
-    @media screen and (min-width: 601px) {
-        -webkit-transform: scale(1.5);
-        transform: scale(1.5);
-    }
-}
-
 @media screen and (min-width: 601px) {
 
     #list1,

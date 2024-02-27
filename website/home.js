@@ -13,6 +13,23 @@ function openPage(pageName, elmnt, color) {
     elmnt.style.backgroundColor = color;
 }
 
+// Function to zoom in and out grafana dashboard
+document.addEventListener('DOMContentLoaded', function() {
+    var img = document.querySelector('.dashboard>img');
+    if(img) {
+        img.addEventListener('click', function() {
+            if(this.style.transform == 'scale(1.5)'){
+                this.style.transform = '';
+                this.style.webkitTransform = '';
+            } else {
+                this.style.transform = 'scale(1.5)';
+                this.style.webkitTransform = 'scale(1.5)';
+            }
+        });
+    }
+});
+
+
 // Add number suffix to value
 function ordinalSuffix(i) {
     // j is last digit and k is last 2 digits

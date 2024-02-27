@@ -1,15 +1,16 @@
 import boto3
-from moto import mock_dynamodb2
+from moto import mock_dynamodb
 import pytest
 
 from lambda_local.main import call
 from lambda_local.context import Context
+from lambdaFunctions.visitorCount import lambda_handler
 
 context = Context(5)
 
 
 # Function to create Mock table of Visitor Count Table.
-@mock_dynamodb2
+@mock_dynamodb
 def test_createmockTimeTable():
     dynamodb = boto3.resource('dynamodb')
     myTable = 'visitorCountTable'
@@ -23,9 +24,9 @@ def test_createmockTimeTable():
         )
     assert table
 
+
 @pytest.fixture(scope='function')
 def test_mockTimeTable(eventDummyInfo):
-    from lambdaFunctions.visitorCount import lambda_handler
     # Fill the mock table with Dummy Value.
     table = test_createmockTimeTable()
     myTable = 'timeTable'

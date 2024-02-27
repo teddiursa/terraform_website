@@ -7,7 +7,6 @@ import math
 
 from lambda_local.main import call
 from lambda_local.context import Context
-from lambdaFunctions.timeCount import lambda_handler
 
 context = Context(5)
 
@@ -30,6 +29,7 @@ def test_createmockTimeTable():
 
 @pytest.fixture(scope='function')
 def test_mockTimeTable(eventDummyInfo):
+    from lambdaFunctions.timeCount import lambda_handler
     # Create mock table with current time as it's value.
     table = test_createmockTimeTable()
     myTable = 'timeTable'

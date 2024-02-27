@@ -4,7 +4,6 @@ import pytest
 
 from lambda_local.main import call
 from lambda_local.context import Context
-from lambdaFunctions.visitorCount import lambda_handler
 
 context = Context(5)
 
@@ -24,9 +23,9 @@ def test_createmockTimeTable():
         )
     assert table
 
-
 @pytest.fixture(scope='function')
 def test_mockTimeTable(eventDummyInfo):
+    from lambdaFunctions.visitorCount import lambda_handler
     # Fill the mock table with Dummy Value.
     table = test_createmockTimeTable()
     myTable = 'timeTable'

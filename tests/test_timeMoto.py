@@ -1,5 +1,5 @@
 import boto3
-from moto import mock_dynamodb
+from moto import mock_aws
 
 import pytest
 import time
@@ -13,19 +13,19 @@ context = Context(5)
 
 
 # Function to create mock table of Visitor Time Table.
-@mock_dynamodb
 def test_createmockTimeTable():
-    dynamodb = boto3.resource('dynamodb')
-    myTable = 'timeTable'
-    table = dynamodb.create_table(
-        TableName=myTable,
-        KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
-        AttributeDefinitions=[
-            {'AttributeName': 'id', 'AttributeType': 'S'}
-            ],
-        BillingMode="PAY_PER_REQUEST"
-        )
-    assert table
+    with mock_aws():
+        dynamodb = boto3.resource('dynamodb')
+        myTable = 'timeTable'
+        table = dynamodb.create_table(
+            TableName=myTable,
+            KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
+            AttributeDefinitions=[
+                {'AttributeName': 'id', 'AttributeType': 'S'}
+                ],
+            BillingMode="PAY_PER_REQUEST"
+            )
+        assert table
 
 
 @pytest.fixture(scope='function')

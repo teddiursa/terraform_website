@@ -1,5 +1,5 @@
 import boto3
-from moto import mock_dynamodb
+from moto import mock_aws
 import pytest
 
 from lambda_local.main import call
@@ -10,19 +10,19 @@ context = Context(5)
 
 
 # Function to create Mock table of Visitor Count Table.
-@mock_dynamodb
 def test_createmockTimeTable():
-    dynamodb = boto3.resource('dynamodb')
-    myTable = 'visitorCountTable'
-    table = dynamodb.create_table(
-        TableName=myTable,
-        KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
-        AttributeDefinitions=[
-            {'AttributeName': 'id', 'AttributeType': 'S'}
-            ],
-        BillingMode="PAY_PER_REQUEST"
-        )
-    assert table
+    with mock_aws():
+        dynamodb = boto3.resource('dynamodb')
+        myTable = 'visitorCountTable'
+        table = dynamodb.create_table(
+            TableName=myTable,
+            KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
+            AttributeDefinitions=[
+                {'AttributeName': 'id', 'AttributeType': 'S'}
+                ],
+            BillingMode="PAY_PER_REQUEST"
+            )
+        assert table
 
 
 @pytest.fixture(scope='function')

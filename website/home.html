@@ -243,7 +243,7 @@
     <div id="Projects" class="tabcontent" style="display: none;">
         <div class="container">
             <h2>Projects</h2>
-            <h3>My Cloud Resume Project: <a href="https://www.gregchow.net">gregchow.net</a></h3>
+            <h3>gregchow.net</h3>
             <h4><a href="https://github.com/teddiursa/terraform_website">GitHub Repository</a></h4>
             <div class="cloudDiagram">
                 <img src="CloudDiagram.svg" rel="prefetch" alt="Diagram of AWS Cloud Infrastructure">
@@ -274,7 +274,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <li><b>Hypervisors</b>: Proxmox (KVM and LXC) and VMWare's ESXI</li>
-                        <li><b>Linux Distributions</b>: Debian, Red Hat, TrueNASScale, PfSense, and Ubuntu</li>
+                        <li><b>Automation</b>: Ansible</li>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <li><b>Container Runtimes</b>: Docker and LXC</li>
@@ -283,17 +283,19 @@
                     </div>
                 </div>
             </ul>
-            <p>Bare-Metal Hypervisor running various virtual machines and containers. While some are primarily for
-                testing and learning, several services are used daily. PfSense as an open source router and firewall,
-                Plex to stream media, Pi-hole for internal DNS, Vault Warden to manage passwords, and TruNAS scale to
-                host: media files and
+            <p>Bare-Metal Hypervisor running various virtual machines and containers. Uses Ansible to automatically
+                provision and manage infrastucture, PfSense as an open source router/firewall,
+                Plex to host media, Pi-hole for internal DNS, Vault Warden for password management, and TruNAS scale to
+                host media files and
                 backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the services and monitor
-                their usage. VMware's ESXI vSphere hypervisor is
-                virtualized due to not supporting my network card and hosts commonly used Virtual Machines to help teach
-                differences between Proxmox and VMware. While Proxmox run it's own LXC containers, Docker runs
-                containers that need a more up to date image than LXC offers. Nginx has a valid HTTPS certificate for
-                *.teddiursa.net, which allows for all hosts to have a valid HTTPS certificate with no browser warnings.
+                their usage, including Prometheus and Grafana which helps aggregate and visualize the data. While
+                Proxmox run it's own LXC containers, Docker runs
+                containers that primarily use docker. Nginx has a valid HTTPS certificate for
+                *.teddiursa.net, which allows for all hosts to have valid HTTPS encryption with no certificate warnings.
+
             </p>
+            <h4>Network Overview</h4>
+            <img src="network_proxmox.svg" rel="prefetch" style="width:75%" alt="diagram of home network">
             <h4>Monitoring with Grafana and Prometheus</h4>
             <div class="dashboard"> <img src="grafana.webp" rel="prefetch" alt="Grafana Dashboard"></div>
             <h5>Based on <a href="https://grafana.com/grafana/dashboards/10347-proxmox-via-prometheus/">dashboard</a> by

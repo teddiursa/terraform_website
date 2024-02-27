@@ -1,5 +1,5 @@
 import boto3
-from moto import mock_dynamodb
+from moto import mock_dynamodb2
 import pytest
 
 from lambda_local.main import call
@@ -10,7 +10,7 @@ context = Context(5)
 
 
 # Function to create Mock table of Visitor Count Table.
-@mock_dynamodb
+@mock_dynamodb2
 def test_createmockTimeTable():
     dynamodb = boto3.resource('dynamodb')
     myTable = 'visitorCountTable'
@@ -18,7 +18,7 @@ def test_createmockTimeTable():
         TableName=myTable,
         KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
         AttributeDefinitions=[
-            {'AttributeName': 'id','AttributeType': 'S'}
+            {'AttributeName': 'id', 'AttributeType': 'S'}
             ],
         BillingMode="PAY_PER_REQUEST"
         )
@@ -40,6 +40,6 @@ def test_mockTimeTable(eventDummyInfo):
     )
     result = call(lambda_handler, eventDummyInfo, context)
 
-    # Test actual response with expected value. 
+    # Test actual response with expected value.
     expected_response = ({'Time': dummyCount + 1}, None)
     assert result == expected_response

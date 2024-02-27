@@ -1,5 +1,5 @@
 import boto3
-from moto import mock_dynamodb
+from moto import mock_dynamodb2
 
 import pytest
 import time
@@ -13,7 +13,7 @@ context = Context(5)
 
 
 # Function to create mock table of Visitor Time Table.
-@mock_dynamodb
+@mock_dynamodb2
 def test_createmockTimeTable():
     dynamodb = boto3.resource('dynamodb')
     myTable = 'timeTable'

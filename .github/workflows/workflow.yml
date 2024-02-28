@@ -20,10 +20,27 @@ jobs:
     - name: Deploy image files to S3 without gzip
       run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude "*" --include "*.png" --include "*.webp" --include "*.ico" --cache-control max-age=86400,public --metadata "Content-Encoding="
     - name: Deploy other files with gzip
-      run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude ".vs*" --exclude "desktop.ini" --exclude "*.png" --exclude "*.webp" --exclude "*.ico" --cache-control max-age=86400,public --metadata Content-Encoding=gzip
-    - name: Deploy error files with gzip
-      run: aws s3 sync ./errors/ s3://www.gregchow.net --delete --exclude ".vs*" --exclude "desktop.ini" --exclude "*.png" --exclude "*.webp" --exclude "*.ico" --cache-control max-age=86400,public --metadata Content-Encoding=gzip
-    - name: Get url for the Cloudfront cache refresh Lambda Functio
+      run: |
+        aws s3 sync ./website/ s3://www.gregchow.net \
+          --delete \
+          --exclude ".vs*" \
+          --exclude "desktop.ini" \
+          --exclude "*.png" \
+          --exclude "*.webp" \
+          --exclude "*.ico" \
+          --cache-control max-age=86400,public \
+          --metadata Content-Encoding=gzip
+
+        aws s3 sync ./errors/ s3://www.gregchow.net \
+          --delete \
+          --exclude ".vs*" \
+          --exclude "desktop.ini" \
+          --exclude "*.png" \
+          --exclude "*.webp" \
+          --exclude "*.ico" \
+          --cache-control max-age=86400,public \
+          --metadata Content-Encoding=gzip    
+    - name: Get url for the Cloudfront cache refresh Lambda Function
       id: get-urlCache
       run: |
         urlCache=$(curl -s https://s3.amazonaws.com/gregchow.jsonbucket/links.json | jq -r '.urlCache')

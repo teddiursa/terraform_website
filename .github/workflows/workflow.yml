@@ -19,10 +19,9 @@ jobs:
         aws-region: us-east-1
     - name: Deploy image files to S3 without gzip
       run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude "*" --include "*.png" --include "*.webp" --include "*.ico" --cache-control max-age=86400,public --metadata "Content-Encoding="
-    - name: Deploy other files with gzip
+    - name: Deploy website files with gzip
       run: |
         aws s3 sync ./website/ s3://www.gregchow.net \
-          --delete \
           --exclude ".vs*" \
           --exclude "desktop.ini" \
           --exclude "*.png" \
@@ -30,16 +29,16 @@ jobs:
           --exclude "*.ico" \
           --cache-control max-age=86400,public \
           --metadata Content-Encoding=gzip
-
+    - name: Sync files to S3 (./errors/)
+      run: |
         aws s3 sync ./errors/ s3://www.gregchow.net \
-          --delete \
-          --exclude ".vs*" \
-          --exclude "desktop.ini" \
-          --exclude "*.png" \
-          --exclude "*.webp" \
-          --exclude "*.ico" \
-          --cache-control max-age=86400,public \
-          --metadata Content-Encoding=gzip    
+        --exclude ".vs*" \
+        --exclude "desktop.ini" \
+        --exclude "*.png" \
+        --exclude "*.webp" \
+        --exclude "*.ico" \
+        --cache-control max-age=86400,public \
+        --metadata Content-Encoding=gzip   
     - name: Get url for the Cloudfront cache refresh Lambda Function
       id: get-urlCache
       run: |

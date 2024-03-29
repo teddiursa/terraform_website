@@ -378,7 +378,6 @@ img {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% auto;
-    background-image: url('/map.webp');
 
     &:before {
         content: '';

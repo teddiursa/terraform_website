@@ -14,11 +14,11 @@ function openPage(pageName, elmnt, color) {
 }
 
 // Function to zoom in and out grafana dashboard
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var img = document.querySelector('.dashboard>img');
-    if(img) {
-        img.addEventListener('click', function() {
-            if(this.style.transform == 'scale(1.5)'){
+    if (img) {
+        img.addEventListener('click', function () {
+            if (this.style.transform == 'scale(1.5)') {
                 this.style.transform = '';
                 this.style.webkitTransform = '';
             } else {
@@ -166,7 +166,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     .then((data) => {
         // Increment loading text
         document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
-        counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>'
+        counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5><h4>Code can be found on <a href="https://github.com/teddiursa/terraform_website">GitHub</a></h4>'
         //display block after loading
         document.getElementById('counterID').innerHTML = counter;
     })

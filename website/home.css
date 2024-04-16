@@ -55,11 +55,15 @@ body {
     margin: auto;
 }
 
-#Home h1{
+#Home h1 {
     text-align: center;
 }
 
-#Home .skills{
+#Home h6 {
+    text-align: center;
+}
+
+#Home .skills {
     max-width: 600px;
     margin: auto;
 }

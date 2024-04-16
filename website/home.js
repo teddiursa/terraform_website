@@ -124,7 +124,7 @@ function secondsToWeeks(input) {
 // variables for JSON url data
 let urlCount = "";
 let urlTime = "";
-let counter = '<h2>You are the</h2><h2><span style="color:#67B868">'
+let counter = '<h2>You are the<span style="color:#67B868">'
 
 // Fetch JSON data containing urls, then fetch data from urls
 fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
@@ -151,7 +151,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
         return response.json();
     })
     .then((data) => {
-        counter += ordinalSuffix(data.Count) + '</span> Visitor!</h2><h2>The last visitor was <span style="color:#67B868">'
+        counter += ordinalSuffix(data.Count) + '</span> Visitor!</h2><h2>The last visitor was:</h2><h2> <span style="color:#67B868">'
 
         // Increment loading text
         document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
@@ -166,7 +166,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     .then((data) => {
         // Increment loading text
         document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
-        counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5><h4>Code can be found on <a href="https://github.com/teddiursa/terraform_website">GitHub</a></h4>'
+        counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>'
         //display block after loading
         document.getElementById('counterID').innerHTML = counter;
     })

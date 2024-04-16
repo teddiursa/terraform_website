@@ -124,7 +124,7 @@ function secondsToWeeks(input) {
 // variables for JSON url data
 let urlCount = "";
 let urlTime = "";
-let counter = '<h2>You are the <span style="color:#67B868">'
+let counter = '<h2>You are the</h2><h2><span style="color:#67B868">'
 
 // Fetch JSON data containing urls, then fetch data from urls
 fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')

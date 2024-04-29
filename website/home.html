@@ -314,7 +314,8 @@
                     along with Docker, and Grafana helps visualize the data. I also use Docker Exporter to expose my
                     docker statistics, netdata to export my TrueNAS scale data, and Uptime Kuma to monitor my services,
                     nodes, and this website. I also implemented a GitHub commit tracker using the GitHub API.</p>
-                <h3>Azure Spoke Hub Terraform Infrastructure</h3>
+
+                <h3>Azure Hub Spoke Terraform Infrastructure</h3>
                 <h4><a href="https://github.com/teddiursa/azure_terraform_hub_spoke">GitHub Repository</a></h4>
                 <div class="azure_image">
                     <img src="infrastructure.svg" rel="prefetch" alt="Resource Diagram of Azure Topology">
@@ -334,7 +335,7 @@
                     </div>
                 </ul>
                 <p>Terraform IaC code that creates an Azure "On-Prem" Network and a Hub-Spoke network with a few dummy
-                    production services. Connected together via a VPN Gateway, it also has centralized logging, Bastion
+                    production services. Connected together via a VPN Gateway, centralized logging, Bastion
                     for secure remote connections, and Network Security Groups (NSGs) for isolated networks. Leverages
                     Terraform output values with Bash and PowerShell to semi-automate testing.</p>
 

@@ -149,6 +149,11 @@ body {
     z-index: -1;
 }
 
+#Projects .form_filler_image{
+    width: 70%;
+    margin: auto;
+}
+
 .dashboard>img {
     transition: transform 0.25s ease;
 }

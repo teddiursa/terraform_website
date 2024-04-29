@@ -314,10 +314,34 @@
                     along with Docker, and Grafana helps visualize the data. I also use Docker Exporter to expose my
                     docker statistics, netdata to export my TrueNAS scale data, and Uptime Kuma to monitor my services,
                     nodes, and this website. I also implemented a GitHub commit tracker using the GitHub API.</p>
+                <h3>Azure Spoke Hub Terraform Network Topology</h3>
+                <h4><a href="https://github.com/teddiursa/azure_terraform_hub_spoke">GitHub Repository</a></h4>
+                <div class="azure_image">
+                    <img src="infrastructure.svg" rel="prefetch" alt="Resource Diagram of Azure Topology">
+                </div>
+                <ul>
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <li><b>Cloud Engineering</b>: Azure NSG, Bastion, Private Endpoints, Network Peering, and
+                                VPN Gateways</li>
+                            <li><b>IaC</b>: Terraform</li>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <li><b>Scripting Languages</b>: PowerShell, Bash and KQL</li>
+                            <li><b>Azure Services</b>: DNS, Linux Web Apps, and MS SQL</li>
+                        </div>
+                    </div>
+                </ul>
+                <p>Terraform IaC code that creates an Azure "On-Prem" Network and a Hub-Spoke network with a few dummy
+                    production services. Connected together via a VPN Gateway, it also has centralized logging, Bastion
+                    for secure remote connections, and Network Security Groups (NSGs) for isolated networks. Leverages
+                    Terraform output values with Bash and PowerShell to semi-automate testing.</p>
+
                 <h3>Configurable Form Filling Python Application</h3>
                 <h4><a href="https://github.com/teddiursa/form_filler">GitHub Repository</a></h4>
-                <div class="form_filler_gif">
-                    <img src="form_filler.webp" rel="prefetch" alt="Gif of form_filler python applications">
+                <div class="form_filler_image">
+                    <img src="form_filler.svg" rel="prefetch" alt="Flow Chart form_filler python applications">
                 </div>
                 <ul>
                     <div class="row">
@@ -357,10 +381,7 @@
                         </ul>
                     </li>
                 </ul>
-                <h4>Flow Chart</h4>
-                <div class="form_filler_image">
-                    <img src="form_filler.svg" rel="prefetch" alt="Flow Chart form_filler python applications">
-                </div>
+
             </div>
         </div>
 

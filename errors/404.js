@@ -1,21 +1,8 @@
 // Variable for JSON url data
-let urlStatus = "";
+let urlStatus = "https://b96tmqfgoi.execute-api.us-east-1.amazonaws.com/statusStage";
 
 // Fetch JSON data containing urls, then fetch data from url
-fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Stores json url into variables
-    urlStatus = data.urlStatus;
-
-    // Call function to get website status
-    return fetch(urlStatus); 
-  })
+fetch(urlStatus)
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');

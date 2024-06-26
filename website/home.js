@@ -122,28 +122,12 @@ function secondsToWeeks(input) {
 }
 
 // variables for JSON url data
-let urlCount = "";
-let urlTime = "";
+let urlCount = "https://cjv0ahsnx7.execute-api.us-east-1.amazonaws.com/countStage";
+let urlTime = "https://u2qassxreh.execute-api.us-east-1.amazonaws.com/timeStage";
 let counter = '<h2>You are the <span style="color:#67B868">'
 
 // Fetch JSON data containing urls, then fetch data from urls
-fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Stores json urls into variables
-        urlCount = data.urlCount;
-        urlTime = data.urlTime;
-
-        // Increment loading text
-        document.getElementById('counterID').innerHTML = '<h2>Loading.</h2>'
-
-        return fetch(urlCount);
-    })
+fetch(urlCount)
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -154,7 +138,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
         counter += ordinalSuffix(data.Count) + '</span> Visitor!</h2><h2>The last visitor was:</h2><h2> <span style="color:#67B868">'
 
         // Increment loading text
-        document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
+        document.getElementById('counterID').innerHTML = '<h2>Loading.</h2>'
         return fetch(urlTime);
     })
     .then(response => {
@@ -165,7 +149,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     })
     .then((data) => {
         // Increment loading text
-        document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
+        document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
         counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>'
         //display block after loading
         document.getElementById('counterID').innerHTML = counter;

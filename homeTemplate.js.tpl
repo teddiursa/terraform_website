@@ -156,52 +156,6 @@ fetch(urlCount)
     })
     .catch(error => console.error('Error:', error));
 
-// // Fetch JSON data containing urls, then fetch data from urls
-// fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//     })
-//     .then(data => {
-//         // Stores json urls into variables
-//         urlCount = data.urlCount;
-//         urlTime = data.urlTime;
-
-//         // Increment loading text
-//         document.getElementById('counterID').innerHTML = '<h2>Loading.</h2>'
-
-//         return fetch(urlCount);
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//     })
-//     .then((data) => {
-//         counter += ordinalSuffix(data.Count) + '</span> Visitor!</h2><h2>The last visitor was:</h2><h2> <span style="color:#67B868">'
-
-//         // Increment loading text
-//         document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
-//         return fetch(urlTime);
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//     })
-//     .then((data) => {
-//         // Increment loading text
-//         document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
-//         counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>'
-//         //display block after loading
-//         document.getElementById('counterID').innerHTML = counter;
-//     })
-//     .catch(error => console.error('Error:', error));
-
 // Function to iterate unix timer
 setInterval(function () {
     document.getElementById('unixTime').innerText = Math.floor(Date.now() / 1000)

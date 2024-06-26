@@ -187,14 +187,14 @@ resource "aws_s3_object" "javascriptError" {
 
 #bucket to pass api gateway url to javascript
 
-resource "aws_s3_bucket" "jsonBucket" {
-  bucket = "gregchow.jsonbucket"
-  tags = {
-    Name        = "terraformBucket"
-    Environment = "Prod"
-  }
+# resource "aws_s3_bucket" "jsonBucket" {
+#   bucket = "gregchow.jsonbucket"
+#   tags = {
+#     Name        = "terraformBucket"
+#     Environment = "Prod"
+#   }
 
-}
+# }
 
 #enable cors from www.gregchow.net
 resource "aws_s3_bucket_cors_configuration" "jsonCors" {
@@ -215,61 +215,78 @@ resource "aws_s3_bucket_cors_configuration" "jsonCors" {
   }
 }
 
-#json bucket ownership
-resource "aws_s3_bucket_ownership_controls" "jsonOwnership" {
-  bucket = aws_s3_bucket.jsonBucket.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
+# #json bucket ownership
+# resource "aws_s3_bucket_ownership_controls" "jsonOwnership" {
+#   bucket = aws_s3_bucket.jsonBucket.id
+#   rule {
+#     object_ownership = "BucketOwnerPreferred"
+#   }
+# }
+# # allow bucket access
+# resource "aws_s3_bucket_public_access_block" "pbJson" {
+#   bucket = aws_s3_bucket.terraformBucket.id
+
+#   block_public_acls       = false
+#   block_public_policy     = false
+#   ignore_public_acls      = false
+#   restrict_public_buckets = false
+# }
+
+
+# resource "aws_s3_bucket_policy" "policyJson" {
+#   bucket = aws_s3_bucket.jsonBucket.id
+#   policy = jsonencode(
+#     {
+#       "Version" : "2012-10-17",
+#       "Statement" : [
+#         {
+#           "Sid" : "PublicReadGetObject",
+#           "Effect" : "Allow",
+#           "Principal" : "*",
+#           "Action" : "s3:GetObject",
+#           "Resource" : "arn:aws:s3:::${aws_s3_bucket.jsonBucket.id}/*"
+#         }
+#       ]
+#     }
+#   )
+# }
+
+
+# # Render the template
+# data "template_file" "urlTemplate" {
+#   template = file("jsonFiles/links.tpl")
+#   vars = {
+#     urlCountVar  = "${aws_api_gateway_deployment.countDeployment.invoke_url}"
+#     urlTimeVar   = "${aws_api_gateway_deployment.timeDeployment.invoke_url}"
+#     urlStatusVar = "${aws_api_gateway_deployment.statusDeployment.invoke_url}"
+#     urlCacheVar  = "${aws_api_gateway_deployment.cacheDeployment.invoke_url}"
+#   }
+# }
+
+locals {
+    urlCount  = "${aws_api_gateway_deployment.countDeployment.invoke_url}"
+    urlTime   = "${aws_api_gateway_deployment.timeDeployment.invoke_url}"
+    urlStatus = "${aws_api_gateway_deployment.statusDeployment.invoke_url}"
+    urlCache  = "${aws_api_gateway_deployment.cacheDeployment.invoke_url}"
 }
-# allow bucket access
-resource "aws_s3_bucket_public_access_block" "pbJson" {
-  bucket = aws_s3_bucket.terraformBucket.id
 
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+resource "local_file" "home_js_inject" {
+  content  = templatefile("${path.module}/homeTemplate.js.tpl", { url_count = local.urlCount, url_time = local.urlTime })
+  filename = "${path.module}/website/home.js"
 }
 
-
-resource "aws_s3_bucket_policy" "policyJson" {
-  bucket = aws_s3_bucket.jsonBucket.id
-  policy = jsonencode(
-    {
-      "Version" : "2012-10-17",
-      "Statement" : [
-        {
-          "Sid" : "PublicReadGetObject",
-          "Effect" : "Allow",
-          "Principal" : "*",
-          "Action" : "s3:GetObject",
-          "Resource" : "arn:aws:s3:::${aws_s3_bucket.jsonBucket.id}/*"
-        }
-      ]
-    }
-  )
+resource "local_file" "error_js_inject" {
+  content  = templatefile("${path.module}/errorTemplate.js.tpl", { urlStatus = local.urlStatus})
+  filename = "${path.module}/error/404.js"
 }
 
+# resource "aws_s3_object" "jsonCount" {
+#   bucket       = aws_s3_bucket.jsonBucket.id
+#   key          = "links.json"
+#   content      = data.template_file.urlTemplate.rendered #templatefile("jsonFiles/links.conf.tpl", local.template_vars)
+#   content_type = "application/json"
 
-# Render the template
-data "template_file" "urlTemplate" {
-  template = file("jsonFiles/links.tpl")
-  vars = {
-    urlCountVar  = "${aws_api_gateway_deployment.countDeployment.invoke_url}"
-    urlTimeVar   = "${aws_api_gateway_deployment.timeDeployment.invoke_url}"
-    urlStatusVar = "${aws_api_gateway_deployment.statusDeployment.invoke_url}"
-    urlCacheVar  = "${aws_api_gateway_deployment.cacheDeployment.invoke_url}"
-  }
-}
-
-resource "aws_s3_object" "jsonCount" {
-  bucket       = aws_s3_bucket.jsonBucket.id
-  key          = "links.json"
-  content      = data.template_file.urlTemplate.rendered #templatefile("jsonFiles/links.conf.tpl", local.template_vars)
-  content_type = "application/json"
-
-  metadata = {
-    "cache-control" = "max-age=86400, public"
-  }
-}
+#   metadata = {
+#     "cache-control" = "max-age=86400, public"
+#   }
+# }

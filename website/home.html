@@ -91,8 +91,41 @@
                     <div>
                         <h5>Code hosted on <a href="https://github.com/teddiursa/terraform_website">GitHub</a></h5>
                     </div>
-                </section>
+                    <div class="cert-list">
+                        <h2>Certifications</h2>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <ul>
+                                <li>Cisco Certified Network Associate - CCNA</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <ul>
+                                <li>Junos, Associate - JNCIA</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <ul>
 
+
+                                <li>Azure Administrator Associate - AZ-104</li>
+
+                        </div>
+                        </ul>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <ul>
+                                <li>AWS-Certified Cloud Practitioner</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <!--set id to get count from script, then display at bottom of home page-->
+
+                <div class="counter" id="counterID">
+                    <h2>You are the <span style="color:#67B868">1344th</span> Visitor!</h2>
+                    <h2>The last visitor was:</h2>
+                    <h2> <span style="color:#67B868"> 1 minute and 7 seconds</span> ago</h2>
+                    <h5>Created with AWS Lambda and DynamoDB</h5>
+                </div>
             </section>
         </div>
 
@@ -287,7 +320,8 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <li><b>Container Runtimes</b>: Docker and LXC</li>
-                            <li><b>Containers</b>: Grafana, Prometheus, Graylog, Vault Warden, Homer, Olivetin, Pi-hole, Ubuntu,
+                            <li><b>Containers</b>: Grafana, Prometheus, Graylog, Vault Warden, Homer, Olivetin, Pi-hole,
+                                Ubuntu,
                                 and
                                 Nginx Proxy Manager </li>
                         </div>
@@ -301,7 +335,8 @@
                     host media files and
                     backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the services and
                     monitor
-                    their usage, including Prometheus and Grafana which helps aggregate and visualize the data. Includes centralized logging with a Graylog syslog server. While
+                    their usage, including Prometheus and Grafana which helps aggregate and visualize the data. Includes
+                    centralized logging with a Graylog syslog server. While
                     Proxmox run it's own LXC containers, Docker runs
                     containers that primarily use docker. Nginx has a valid HTTPS certificate for
                     *.teddiursa.net, which allows for all hosts to have valid HTTPS encryption with no certificate
@@ -664,14 +699,6 @@
             </div>
         </div>
 
-
-        <!--set id to get count from script, then display as a footer-->
-        <div class="counter" id="counterID">
-            <h2>You are the <span style="color:#67B868">1344th</span> Visitor!</h2>
-            <h2>The last visitor was:</h2>
-            <h2> <span style="color:#67B868"> 1 minute and 7 seconds</span> ago</h2>
-            <h5>Created with AWS Lambda and DynamoDB</h5>
-        </div>
 
         <script>
             // Get the element with id="defaultOpen" and click on it

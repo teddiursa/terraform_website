@@ -229,7 +229,6 @@ h2 {
 .counter {
     position: static;
     overflow: visible;
-    background-color: #242526;
     display: block;
     height: auto;
     width: 100%;
@@ -237,7 +236,7 @@ h2 {
     font-family: 'Josefin Sans', sans-serif;
     padding: 1em 0;
     margin: auto;
-    margin-top: 2em;
+    margin-top: 0em;
 
     h2 {
         margin: 0;
@@ -247,9 +246,10 @@ h2 {
 
 .cert-list{
   margin-top: 6em;
-  margin-bottom: 4em;
+  margin-bottom: 5em;
+  font-size: 20px;
+  list-style-type: none;
 }
-
 .link {
     color: #DB4D57;
     text-align: center;

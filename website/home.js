@@ -149,7 +149,7 @@ fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
     .then((data) => {
         // Increment loading text
         document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
-        counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>            <h5>Code hosted on <a href="https://github.com/teddiursa/terraform_website">GitHub</a></h5>'
+        counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>'
         //display block after loading
         document.getElementById('counterID').innerHTML = counter;
     })
@@ -177,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
 
 // Define the slideIndex variable globally
 let slideIndex = 1;
@@ -208,34 +209,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
         showSlides(slideIndex = n);
     }
 
-    // Function to change the slide to the one indexed by 'n'
+    // Define the showSlides function
     function showSlides(n) {
         let i;
-        // Get all elements with the class 'mySlides' and 'demo'
         let slides = document.getElementsByClassName("mySlides");
         let dots = document.getElementsByClassName("demo");
-        // Get the element that will display the image caption
         let captionText = document.getElementById("caption");
-
-        // Wrap around to the first slide if 'n' is greater than the number of slides
         if (n > slides.length) { slideIndex = 1 }
-        // Wrap around to the last slide if 'n' is less than 1
         if (n < 1) { slideIndex = slides.length }
-
-        // Hide all slides
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
-
-        // Remove 'active' class from all dots
         for (i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
         }
-
-        // Display the current slide and add 'active' class to the corresponding dot
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-        // Set the caption text to the 'alt' attribute of the active dot
         captionText.innerHTML = dots[slideIndex - 1].alt;
     }
 

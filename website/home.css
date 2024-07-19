@@ -47,12 +47,17 @@ body {
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 52px 20px;
+    padding-top: 52px;
+    padding-bottom: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
+
 }
 
 .wallcontent {
-    width: 800px;
+    width: 700px;
     margin: auto;
+    padding-bottom: 2em;
 }
 
 .wallContent h1 {
@@ -91,19 +96,28 @@ body {
 
 #Home .row {
     margin: auto;
-    max-width: 800px;
+    max-width: 600px;
     text-align: center;
 }
 
 #Home .skillsHome {
     margin: auto;
-    max-width: 800px;
+    max-width: 600px;
     text-align: left;
+    display: flex;
 
     h5 {
         text-align: center;
     }
 }
+
+#Home .certList {
+    margin: auto;
+    max-width: 600px;
+    display: flex;
+}
+
+
 
 #Resume h1 {
     text-align: center;
@@ -252,7 +266,7 @@ h2 {
     width: 100%;
     max-width: 800px;
     /* Maximum width */
-    height: 13em;
+    height: 11em;
     /* Fixed height */
     margin: 0 auto;
     /* Center horizontally */
@@ -263,18 +277,19 @@ h2 {
     align-items: center;
     text-align: center;
     font-family: 'Josefin Sans', sans-serif;
-    padding: 1em 0;
+    padding: 2em 0;
     /* Place it at the bottom of the .wrapper */
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
+    padding-bottom: 4em;
 
 
 
     h2 {
         margin: 0;
-        margin-bottom: 0.2em
+        margin-bottom: 0em
     }
 }
 
@@ -359,8 +374,16 @@ img {
 
 /* If the screen size is 601px wide or more, resize some fonts */
 @media screen and (min-width: 601px) {
+
+
     .counter {
-        font-size: 14px;
+        height: 11em;
+        font-size: 10px;
+    }
+
+    .wrapper {
+        position: relative;
+        padding-bottom: 10em;
     }
 
     .certifications,
@@ -381,8 +404,16 @@ img {
 
 /* If the screen size is 600px wide or less, resize some fonts */
 @media screen and (max-width: 600px) {
+
+
     .counter {
+        height: 5em;
         font-size: 10px;
+    }
+
+    .wrapper {
+        position: relative;
+        padding-bottom: 5em;
     }
 
     .certifications,
@@ -509,6 +540,7 @@ img {
 
 .slideshow {
 
+
     * {
         box-sizing: border-box;
     }
@@ -612,6 +644,7 @@ img {
 
 /* If the screen size is 600px wide or less, resize some fonts */
 @media screen and (max-width: 600px) {
+
 
     .mySlides img {
         width: auto;

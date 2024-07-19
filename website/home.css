@@ -55,16 +55,16 @@ body {
     margin: auto;
 }
 
-#Home h1 {
+.wallContent h1{
     text-align: center;
 }
 
-#Home h5 {
+.wallContent h5{
     text-align: center;
 }
 
-#Home .skills {
-    max-width: 600px;
+.skills{
+    width: 800px;
     margin: auto;
 }
 
@@ -73,6 +73,10 @@ body {
 }
 
 #Home h4 {
+    text-align: center;
+}
+
+#Home h5 {
     text-align: center;
 }
 
@@ -88,6 +92,16 @@ body {
 #Home .row {
     margin: auto;
     max-width: 800px;
+    text-align: center;
+}
+
+#Home .skillsHome {
+    margin: auto;
+    max-width: 800px;
+    text-align: left;
+    h5{
+        text-align: center;
+    }
 }
 
 #Resume h1 {
@@ -141,7 +155,6 @@ body {
 
 #Projects p {
     text-indent: 2em;
-    margin-top: 20px;
 }
 
 #Projects ul {
@@ -226,15 +239,33 @@ h2 {
     margin-right: 15%;
 }
 
+.wrapper {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 13em; /* Equal to the height of .counter to prevent overlap */
+}
+
 .counter {
-    position: static;
-    overflow: visible;
-    display: block;
-    height: auto;
-    width: 100%;
+    position: relative;
+    width: 100%; 
+    max-width: 800px; /* Maximum width */
+    height: 13em; /* Fixed height */
+    margin: 0 auto; /* Center horizontally */
+    background-color: #18191A;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     font-family: 'Josefin Sans', sans-serif;
     padding: 1em 0;
+    /* Place it at the bottom of the .wrapper */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    
 
     h2 {
         margin: 0;
@@ -242,12 +273,6 @@ h2 {
     }
 }
 
-.cert-list{
-  margin-bottom: 8em;
-  font-size: 18px;
-  ul{list-style-type: none;}
-  
-}
 .link {
     color: #DB4D57;
     text-align: center;
@@ -334,7 +359,8 @@ img {
     }
 
     .certifications,
-    .skills {
+    .skills,
+    skillsHome{
         font-size: 17px;
     }
 
@@ -358,6 +384,7 @@ img {
     p,
     ol,
     .skills,
+    .skillsHome,
     li {
         font-size: 12px;
     }
@@ -385,6 +412,11 @@ img {
     h1 {
         font-size: 20px;
     }
+
+    .prev,
+.next {
+  top: 12%;
+}
 }
 
 /* Wall
@@ -397,6 +429,7 @@ img {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% auto;
+    background-image: url('/map.webp');
 
     &:before {
         content: '';
@@ -449,5 +482,110 @@ img {
     }
 }
 
+.wall {}
+
+.wall {}
+
 /* Wall [END]
     ----------------------------------------------------------- */
+
+/* Slide Show */
+
+.slideshow{
+
+
+*{
+    box-sizing: border-box;
+}
+    
+img {
+  vertical-align: middle;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+    img{
+width: auto;
+  max-height: 600px;
+  object-fit: contain;
+    }
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 20%;
+  width: auto;
+  padding: -5%;
+  /* margin-top: -50px; */
+  color: #E4E6EB;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #E4E6EB;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  padding: 2px 16px;
+  color: #E4E6EB;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+    height: auto;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}}

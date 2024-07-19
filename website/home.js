@@ -13,23 +13,6 @@ function openPage(pageName, elmnt, color) {
     elmnt.style.backgroundColor = color;
 }
 
-// Function to zoom in and out grafana dashboard
-document.addEventListener('DOMContentLoaded', function () {
-    var img = document.querySelector('.dashboard>img');
-    if (img) {
-        img.addEventListener('click', function () {
-            if (this.style.transform == 'scale(1.5)') {
-                this.style.transform = '';
-                this.style.webkitTransform = '';
-            } else {
-                this.style.transform = 'scale(1.5)';
-                this.style.webkitTransform = 'scale(1.5)';
-            }
-        });
-    }
-});
-
-
 // Add number suffix to value
 function ordinalSuffix(i) {
     // j is last digit and k is last 2 digits
@@ -122,12 +105,28 @@ function secondsToWeeks(input) {
 }
 
 // variables for JSON url data
-let urlCount = "https://cjv0ahsnx7.execute-api.us-east-1.amazonaws.com/countStage";
-let urlTime = "https://u2qassxreh.execute-api.us-east-1.amazonaws.com/timeStage";
+let urlCount = "";
+let urlTime = "";
 let counter = '<h2>You are the <span style="color:#67B868">'
 
 // Fetch JSON data containing urls, then fetch data from urls
-fetch(urlCount)
+fetch('https://s3.amazonaws.com/gregchow.jsonbucket/links.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Stores json urls into variables
+        urlCount = data.urlCount;
+        urlTime = data.urlTime;
+
+        // Increment loading text
+        document.getElementById('counterID').innerHTML = '<h2>Loading.</h2>'
+
+        return fetch(urlCount);
+    })
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -135,10 +134,10 @@ fetch(urlCount)
         return response.json();
     })
     .then((data) => {
-        counter += ordinalSuffix(data.Count) + '</span> Visitor!</h2><h2>The last visitor was:</h2><h2> <span style="color:#67B868">'
+        counter += ordinalSuffix(data.Count) + '</span> visitor!</h2><h2>The last visitor was <span style="color:#67B868">'
 
         // Increment loading text
-        document.getElementById('counterID').innerHTML = '<h2>Loading.</h2>'
+        document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
         return fetch(urlTime);
     })
     .then(response => {
@@ -149,8 +148,8 @@ fetch(urlCount)
     })
     .then((data) => {
         // Increment loading text
-        document.getElementById('counterID').innerHTML = '<h2>Loading..</h2>'
-        counter += secondsToWeeks(data.Time) + '</span> ago</h2>'
+        document.getElementById('counterID').innerHTML = '<h2>Loading...</h2>'
+        counter += secondsToWeeks(data.Time) + '</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>            <h5>Code hosted on <a href="https://github.com/teddiursa/terraform_website">GitHub</a></h5>'
         //display block after loading
         document.getElementById('counterID').innerHTML = counter;
     })
@@ -161,3 +160,76 @@ setInterval(function () {
     document.getElementById('unixTime').innerText = Math.floor(Date.now() / 1000)
 },
     1000);
+
+// Function to zoom in and out grafana dashboard
+
+document.addEventListener('DOMContentLoaded', function() {
+    var img = document.querySelector('.dashboard>img');
+    if(img) {
+        img.addEventListener('click', function() {
+            if(this.style.transform == 'scale(1.5)'){
+                this.style.transform = '';
+                this.style.webkitTransform = '';
+            } else {
+                this.style.transform = 'scale(1.5)';
+                this.style.webkitTransform = 'scale(1.5)';
+            }
+        });
+    }
+});
+
+
+// Define the slideIndex variable globally
+let slideIndex = 1;
+
+// Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Attach event listeners to the prev and next buttons
+  document.querySelector('.prev').addEventListener('click', () => {
+    plusSlides(-1);
+  });
+  document.querySelector('.next').addEventListener('click', () => {
+    plusSlides(1);
+  });
+
+  // Attach event listeners to each dot
+  document.querySelectorAll('.demo').forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentSlide(index + 1);
+    });
+  });
+
+  // Define the plusSlides function
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  // Define the currentSlide function
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  // Define the showSlides function
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("demo");
+    let captionText = document.getElementById("caption");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+    captionText.innerHTML = dots[slideIndex-1].alt;
+  }
+
+    
+// Call showSlides to display the first slide
+showSlides(slideIndex);
+
+});

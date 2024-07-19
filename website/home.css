@@ -449,25 +449,6 @@ img {
         font-size: 20px;
     }
 
-    .prev,
-    .next {
-        top: 50%;
-    }
-
-    .mySlides img {
-        max-height: 300px;
-        /* Adjust this value as needed for smaller screens */
-    }
-
-    /* You may also want to adjust the size of the arrows for smaller screens */
-    .prev,
-    .next {
-        font-size: 18px;
-        /* Smaller font size for the arrows */
-        padding: 12px;
-        /* Smaller padding for the arrows */
-    }
-
 }
 
 /* Wall
@@ -575,11 +556,10 @@ img {
     .next {
         cursor: pointer;
         position: absolute;
-        top: 40%;
+        top: 75%;
         transform: translateY(-50%);
         width: auto;
         padding: -16px;
-        /* margin-top: -50px; */
         color: #E4E6EB;
         font-weight: bold;
         font-size: 20px;
@@ -642,25 +622,22 @@ img {
     }
 }
 
-/* If the screen size is 600px wide or less, resize some fonts */
 @media screen and (max-width: 600px) {
 
 
     .mySlides img {
         width: auto;
-        max-width: 90%;
+        max-width: 100%;
         height: 300px;
         /* Adjust this value as needed for smaller screens */
         object-fit: cover;
     }
 
-    /* You may also want to adjust the size of the arrows for smaller screens */
     .prev,
     .next {
-        top: 25%;
         font-size: 16px;
         /* Smaller font size for the arrows */
-        padding: 4px;
+        padding: -2px;
         /* Smaller padding for the arrows */
     }
 }

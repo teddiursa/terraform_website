@@ -178,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-
 // Define the slideIndex variable globally
 let slideIndex = 1;
 
@@ -209,22 +208,34 @@ document.addEventListener('DOMContentLoaded', (event) => {
         showSlides(slideIndex = n);
     }
 
-    // Define the showSlides function
+    // Function to change the slide to the one indexed by 'n'
     function showSlides(n) {
         let i;
+        // Get all elements with the class 'mySlides' and 'demo'
         let slides = document.getElementsByClassName("mySlides");
         let dots = document.getElementsByClassName("demo");
+        // Get the element that will display the image caption
         let captionText = document.getElementById("caption");
+
+        // Wrap around to the first slide if 'n' is greater than the number of slides
         if (n > slides.length) { slideIndex = 1 }
+        // Wrap around to the last slide if 'n' is less than 1
         if (n < 1) { slideIndex = slides.length }
+
+        // Hide all slides
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
+
+        // Remove 'active' class from all dots
         for (i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
         }
+
+        // Display the current slide and add 'active' class to the corresponding dot
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
+        // Set the caption text to the 'alt' attribute of the active dot
         captionText.innerHTML = dots[slideIndex - 1].alt;
     }
 

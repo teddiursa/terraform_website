@@ -604,10 +604,9 @@ img {
         clear: both;
     }
 
-    /* Four columns side by side */
     .column {
         float: left;
-        width: 25%;
+        width: 16.667%;
         height: auto;
     }
 
@@ -623,7 +622,6 @@ img {
 }
 
 @media screen and (max-width: 600px) {
-
 
     .mySlides img {
         width: auto;

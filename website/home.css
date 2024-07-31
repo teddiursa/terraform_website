@@ -57,8 +57,7 @@ body {
 .wallcontent {
     width: 700px;
     margin: auto;
-    heigh:
-        padding-bottom: 2em;
+    padding-bottom: 2em;
 }
 
 .wallContent h1 {
@@ -634,6 +633,10 @@ img {
         font-size: 20px;
     }
 
+    .numbertext {
+        font-size: 12px;
+    }
+
 }
 
 
@@ -650,5 +653,9 @@ img {
     .next {
         font-size: 16px;
         padding: -2px;
+    }
+
+    .numbertext {
+        font-size: 10px;
     }
 }

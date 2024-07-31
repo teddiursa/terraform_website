@@ -57,7 +57,8 @@ body {
 .wallcontent {
     width: 700px;
     margin: auto;
-    padding-bottom: 2em;
+    heigh:
+        padding-bottom: 2em;
 }
 
 .wallContent h1 {
@@ -541,7 +542,6 @@ img {
 
         img {
             width: auto;
-            max-height: 550px;
             object-fit: contain;
         }
     }
@@ -621,21 +621,34 @@ img {
     }
 }
 
+@media screen and (min-width: 601px) {
+    .mySlides img {
+        width: auto;
+        max-width: 100%;
+        max-height: 550px;
+        object-fit: cover;
+    }
+
+    .prev,
+    .next {
+        font-size: 20px;
+    }
+
+}
+
+
 @media screen and (max-width: 600px) {
 
     .mySlides img {
         width: auto;
         max-width: 100%;
-        height: 300px;
-        /* Adjust this value as needed for smaller screens */
+        max-height: 260px;
         object-fit: cover;
     }
 
     .prev,
     .next {
         font-size: 16px;
-        /* Smaller font size for the arrows */
         padding: -2px;
-        /* Smaller padding for the arrows */
     }
 }

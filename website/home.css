@@ -7,7 +7,7 @@ body {
     font-size: 18px;
 }
 
-/* style scrollbar*/
+/* style scrollbar */
 /* width */
 ::-webkit-scrollbar {
     width: 12px;
@@ -68,7 +68,6 @@ body {
     text-align: center;
 }
 
-
 #Home h6 {
     text-align: center;
 }
@@ -95,9 +94,6 @@ body {
     max-width: 600px;
     text-align: center;
 }
-
-
-
 
 #Resume h1 {
     text-align: center;
@@ -265,8 +261,6 @@ h2 {
     right: 0;
     padding-bottom: 4em;
 
-
-
     h2 {
         margin: 0;
         margin-bottom: 0em
@@ -392,7 +386,6 @@ img {
         font-size: 28px;
     }
 
-
     .counter {
         height: 5em;
         font-size: 10px;
@@ -438,9 +431,7 @@ img {
 
 }
 
-
 /* Slide Show */
-
 
 .home_slideshow {
 
@@ -543,7 +534,6 @@ img {
 }
 
 .slideshow {
-
 
     * {
         box-sizing: border-box;
@@ -668,7 +658,6 @@ img {
     }
 }
 
-
 @media screen and (max-width: 600px) {
 
     .mySlides img {
@@ -677,7 +666,6 @@ img {
         max-height: 260px;
         object-fit: cover;
     }
-
 
     .prev,
     .next {

@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <!-- Title of Tab-->
-    <title>Greg Chow's Portfolio Website</title>
-    <meta name="description" content="A Portfolio for Gregory Chow's Projects">
+    <title>Greg Chow's Website</title>
+    <meta name="description" content="A portfolio demonstrating cloud, network, and server technologies.">
     <!-- linking to bootstrap css-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -58,54 +58,73 @@
 
         <!-- Home page-->
         <div id="Home" class="tabcontent" style="display: none;">
-            <div class="wall" rel="preload" as="image" style="background-image: url('/map.webp');" fetchpriority="high"
+            <!--    <div class="wall" rel="preload" as="image" style="background-image: url('/map.webp');" fetchpriority="high"
                 loading="eager">
                 <div class="wallHeader">
                     <h1 class="wallTitle">Greg Chow</h1>
                 </div>
-            </div>
+            </div> -->
 
             <section class="wallContent">
-                <h6>Map by <a href="https://www2.telegeography.com/">Telegeography</a> on <a
-                        href="https://www.submarinecablemap.com/">Submarine Cable Map</a></h6>
+                <!-- <h6>Map by <a href="https://www2.telegeography.com/">Telegeography</a> on <a
+                        href="https://www.submarinecablemap.com/">Submarine Cable Map</a></h6> -->
                 <h1>Welcome to gregchow.net!</h1>
                 <p>My name is Gregory Chow, and I'm passionate about networking, servers, and cloud technology.</p>
 
-                <h2>Skills Snapshot</h2>
-                <div class="skillsHome">
+                <h2>Project Examples</h2>
+                <div class="home_slideshow">
 
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <ul>
-                            <li>Routing Protocols</li>
-                            <li>Infrastructure as code (Terraform and Ansible)</li>
-                            <li>Network Automation</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <ul>
-                            <li>Front End Development</li>
-                            <li>Cloud Networking (AWS &amp; Azure)</li>
-                            <li>Server Administration</li>
-                        </ul>
+                    <div class="home_slideContainer">
+                        <div class="home_Slides">
+                            <div class="numbertext">1 / 4</div>
+                            <img rel="preload" src="CloudDiagram.svg">
+                        </div>
+
+                        <div class="home_Slides">
+                            <div class="numbertext">2 / 4</div>
+                            <img src="network_proxmox.svg">
+                        </div>
+
+                        <div class="home_Slides">
+                            <div class="numbertext">3 / 4</div>
+                            <img src="infrastructure.svg">
+                        </div>
+
+                        <div class="home_Slides">
+                            <div class="numbertext">4 / 4</div>
+                            <img src="grafana.png"">
+                        </div>
+
+                        <a class=" home_prev">❮</a>
+                            <a class="home_next">❯</a>
+
+                            <div class="home_caption-container">
+                                <p id="home_caption"></p>
+                            </div>
+
+                            <div class="row">
+                                <div class="column">
+                                    <img class="home_demo" src="CloudDiagram.svg" rel="preload"
+                                        alt="This websited hosted on AWS, using DynamoDB, Lambda Functions, and Github Actions for Dynamic changes.">
+                                </div>
+                                <div class="column">
+                                    <img class="home_demo" src="network_proxmox.svg" rel="preload"
+                                        alt="Home Network with virtualized and containerized services, including DNS, SNMP, and Syslog servers">
+                                </div>
+                                <div class="column">
+                                    <img class="home_demo" src="infrastructure.svg" rel="preload"
+                                        alt="Azure Hub and Spoke infrastructure provisioned with Terraform IaC and featuring NSGs, VPN, and Log Analytical Workspaces.">
+                                </div>
+
+                                <div class="column">
+                                    <img class="home_demo" src="grafana.png" rel="preload"
+                                        alt="Grafana visualizes metrics from Prometheus, Netdata, Proxmox, Watch Tower, and Github">
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
-                </div>
-                <h2>Certifications</h2>
-                <div class="certList">
-
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <ul>
-                            <li>Cisco Certified Network Associate - CCNA</li>
-                            <li>Junos, Associate - JNCIA</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <ul>
-                            <li>Azure Administrator Associate - AZ-104</li>
-                            <li>AWS-Certified Cloud Practitioner</li>
-                        </ul>
-                    </div>
-                </div>
             </section>
         </div>
 
@@ -133,11 +152,12 @@
                     <!-- summary section -->
                     <div class="summary">
                         <h2>Summary</h2>
-                        <p>Dynamic IT professional with a bachelor’s degree in networking/digital technology and 4+
-                            years of experience in system administration and technical support. Skilled in maintaining
-                            network and security systems, engineering web applications, and resolving complex issues.
-                            Experienced in coordinating teams and implementing disaster recovery processes. Holds CCNA,
-                            JNCIA, AWS, and Azure certifications.</p>
+                        <p>Accomplished IT professional with a Bachelor’s degree in Networking and Digital Technology,
+                            bolstered by over four years of hands-on experience in technical support. Proficient in
+                            supporting network and security systems, developing web applications, and swiftly resolving
+                            intricate technical challenges. Adept at leading teams and executing disaster recovery
+                            strategies. Holds certifications in CCNA, JNCIA, AWS, and Azure.
+                        </p>
 
                         <!-- List of skills-->
                         <h2>Technical Skills</h2>
@@ -178,57 +198,43 @@
                                 <h4>Customer Engineer</h4>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                                <h3 id="date">Apr 2024 - Present</h3>
+                                <h3 id="date">August 2023 - Present</h3>
                             </div>
                         </div>
                         <div class="row experience-summary">
                             <div class="col-md-12">
-                                <p>Leverage expertise in monitoring, configuring, and maintaining Cisco and Fortigate
-                                    devices in a Medium-scale environment to ensure network stability and optimal
-                                    performance</p>
-                                <p>Collaborate with 50+ members of a global team to perform network refreshes, upgrades,
-                                    and maintenance for up-to-date infrastructure and seamless operations</p>
+                                <p>Oversee network and system stability at Mercedes-Benz R&D’s Sunnyvale offices and
+                                    data center.</p>
+                                <p>Monitor network infrastructure using SNMP and ServiceNow, with expertise in OSPF,
+                                    VLANs, VRRP, and STP.</p>
+                                <p>Conduct maintenance and testing on Cisco and Fortigate devices to ensure optimal
+                                    performance.</p>
+                                <p>Collaborate with a global network team to troubleshoot and maintain operational
+                                    continuity during network upgrades and maintenance.</p>
                             </div>
                         </div>
 
                         <div class="row experience-title">
                             <div class="col-md-8 col-sm-8 col-xs-8">
-                                <h3>MergeIT</h3>
-                                <h4>Junior Network Engineer</h4>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <h3 id="date">Aug 2023 - Apr 2024</h3>
-                            </div>
-                        </div>
-                        <div class="row experience-summary">
-                            <div class="col-md-12">
-                                <p>Troubleshot complex technical issues in partnership with network engineers to enhance
-                                    network functionality</p>
-                                <p>Regularly monitored and audited network performance, identifying areas for
-                                    improvement and implementing effective solutions to enhance network security and
-                                    reliability</p>
-                            </div>
-                        </div>
-
-                        <div class="row experience-title">
-                            <div class="col-md-8 col-sm-8 col-xs-8">
-                                <h3>VIVOTEK</h3>
+                                <h3>Vivotek</h3>
                                 <h4>Technical Support Engineer</h4>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                                <h3 id="date">Apr 2019 - Aug 2023</h3>
+                                <h3 id="date">April 2019 - August 2023</h3>
                             </div>
                         </div>
                         <div class="row experience-summary">
                             <div class="col-md-12">
-                                <p>Performed day-to-day activities, including diagnosing and rectifying critical issues
-                                    with networking cameras, servers, and software to streamline routine operations</p>
-                                <p>Assumed additional responsibilities as an interim leader and Tier 2 support during a
-                                    period of leadership transition, ensuring continuity of critical operations</p>
-                                <p>Significantly contributed to the transition to Zendesk ticketing and documentation
-                                    which resulted in a marked decrease in customer calls and tickets</p>
+                                <p>Diagnosed and resolved critical issues with networking cameras, servers, and
+                                    software.</p>
+                                <p>Acted as interim leader and Tier 2 support during a leadership transition, ensuring
+                                    uninterrupted operations.</p>
+                                <p>Led the creation of documentation during the transition to Zendesk, reducing customer
+                                    tickets by up to 50%.</p>
+                                <p>Managed a Windows-based demo server with automated backups.</p>
                             </div>
                         </div>
+
                     </div>
 
                     <!-- Education and Certifications -->
@@ -387,105 +393,103 @@
 
                         <div class="row">
                             <div class="column">
-                                <img class="demo" src="grafana.png" style="width:90%"
-                                    alt="Grafana Dashboard with Prometheus, Netdata, and Github integrations">
+                                <img class="demo" src="grafana.png"
+                                    alt="Grafana visualizes metrics from Prometheus, Netdata, and Github">
                             </div>
                             <div class="column">
-                                <img class="demo" src="homarr.png" style="width:90%"
-                                    alt="Homarr Dashboard with media server, weather, proxmox, and sonarr calendar integrations">
+                                <img class="demo" src="homarr.png"
+                                    alt="Homarr Dashboard with Plex, weather, Proxmox, Pi-Hole, and Sonarr/Radarr calendar integrations">
                             </div>
                             <div class="column">
-                                <img class="demo" src="librenms.png" style="width:90%"
+                                <img class="demo" src="librenms.png"
                                     alt="LibreNMS an autodiscovering PHP/MySQL-based network monitoring system.">
                             </div>
 
                             <div class="column">
-                                <img class="demo" src="motd.png" style="width:90%"
-                                    alt="Message of the Day via Bash Script">
+                                <img class="demo" src="motd.png" alt="Message of the Day via Bash Script">
                             </div>
                             <div class="column">
-                                <img class="demo" src="graylog.png" style="width:90%"
-                                    alt="Graylog filtering with Elasticsearcch">
+                                <img class="demo" src="graylog.png" alt="Graylog filtering with Elasticsearcch">
                             </div>
                             <div class="column">
-                                <img class="demo" src="code.png" style="width:90%"
-                                    alt="VS Code Server hosting Ansible scripts">
+                                <img class="demo" src="code.png" alt="VS Code Server hosting Ansible scripts">
                             </div>
 
 
                         </div>
                     </div>
-                    <h3>Azure Spoke Hub Terraform Network Topology</h3>
-                    <h4><a href="https://github.com/teddiursa/azure_terraform_hub_spoke">GitHub Repository</a></h4>
-                    <div class="azure_image">
-                        <img src="infrastructure.svg" rel="prefetch" alt="Resource Diagram of Azure Topology">
-                    </div>
-                    <ul>
-                        <div class="row">
-
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <li><b>Cloud Engineering</b>: Azure NSG, Bastion, Private Endpoints, Network Peering,
-                                    and VPN Gateways</li>
-                                <li><b>IaC</b>: Terraform</li>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <li><b>Test Script Languages</b>: PowerShell, Bash and KQL</li>
-                                <li><b>Azure Services</b>: DNS, Linux Web Apps, and MS SQL</li>
-                            </div>
-                        </div>
-                    </ul>
-                    <p>Terraform IaC code that creates an Azure "On-Prem" Network and a Hub-Spoke network with a few
-                        dummy production services. Connected together via a VPN Gateway, it also has centralized
-                        logging, Bastion for secure remote connections, and Network Security Groups (NSGs) for isolated
-                        networks.</p>
-
-                    <h3>Configurable Form Filling Python Application</h3>
-                    <h4><a href="https://github.com/teddiursa/form_filler">GitHub Repository</a></h4>
-                    <div class="form_filler_image">
-                        <img src="form_filler.svg" rel="prefetch" alt="Flow Chart form_filler python applications">
-                    </div>
-                    <ul>
-                        <div class="row">
-
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <li><b>Code</b>: Python, HTML, CSS</li>
-                                <li><b>File Formats</b>: YAML and Excel</li>
-                                <li><b>Unit Tests</b>: pytests, MagicMock</li>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <li><b>Web Automation and Scraping</b>: Python's Selenium</li>
-                                <li><b>GUI</b>: Python's tkinter</li>
-                                <li><b>Data manipulation</b>: Python's Pandas</li>
-                            </div>
-                        </div>
-                    </ul>
-                    <p>This Python script automates the process of filling out web forms by leveraging data from an
-                        Excel
-                        file.</p>
-                    <ul>
-                        <li><strong>Data Input:</strong>
-                            <ul>
-                                <li>Reads input from an Excel file.</li>
-                                <li>Creates a searchable list of terms.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Web Form Automation:</strong>
-                            <ul>
-                                <li>Automatically fills in a webpage form using data from the Excel file.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Dynamic Configuration:</strong>
-                            <ul>
-                                <li>Utilizes a <b>config.yml</b> file to specify terms and form fields.</li>
-                                <li>Easily modify variables such as file names, website URLs, searchable terms, and user
-                                    details.
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
                 </div>
+                <h3>Azure Spoke Hub Terraform Network Topology</h3>
+                <h4><a href="https://github.com/teddiursa/azure_terraform_hub_spoke">GitHub Repository</a></h4>
+                <div class="azure_image">
+                    <img src="infrastructure.svg" rel="prefetch" alt="Resource Diagram of Azure Topology">
+                </div>
+                <ul>
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <li><b>Cloud Engineering</b>: Azure NSG, Bastion, Private Endpoints, Network Peering,
+                                and VPN Gateways</li>
+                            <li><b>IaC</b>: Terraform</li>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <li><b>Test Script Languages</b>: PowerShell, Bash and KQL</li>
+                            <li><b>Azure Services</b>: DNS, Linux Web Apps, and MS SQL</li>
+                        </div>
+                    </div>
+                </ul>
+                <p>Terraform IaC code that creates an Azure "On-Prem" Network and a Hub-Spoke network with a few
+                    dummy production services. Connected together via a VPN Gateway, it also has centralized
+                    logging, Bastion for secure remote connections, and Network Security Groups (NSGs) for isolated
+                    networks.</p>
+
+                <h3>Configurable Form Filling Python Application</h3>
+                <h4><a href="https://github.com/teddiursa/form_filler">GitHub Repository</a></h4>
+                <div class="form_filler_image">
+                    <img src="form_filler.svg" rel="prefetch" alt="Flow Chart form_filler python applications">
+                </div>
+                <ul>
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <li><b>Code</b>: Python, HTML, CSS</li>
+                            <li><b>File Formats</b>: YAML and Excel</li>
+                            <li><b>Unit Tests</b>: pytests, MagicMock</li>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <li><b>Web Automation and Scraping</b>: Python's Selenium</li>
+                            <li><b>GUI</b>: Python's tkinter</li>
+                            <li><b>Data manipulation</b>: Python's Pandas</li>
+                        </div>
+                    </div>
+                </ul>
+                <p>This Python script automates the process of filling out web forms by leveraging data from an
+                    Excel
+                    file.</p>
+                <ul>
+                    <li><strong>Data Input:</strong>
+                        <ul>
+                            <li>Reads input from an Excel file.</li>
+                            <li>Creates a searchable list of terms.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Web Form Automation:</strong>
+                        <ul>
+                            <li>Automatically fills in a webpage form using data from the Excel file.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Dynamic Configuration:</strong>
+                        <ul>
+                            <li>Utilizes a <b>config.yml</b> file to specify terms and form fields.</li>
+                            <li>Easily modify variables such as file names, website URLs, searchable terms, and user
+                                details.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
             </div>
+        </div>
         </div>
 
         <!-- Blog Page-->

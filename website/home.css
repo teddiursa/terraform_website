@@ -68,10 +68,6 @@ body {
     text-align: center;
 }
 
-.skills {
-    max-width: 800px;
-    margin: auto;
-}
 
 #Home h6 {
     text-align: center;
@@ -100,22 +96,6 @@ body {
     text-align: center;
 }
 
-#Home .skillsHome {
-    margin: auto;
-    max-width: 600px;
-    text-align: left;
-    display: flex;
-
-    h5 {
-        text-align: center;
-    }
-}
-
-#Home .certList {
-    margin: auto;
-    max-width: 600px;
-    display: flex;
-}
 
 
 
@@ -375,6 +355,9 @@ img {
 /* If the screen size is 601px wide or more, resize some fonts */
 @media screen and (min-width: 601px) {
 
+    .wallContent h1 {
+        font-size: 40px;
+    }
 
     .counter {
         height: 11em;
@@ -404,6 +387,10 @@ img {
 
 /* If the screen size is 600px wide or less, resize some fonts */
 @media screen and (max-width: 600px) {
+
+    .wallContent h1 {
+        font-size: 28px;
+    }
 
 
     .counter {
@@ -451,73 +438,109 @@ img {
 
 }
 
-/* Wall
-    ----------------------------------------------------------- */
-
-.wall {
-    width: 100%;
-    padding-bottom: 50%;
-    position: relative;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% auto;
-    background-image: url('/map.webp');
-
-    &:before {
-        content: '';
-        background-color: rgba(0, 0, 0, 0.35);
-        display: block;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-    }
-
-    .wallHeader {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        padding: 2rem;
-        width: 100%;
-    }
-
-    .wallTitle {
-        margin-bottom: 1rem;
-        color: #E4E6EB;
-    }
-
-    .wallText {
-        text-align: center;
-        color: #E4E6EB;
-    }
-
-    /* resize title for mobile*/
-    @media screen and (min-width: 601px) {
-        .wallTitle {
-            font-size: 4em;
-        }
-
-        .wallText {
-            font-size: 1.8em;
-        }
-    }
-
-    @media screen and (max-width: 600px) {
-        .wallTitle {
-            font-size: 2em;
-        }
-
-        .wallText {
-            font-size: .8em;
-        }
-    }
-}
-
-/* Wall [END]
-    ----------------------------------------------------------- */
 
 /* Slide Show */
+
+
+.home_slideshow {
+
+    * {
+        box-sizing: border-box;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    /* Position the image container (needed to position the left and right arrows) */
+    .home_slideContainer {
+        position: relative;
+    }
+
+    /* Hide the images by default */
+    .home_Slides {
+        display: none;
+
+        img {
+            width: auto;
+            object-fit: contain;
+        }
+    }
+
+    /* Add a pointer when hovering over the thumbnail images */
+    .cursor {
+        cursor: pointer;
+    }
+
+    /* Next & previous buttons */
+    .home_prev,
+    .home_next {
+        cursor: pointer;
+        position: absolute;
+        top: 75%;
+        transform: translateY(-50%);
+        width: auto;
+        padding: -16px;
+        color: #E4E6EB;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        -webkit-user-select: none;
+        z-index: 2;
+    }
+
+    /* Position the "next button" to the right */
+    .home_next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .home_prev:hover,
+    .home_next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+        color: #E4E6EB;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    /* Container for image text */
+    .caption-container {
+        text-align: center;
+        padding: 2px 16px;
+        color: #E4E6EB;
+    }
+
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .column {
+        float: left;
+        width: 25%;
+        height: auto;
+    }
+
+    /* Add a transparency effect for thumnbail images */
+    .home_demo {
+        width: 90%;
+        opacity: 0.6;
+    }
+
+    .active,
+    .home_demo:hover {
+        opacity: 1;
+    }
+}
 
 .slideshow {
 
@@ -610,6 +633,7 @@ img {
 
     /* Add a transparency effect for thumnbail images */
     .demo {
+        width: 90%;
         opacity: 0.6;
     }
 
@@ -636,6 +660,12 @@ img {
         font-size: 12px;
     }
 
+    .home_Slides img {
+        width: auto;
+        max-width: 100%;
+        max-height: 600px;
+        object-fit: cover;
+    }
 }
 
 
@@ -648,6 +678,7 @@ img {
         object-fit: cover;
     }
 
+
     .prev,
     .next {
         font-size: 16px;
@@ -656,5 +687,12 @@ img {
 
     .numbertext {
         font-size: 10px;
+    }
+
+    .home_Slides img {
+        width: auto;
+        max-width: 100%;
+        height: 325px;
+        object-fit: cover;
     }
 }

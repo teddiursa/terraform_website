@@ -161,26 +161,10 @@ setInterval(function () {
 },
     1000);
 
-// Function to zoom in and out grafana dashboard
-
-document.addEventListener('DOMContentLoaded', function () {
-    var img = document.querySelector('.dashboard>img');
-    if (img) {
-        img.addEventListener('click', function () {
-            if (this.style.transform == 'scale(1.5)') {
-                this.style.transform = '';
-                this.style.webkitTransform = '';
-            } else {
-                this.style.transform = 'scale(1.5)';
-                this.style.webkitTransform = 'scale(1.5)';
-            }
-        });
-    }
-});
-
 
 // Define the slideIndex variable globally
 let slideIndex = 1;
+let home_slideIndex = 1;
 
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -191,6 +175,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector('.next').addEventListener('click', () => {
         plusSlides(1);
     });
+    // Attach event listeners to home prev and next buttons
+    document.querySelector('.home_prev').addEventListener('click', () => {
+        home_plusSlides(-1);
+    });
+    document.querySelector('.home_next').addEventListener('click', () => {
+        home_plusSlides(1);
+    });
+
 
     // Attach event listeners to each dot
     document.querySelectorAll('.demo').forEach((dot, index) => {
@@ -199,14 +191,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
+    // Attach event listeners to each home dot
+    document.querySelectorAll('.home_demo').forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            home_currentSlide(index + 1);
+        });
+    });
+
+
     // Define the plusSlides function
     function plusSlides(n) {
         showSlides(slideIndex += n);
+    }
+    function home_plusSlides(n) {
+        home_showSlides(home_slideIndex += n);
     }
 
     // Define the currentSlide function
     function currentSlide(n) {
         showSlides(slideIndex = n);
+    }
+    function home_currentSlide(n) {
+        home_showSlides(home_slideIndex = n);
     }
 
     // Define the showSlides function
@@ -231,5 +237,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Call showSlides to display the first slide
     showSlides(slideIndex);
+
+    // Define the showSlides function
+    function home_showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("home_Slides");
+        let dots = document.getElementsByClassName("home_demo");
+        let captionText = document.getElementById("home_caption");
+        if (n > slides.length) { home_slideIndex = 1 }
+        if (n < 1) { home_slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[home_slideIndex - 1].style.display = "block";
+        dots[home_slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[home_slideIndex - 1].alt;
+    }
+
+    // Call showSlides to display the first slide
+    home_showSlides(home_slideIndex);
 
 });

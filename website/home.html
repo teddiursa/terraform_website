@@ -104,11 +104,8 @@
 
                             <div class="row">
                                 <div class="column">
-                                    <img class="home_demo" src="CloudDiagram.svg" rel="preload"
-                                        alt="This website is hosted on AWS, featuring automated provisioning via Terraform and CI/CD pipelines using <a href="
-                                        https://github.com/teddiursa/terraform_website/tree/main/.github/workflows">GitHub
-                                    Actions</a> and <a
-                                        href="https://github.com/teddiursa/terraform_website/tree/main/.github/workflows">Pytest</a>.
+                                    <img class="home_demo" src="CloudDiagram.svg" rel="preload" alt="This website is hosted on AWS, featuring automated provisioning via Terraform and CI/CD pipelines using GitHub
+                                    Actions and Pytest.
                                     Live metrics are provided through DynamoDB, Lambda, and API Gateway.">
                                 </div>
                                 <div class="column">
@@ -321,7 +318,9 @@
                     gateways,
                     and DynamoDB to track the number of visitors and time since the last visit. Has full HTTPS
                     encryption
-                    and root domain rerouting via Route 53. GitHub Actions automatically update S3 files and run <a
+                    and root domain rerouting via Route 53. <a href="
+                    https://github.com/teddiursa/terraform_website/tree/main/.github/workflows">GitHub Actions</a>
+                    automatically update S3 files and run <a
                         href="https://github.com/teddiursa/terraform_website/tree/main/tests">Python
                         unit
                         tests</a>.</p>
@@ -349,21 +348,20 @@
                         href=“https://graylog.org/”>Graylog</a> for centralized syslog consolidation, <a
                         href=“https://github.com/librenms/librenms”>LibreNMS</a> for SNMP tracking, <a
                         href=“https://github.com/dani-garcia/vaultwarden”>Vault Warden</a> for password management, and
-                    TrueNAS Scale for hosting media files and backups.
-
-                    VLAN separation via firewall rules enhances security. The creation of containers and VMs is
+                    TrueNAS Scale for hosting media files and backups.</p>
+                <p>VLAN separation via firewall rules enhances security. The creation of containers and VMs is
                     automated with Ansible, including a <a
                         href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/tasks/main.yml">bootstrap
                         role</a> that automatically creates roles with SSH keys,
                     adds the syslog server, and generates a dynamic <a
                         href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/files/motd.sh">Message
                         of the Day Bash script</a>.
-
-                    Wireguard provides Point-to-Site VPN via the firewall, while <a
+                </p>
+                <p>Wireguard provides Point-to-Site VPN via the firewall, while <a
                         href=“https://tailscale.com/”>Tailscale</a> offers a Point-to-Point VPN connection to specific
                     services.
-
-                    To organize and monitor services, a mix of dashboards and Nginx Proxy Manager is used. <a
+                </p>
+                <p>To organize and monitor services, a mix of dashboards and Nginx Proxy Manager is used. <a
                         href="https://prometheus.io/">Prometheus</a>
                     and <a href="https://grafana.com/">Grafana</a> help aggregate and visualize metrics data. While
                     Proxmox runs its own LXC containers, Docker

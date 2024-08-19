@@ -436,7 +436,7 @@ img {
 
   /* Position the image container (needed to position the left and right arrows) */
   .home_slideContainer {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     position: relative;
   }

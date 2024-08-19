@@ -105,11 +105,15 @@
                             <div class="row">
                                 <div class="column">
                                     <img class="home_demo" src="CloudDiagram.svg" rel="preload"
-                                        alt="This websited hosted on AWS, using DynamoDB, Lambda Functions, and Github Actions for Dynamic changes.">
+                                        alt="This website is hosted on AWS, featuring automated provisioning via Terraform and CI/CD pipelines using <a href="
+                                        https://github.com/teddiursa/terraform_website/tree/main/.github/workflows">GitHub
+                                    Actions</a> and <a
+                                        href="https://github.com/teddiursa/terraform_website/tree/main/.github/workflows">Pytest</a>.
+                                    Live metrics are provided through DynamoDB, Lambda, and API Gateway.">
                                 </div>
                                 <div class="column">
                                     <img class="home_demo" src="network_proxmox.svg" rel="preload"
-                                        alt="Home Network with virtualized and containerized services, including DNS, SNMP, and Syslog servers">
+                                        alt="Home Network with virtualized and containerized services, including DNS, SNMP, Reverse Proxy, and Syslog servers. Ansible Scripts automate provisioning and managing of infrastructure.">
                                 </div>
                                 <div class="column">
                                     <img class="home_demo" src="infrastructure.svg" rel="preload"
@@ -317,9 +321,10 @@
                     gateways,
                     and DynamoDB to track the number of visitors and time since the last visit. Has full HTTPS
                     encryption
-                    and root domain rerouting via Route 53. GitHub Actions automatically update S3 files and run Python
-                    unit
-                    tests.</p>
+                    and root domain rerouting via Route 53. GitHub Actions automatically update S3 files and run <a
+                        href="https://github.com/teddiursa/terraform_website/tree/main/tests">Python
+                        unit
+                        tests</a>.</p>
                 <h3>Home Lab</h3>
                 <h4><a href="https://github.com/teddiursa/ansible_scripts">Ansible GitHub Repository</a></h4>
                 <h4>Network Diagram</h4>
@@ -332,23 +337,42 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <li><b>Container Runtimes</b>: Docker and LXC</li>
-                            <li><b>Distros</b>: Debian, Ubuntu, Alpine, Redhat, Windows</li>
+                            <li><b>Distros</b>: Debian, Ubuntu, Alpine, Fedora, Windows</li>
                         </div>
                     </div>
                 </ul>
-                <p>Bare-Metal Hypervisor running various virtual machines and containers. Uses <a
-                        href="https://github.com/teddiursa/ansible_scripts">Ansible</a> to automatically
-                    provision and manage infrastucture, PfSense as an open source router/firewall,
-                    Plex to host media, Pi-hole for internal DNS, Vault Warden for password management, and TruNAS scale
-                    to
-                    host media files and
-                    backups. There are a mix of dashboards and Nginx Proxy Manager to help organize the services and
-                    monitor
-                    their usage, including Prometheus and Grafana which helps aggregate and visualize the data. While
-                    Proxmox run it's own LXC containers, Docker runs
-                    containers that primarily use docker. Nginx has a valid HTTPS certificate for
-                    *.teddiursa.net, which allows for all hosts to have valid HTTPS encryption with no certificate
-                    warnings.
+                <p>A Bare-Metal Hypervisor hosts various virtual machines and containers. <a
+                        href=“https://github.com/teddiursa/ansible_scripts”>Ansible</a> is used to automate provisioning
+                    and manage infrastructure. The setup includes an <a href=“https://nginxproxymanager.com/”>Nginx
+                        Reverse Proxy</a> to provide Fully Qualified Domain Names (FQDNs), Plex for media hosting, <a
+                        href=“https://github.com/pi-hole/pi-hole”>Pi-hole</a> for internal DNS, <a
+                        href=“https://graylog.org/”>Graylog</a> for centralized syslog consolidation, <a
+                        href=“https://github.com/librenms/librenms”>LibreNMS</a> for SNMP tracking, <a
+                        href=“https://github.com/dani-garcia/vaultwarden”>Vault Warden</a> for password management, and
+                    TrueNAS Scale for hosting media files and backups.
+
+                    VLAN separation via firewall rules enhances security. The creation of containers and VMs is
+                    automated with Ansible, including a <a
+                        href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/tasks/main.yml">bootstrap
+                        role</a> that automatically creates roles with SSH keys,
+                    adds the syslog server, and generates a dynamic <a
+                        href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/files/motd.sh">Message
+                        of the Day Bash script</a>.
+
+                    Wireguard provides Point-to-Site VPN via the firewall, while <a
+                        href=“https://tailscale.com/”>Tailscale</a> offers a Point-to-Point VPN connection to specific
+                    services.
+
+                    To organize and monitor services, a mix of dashboards and Nginx Proxy Manager is used. <a
+                        href="https://prometheus.io/">Prometheus</a>
+                    and <a href="https://grafana.com/">Grafana</a> help aggregate and visualize metrics data. While
+                    Proxmox runs its own LXC containers, Docker
+                    hosts services that have better Docker compatibility. Nginx is configured with a valid HTTPS
+                    certificate for
+                    *.teddiursa.net, ensuring all hosts have HTTPS encryption with no certificate warnings.
+                    Graylog consolidates syslog logs, with Elasticsearch simplifying searches across multiple sources.
+                    LibreNMS
+                    provides an SNMP manager to monitor infrastructure via SNMP agents and traps, simplifying tracking.
                 </p>
                 <div class="slideshow">
                     <h3 style="text-align:center">Features</h3>
@@ -409,7 +433,7 @@
                                 <img class="demo" src="motd.png" alt="Message of the Day via Bash Script">
                             </div>
                             <div class="column">
-                                <img class="demo" src="graylog.png" alt="Graylog filtering with Elasticsearcch">
+                                <img class="demo" src="graylog.png" alt="Graylog filtering with Elasticsearch">
                             </div>
                             <div class="column">
                                 <img class="demo" src="code.png" alt="VS Code Server hosting Ansible scripts">

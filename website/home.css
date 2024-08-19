@@ -431,6 +431,7 @@ img {
 
   img {
     vertical-align: middle;
+    margin-bottom: 1em;
   }
 
   /* Position the image container (needed to position the left and right arrows) */

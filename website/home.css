@@ -436,6 +436,8 @@ img {
 
   /* Position the image container (needed to position the left and right arrows) */
   .home_slideContainer {
+    max-width: 800px;
+    margin: 0 auto;
     position: relative;
   }
 
@@ -449,6 +451,12 @@ img {
     }
   }
 
+  .home_prev,
+  .home_next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   /* Add a pointer when hovering over the thumbnail images */
   .cursor {
     cursor: pointer;
@@ -459,7 +467,7 @@ img {
   .home_next {
     cursor: pointer;
     position: absolute;
-    top: 75%;
+    top: 64%;
     transform: translateY(-50%);
     width: auto;
     padding: -16px;
@@ -494,10 +502,13 @@ img {
   }
 
   /* Container for image text */
-  .caption-container {
+  .home_caption-container {
     text-align: center;
     padding: 2px 16px;
     color: #e4e6eb;
+    min-height: 90px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .row:after {
@@ -558,7 +569,7 @@ img {
   .next {
     cursor: pointer;
     position: absolute;
-    top: 75%;
+    top: 80%;
     transform: translateY(-50%);
     width: auto;
     padding: -16px;
@@ -640,11 +651,23 @@ img {
     font-size: 12px;
   }
 
+  .home_Slides {
+    height: 400px;
+  }
+
   .home_Slides img {
+    max-height: 100%;
     width: auto;
-    max-width: 100%;
-    max-height: 600px;
-    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.2s; /* Animation */
+    position: relative;
+    background-color: #18191a;
+  }
+
+  .home_Slides img.zoomed {
+    transform: scale(2); /* Adjust the scale as needed */
+    z-index: 1000; /* Ensure the zoomed image is on top */
+    position: relative;
   }
 }
 

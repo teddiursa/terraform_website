@@ -250,10 +250,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     captionText.innerHTML = dots[home_slideIndex - 1].alt;
   }
 
-  // Call showSlides to display the first slide
+// Call showSlides to display the first slide
   home_showSlides(home_slideIndex);
 });
 
+// Click to enlarge homepage slideshow
 document.addEventListener("DOMContentLoaded", function () {
   const slidesImages = document.querySelectorAll(".home_Slides img");
 

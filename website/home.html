@@ -340,38 +340,7 @@
                         </div>
                     </div>
                 </ul>
-                <p>A Bare-Metal Hypervisor hosts various virtual machines and containers. <a
-                        href=“https://github.com/teddiursa/ansible_scripts”>Ansible</a> is used to automate provisioning
-                    and manage infrastructure. The setup includes an <a href=“https://nginxproxymanager.com/”>Nginx
-                        Reverse Proxy</a> to provide Fully Qualified Domain Names (FQDNs), Plex for media hosting, <a
-                        href=“https://github.com/pi-hole/pi-hole”>Pi-hole</a> for internal DNS, <a
-                        href=“https://graylog.org/”>Graylog</a> for centralized syslog consolidation, <a
-                        href=“https://github.com/librenms/librenms”>LibreNMS</a> for SNMP tracking, <a
-                        href=“https://github.com/dani-garcia/vaultwarden”>Vault Warden</a> for password management, and
-                    TrueNAS Scale for hosting media files and backups.</p>
-                <p>VLAN separation via firewall rules enhances security. The creation of containers and VMs is
-                    automated with Ansible, including a <a
-                        href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/tasks/main.yml">bootstrap
-                        role</a> that automatically creates roles with SSH keys,
-                    adds the syslog server, and generates a dynamic <a
-                        href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/files/motd.sh">Message
-                        of the Day Bash script</a>.
-                </p>
-                <p>Wireguard provides Point-to-Site VPN via the firewall, while <a
-                        href=“https://tailscale.com/”>Tailscale</a> offers a Point-to-Point VPN connection to specific
-                    services.
-                </p>
-                <p>To organize and monitor services, a mix of dashboards and Nginx Proxy Manager is used. <a
-                        href="https://prometheus.io/">Prometheus</a>
-                    and <a href="https://grafana.com/">Grafana</a> help aggregate and visualize metrics data. While
-                    Proxmox runs its own LXC containers, Docker
-                    hosts services that have better Docker compatibility. Nginx is configured with a valid HTTPS
-                    certificate for
-                    *.teddiursa.net, ensuring all hosts have HTTPS encryption with no certificate warnings.
-                    Graylog consolidates syslog logs, with Elasticsearch simplifying searches across multiple sources.
-                    LibreNMS
-                    provides an SNMP manager to monitor infrastructure via SNMP agents and traps, simplifying tracking.
-                </p>
+
                 <div class="slideshow">
                     <h3 style="text-align:center">Features</h3>
 
@@ -441,6 +410,38 @@
                         </div>
                     </div>
                 </div>
+                <p>A Bare-Metal Hypervisor hosts various virtual machines and containers. <a
+                        href=“https://github.com/teddiursa/ansible_scripts”>Ansible</a> is used to automate provisioning
+                    and manage infrastructure. The setup includes an <a href=“https://nginxproxymanager.com/”>Nginx
+                        Reverse Proxy</a> to provide Fully Qualified Domain Names (FQDNs), Plex for media hosting, <a
+                        href=“https://github.com/pi-hole/pi-hole”>Pi-hole</a> for internal DNS, <a
+                        href=“https://graylog.org/”>Graylog</a> for centralized syslog consolidation, <a
+                        href=“https://github.com/librenms/librenms”>LibreNMS</a> for SNMP tracking, <a
+                        href=“https://github.com/dani-garcia/vaultwarden”>Vault Warden</a> for password management, and
+                    TrueNAS Scale for hosting media files and backups.</p>
+                <p>VLAN separation via firewall rules enhances security. The creation of containers and VMs is
+                    automated with Ansible, including a <a
+                        href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/tasks/main.yml">bootstrap
+                        role</a> that automatically creates roles with SSH keys,
+                    adds the syslog server, and generates a dynamic <a
+                        href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/files/motd.sh">Message
+                        of the Day Bash script</a>.
+                </p>
+                <p>Wireguard provides Point-to-Site VPN via the firewall, while <a
+                        href=“https://tailscale.com/”>Tailscale</a> offers a Point-to-Point VPN connection to specific
+                    services.
+                </p>
+                <p>To organize and monitor services, a mix of dashboards and Nginx Proxy Manager is used. <a
+                        href="https://prometheus.io/">Prometheus</a>
+                    and <a href="https://grafana.com/">Grafana</a> help aggregate and visualize metrics data. While
+                    Proxmox runs its own LXC containers, Docker
+                    hosts services that have better Docker compatibility. Nginx is configured with a valid HTTPS
+                    certificate for
+                    *.teddiursa.net, ensuring all hosts have HTTPS encryption with no certificate warnings.
+                    Graylog consolidates syslog logs, with Elasticsearch simplifying searches across multiple sources.
+                    LibreNMS
+                    provides an SNMP manager to monitor infrastructure via SNMP agents and traps, simplifying tracking.
+                </p>
                 <h3>Azure Spoke Hub Terraform Network Topology</h3>
                 <h4><a href="https://github.com/teddiursa/azure_terraform_hub_spoke">GitHub Repository</a></h4>
                 <div class="azure_image">

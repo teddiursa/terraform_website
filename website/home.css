@@ -665,7 +665,7 @@ img {
   }
 
   .home_Slides img.zoomed {
-    transform: scale(2); /* Adjust the scale as needed */
+    transform: scale(1.75); /* Adjust the scale as needed */
     z-index: 1000; /* Ensure the zoomed image is on top */
     position: relative;
   }

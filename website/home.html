@@ -314,9 +314,10 @@
                 <p>This project is fully automated with Terraform for easy provisioning and destruction of AWS resources
                     along
                     with a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>.
-                    Files are hosted in an AWS S3 bucket and delivered with Cloudfront. Uses Lambda functions, API
+                    Files are hosted in an AWS S3 bucket and delivered via Cloudfront. It uses Lambda functions, API
                     gateways,
-                    and DynamoDB to track the number of visitors and time since the last visit. Has full HTTPS
+                    and DynamoDB to track the number of visitors and time since the last visit. This project has full
+                    HTTPS
                     encryption
                     and root domain rerouting via Route 53. <a href="
                     https://github.com/teddiursa/terraform_website/tree/main/.github/workflows">GitHub Actions</a>
@@ -336,7 +337,7 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <li><b>Container Runtimes</b>: Docker and LXC</li>
-                            <li><b>Distros</b>: Debian, Ubuntu, Alpine, Fedora, Windows</li>
+                            <li><b>Distros</b>: Debian, Ubuntu, Alpine, Redhat, Windows</li>
                         </div>
                     </div>
                 </ul>
@@ -419,17 +420,18 @@
                         href=“https://github.com/librenms/librenms”>LibreNMS</a> for SNMP tracking, <a
                         href=“https://github.com/dani-garcia/vaultwarden”>Vault Warden</a> for password management, and
                     TrueNAS Scale for hosting media files and backups.</p>
-                <p>VLAN separation via firewall rules enhances security. The creation of containers and VMs is
+                <p>The creation of containers and VMs is
                     automated with Ansible, including a <a
                         href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/tasks/main.yml">bootstrap
-                        role</a> that automatically creates roles with SSH keys,
-                    adds the syslog server, and generates a dynamic <a
-                        href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/files/motd.sh">Message
-                        of the Day Bash script</a>.
+                        role</a> that automatically creates users with SSH keys,
+                    adds a remote syslog server, and generates a dynamic Message
+                    of the Day <a
+                        href="https://github.com/teddiursa/ansible_scripts/blob/main/roles/bootstrap/files/motd.sh">Bash
+                        script</a>.
                 </p>
                 <p>Wireguard provides Point-to-Site VPN via the firewall, while <a
                         href=“https://tailscale.com/”>Tailscale</a> offers a Point-to-Point VPN connection to specific
-                    services.
+                    devices. Utilizes VLAN separation via firewall rules to enhances security.
                 </p>
                 <p>To organize and monitor services, a mix of dashboards and Nginx Proxy Manager is used. <a
                         href="https://prometheus.io/">Prometheus</a>
@@ -437,10 +439,11 @@
                     Proxmox runs its own LXC containers, Docker
                     hosts services that have better Docker compatibility. Nginx is configured with a valid HTTPS
                     certificate for
-                    *.teddiursa.net, ensuring all hosts have HTTPS encryption with no certificate warnings.
+                    *.teddiursa.net, ensuring all hosts have HTTPS encryption with no certificate warnings for their
+                    FQDN.
                     Graylog consolidates syslog logs, with Elasticsearch simplifying searches across multiple sources.
                     LibreNMS
-                    provides an SNMP manager to monitor infrastructure via SNMP agents and traps, simplifying tracking.
+                    provides an SNMP Manager to monitor infrastructure via SNMP agents and traps, simplifying tracking.
                 </p>
                 <h3>Azure Spoke Hub Terraform Network Topology</h3>
                 <h4><a href="https://github.com/teddiursa/azure_terraform_hub_spoke">GitHub Repository</a></h4>
@@ -462,7 +465,7 @@
                     </div>
                 </ul>
                 <p>Terraform IaC code that creates an Azure "On-Prem" Network and a Hub-Spoke network with a few
-                    dummy production services. Connected together via a VPN Gateway, it also has centralized
+                    dummy production services. Connected together via a VPN Gateway, it features centralized
                     logging, Bastion for secure remote connections, and Network Security Groups (NSGs) for isolated
                     networks.</p>
 

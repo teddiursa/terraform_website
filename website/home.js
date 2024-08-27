@@ -254,13 +254,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
   home_showSlides(home_slideIndex);
 });
 
-// Click to enlarge homepage slideshow
-document.addEventListener("DOMContentLoaded", function () {
-  const slidesImages = document.querySelectorAll(".home_Slides img");
+document.addEventListener('DOMContentLoaded', function() {
+  const slidesImages = document.querySelectorAll('.home_Slides img');
 
-  slidesImages.forEach((img) => {
-    img.addEventListener("click", function () {
-      this.classList.toggle("zoomed");
-    });
+  slidesImages.forEach(img => {
+      img.addEventListener('click', function(event) {
+          this.classList.toggle('zoomed');
+          event.stopPropagation(); // Prevent the click from bubbling up to the document
+      });
+  });
+
+  document.addEventListener('click', function(event) {
+      slidesImages.forEach(img => {
+          if (img.classList.contains('zoomed')) {
+              img.classList.remove('zoomed');
+          }
+      });
   });
 });
+

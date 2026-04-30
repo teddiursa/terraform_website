@@ -15,51 +15,31 @@ function handleNavigation() {
       navLinks.forEach(l => l.classList.remove('active'));
       this.classList.add('active');
 
-      // Show target section
+      // Hide all sections first
       sections.forEach(section => {
+        section.style.display = 'none';
         section.classList.remove('active-section');
-        if (section.id === targetId) {
-          section.classList.add('active-section');
-        }
       });
 
-      // Smooth scroll to top of section
+      // Show target section
       if (targetSection) {
+        targetSection.style.display = 'block';
+        targetSection.classList.add('active-section');
+
+        // Scroll to top of page
         window.scrollTo({
-          top: targetSection.offsetTop - 80,
+          top: 0,
           behavior: 'smooth'
         });
       }
 
       // Close mobile menu if open
       const navbarCollapse = document.querySelector('.navbar-collapse');
-      if (navbarCollapse.classList.contains('show')) {
+      if (navbarCollapse && navbarCollapse.classList.contains('show')) {
         const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
         if (bsCollapse) {
           bsCollapse.hide();
         }
-      }
-    });
-  });
-
-  // Handle scroll to update active nav link
-  window.addEventListener('scroll', function() {
-    let current = '';
-    const scrollPosition = window.scrollY + 100;
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
       }
     });
   });
@@ -390,8 +370,17 @@ document.addEventListener("DOMContentLoaded", function() {
   // Set home section as active by default
   const homeSection = document.getElementById('home');
   const homeLink = document.querySelector('a[href="#home"]');
+  const allSections = document.querySelectorAll('.section-content');
 
+  // Hide all sections first
+  allSections.forEach(section => {
+    section.style.display = 'none';
+    section.classList.remove('active-section');
+  });
+
+  // Show home section
   if (homeSection && homeLink) {
+    homeSection.style.display = 'block';
     homeSection.classList.add('active-section');
     homeLink.classList.add('active');
   }

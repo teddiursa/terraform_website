@@ -137,8 +137,9 @@ body {
 /* Section Styling */
 .section-content {
   display: none;
-  padding: var(--spacing-lg) 0;
+  padding: var(--spacing-lg) var(--spacing-md);
   animation: fadeIn var(--transition-normal);
+  min-height: calc(100vh - 200px);
 }
 
 .section-content.active-section {
@@ -309,22 +310,31 @@ img:hover {
   border-radius: var(--radius-md);
   padding: var(--spacing-md);
   box-shadow: var(--shadow-md);
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mySlides,
 .home_Slides {
   display: none;
-  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mySlides img,
 .home_Slides img {
-  max-width: 100%;
-  max-height: 500px;
+  max-width: 90%;
+  max-height: 400px;
   object-fit: contain;
   margin: 0 auto;
   cursor: pointer;
   transition: transform var(--transition-normal);
+  display: block;
 }
 
 .mySlides img:hover,
@@ -350,7 +360,7 @@ img:hover {
   top: 50%;
   transform: translateY(-50%);
   width: auto;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
   color: var(--text-primary);
   font-weight: bold;
   font-size: 1.5rem;
@@ -359,6 +369,10 @@ img:hover {
   background: rgba(0, 0, 0, 0.5);
   transition: all var(--transition-fast);
   z-index: 10;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .next,
@@ -602,7 +616,12 @@ img:hover {
 
   .mySlides img,
   .home_Slides img {
-    max-height: 300px;
+    max-height: 250px;
+  }
+
+  .slideContainer,
+  .home_slideContainer {
+    min-height: 300px;
   }
 
   .column {
@@ -618,7 +637,8 @@ img:hover {
   .home_prev,
   .home_next {
     font-size: 1.25rem;
-    padding: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    height: 50px;
   }
 
   .project-card,

@@ -11,10 +11,20 @@ fetch(urlStatus)
   })
   .then((data) => {
     // Update status HTML
-    if (data.Status == 'Up') {
-        document.getElementById("status").innerHTML = 'GregChow.net is currently <span class="status-up">up</span>';
-    } else {
-        document.getElementById("status").innerHTML = 'GregChow.net is currently <span class="status-down">down</span>';
+    const statusElement = document.getElementById("status");
+    if (statusElement) {
+      if (data.Status == 'Up') {
+        statusElement.innerHTML = 'GregChow.net is currently <span class="status-up">up</span>';
+      } else {
+        statusElement.innerHTML = 'GregChow.net is currently <span class="status-down">down</span>';
+      }
     }
   })
-  .catch(error => console.error('Error:', error));
+  .catch(error => {
+    console.error('Error:', error);
+    const statusElement = document.getElementById("status");
+    if (statusElement) {
+      statusElement.innerHTML = 'Unable to check status. Please try again later.';
+      statusElement.classList.add('status-down');
+    }
+  });

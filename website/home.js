@@ -1,23 +1,74 @@
-// Menu buttons
-function openPage(pageName, elmnt, color) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].style.backgroundColor = "";
-  }
-  document.getElementById(pageName).style.display = "block";
-  elmnt.style.backgroundColor = color;
+// Navigation and Section Management
+function handleNavigation() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('.section-content');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      // Get target section
+      const targetId = this.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      // Update active states
+      navLinks.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+
+      // Show target section
+      sections.forEach(section => {
+        section.classList.remove('active-section');
+        if (section.id === targetId) {
+          section.classList.add('active-section');
+        }
+      });
+
+      // Smooth scroll to top of section
+      if (targetSection) {
+        window.scrollTo({
+          top: targetSection.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+
+      // Close mobile menu if open
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      if (navbarCollapse.classList.contains('show')) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) {
+          bsCollapse.hide();
+        }
+      }
+    });
+  });
+
+  // Handle scroll to update active nav link
+  window.addEventListener('scroll', function() {
+    let current = '';
+    const scrollPosition = window.scrollY + 100;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
 }
 
 // Add number suffix to value
 function ordinalSuffix(i) {
-  // j is last digit and k is last 2 digits
-  var j = i % 10,
-    k = i % 100;
+  const j = i % 10;
+  const k = i % 100;
   if (j == 1 && k != 11) {
     return i + "st";
   }
@@ -40,18 +91,16 @@ const minuteSeconds = 60;
    Ensures use of plural or singular as necessary
 */
 function secondsToWeeks(input) {
-  time = input;
-  // Create empty string output
+  let time = input;
   let output = "";
+
   if (Math.trunc(time / weekSeconds) != 0) {
     output += Math.trunc(time / weekSeconds);
     if (Math.trunc(time / weekSeconds) > 1) output += " weeks";
     else output += " week";
-    // Reduce time for next type
     time = time % weekSeconds;
   }
   if (Math.trunc(time / daySeconds) != 0) {
-    // Prepend space if output exists
     if (output != null) output += " ";
     output += Math.trunc(time / daySeconds);
     if (Math.trunc(time / daySeconds) > 1) output += " days";
@@ -59,217 +108,291 @@ function secondsToWeeks(input) {
     time = time % daySeconds;
   }
   if (Math.trunc(time / hourSeconds) != 0) {
-    // Prepend space if output exists
     if (output != null) output += " ";
     output += Math.trunc(time / hourSeconds);
     if (Math.trunc(time / hourSeconds) > 1) output += " hours";
     else output += " hour";
-    // Reduce time for next type
     time = time % hourSeconds;
   }
   if (Math.trunc(time / minuteSeconds) != 0) {
-    // Prepend space if output exists
     if (output != null) output += " ";
     output += Math.trunc(time / minuteSeconds);
     if (Math.trunc(time / minuteSeconds) > 1) output += " minutes";
     else output += " minute";
-    // Reduce time for next type
     time = time % minuteSeconds;
   }
   if (time >= 1) {
-    // Prepend space if output exists
-    if (output != "") output += " and ";
+    if (output !== "") output += " and ";
     output += Math.trunc(time);
     if (Math.trunc(time) > 1) output += " seconds";
     else output += " second";
-  }
-  // For when value is less than a second
-  else if (output == "") {
+  } else if (output === "") {
     output += "less than a second";
   }
   return output;
 }
 
-// variables for JSON url data
-let urlCount = "";
-let urlTime = "";
-let counter = '<h2>You are the <span style="color:#67B868">';
+// Visitor Counter Functionality
+function initVisitorCounter() {
+  let urlCount = "";
+  let urlTime = "";
+  let counter = '<h2>You are the <span style="color:#67B868">';
 
-// Fetch JSON data containing urls, then fetch data from urls
-fetch("https://s3.amazonaws.com/gregchow.jsonbucket/links.json")
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
+  fetch("https://s3.amazonaws.com/gregchow.jsonbucket/links.json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      urlCount = data.urlCount;
+      urlTime = data.urlTime;
+
+      document.getElementById("counterID").innerHTML = "<h2>Loading.</h2>";
+
+      return fetch(urlCount);
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      counter +=
+        ordinalSuffix(data.Count) +
+        '</span> visitor!</h2><h2>The last visitor was <span style="color:#67B868">';
+
+      document.getElementById("counterID").innerHTML = "<h2>Loading..</h2>";
+      return fetch(urlTime);
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      document.getElementById("counterID").innerHTML = "<h2>Loading...</h2>";
+      counter +=
+        secondsToWeeks(data.Time) +
+        "</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>";
+      document.getElementById("counterID").innerHTML = counter;
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      document.getElementById("counterID").innerHTML = "<h2>Unable to load visitor count</h2>";
+    });
+}
+
+// Unix Timer
+function initUnixTimer() {
+  setInterval(function () {
+    const unixTimeElement = document.getElementById("unixTime");
+    if (unixTimeElement) {
+      unixTimeElement.innerText = Math.floor(Date.now() / 1000);
     }
-    return response.json();
-  })
-  .then((data) => {
-    // Stores json urls into variables
-    urlCount = data.urlCount;
-    urlTime = data.urlTime;
+  }, 1000);
+}
 
-    // Increment loading text
-    document.getElementById("counterID").innerHTML = "<h2>Loading.</h2>";
-
-    return fetch(urlCount);
-  })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
-  })
-  .then((data) => {
-    counter +=
-      ordinalSuffix(data.Count) +
-      '</span> visitor!</h2><h2>The last visitor was <span style="color:#67B868">';
-
-    // Increment loading text
-    document.getElementById("counterID").innerHTML = "<h2>Loading..</h2>";
-    return fetch(urlTime);
-  })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
-  })
-  .then((data) => {
-    // Increment loading text
-    document.getElementById("counterID").innerHTML = "<h2>Loading...</h2>";
-    counter +=
-      secondsToWeeks(data.Time) +
-      "</span> ago</h2><h5>Created with AWS Lambda and DynamoDB</h5>";
-    //display block after loading
-    document.getElementById("counterID").innerHTML = counter;
-  })
-  .catch((error) => console.error("Error:", error));
-
-// Function to iterate unix timer
-setInterval(function () {
-  document.getElementById("unixTime").innerText = Math.floor(Date.now() / 1000);
-}, 1000);
-
-// Define the slideIndex variable globally
+// Slideshow Functionality
 let slideIndex = 1;
 let home_slideIndex = 1;
 
-// Wait for the DOM to be fully loaded
-document.addEventListener("DOMContentLoaded", (event) => {
-  // Attach event listeners to the prev and next buttons
-  document.querySelector(".prev").addEventListener("click", () => {
-    plusSlides(-1);
-  });
-  document.querySelector(".next").addEventListener("click", () => {
-    plusSlides(1);
-  });
-  // Attach event listeners to home prev and next buttons
-  document.querySelector(".home_prev").addEventListener("click", () => {
-    home_plusSlides(-1);
-  });
-  document.querySelector(".home_next").addEventListener("click", () => {
-    home_plusSlides(1);
-  });
+function initSlideshows() {
+  // Projects slideshow
+  const slides = document.getElementsByClassName("mySlides");
+  const dots = document.getElementsByClassName("demo");
+  const captionText = document.getElementById("caption");
 
-  // Attach event listeners to each dot
-  document.querySelectorAll(".demo").forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      currentSlide(index + 1);
+  if (slides.length > 0) {
+    showSlides(slideIndex);
+
+    // Next/previous buttons
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+
+    if (prevBtn) prevBtn.addEventListener("click", () => plusSlides(-1));
+    if (nextBtn) nextBtn.addEventListener("click", () => plusSlides(1));
+
+    // Thumbnail clicks
+    Array.from(dots).forEach((dot, index) => {
+      dot.addEventListener("click", () => currentSlide(index + 1));
     });
-  });
+  }
 
-  // Attach event listeners to each home dot
-  document.querySelectorAll(".home_demo").forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      home_currentSlide(index + 1);
+  // Home slideshow
+  const homeSlides = document.getElementsByClassName("home_Slides");
+  const homeDots = document.getElementsByClassName("home_demo");
+  const homeCaptionText = document.getElementById("home_caption");
+
+  if (homeSlides.length > 0) {
+    home_showSlides(home_slideIndex);
+
+    // Next/previous buttons
+    const homePrevBtn = document.querySelector(".home_prev");
+    const homeNextBtn = document.querySelector(".home_next");
+
+    if (homePrevBtn) homePrevBtn.addEventListener("click", () => home_plusSlides(-1));
+    if (homeNextBtn) homeNextBtn.addEventListener("click", () => home_plusSlides(1));
+
+    // Thumbnail clicks
+    Array.from(homeDots).forEach((dot, index) => {
+      dot.addEventListener("click", () => home_currentSlide(index + 1));
     });
-  });
+  }
+}
 
-  // Define the plusSlides function
-  function plusSlides(n) {
-    showSlides((slideIndex += n));
+function plusSlides(n) {
+  showSlides((slideIndex += n));
+}
+
+function home_plusSlides(n) {
+  home_showSlides((home_slideIndex += n));
+}
+
+function currentSlide(n) {
+  showSlides((slideIndex = n));
+}
+
+function home_currentSlide(n) {
+  home_showSlides((home_slideIndex = n));
+}
+
+function showSlides(n) {
+  let i;
+  const slides = document.getElementsByClassName("mySlides");
+  const dots = document.getElementsByClassName("demo");
+  const captionText = document.getElementById("caption");
+
+  if (slides.length === 0) return;
+
+  if (n > slides.length) {
+    slideIndex = 1;
   }
-  function home_plusSlides(n) {
-    home_showSlides((home_slideIndex += n));
+  if (n < 1) {
+    slideIndex = slides.length;
   }
 
-  // Define the currentSlide function
-  function currentSlide(n) {
-    showSlides((slideIndex = n));
-  }
-  function home_currentSlide(n) {
-    home_showSlides((home_slideIndex = n));
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
   }
 
-  // Define the showSlides function
-  function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("demo");
-    let captionText = document.getElementById("caption");
-    if (n > slides.length) {
-      slideIndex = 1;
-    }
-    if (n < 1) {
-      slideIndex = slides.length;
-    }
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
+  for (i = 0; i < dots.length; i++) {
+    dots[i].classList.remove("active");
+  }
+
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].classList.add("active");
+
+  if (captionText && dots[slideIndex - 1]) {
     captionText.innerHTML = dots[slideIndex - 1].alt;
   }
+}
 
-  // Call showSlides to display the first slide
-  showSlides(slideIndex);
+function home_showSlides(n) {
+  let i;
+  const slides = document.getElementsByClassName("home_Slides");
+  const dots = document.getElementsByClassName("home_demo");
+  const captionText = document.getElementById("home_caption");
 
-  // Define the showSlides function
-  function home_showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("home_Slides");
-    let dots = document.getElementsByClassName("home_demo");
-    let captionText = document.getElementById("home_caption");
-    if (n > slides.length) {
-      home_slideIndex = 1;
-    }
-    if (n < 1) {
-      home_slideIndex = slides.length;
-    }
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[home_slideIndex - 1].style.display = "block";
-    dots[home_slideIndex - 1].className += " active";
-    captionText.innerHTML = dots[home_slideIndex - 1].alt;
+  if (slides.length === 0) return;
+
+  if (n > slides.length) {
+    home_slideIndex = 1;
+  }
+  if (n < 1) {
+    home_slideIndex = slides.length;
   }
 
-// Call showSlides to display the first slide
-  home_showSlides(home_slideIndex);
-});
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const slidesImages = document.querySelectorAll('.home_Slides img');
+  for (i = 0; i < dots.length; i++) {
+    dots[i].classList.remove("active");
+  }
+
+  slides[home_slideIndex - 1].style.display = "block";
+  dots[home_slideIndex - 1].classList.add("active");
+
+  if (captionText && dots[home_slideIndex - 1]) {
+    captionText.innerHTML = dots[home_slideIndex - 1].alt;
+  }
+}
+
+// Enhanced Image Zoom Functionality
+function initImageZoom() {
+  const slidesImages = document.querySelectorAll('.home_Slides img, .mySlides img');
 
   slidesImages.forEach(img => {
-      img.addEventListener('click', function(event) {
-          this.classList.toggle('zoomed');
-          event.stopPropagation(); // Prevent the click from bubbling up to the document
-      });
+    // Click to zoom
+    img.addEventListener('click', function(event) {
+      event.stopPropagation();
+      this.classList.toggle('zoomed');
+
+      // Add overlay when zoomed
+      if (this.classList.contains('zoomed')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Touch support for mobile
+    img.addEventListener('touchstart', function(event) {
+      // Prevent default touch behavior
+      // event.preventDefault();
+    }, { passive: true });
   });
 
+  // Click outside to close zoom
   document.addEventListener('click', function(event) {
-      slidesImages.forEach(img => {
-          if (img.classList.contains('zoomed')) {
-              img.classList.remove('zoomed');
-          }
-      });
+    const zoomedImages = document.querySelectorAll('.home_Slides img.zoomed, .mySlides img.zoomed');
+    zoomedImages.forEach(img => {
+      if (!img.contains(event.target)) {
+        img.classList.remove('zoomed');
+        document.body.style.overflow = '';
+      }
+    });
   });
-});
 
+  // Keyboard support - ESC to close zoom
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      const zoomedImages = document.querySelectorAll('.home_Slides img.zoomed, .mySlides img.zoomed');
+      zoomedImages.forEach(img => {
+        img.classList.remove('zoomed');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+}
+
+// Initialize everything when DOM is ready
+document.addEventListener("DOMContentLoaded", function() {
+  // Initialize navigation
+  handleNavigation();
+
+  // Initialize visitor counter
+  initVisitorCounter();
+
+  // Initialize unix timer
+  initUnixTimer();
+
+  // Initialize slideshows
+  initSlideshows();
+
+  // Initialize image zoom
+  initImageZoom();
+
+  // Set home section as active by default
+  const homeSection = document.getElementById('home');
+  const homeLink = document.querySelector('a[href="#home"]');
+
+  if (homeSection && homeLink) {
+    homeSection.classList.add('active-section');
+    homeLink.classList.add('active');
+  }
+});

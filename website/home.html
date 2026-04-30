@@ -7,8 +7,8 @@
     <title>Greg Chow's Website</title>
     <meta name="description" content="A portfolio demonstrating cloud, network, and server technologies.">
     <!-- linking to bootstrap css-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- my css stylesheet-->
     <link rel="stylesheet" type="text/css" href="home.css">
     <!-- tell mobile devices to not adjust-->
@@ -49,29 +49,45 @@
 
 <body>
 
-    <body>
-        <!-- Buttons to split into multiple pages-->
-        <button class="tablink" onclick="openPage('Home', this)" id="defaultOpen">Home</button>
-        <button class="tablink" onclick="openPage('Resume', this)">Resume</button>
-        <button class="tablink" onclick="openPage('Projects', this)">Projects</button>
-        <button class="tablink" onclick="openPage('Blog', this)">Blog</button>
+    <!-- Sticky Header Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Greg Chow</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home" data-section="Home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resume" data-section="Resume">Resume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects" data-section="Projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog" data-section="Blog">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Home page-->
-        <div id="Home" class="tabcontent" style="display: none;">
-            <!--    <div class="wall" rel="preload" as="image" style="background-image: url('/map.webp');" fetchpriority="high"
-                loading="eager">
-                <div class="wallHeader">
-                    <h1 class="wallTitle">Greg Chow</h1>
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Home Section -->
+        <section id="home" class="section-content active-section">
+            <div class="container">
+                <div class="hero-section">
+                    <h1 class="text-center">Welcome to gregchow.net!</h1>
+                    <p class="text-center lead">My name is Gregory Chow, and I'm passionate about networking, servers, and cloud technology.</p>
                 </div>
-            </div> -->
 
-            <section class="wallContent">
-                <!-- <h6>Map by <a href="https://www2.telegeography.com/">Telegeography</a> on <a
-                        href="https://www.submarinecablemap.com/">Submarine Cable Map</a></h6> -->
-                <h1>Welcome to gregchow.net!</h1>
-                <p>My name is Gregory Chow, and I'm passionate about networking, servers, and cloud technology.</p>
-
-                <h2>Project Examples</h2>
+                <h2 class="text-center mt-5">Project Examples</h2>
                 <div class="home_slideshow">
 
                     <div class="home_slideContainer">
@@ -125,35 +141,39 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-            </section>
-        </div>
-
-        <!-- Resume page-->
-        <div id="Resume" class="tabcontent" style="display: none;">
+        <!-- Resume Section -->
+        <section id="resume" class="section-content">
 
             <!-- Title and Links-->
             <div class="container">
                 <div class="row">
-                    <div class="title">
-                        <h4><a href="https://drive.google.com/uc?id=1QErZikutdeCqoH2I2O29HpsClHdNSjRl&amp;export=download"
-                                download="">Resume Download
-                            </a>
-                            |
-                            <a href="https://github.com/teddiursa/">GitHub
-                            </a>
-                            |
-                            <a href="https://www.linkedin.com/in/gregory-chow-1b2299a2">LinkedIn
-                            </a>
-                            |
-                            <a href="mailto: greg.choww@gmail.com">greg.choww@gmail.com
-                            </a>
-                        </h4>
+                    <div class="col-12">
+                        <div class="title text-center">
+                            <h4 class="mb-4">
+                                <a href="https://drive.google.com/uc?id=1QErZikutdeCqoH2I2O29HpsClHdNSjRl&export=download"
+                                    download="">Resume Download
+                                </a>
+                                |
+                                <a href="https://github.com/teddiursa/">GitHub
+                                </a>
+                                |
+                                <a href="https://www.linkedin.com/in/gregory-chow-1b2299a2">LinkedIn
+                                </a>
+                                |
+                                <a href="mailto: greg.choww@gmail.com">greg.choww@gmail.com
+                                </a>
+                            </h4>
+                        </div>
                     </div>
+                </div>
                     <!-- summary section -->
                     <div class="summary">
-                        <h2>Summary</h2>
-                        <p>Accomplished IT professional with a Bachelor’s degree in Networking and Digital Technology,
+                        <h2 class="text-center">Summary</h2>
+                        <p>Accomplished IT professional with a Bachelor's degree in Networking and Digital Technology,
                             bolstered by over four years of hands-on experience in technical support. Proficient in
                             supporting network and security systems, developing web applications, and swiftly resolving
                             intricate technical challenges. Adept at leading teams and executing disaster recovery
@@ -161,18 +181,35 @@
                         </p>
 
                         <!-- List of skills-->
-                        <h2>Technical Skills</h2>
+                        <h2 class="text-center">Technical Skills</h2>
                         <div class="skills">
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <p><strong>Cisco CCNA:</strong> Proficient in configuring and maintaining Cisco network
-                                    devices</p>
-                                <p><strong>Python, Terraform, Ansible, and Powershell:</strong> Skilled in scripting and
-                                    automation</p>
-                                <p><strong>Routing and Switching:</strong> Experienced in network design and
-                                    troubleshooting</p>
-                                <p><strong>Juniper JNCIA:</strong> Familiar with Juniper networking solutions</p>
-                                <p><strong>Linux Administration:</strong> Competent in managing Linux systems</p>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <p><strong>Cisco CCNA:</strong> Proficient in configuring and maintaining Cisco network
+                                        devices</p>
+                                    <p><strong>Python, Terraform, Ansible, and Powershell:</strong> Skilled in scripting and
+                                        automation</p>
+                                    <p><strong>Routing and Switching:</strong> Experienced in network design and
+                                        troubleshooting</p>
+                                    <p><strong>Juniper JNCIA:</strong> Familiar with Juniper networking solutions</p>
+                                    <p><strong>Linux Administration:</strong> Competent in managing Linux systems</p>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <p><strong>Troubleshooting:</strong> Adept at diagnosing and resolving complex technical
+                                        issues</p>
+                                    <p><strong>Cloud (AWS & Azure):</strong> Familiar with provisioning cloud services
+                                        and
+                                        architecture</p>
+                                    <p><strong>Web Development:</strong> Proficient using HTML, CSS, and JavaScript</p>
+                                    <p><strong>Azure Administration:</strong>Proficient in Azure Administration
+                                    </p>
+                                    <p><strong>Network Monitoring:</strong> Capable of ensuring network performance and
+                                        security
+                                    </p>
+                                </div>
                             </div>
+                        </div>
+                    </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <p><strong>Troubleshooting:</strong> Adept at diagnosing and resolving complex technical
                                     issues</p>
@@ -193,11 +230,50 @@
                     <div class="work-experience">
                         <h2 class="text-center">Work Experience</h2>
 
-                        <div class="row experience-title">
-                            <div class="col-md-8 col-sm-8 col-xs-8">
-                                <h3>Computacenter</h3>
-                                <h4>Customer Engineer</h4>
+                        <div class="experience-card mb-4">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-8 col-xs-8">
+                                    <h3>Computacenter</h3>
+                                    <h4>Customer Engineer</h4>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                    <h3 id="date">August 2023 - Present</h3>
+                                </div>
                             </div>
+                            <div class="experience-summary">
+                                <p>Oversee network and system stability at Mercedes-Benz R&D's Sunnyvale offices and
+                                    data center.</p>
+                                <p>Monitor network infrastructure using SNMP and ServiceNow, with expertise in OSPF,
+                                    VLANs, VRRP, and STP.</p>
+                                <p>Conduct maintenance and testing on Cisco and Fortigate devices to ensure optimal
+                                    performance.</p>
+                                <p>Collaborate with a global network team to troubleshoot and maintain operational
+                                    continuity during network upgrades and maintenance.</p>
+                            </div>
+                        </div>
+
+                        <div class="experience-card mb-4">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-8 col-xs-8">
+                                    <h3>Vivotek</h3>
+                                    <h4>Technical Support Engineer</h4>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                    <h3 id="date">April 2019 - August 2023</h3>
+                                </div>
+                            </div>
+                            <div class="experience-summary">
+                                <p>Diagnosed and resolved critical issues with networking cameras, servers, and
+                                    software.</p>
+                                <p>Acted as interim leader and Tier 2 support during a leadership transition, ensuring
+                                    uninterrupted operations.</p>
+                                <p>Led the creation of documentation during the transition to Zendesk, reducing customer
+                                    tickets by up to 50%.</p>
+                                <p>Managed a Windows-based demo server with automated backups.</p>
+                            </div>
+                        </div>
+
+                    </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
                                 <h3 id="date">August 2023 - Present</h3>
                             </div>
@@ -241,14 +317,16 @@
                     <!-- Education and Certifications -->
                     <div class="certifications">
                         <h2 class="text-center">Education and Certifications</h2>
-                        <div class="row certification-title">
-                            <div class="certification-row">
+                        <div class="certification-row mb-3">
+                            <div class="row">
                                 <div class="col-md-9 col-sm-9 col-xs-9">
                                     <h3>University of California, Santa Cruz</h3>
                                     <h4>Bachelor's in Networking and Digital Technology</h4>
                                 </div>
                             </div>
-                            <div class="certification-row">
+                        </div>
+                        <div class="certification-row mb-3">
+                            <div class="row">
                                 <div class="col-md-9 col-sm-9 col-xs-9">
                                     <h3>Cisco Certified Network Associate</h3>
                                     <h4>CCNA</h4>
@@ -257,7 +335,9 @@
                                     <h3 id="date">2023</h3>
                                 </div>
                             </div>
-                            <div class="certification-row">
+                        </div>
+                        <div class="certification-row mb-3">
+                            <div class="row">
                                 <div class="col-md-9 col-sm-9 col-xs-9">
                                     <h3>Junos, Associate</h3>
                                     <h4>JNCIA-junos</h4>
@@ -266,7 +346,9 @@
                                     <h3 id="date">2023</h3>
                                 </div>
                             </div>
-                            <div class="certification-row">
+                        </div>
+                        <div class="certification-row mb-3">
+                            <div class="row">
                                 <div class="col-md-9 col-sm-9 col-xs-9">
                                     <h3>AWS</h3>
                                     <h4>Cloud Practitioner</h4>
@@ -275,12 +357,13 @@
                                     <h3 id="date">2023</h3>
                                 </div>
                             </div>
-                            <div class="certification-row">
+                        </div>
+                        <div class="certification-row mb-3">
+                            <div class="row">
                                 <div class="col-md-9 col-sm-9 col-xs-9">
                                     <h3>Microsoft Certified: Azure Administrator Associate</h3>
                                     <h4>AZ-104</h4>
                                 </div>
-
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <h3 id="date">2024</h3>
                                 </div>
@@ -289,61 +372,68 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Project page -->
-        <div id="Projects" class="tabcontent" style="display: block;">
-            <div class="container">
-                <h2>Projects</h2>
-                <h3>gregchow.net</h3>
-                <h4><a href="https://github.com/teddiursa/terraform_website">GitHub Repository</a></h4>
-                <div class="cloudDiagram">
-                    <img src="CloudDiagram.svg" rel="prefetch" alt="Diagram of AWS Cloud Infrastructure">
-                </div>
-                <ul>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <li><b>Web Development</b>: HTML, CSS, and Javascript</li>
-                            <li><b>Automation</b>: Terraform</li>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <li><b>Cloud Engineering</b>: AWS S3, DynamoDB, Lambda, and Cloudfront</li>
-                            <li><b>Coding</b>: Python</li>
-                        </div>
-                    </div>
-                </ul>
-                <p>This project is fully automated with Terraform for easy provisioning and destruction of AWS resources
-                    along
-                    with a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>.
-                    Files are hosted in an AWS S3 bucket and delivered via Cloudfront. It uses Lambda functions, API
-                    gateways,
-                    and DynamoDB to track the number of visitors and time since the last visit. This project has full
-                    HTTPS
-                    encryption
-                    and root domain rerouting via Route 53. <a href="
-                    https://github.com/teddiursa/terraform_website/tree/main/.github/workflows">GitHub Actions</a>
-                    automatically update S3 files and run <a
-                        href="https://github.com/teddiursa/terraform_website/tree/main/tests">Python
-                        unit
-                        tests</a>.</p>
-                <h3>Home Lab</h3>
-                <h4><a href="https://github.com/teddiursa/ansible_scripts">Ansible GitHub Repository</a></h4>
-                <h4>Network Diagram</h4>
-                <img src="network_proxmox.svg" rel="prefetch" style="width:75%" alt="diagram of home network">
-                <ul>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <li><b>Hypervisors</b>: Proxmox (KVM and LXC) and VMWare's ESXI</li>
-                            <li><b>Automation</b>: Ansible</li>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <li><b>Container Runtimes</b>: Docker and LXC</li>
-                            <li><b>Distros</b>: Debian, Ubuntu, Alpine, Redhat, Windows</li>
-                        </div>
-                    </div>
-                </ul>
+        </section>
 
-                <div class="slideshow">
-                    <h3 style="text-align:center">Features</h3>
+        <!-- Projects Section -->
+        <section id="projects" class="section-content">
+            <div class="container">
+                <h2 class="text-center">Projects</h2>
+                <div class="project-card mb-5">
+                    <h3 class="text-center">gregchow.net</h3>
+                    <h4 class="text-center"><a href="https://github.com/teddiursa/terraform_website">GitHub Repository</a></h4>
+                    <div class="cloudDiagram text-center">
+                        <img src="CloudDiagram.svg" rel="prefetch" alt="Diagram of AWS Cloud Infrastructure">
+                    </div>
+                    <ul class="list-unstyled">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <li><b>Web Development</b>: HTML, CSS, and Javascript</li>
+                                <li><b>Automation</b>: Terraform</li>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <li><b>Cloud Engineering</b>: AWS S3, DynamoDB, Lambda, and Cloudfront</li>
+                                <li><b>Coding</b>: Python</li>
+                            </div>
+                        </div>
+                    </ul>
+                    <p>This project is fully automated with Terraform for easy provisioning and destruction of AWS resources
+                        along
+                        with a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>.
+                        Files are hosted in an AWS S3 bucket and delivered via Cloudfront. It uses Lambda functions, API
+                        gateways,
+                        and DynamoDB to track the number of visitors and time since the last visit. This project has full
+                        HTTPS
+                        encryption
+                        and root domain rerouting via Route 53. <a href="
+                        https://github.com/teddiursa/terraform_website/tree/main/.github/workflows">GitHub Actions</a>
+                        automatically update S3 files and run <a
+                            href="https://github.com/teddiursa/terraform_website/tree/main/tests">Python
+                            unit
+                            tests</a>.</p>
+                </div>
+
+                <div class="project-card mb-5">
+                    <h3 class="text-center">Home Lab</h3>
+                    <h4 class="text-center"><a href="https://github.com/teddiursa/ansible_scripts">Ansible GitHub Repository</a></h4>
+                    <h4 class="text-center">Network Diagram</h4>
+                    <div class="text-center">
+                        <img src="network_proxmox.svg" rel="prefetch" style="width:75%" alt="diagram of home network">
+                    </div>
+                    <ul class="list-unstyled">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <li><b>Hypervisors</b>: Proxmox (KVM and LXC) and VMWare's ESXI</li>
+                                <li><b>Automation</b>: Ansible</li>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <li><b>Container Runtimes</b>: Docker and LXC</li>
+                                <li><b>Distros</b>: Debian, Ubuntu, Alpine, Redhat, Windows</li>
+                            </div>
+                        </div>
+                    </ul>
+
+                    <div class="slideshow">
+                        <h3 style="text-align:center">Features</h3>
 
                     <div class="slideContainer">
                         <div class="mySlides">
@@ -410,15 +500,17 @@
 
                         </div>
                     </div>
+                        </div>
+                    </div>
                 </div>
                 <p>A Bare-Metal Hypervisor hosts various virtual machines and containers. <a
-                        href=“https://github.com/teddiursa/ansible_scripts”>Ansible</a> is used to automate provisioning
-                    and manage infrastructure. The setup includes an <a href=“https://nginxproxymanager.com/”>Nginx
+                        href="https://github.com/teddiursa/ansible_scripts">Ansible</a> is used to automate provisioning
+                    and manage infrastructure. The setup includes an <a href="https://nginxproxymanager.com/">Nginx
                         Reverse Proxy</a> to provide Fully Qualified Domain Names (FQDNs), Plex for media hosting, <a
-                        href=“https://github.com/pi-hole/pi-hole”>Pi-hole</a> for internal DNS, <a
-                        href=“https://graylog.org/”>Graylog</a> for centralized syslog consolidation, <a
-                        href=“https://github.com/librenms/librenms”>LibreNMS</a> for SNMP tracking, <a
-                        href=“https://github.com/dani-garcia/vaultwarden”>Vault Warden</a> for password management, and
+                        href="https://github.com/pi-hole/pi-hole">Pi-hole</a> for internal DNS, <a
+                        href="https://graylog.org/">Graylog</a> for centralized syslog consolidation, <a
+                        href="https://github.com/librenms/librenms">LibreNMS</a> for SNMP tracking, <a
+                        href="https://github.com/dani-garcia/vaultwarden">Vault Warden</a> for password management, and
                     TrueNAS Scale for hosting media files and backups.</p>
                 <p>The creation of containers and VMs is
                     automated with Ansible, including a <a
@@ -430,7 +522,7 @@
                         script</a>.
                 </p>
                 <p>Wireguard provides Point-to-Site VPN via the firewall, while <a
-                        href=“https://tailscale.com/”>Tailscale</a> offers a Point-to-Point VPN connection to specific
+                        href="https://tailscale.com/">Tailscale</a> offers a Point-to-Point VPN connection to specific
                     devices. Utilizes VLAN separation via firewall rules to enhances security.
                 </p>
                 <p>To organize and monitor services, a mix of dashboards and Nginx Proxy Manager is used. <a
@@ -445,83 +537,88 @@
                     LibreNMS
                     provides an SNMP Manager to monitor infrastructure via SNMP agents and traps, simplifying tracking.
                 </p>
-                <h3>Azure Spoke Hub Terraform Network Topology</h3>
-                <h4><a href="https://github.com/teddiursa/azure_terraform_hub_spoke">GitHub Repository</a></h4>
-                <div class="azure_image">
-                    <img src="infrastructure.svg" rel="prefetch" alt="Resource Diagram of Azure Topology">
                 </div>
-                <ul>
-                    <div class="row">
 
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <li><b>Cloud Engineering</b>: Azure NSG, Bastion, Private Endpoints, Network Peering,
-                                and VPN Gateways</li>
-                            <li><b>IaC</b>: Terraform</li>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <li><b>Test Script Languages</b>: PowerShell, Bash and KQL</li>
-                            <li><b>Azure Services</b>: DNS, Linux Web Apps, and MS SQL</li>
-                        </div>
+                <div class="project-card mb-5">
+                    <h3 class="text-center">Azure Spoke Hub Terraform Network Topology</h3>
+                    <h4 class="text-center"><a href="https://github.com/teddiursa/azure_terraform_hub_spoke">GitHub Repository</a></h4>
+                    <div class="azure_image text-center">
+                        <img src="infrastructure.svg" rel="prefetch" alt="Resource Diagram of Azure Topology">
                     </div>
-                </ul>
-                <p>Terraform IaC code that creates an Azure "On-Prem" Network and a Hub-Spoke network with a few
-                    dummy production services. Connected together via a VPN Gateway, it features centralized
-                    logging, Bastion for secure remote connections, and Network Security Groups (NSGs) for isolated
-                    networks.</p>
+                    <ul class="list-unstyled">
+                        <div class="row">
 
-                <h3>Configurable Form Filling Python Application</h3>
-                <h4><a href="https://github.com/teddiursa/form_filler">GitHub Repository</a></h4>
-                <div class="form_filler_image">
-                    <img src="form_filler.svg" rel="prefetch" alt="Flow Chart form_filler python applications">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <li><b>Cloud Engineering</b>: Azure NSG, Bastion, Private Endpoints, Network Peering,
+                                    and VPN Gateways</li>
+                                <li><b>IaC</b>: Terraform</li>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <li><b>Test Script Languages</b>: PowerShell, Bash and KQL</li>
+                                <li><b>Azure Services</b>: DNS, Linux Web Apps, and MS SQL</li>
+                            </div>
+                        </div>
+                    </ul>
+                    <p>Terraform IaC code that creates an Azure "On-Prem" Network and a Hub-Spoke network with a few
+                        dummy production services. Connected together via a VPN Gateway, it features centralized
+                        logging, Bastion for secure remote connections, and Network Security Groups (NSGs) for isolated
+                        networks.</p>
                 </div>
-                <ul>
-                    <div class="row">
 
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <li><b>Code</b>: Python, HTML, CSS</li>
-                            <li><b>File Formats</b>: YAML and Excel</li>
-                            <li><b>Unit Tests</b>: pytests, MagicMock</li>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <li><b>Web Automation and Scraping</b>: Python's Selenium</li>
-                            <li><b>GUI</b>: Python's tkinter</li>
-                            <li><b>Data manipulation</b>: Python's Pandas</li>
-                        </div>
+                <div class="project-card mb-5">
+                    <h3 class="text-center">Configurable Form Filling Python Application</h3>
+                    <h4 class="text-center"><a href="https://github.com/teddiursa/form_filler">GitHub Repository</a></h4>
+                    <div class="form_filler_image text-center">
+                        <img src="form_filler.svg" rel="prefetch" alt="Flow Chart form_filler python applications">
                     </div>
-                </ul>
-                <p>This Python script automates the process of filling out web forms by leveraging data from an
-                    Excel
-                    file.</p>
-                <ul>
-                    <li><strong>Data Input:</strong>
-                        <ul>
-                            <li>Reads input from an Excel file.</li>
-                            <li>Creates a searchable list of terms.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Web Form Automation:</strong>
-                        <ul>
-                            <li>Automatically fills in a webpage form using data from the Excel file.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Dynamic Configuration:</strong>
-                        <ul>
-                            <li>Utilizes a <b>config.yml</b> file to specify terms and form fields.</li>
-                            <li>Easily modify variables such as file names, website URLs, searchable terms, and user
-                                details.
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                    <ul class="list-unstyled">
+                        <div class="row">
+
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <li><b>Code</b>: Python, HTML, CSS</li>
+                                <li><b>File Formats</b>: YAML and Excel</li>
+                                <li><b>Unit Tests</b>: pytests, MagicMock</li>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <li><b>Web Automation and Scraping</b>: Python's Selenium</li>
+                                <li><b>GUI</b>: Python's tkinter</li>
+                                <li><b>Data manipulation</b>: Python's Pandas</li>
+                            </div>
+                        </div>
+                    </ul>
+                    <p>This Python script automates the process of filling out web forms by leveraging data from an
+                        Excel
+                        file.</p>
+                    <ul>
+                        <li><strong>Data Input:</strong>
+                            <ul>
+                                <li>Reads input from an Excel file.</li>
+                                <li>Creates a searchable list of terms.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Web Form Automation:</strong>
+                            <ul>
+                                <li>Automatically fills in a webpage form using data from the Excel file.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Dynamic Configuration:</strong>
+                            <ul>
+                                <li>Utilizes a <b>config.yml</b> file to specify terms and form fields.</li>
+                                <li>Easily modify variables such as file names, website URLs, searchable terms, and user
+                                    details.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
             </div>
-        </div>
-        </div>
+        </section>
 
-        <!-- Blog Page-->
-        <div id="Blog" class="tabcontent" style="display: none;">
+        <!-- Blog Section -->
+        <section id="blog" class="section-content">
             <div class="container">
-                <h2>The Challenge</h2>
+                <h2 class="text-center">The Challenge</h2>
                 <p>While looking for new technologies to learn, I came across something known as the <a
                         href="https://cloudresumechallenge.dev/">Cloud Resume Challenge</a>. Created by Forrest Brazael,
                     the
@@ -539,6 +636,275 @@
                             <li>Static Website: Deploy it on the cloud (S3 bucket)</li>
                         </ol>
                     </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3" id="list2">
+                        <ol start="5">
+                            <li>HTTPS: Obtain and apply a valid HTTPS Certificate</li>
+                            <li>DNS: Register a Domain Name</li>
+                            <li>Javascript: Program a visitor counter with Javascript</li>
+                            <li>Database: Use a cloud database to retrieve and update this counter</li>
+                        </ol>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3" id="list3">
+                        <ol start="9">
+                            <li>API: Create an API for backend communication</li>
+                            <li>Python: Create a Lambda Function for the API</li>
+                            <li>Tests: Create some Python tests</li>
+                            <li>Infrastructure as Code: deploy API resources with terraform (or SAM)</li>
+                        </ol>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3" id="list4">
+                        <ol start="13">
+                            <li>Source Control: Automate code changes with GitHub</li>
+                            <li>CI/CD Back end: Set up GitHub to test and deploy backend functions</li>
+                            <li>CD/CD Front End: Set up GitHub actions to update the websites files</li>
+                            <li>Blog Post: Make a blog post describing what was learned</li>
+                        </ol>
+                    </div>
+                    <div class="col-12" id="mobileList">
+                        <ol>
+                            <li>Certification: Get a Cloud Certification</li>
+                            <li>HTML: Create an HTML Resume</li>
+                            <li>CSS: Style it with CSS</li>
+                            <li>Static Website: Deploy it on the cloud (S3 bucket)</li>
+                            <li>HTTPS: Obtain and apply a valid HTTPS Certificate</li>
+                            <li>DNS: Register a Domain Name</li>
+                            <li>Javascript: Program a visitor counter with Javascript</li>
+                            <li>Database: Use a cloud database to retrieve and update this counter</li>
+                            <li>API: Create an API for backend communication</li>
+                            <li>Python: Create a Lambda Function for the API</li>
+                            <li>Tests: Create some Python tests</li>
+                            <li>Infrastructure as Code: deploy API resources with terraform (or SAM)</li>
+                            <li>Source Control: Automate code changes with GitHub</li>
+                            <li>CI/CD Back end: Set up GitHub to test and deploy backend functions</li>
+                            <li>CD/CD Front End: Set up GitHub actions to update the websites files</li>
+                            <li>Blog Post: Make a blog post describing what was learned</li>
+                        </ol>
+                    </div>
+                </div>
+                <h2 class="text-center">The Website</h2>
+                <p>While I'm no Web Designer, I have done some simple web development before, including a Javascript
+                    visualization,
+                    and I have always enjoyed how responsive web development is compared to traditional software
+                    development.
+                    I
+                    started by finding a sample <a href="https://devsnap.me/html-resume-templates">template</a> online,
+                    mostly for the dark mode colors, and heavily tweaking it. Funnily enough, I ended up using a
+                    different
+                    color
+                    scheme, specifically Facebook's scheme I found on a <a
+                        href="https://blog.karenying.com/posts/50-shades-of-dark-mode-gray">website</a> comparing
+                    different
+                    popular darkmode colors. What was most useful was the use of bootstrap grids, something I had not
+                    used
+                    before. I also spent a large amount of time ensuring the website would properly display for mobile
+                    devices.
+                    I also discovered that phones display websites differently unless you specifically indicate the
+                    website
+                    was
+                    designed for mobile devices. I also learned about a useful "viewport" tag that enables you to get
+                    the
+                    width
+                    of the user's screen, which helped scale my pictures.</p>
+
+                <h2 class="text-center">Deploying on AWS</h2>
+                <p>Creating a simple static website with an S3 bucket was relatively simple. I uploaded the relevant
+                    files
+                    and
+                    enabled
+                    it for static website hosting. After purchasing my domain name and configuring route 53 and
+                    CloudFront
+                    to
+                    point my domain to my website, it still did not propagate after several hours. I discovered the
+                    name
+                    servers of my hosted zone and my registered domain did not match. Once I fixed this, my domain
+                    resolved
+                    properly and the previously requested HTTPS certificate instantly worked as well. Once I checked my
+                    root
+                    domain properly redirects and HTTPS was required, along with continually tweaking my website code,
+                    it
+                    was
+                    time to implement some basic web functions.</p>
+
+                <h2 class="text-center">Programming with AWS Lambda</h2>
+                <p>One of the good things about this challenge is, while it gives you the basics for each step, it does
+                    not
+                    detail
+                    how. For example, it simply links to a Javascript/Python tutorial not how to implement the specific
+                    function. The
+                    visitor counter logical was extremely simple, but I had to learn how to reference and update my
+                    database.
+                    Luckily, it is similar to how many programming languages handle inputs, plus some database syntax.
+                    After
+                    ensuring the proper permissions between the lambda function, the API gateway, and the database,
+                    while
+                    also
+                    enabling CORS, I was able to successfully update and display my Visitor Counter.</p>
+
+                <h2 class="text-center">An Additional Function</h2>
+                <p>I wanted to add an additional feature with Lambda/AWS, since I wanted to stand out, but I had trouble
+                    deciding on the function. I contemplated displaying different days of the week accessed, similar to
+                    GitHub's
+                    commit calendar, but ultimately decided something much simpler: time since the last visit. I
+                    accomplished this
+                    using <b>Unix time</b> which is a counter from the beginning of "time" for computers, which is
+                    defined
+                    as
+                    1/1/1970.
+                </p>
+                <div class="unixTimeLine text-center">
+                    <h4>Current Unix Time</h4>
+                    <h4><span id="unixTime" style="color:#20cef5">1711743756</span></h4>
+                </div>
+                <p>This <b>Unix time</b> is already in seconds (after truncating) and, since I'm not dealing with Time
+                    Zones,
+                    I
+                    simply used this to find the difference since the last visit. I fiddled with Javascript to display
+                    this
+                    cleanly in a proper time format, ensuring it properly displayed any spaces and correct unit(s)</p>
+                <h2 class="text-center">Automating with Terraform</h2>
+                <p>I chose to use Terraform rather than SAM since it's a bit more flexible with other vendors. I started
+                    the
+                    process by deploying each service at a time, starting with the buckets. After declaring what types
+                    my
+                    uploaded files should be and setting an access policy, it went smoothly. Deploying CloudFront also
+                    had
+                    little issues, but properly getting my HTTPS certificate and DNS records was a bit trickier. I found
+                    it
+                    easier to do repeat steps manually to better visualize the steps needed for my IaC. After creating
+                    the
+                    records
+                    needed for the DNS verification, I realized I had the same issue as before" my name servers did not
+                    match. I changed them manually to verify this was the issue and then discovered they recently
+                    added a
+                    function to update my registered domain name servers. After automating this with Terraform's for
+                    loop
+                    equivalent, I was pleased to see it update in real time and for my certificate automatically
+                    validated.</p>
+                <h2 class="text-center">Passing API URLs from Terraform</h2>
+                <p>An Issue I discovered from Terraform automation is the API gateway URLs changed every deployment,
+                    which
+                    would break the Javascript lambda calls unless they were manually changed each time. I decided to
+                    resolve this in a
+                    Cloud CI/CD way:
+                </p>
+                <ul>
+                    <li>Have Terraform create a JSON file with the API gateway invoke URLs</li>
+                    <li>Store the JSON file in an S3 bucket</li>
+                    <li>Have the Javascript retrieve the JSON file and use the URLs to invoke the Lambda Function</li>
+                </ul>
+                I had the fetches happened synchronously, since they depended on the JSON fetch, which increased the
+                load
+                time. I also had the Lambda display not load until they were completed, instead display incrementing
+                loading text.
+                <h2 class="text-center">GitHub Actions</h2>
+                <p>GitHub Actions executes a <i>workflow</i> when a specific event occurs. My workflow updates the files
+                    of
+                    the S3 bucket when I push changes to my repository. This way my website updates in real time
+                    whenever I
+                    make changes, instead of having to rerun my Terraform code.</p>
+                <h2 class="text-center">Testing with pytest</h2>
+                <p>I delayed creating unit tests for my Lambda code for a simple reason: there is no input for me to
+                    test
+                    for. Doing unit tests always reminds me of a certain QA joke:</p>
+                <div class="joke">
+                    <p>A QA tester walks into a bar and orders:</p>
+                    <div class="jokelist">
+                        <ul>
+                            <li>a beer</li>
+                            <li>2 beers</li>
+                            <li>0 beers</li>
+                            <li>99999 beers</li>
+                            <li>-1 beers</li>
+                            <li>adjkl beers</li>
+                        </ul>
+                    </div>
+                    <span style="color:#13cf13">Test Successful!</span>
+                    <p>A customer walks into the bar and asks where the bathroom is</p>
+                    <p>The bar goes up in <span style="color:#ff7e29">flames</span></p>
+                </div>
+                <p>A large reason for testing is to ensure that an unexpected input is handled properly and, as the joke
+                    eloquently demonstrates, it's not as simple as it might seem.
+                    However, my functions call upon values in a database, not directly from the user or code. So, while I
+                    can
+                    test for basic functionality and proper output, the major purpose of testing for abnormal inputs is
+                    unnecessary. But I did approach it thoroughly to ensure I can scale up my lambda functions and
+                    their tests for future additions. After some research, I discovered a package that enables me to run
+                    my
+                    Lambda functions
+                    locally, <i>lambda_local</i>. I also used moto to create mock AWS resources for my testing. While
+                    it's
+                    not necessary since my functions do not heavily manipulate the table data, I wanted to continue
+                    the trend of learning new technologies when possible.
+                    Since I was creating my mock tables during testing, I was able know exactly what the table data
+                    was, whether a static value or the current Unix time, and test whether the output properly
+                    incremented
+                    the
+                    count or correctly calculated the time difference.
+                </p>
+                <div class="text-center">
+                    <img src="testChart.svg" rel="prefetch" style="width:60%" alt="Time since last visit flowchart">
+                </div>
+                <h2 class="text-center">Error Page</h2>
+                <p>To replace the generic <a style="color:#cf1313">404</a> and <a style="color:#cf1313">403</a> error
+                    pages,
+                    I created a custom <a href="https://www.gregchow.net/error" style="color:#cf1313">error page</a>
+                    complete with a Javascript function to display the current status of the website. The Javascript
+                    calls on a Python Lambda Function to ensure compatibility, as client-side Javascript checks are
+                    sometimes blocked. I contemplated having this error page be hosted in a separate S3 bucket, in case I
+                    had torn down the website using Terraform. However, Terraform would also destroy the CloudFront
+                    distribution, which would cause the error page to be inaccessible anyways.
+                </p>
+                <h2 class="text-center">Automating Cache Invalidation</h2>
+                <p>CloudFront caches the website files at Edge Locations to reduce latency and load. While this is
+                    great,
+                    since it prevents users from accessing the S3 bucket website directly, it does need to be told
+                    when I update the S3 files. While I could do this manually via the AWS GUI, I utilized what I
+                    learned to
+                    automate this process.
+                    First I simply found the AWS CLI commands to do and test this. While I could have just make a simple
+                    script and invoked it using GitHub actions, I decided to do this via
+                    a Lambda Function. I implemented a Python function to list my CloudFront distributions and invoke a
+                    call
+                    to invalidate all files in the wild card path <b>/*</b>. After testing, I then:
+                </p>
+                <div class="list">
+                    <ul>
+                        <li>
+                            Created an API gateway linking to the clearCache Lambda Function.
+                        </li>
+                        <li>
+                            Added the API URL to my JSON File/URL bucket, to ensure it works between Terraform
+                            deployments.
+                        </li>
+                        <li>
+                            Used GitHub actions to parse through the JSON file and do a simple HTTP GET request to the
+                            API
+                            URL,
+                            clearing my cache on every git push.
+                        </li>
+                    </ul>
+                </div>
+                <p>I also made sure to check I wouldn't accidentally go out of the AWS free tier. But as long as I don't
+                    push
+                    to my Repository more than 10,000 times a month, it will stay free.</p>
+                <p></p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer with Counter -->
+    <footer class="footer">
+        <div class="container">
+            <div class="counter" id="counterID">
+                <h2>You are the <span style="color:#67B868">1344th</span> Visitor!</h2>
+                <h2>The last visitor was:</h2>
+                <h2> <span style="color:#67B868"> 1 minute and 7 seconds</span> ago</h2>
+                <h5>Created with AWS Lambda and DynamoDB</h5>
+                <h5>Code hosted on <a href="https://github.com/teddiursa/terraform_website">GitHub</a></h5>
+            </div>
+        </div>
+    </footer>
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3" id="list2">
                         <ol start="5">
                             <li>HTTPS: Obtain and apply a valid HTTPS Certificate</li>
@@ -807,10 +1173,10 @@
             </div>
         </div>
 
-        <script>
-            // Get the element with id="defaultOpen" and click on it
-            document.getElementById("defaultOpen").click();
-        </script>
+        <!-- Bootstrap 5.3 JS Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 
     </body>
 </body>

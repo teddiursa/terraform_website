@@ -256,6 +256,7 @@ function showSlides(n) {
   }
 
   for (i = 0; i < slides.length; i++) {
+    slides[i].classList.remove("active");
     slides[i].style.display = "none";
   }
 
@@ -263,7 +264,8 @@ function showSlides(n) {
     dots[i].classList.remove("active");
   }
 
-  slides[slideIndex - 1].style.display = "block";
+  slides[slideIndex - 1].classList.add("active");
+  slides[slideIndex - 1].style.display = "flex";
   dots[slideIndex - 1].classList.add("active");
 
   if (captionText && dots[slideIndex - 1]) {
@@ -287,6 +289,7 @@ function home_showSlides(n) {
   }
 
   for (i = 0; i < slides.length; i++) {
+    slides[i].classList.remove("active");
     slides[i].style.display = "none";
   }
 
@@ -294,7 +297,8 @@ function home_showSlides(n) {
     dots[i].classList.remove("active");
   }
 
-  slides[home_slideIndex - 1].style.display = "block";
+  slides[home_slideIndex - 1].classList.add("active");
+  slides[home_slideIndex - 1].style.display = "flex";
   dots[home_slideIndex - 1].classList.add("active");
 
   if (captionText && dots[home_slideIndex - 1]) {

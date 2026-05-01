@@ -186,6 +186,9 @@ function initSlideshows() {
   const dots = document.getElementsByClassName("demo");
   const captionText = document.getElementById("caption");
 
+  console.log("Projects slideshow - Slides found:", slides.length);
+  console.log("Projects slideshow - Dots found:", dots.length);
+
   if (slides.length > 0) {
     showSlides(slideIndex);
 
@@ -206,6 +209,9 @@ function initSlideshows() {
   const homeSlides = document.getElementsByClassName("home_Slides");
   const homeDots = document.getElementsByClassName("home_demo");
   const homeCaptionText = document.getElementById("home_caption");
+
+  console.log("Home slideshow - Slides found:", homeSlides.length);
+  console.log("Home slideshow - Dots found:", homeDots.length);
 
   if (homeSlides.length > 0) {
     home_showSlides(home_slideIndex);
@@ -265,7 +271,7 @@ function showSlides(n) {
   }
 
   slides[slideIndex - 1].classList.add("active");
-  slides[slideIndex - 1].style.display = "flex";
+  slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].classList.add("active");
 
   if (captionText && dots[slideIndex - 1]) {
@@ -298,7 +304,7 @@ function home_showSlides(n) {
   }
 
   slides[home_slideIndex - 1].classList.add("active");
-  slides[home_slideIndex - 1].style.display = "flex";
+  slides[home_slideIndex - 1].style.display = "block";
   dots[home_slideIndex - 1].classList.add("active");
 
   if (captionText && dots[home_slideIndex - 1]) {
@@ -306,51 +312,69 @@ function home_showSlides(n) {
   }
 }
 
-// Enhanced Image Zoom Functionality
-function initImageZoom() {
+// Simple Image Modal for Viewing Details
+function initImageModal() {
+  const modal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
   const slidesImages = document.querySelectorAll('.home_Slides img, .mySlides img');
+  const navLinks = document.querySelectorAll('.nav-link');
 
-  slidesImages.forEach(img => {
-    // Click to zoom
+  console.log("Image modal - Images found:", slidesImages.length);
+
+  slidesImages.forEach((img, index) => {
+    console.log(`Image ${index}:`, img.src);
+
+    // Click to open modal
     img.addEventListener('click', function(event) {
+      event.preventDefault();
       event.stopPropagation();
-      this.classList.toggle('zoomed');
 
-      // Add overlay when zoomed
-      if (this.classList.contains('zoomed')) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
+      console.log('Opening modal for image:', this.src);
+
+      // Set modal image source
+      modalImage.src = this.src;
+      modalImage.alt = this.alt || 'Enlarged view';
+
+      // Show modal
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     });
 
-    // Touch support for mobile
-    img.addEventListener('touchstart', function(event) {
-      // Prevent default touch behavior
-      // event.preventDefault();
-    }, { passive: true });
-  });
+    // Check if image loaded
+    img.addEventListener('load', function() {
+      console.log(`Image loaded: ${this.src}`);
+    });
 
-  // Click outside to close zoom
-  document.addEventListener('click', function(event) {
-    const zoomedImages = document.querySelectorAll('.home_Slides img.zoomed, .mySlides img.zoomed');
-    zoomedImages.forEach(img => {
-      if (!img.contains(event.target)) {
-        img.classList.remove('zoomed');
-        document.body.style.overflow = '';
-      }
+    img.addEventListener('error', function() {
+      console.error(`Image failed to load: ${this.src}`);
     });
   });
 
-  // Keyboard support - ESC to close zoom
+  // Close modal when clicking anywhere
+  modal.addEventListener('click', function() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    modalImage.src = '';
+  });
+
+  // Close modal with ESC key
   document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-      const zoomedImages = document.querySelectorAll('.home_Slides img.zoomed, .mySlides img.zoomed');
-      zoomedImages.forEach(img => {
-        img.classList.remove('zoomed');
-        document.body.style.overflow = '';
-      });
+    if (event.key === 'Escape' && modal.classList.contains('active')) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      modalImage.src = '';
     }
+  });
+
+  // Close modal when clicking tabs
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        modalImage.src = '';
+      }
+    });
   });
 }
 
@@ -368,8 +392,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // Initialize slideshows
   initSlideshows();
 
-  // Initialize image zoom
-  initImageZoom();
+  // Initialize image modal
+  initImageModal();
 
   // Set home section as active by default
   const homeSection = document.getElementById('home');

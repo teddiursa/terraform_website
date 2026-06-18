@@ -166,15 +166,7 @@ function initVisitorCounter() {
     });
 }
 
-// Unix Timer
-function initUnixTimer() {
-  setInterval(function () {
-    const unixTimeElement = document.getElementById("unixTime");
-    if (unixTimeElement) {
-      unixTimeElement.innerText = Math.floor(Date.now() / 1000);
-    }
-  }, 1000);
-}
+
 
 // Slideshow Functionality
 let slideIndex = 1;
@@ -316,7 +308,7 @@ function home_showSlides(n) {
 function initImageModal() {
   const modal = document.getElementById('imageModal');
   const modalImage = document.getElementById('modalImage');
-  const slidesImages = document.querySelectorAll('.home_Slides img, .mySlides img');
+  const slidesImages = document.querySelectorAll('.home_Slides img, .mySlides img, .project-card img, .experience-card img');
   const navLinks = document.querySelectorAll('.nav-link');
 
   console.log("Image modal - Images found:", slidesImages.length);
@@ -335,9 +327,10 @@ function initImageModal() {
       modalImage.src = this.src;
       modalImage.alt = this.alt || 'Enlarged view';
 
-      // Show modal
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.querySelectorAll('.home_prev, .home_next, .prev, .next').forEach(a => a.style.display = 'none');
     });
 
     // Check if image loaded
@@ -351,29 +344,32 @@ function initImageModal() {
   });
 
   // Close modal when clicking anywhere
-  modal.addEventListener('click', function() {
+    modal.addEventListener('click', function() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
     modalImage.src = '';
-  });
+    document.querySelectorAll('.home_prev, .home_next, .prev, .next').forEach(a => a.style.display = '');
+});
 
-  // Close modal with ESC key
-  document.addEventListener('keydown', function(event) {
+// Close modal with ESC key
+document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape' && modal.classList.contains('active')) {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-      modalImage.src = '';
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        modalImage.src = '';
+        document.querySelectorAll('.home_prev, .home_next, .prev, .next').forEach(a => a.style.display = '');
     }
-  });
+});
 
   // Close modal when clicking tabs
   navLinks.forEach(link => {
     link.addEventListener('click', function() {
-      if (modal.classList.contains('active')) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-        modalImage.src = '';
-      }
+        if (modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                modalImage.src = '';
+                document.querySelectorAll('.home_prev, .home_next, .prev, .next').forEach(a => a.style.display = '');
+            }
     });
   });
 }
@@ -385,9 +381,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Initialize visitor counter
   initVisitorCounter();
-
-  // Initialize unix timer
-  initUnixTimer();
 
   // Initialize slideshows
   initSlideshows();

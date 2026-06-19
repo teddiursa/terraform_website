@@ -178,9 +178,9 @@
                     <!-- summary section -->
                     <div class="summary" data-aos="fade-up">
                         <h2 class="text-center">Summary</h2>
-                        <p>QA engineer who built automated validation infrastructure for multi-cloud CNAPP, reducing
-                            production SEVs from ~38/month to ~22/month. Own CI/CD test gates that block
-                            releases.</p>
+                        <p>QA engineer who built automated validation infrastructure for multi-cloud CNAPP. Reduced
+                            SEV 1/2/3 incidents by 35%. Own CI/CD test gates covering 35 K8s policies + 18 GCP
+                            resource types.</p>
 
                         <h2 class="text-center">Technical Skills</h2>
                         <div class="skills">
@@ -202,6 +202,7 @@
                                     <span class="skill-badge">CSPM</span>
                                     <span class="skill-badge">CIEM</span>
                                     <span class="skill-badge">CWPP</span>
+                                    <span class="skill-badge">CIS Benchmarks</span>
                                 </div>
                             </div>
                             <div class="skills-category">
@@ -227,60 +228,33 @@
                         <div class="experience-card mb-4">
                             <div class="row">
                                 <div class="col-md-8 col-sm-8 col-xs-8">
-                                    <h3>Fortinet (Lacework/CNAPP)</h3>
-                                    <h4>Sr. Technical Support Engineer (QA & Infrastructure Automation)</h4>
+                                    <h3>Fortinet (Lacework/Forti CNAPP)</h3>
+                                    <h4>Technical Support Engineer → Sr. Technical Support Engineer (QA)</h4>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-4">
-                                    <h3 id="date">January 2026 - Present</h3>
-                                </div>
-                            </div>
-<div class="experience-summary">
-                                <p>Build automated test coverage for a QA staging pipeline that reduced SEV
-                                    tickets from ~38/month to ~22/month over 5 months.</p>
-                                <p>Build 20 Ansible roles including a cross-distro vulnerable package installer
-                                    (apt/yum/dnf/zypper) and auto-generated Ansible inventory from Terraform state
-                                    outputs — designed role architecture and deployment templates for 80 VMs across
-                                    AWS, GCP, and Azure.</p>
-                                <p>Develop EKS Admission Controller test framework via Helm — designed test
-                                    scenarios, validation checks, and failure conditions for blocking/non-blocking
-                                    policies, vulnerability detection, and proxy scanner integration.</p>
-                                <p>Build automated E2E test coverage for 35+ K8s security policy alerts across EKS
-                                    clusters, cross-referenced with CloudWatch audit events.</p>
-                                <p>Create GCP inventory testing framework for 8+ resource types using Cloud Asset
-                                    Inventory and pytest fixtures — previously zero coverage.</p>
-                                <p>Write automated E2E tests against live multi-cloud environments — inject
-                                    misconfigurations and verify the platform detects and alerts correctly through
-                                    API queries and data validation.</p>
-                                <p>Maintain 40+ automated tests in GitHub Actions CI/CD pipeline; blocked 2
-                                    releases when critical tests failed. Tests cover all 35 K8s security policies +
-                                    8 GCP resource types. Pipeline runs in 2-3 hours with parallel jobs.</p>
-                                <p>Implement Playwright-based UI regression tests for web console validation.</p>
-                            </div>
-                        </div>
-
-                        <div class="experience-card mb-4">
-                            <div class="row">
-                                <div class="col-md-8 col-sm-8 col-xs-8">
-                                    <h3>Fortinet (Lacework/CNAPP)</h3>
-                                    <h4>Technical Support Engineer</h4>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-4">
-                                    <h3 id="date">September 2024 - January 2026</h3>
+                                    <h3 id="date">September 2024 - Present (promoted Jan 2026)</h3>
                                 </div>
                             </div>
                             <div class="experience-summary">
-                                <p>Created or updated 15+ internal runbooks and 5 customer-facing docs while
-                                    managing active customer cases.</p>
+                                <p>Build automated test coverage for QA staging pipeline; contributed to 35% SEV 1/2/3
+                                    reduction through automated testing.</p>
+                                <p>Build 20+ Ansible roles including cross-distro vulnerable package installer
+                                    (apt/yum/dnf/zypper) and auto-generated Ansible inventory from Terraform outputs.
+                                    Designed role architecture for 70+ VMs across AWS, GCP, and Azure.</p>
+                                <p>Develop EKS Admission Controller test framework via Helm — designed test scenarios,
+                                    validation checks, and failure conditions for blocking/non-blocking policies,
+                                    vulnerability detection, and proxy scanner integration.</p>
+                                <p>Build automated E2E test coverage for 35+ K8s security policy alerts across EKS
+                                    clusters, cross-referenced with CloudWatch audit events.</p>
+                                <p>Create GCP inventory testing framework covering 18+ resource types using Cloud Asset
+                                    Inventory and pytest fixtures — expanded from zero coverage.</p>
+                                <p>Maintain automated E2E + integration tests in GitHub Actions covering 35 K8s security
+                                    policies and 18 GCP resource types. Pipeline runs 2-3 hours with parallel jobs
+                                    across multiple environments. Blocked 2 releases on critical test failures.</p>
+                                <p>Created or updated 15+ internal runbooks and 5 customer docs while managing 20-30
+                                    active cases.</p>
                                 <p>Resolved IAM and permissions issues across AWS, GCP, and Azure including
                                     roles/policies, SCPs, and SAML/SSO.</p>
-                                <p>Diagnosed cloud security issues for agent-based and agentless workloads.</p>
-                                <p>Investigated CSPM compliance violations against CIS benchmarks and CIEM entitlement
-                                    issues.</p>
-                                <p>Troubleshot data ingestion failures and guided customers through
-                                    integrations (manual, CloudFormation, Terraform) across AWS, GCP, and
-                                    Azure.</p>
-                                <p>Collaborated with Engineering and Sales teams on escalated P1/P2 cases;
-                                    provided logs, root cause analysis, and query fixes.</p>
                             </div>
                         </div>
 
@@ -295,10 +269,10 @@
                                 </div>
                             </div>
                             <div class="experience-summary">
-                                <p>Monitored network uptime for Mercedes-Benz R&D HQ, 2 remote sites, and 1
-                                    colo facility using WhatsUp Gold and ServiceNow.</p>
-                                <p>Responded to network incidents and performed on-site maintenance for Cisco
-                                    and Fortigate infrastructure.</p>
+                                <p>Monitored network uptime for Mercedes-Benz R&D HQ and remote sites via ServiceNow
+                                    and What's Up Gold.</p>
+                                <p>Responded to network incidents and performed on-site maintenance for Cisco and
+                                    Fortigate devices.</p>
                             </div>
                         </div>
 
@@ -313,10 +287,10 @@
                                 </div>
                             </div>
                             <div class="experience-summary">
-                                <p>Handled 5-10 daily Tier 1-2 support cases for IP cameras, NVRs, and
-                                    embedded Linux devices.</p>
-                                <p>Maintained internal test device pool and reproduced customer-reported bugs
-                                    and validated firmware fixes.</p>
+                                <p>Handled 5-10 daily Tier 1-2 support cases for IP cameras, NVRs, and embedded Linux
+                                    devices.</p>
+                                <p>Maintained internal device pool and reproduced customer-reported bugs and validated
+                                    firmware fixes.</p>
                             </div>
                         </div>
 

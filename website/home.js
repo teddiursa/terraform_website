@@ -456,6 +456,48 @@ document.addEventListener('keydown', function(event) {
   });
 }
 
+// Swipe detection for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+function initSwipe() {
+  document.addEventListener('touchstart', function(event) {
+    touchStartX = event.changedTouches[0].screenX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(event) {
+    touchEndX = event.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+}
+
+function handleSwipe() {
+  const modal = document.getElementById('imageModal');
+  if (modal && modal.classList.contains('active')) return;
+
+  const activeSection = document.querySelector('.section-content.active-section');
+  if (!activeSection) return;
+
+  const swipeThreshold = 50;
+  const diff = touchStartX - touchEndX;
+
+  if (Math.abs(diff) < swipeThreshold) return;
+
+  if (activeSection.id === 'projects') {
+    if (diff > 0) {
+      plusSlides(1);
+    } else {
+      plusSlides(-1);
+    }
+  } else if (activeSection.id === 'home') {
+    if (diff > 0) {
+      home_plusSlides(1);
+    } else {
+      home_plusSlides(-1);
+    }
+  }
+}
+
 // Initialize everything when DOM is ready
 document.addEventListener("DOMContentLoaded", function() {
   // Initialize navigation
@@ -469,6 +511,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Initialize image modal
   initImageModal();
+
+  // Initialize swipe detection
+  initSwipe();
 
   // Set home section as active by default
   const homeSection = document.getElementById('home');
@@ -488,7 +533,7 @@ document.addEventListener("DOMContentLoaded", function() {
     homeLink.classList.add('active');
   }
 
-// Add keyboard navigation for slideshows
+  // Add keyboard navigation for slideshows
   document.addEventListener('keydown', function(event) {
     const modal = document.getElementById('imageModal');
     if (modal && modal.classList.contains('active')) {

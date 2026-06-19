@@ -473,8 +473,7 @@ function initSwipe() {
 
 function handleSwipe() {
   const modal = document.getElementById('imageModal');
-  if (modal && modal.classList.contains('active')) return;
-
+  const modalImage = document.getElementById('modalImage');
   const activeSection = document.querySelector('.section-content.active-section');
   if (!activeSection) return;
 
@@ -489,11 +488,27 @@ function handleSwipe() {
     } else {
       plusSlides(-1);
     }
+    // Update modal image if modal is open
+    if (modal && modal.classList.contains('active')) {
+      const slides = document.getElementsByClassName("mySlides");
+      if (slides.length > 0) {
+        const newImg = slides[slideIndex - 1].querySelector('img');
+        if (newImg) modalImage.src = newImg.src;
+      }
+    }
   } else if (activeSection.id === 'home') {
     if (diff > 0) {
       home_plusSlides(1);
     } else {
       home_plusSlides(-1);
+    }
+    // Update modal image if modal is open
+    if (modal && modal.classList.contains('active')) {
+      const homeSlides = document.getElementsByClassName("home_Slides");
+      if (homeSlides.length > 0) {
+        const newImg = homeSlides[home_slideIndex - 1].querySelector('img');
+        if (newImg) modalImage.src = newImg.src;
+      }
     }
   }
 }

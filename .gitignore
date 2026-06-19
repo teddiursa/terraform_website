@@ -16,3 +16,4 @@ website/.vs/
 # Lambda Function Files
 src/lambdaFunctions.egg-info/
 .github
+website/index.html

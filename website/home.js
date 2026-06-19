@@ -359,6 +359,88 @@ document.addEventListener('keydown', function(event) {
         modalImage.src = '';
         document.querySelectorAll('.home_prev, .home_next, .prev, .next').forEach(a => a.style.display = '');
     }
+    
+    // Arrow key navigation when modal is open
+    if (modal.classList.contains('active')) {
+      const activeSection = document.querySelector('.section-content.active-section');
+      if (!activeSection) return;
+      
+      // Only navigate slides if the current image is part of a slideshow
+      const currentSrc = modalImage.src;
+      let isSlideshow = false;
+      
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        if (activeSection.id === 'projects') {
+          // Check if current image is in mySlides
+          const slides = document.getElementsByClassName("mySlides");
+          for (let i = 0; i < slides.length; i++) {
+            const img = slides[i].querySelector('img');
+            if (img && img.src === currentSrc) {
+              isSlideshow = true;
+              slideIndex = i + 1;
+              break;
+            }
+          }
+          if (isSlideshow) {
+            plusSlides(-1);
+            const newImg = slides[slideIndex - 1].querySelector('img');
+            if (newImg) modalImage.src = newImg.src;
+          }
+        } else if (activeSection.id === 'home') {
+          // Check if current image is in home_Slides
+          const homeSlides = document.getElementsByClassName("home_Slides");
+          for (let i = 0; i < homeSlides.length; i++) {
+            const img = homeSlides[i].querySelector('img');
+            if (img && img.src === currentSrc) {
+              isSlideshow = true;
+              home_slideIndex = i + 1;
+              break;
+            }
+          }
+          if (isSlideshow) {
+            home_plusSlides(-1);
+            const newImg = homeSlides[home_slideIndex - 1].querySelector('img');
+            if (newImg) modalImage.src = newImg.src;
+          }
+        }
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        if (activeSection.id === 'projects') {
+          // Check if current image is in mySlides
+          const slides = document.getElementsByClassName("mySlides");
+          for (let i = 0; i < slides.length; i++) {
+            const img = slides[i].querySelector('img');
+            if (img && img.src === currentSrc) {
+              isSlideshow = true;
+              slideIndex = i + 1;
+              break;
+            }
+          }
+          if (isSlideshow) {
+            plusSlides(1);
+            const newImg = slides[slideIndex - 1].querySelector('img');
+            if (newImg) modalImage.src = newImg.src;
+          }
+        } else if (activeSection.id === 'home') {
+          // Check if current image is in home_Slides
+          const homeSlides = document.getElementsByClassName("home_Slides");
+          for (let i = 0; i < homeSlides.length; i++) {
+            const img = homeSlides[i].querySelector('img');
+            if (img && img.src === currentSrc) {
+              isSlideshow = true;
+              home_slideIndex = i + 1;
+              break;
+            }
+          }
+          if (isSlideshow) {
+            home_plusSlides(1);
+            const newImg = homeSlides[home_slideIndex - 1].querySelector('img');
+            if (newImg) modalImage.src = newImg.src;
+          }
+        }
+      }
+    }
 });
 
   // Close modal when clicking tabs
@@ -405,4 +487,34 @@ document.addEventListener("DOMContentLoaded", function() {
     homeSection.classList.add('active-section');
     homeLink.classList.add('active');
   }
+
+// Add keyboard navigation for slideshows
+  document.addEventListener('keydown', function(event) {
+    const modal = document.getElementById('imageModal');
+    if (modal && modal.classList.contains('active')) {
+      // Modal is open - don't handle arrow keys
+      return;
+    }
+
+    // Check if we're in projects or home section
+    const activeSection = document.querySelector('.section-content.active-section');
+    if (!activeSection) return;
+
+    // Handle arrow keys for slideshow navigation
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      if (activeSection.id === 'projects') {
+        plusSlides(-1);
+      } else if (activeSection.id === 'home') {
+        home_plusSlides(-1);
+      }
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      if (activeSection.id === 'projects') {
+        plusSlides(1);
+      } else if (activeSection.id === 'home') {
+        home_plusSlides(1);
+      }
+    }
+  });
 });

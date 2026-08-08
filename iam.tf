@@ -150,3 +150,42 @@ resource "aws_iam_role_policy" "cachePolicy" {
     }
   )
 }
+
+# User for the homelab metrics publisher (ansible_proxmox/roles/metrics_publisher).
+# Its credentials live on the docker host, outside AWS, so the policy is scoped
+# to exactly one action on exactly one object key - nothing else in the account
+# is reachable if that host is ever compromised.
+
+resource "aws_iam_user" "metricsPublisher" {
+  name = "homelab-metrics-publisher"
+  tags = {
+    Name        = "metricsPublisher"
+    Environment = "Prod"
+  }
+}
+
+resource "aws_iam_user_policy" "metricsPublisherPolicy" {
+  name = "metricsPublisherPolicy"
+  user = aws_iam_user.metricsPublisher.name
+  policy = jsonencode(
+    {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "PutMetricsSnapshotOnly",
+          "Effect" : "Allow",
+          "Action" : "s3:PutObject",
+          "Resource" : "${aws_s3_bucket.jsonBucket.arn}/metrics.json"
+        }
+      ]
+    }
+  )
+}
+
+# The access key is deliberately NOT managed here: aws_iam_access_key stores
+# the secret in plaintext in the state file. Mint it once by hand instead:
+#
+#   aws iam create-access-key --user-name homelab-metrics-publisher
+#
+# then store the pair in the Ansible vault (group_vars/metrics.yml) as
+# metrics_aws_access_key_id and metrics_aws_secret_access_key.

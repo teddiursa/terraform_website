@@ -1,8 +1,22 @@
-// Variable for JSON url data
-let urlStatus = "https://b96tmqfgoi.execute-api.us-east-1.amazonaws.com/statusStage";
+// The status API gateway URL changes on every Terraform deployment, so it is
+// read from the JSON file Terraform writes rather than hardcoded here - the
+// same approach home.js uses for the visitor count and time APIs.
+const urlLinks = "https://s3.amazonaws.com/gregchow.jsonbucket/links.json";
 
-// Fetch JSON data containing urls, then fetch data from url
-fetch(urlStatus)
+// Fetch JSON data containing urls, then fetch the status from that url
+fetch(urlLinks)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then((links) => {
+    if (!links.urlStatus) {
+      throw new Error('urlStatus missing from links.json');
+    }
+    return fetch(links.urlStatus);
+  })
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');

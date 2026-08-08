@@ -17,12 +17,16 @@ Code is organized into several separate files based on infrastructure type: [S3 
 
 Terraform automatically upload/update files on `terraform apply`, ensuring cloud infrastructure stays up to date.
 
+State is stored remotely in a versioned S3 bucket with a DynamoDB lock table, configured in [backend.tf](https://github.com/teddiursa/terraform_website/blob/main/backend.tf), so the project can be applied from any machine and never by two at once.
+
 ## Website Files
 The Website files are stored under the [website](/website) and [errors](/errors) folders.
 
 Which include the ***Home*** website files and the ***404*** error page files respectively.
 
 Main website files are: [html](/website/home.html), [css](/website/home.css), and [Javascript](/website/home.js) files
+
+[metrics.js](/website/metrics.js) draws the live infrastructure maps and the Metrics tab.
 
 ## Lambda  Functions
 The Lambda Python functions are stored under the [src/lambdaFunctions](/src/lambdaFunctions) folder.
@@ -43,5 +47,10 @@ Automates [Python tests](/.github/workflows/python-app.yml) and [S3 Bucket chang
 
 Also automates invalidating CloudFront's Cache, using a LambdaFunction via an API Gateway URL, also stored in an S3 bucket.
 
-## Caching and Compression
-Includes a 1 day Cache header to prevent repeat calls for duplicate resources on website files. Also compresses text-based files and SVG using gzip while image files are either small or use a [.webp](https://web.dev/articles/serve-images-webp) file format. Main [map.webp](./website/map.webp) image has a **preload** tag while others have a **prefetch** tag, since they are on a separate page. Includes Google Font's [Josefin Sans](https://fonts.google.com/specimen/Josefin+Sans) inline to decrease loading times.
+## Homelab Metrics
+The Metrics tab and the home lab map are drawn from a sanitised Prometheus snapshot, published from a home lab every 15 minutes by an Ansible role.
+
+An IAM user scoped to a single `s3:PutObject` on one key writes `metrics.json` to the JSON bucket, which the site fetches. Names are allowlisted before publishing, so anything not named stays private.
+
+## Caching
+Includes a 1 day Cache header to prevent repeat calls for duplicate resources on website files. Includes Google Font's [Josefin Sans](https://fonts.google.com/specimen/Josefin+Sans) inline to decrease loading times.

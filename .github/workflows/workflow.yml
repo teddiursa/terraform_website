@@ -10,16 +10,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-    - name: Deploy image files to S3 without gzip
-      run: aws s3 sync ./website/ s3://www.gregchow.net --delete --exclude "*" --include "*.png" --include "*.webp" --include "*.ico" --cache-control max-age=86400,public --metadata "Content-Encoding="
-    - name: Deploy website files with gzip
+
+    # --metadata only writes x-amz-meta-* keys, never the real header. The
+    # Content-Encoding values here described these files as gzipped when
+    # nothing in this pipeline compresses anything.
+    - name: Deploy image files to S3
+      run: |
+        aws s3 sync ./website/ s3://www.gregchow.net --delete \
+          --exclude "*" \
+          --include "*.png" --include "*.webp" --include "*.ico" \
+          --cache-control max-age=86400,public
+
+    - name: Deploy website files
       run: |
         aws s3 sync ./website/ s3://www.gregchow.net \
           --exclude ".vs*" \
@@ -27,27 +36,31 @@ jobs:
           --exclude "*.png" \
           --exclude "*.webp" \
           --exclude "*.ico" \
-          --cache-control max-age=86400,public \
-          --metadata Content-Encoding=gzip
+          --cache-control max-age=86400,public
+
     - name: Sync files to S3 (./errors/)
       run: |
         aws s3 sync ./errors/ s3://www.gregchow.net \
-        --exclude ".vs*" \
-        --exclude "desktop.ini" \
-        --exclude "*.png" \
-        --exclude "*.webp" \
-        --exclude "*.ico" \
-        --cache-control max-age=86400,public \
-        --metadata Content-Encoding=gzip   
-    - name: Get url for the Cloudfront cache refresh Lambda Function
+          --exclude ".vs*" \
+          --exclude "desktop.ini" \
+          --exclude "*.png" \
+          --exclude "*.webp" \
+          --exclude "*.ico" \
+          --cache-control max-age=86400,public
+
+    # ::set-output was disabled by GitHub in 2023, so this step kept passing
+    # while producing an empty URL and the refresh below curled nothing.
+    - name: Get url for the CloudFront cache refresh Lambda
       id: get-urlCache
       run: |
-        urlCache=$(curl -s https://s3.amazonaws.com/gregchow.jsonbucket/links.json | jq -r '.urlCache')
-        echo "::set-output name=urlCache::$urlCache"
+        urlCache=$(curl -sf https://s3.amazonaws.com/gregchow.jsonbucket/links.json | jq -r '.urlCache')
+        if [ -z "$urlCache" ] || [ "$urlCache" = "null" ]; then
+          echo "::error::urlCache missing from links.json"
+          exit 1
+        fi
+        echo "urlCache=$urlCache" >> "$GITHUB_OUTPUT"
 
-    - name: Perform HTTP GET request to refresh CloudFront Distribution
+    - name: Refresh the CloudFront distribution
       run: |
-        urlCache="${{ steps.get-urlCache.outputs.urlCache }}"
-        curl -s -o /dev/null $urlCache
-        curl -s -o /dev/null https://gregchow.net
-        
+        curl -sf -o /dev/null "${{ steps.get-urlCache.outputs.urlCache }}"
+        curl -sf -o /dev/null https://gregchow.net

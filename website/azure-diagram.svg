@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" role="img"
+     aria-label="Azure hub and spoke, full design. An on-premises office VNet on 192.168.0.0/16 with a GatewaySubnet, user and management subnets and an AzureBastionSubnet reaches the hub on 10.0.0.0/16 over an IPsec site-to-site VPN. A route table forces traffic through a network virtual appliance in the hub DMZ before it reaches either spoke; the hub also holds a management VM. The hub peers bidirectionally with spoke 1 on 10.1.0.0/16, whose NSG permits SSH only from the hub, and spoke 2 on 10.2.0.0/16, whose NSG permits SQL on 1433 only from the hub. Inbound web traffic arrives from the internet at an Application Gateway v2 with a public IP, which forwards to two Linux web apps reached over private endpoints alongside a SQL Server and database. Shared services are two private DNS zones with nine A records plus a public zone for custom domain verification, a Log Analytics workspace taking eight diagnostic settings, and a Network Watcher collecting NSG flow logs with traffic analytics.">
+  <title>Azure hub-and-spoke: the full design</title>
+
+  <!-- Addressing and rules come from the Terraform: variables.tf for the
+       prefixes, the azurerm_network_security_rule blocks for the ports.
+       Everything the configuration defines is drawn as deployed, including
+       the resources currently commented out to hold running cost down. -->
+
+  <rect width="1000" height="700" rx="8" fill="#171819"/>
+
+  <defs>
+    <style>
+      .n    { fill:#202123; stroke:#383835; stroke-width:1.5; }
+      .zone { fill:#1a1b1d; stroke:#4a4b4d; stroke-width:1.5; stroke-dasharray:6 5; }
+      .t    { fill:#e4e6eb; font-family:sans-serif; font-size:20px; font-weight:600; text-anchor:middle; }
+      .s    { fill:#898781; font-family:sans-serif; font-size:15px; text-anchor:middle; }
+      .zt   { fill:#b0b3b8; font-family:sans-serif; font-size:15px; font-weight:700; text-anchor:start; letter-spacing:.05em; }
+      .chip { fill:#26282c; }
+      .ct   { fill:#b0b3b8; font-family:monospace; font-size:14px; text-anchor:start; }
+      .cloud { fill:#242f40; stroke:#3a4e6c; stroke-width:1.5; }
+      .cta  { fill:#3789fd; font-family:sans-serif; font-size:14px; text-anchor:start; }
+      .lbl  { fill:#b0b3b8; font-family:sans-serif; font-size:16px; text-anchor:middle; }
+      .e    { fill:none; stroke-width:3; stroke-linecap:round; }
+      .head { fill:none; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+      .vpn  { stroke:#3789fd; }
+      .peer { stroke:#199e6e; }
+      .web  { stroke:#d8592b; }
+      .obs  { stroke:#8353d4; }
+    </style>
+  </defs>
+
+  <!--  on-prem -->
+  <rect class="zone" x="16" y="78" width="260" height="300" rx="8"/>
+  <text class="zt" x="32" y="104">ON-PREM · 192.168.0.0/16</text>
+  <rect class="chip" x="32" y="118" width="228" height="30" rx="5"/>
+  <text class="ct" x="42" y="138">GatewaySubnet .255.224/27</text>
+  <rect class="chip" x="32" y="156" width="228" height="30" rx="5"/>
+  <text class="ct" x="42" y="176">user 192.168.10.0/24</text>
+  <rect class="chip" x="32" y="194" width="228" height="30" rx="5"/>
+  <text class="ct" x="42" y="214">mgmt 192.168.1.128/25</text>
+  <rect class="chip" x="32" y="232" width="228" height="30" rx="5"/>
+  <text class="ct" x="42" y="252">AzureBastion .2.0/27</text>
+  <rect class="n" x="32" y="274" width="228" height="88" rx="6"/>
+  <text class="t" x="146" y="308">Office VNet</text>
+  <text class="s" x="146" y="334">VPN gateway · VM · NSG</text>
+
+  <!--  shared services -->
+  <text class="zt" x="16" y="400">SHARED SERVICES</text>
+  <rect class="n" x="16" y="412" width="260" height="84" rx="6"/>
+  <text class="t" x="146" y="444">DNS</text>
+  <text class="s" x="146" y="468">2 private zones · 9 A records</text>
+  <text class="s" x="146" y="488">public zone · TXT verification</text>
+
+  <rect class="n" x="16" y="512" width="260" height="76" rx="6"/>
+  <text class="t" x="146" y="544">Log Analytics</text>
+  <text class="s" x="146" y="568">8 diagnostic settings</text>
+
+  <rect class="n" x="16" y="604" width="260" height="76" rx="6"/>
+  <text class="t" x="146" y="636">Network Watcher</text>
+  <text class="s" x="146" y="660">NSG flow logs · analytics</text>
+
+  <!-- - hub -->
+  <rect class="zone" x="346" y="78" width="286" height="326" rx="8"/>
+  <text class="zt" x="362" y="104">HUB VNET · 10.0.0.0/16</text>
+  <rect class="chip" x="362" y="118" width="254" height="30" rx="5"/>
+  <text class="ct" x="372" y="138">GatewaySubnet .255.224/27</text>
+  <rect class="chip" x="362" y="156" width="254" height="30" rx="5"/>
+  <text class="ct" x="372" y="176">dmz 10.0.0.32/27</text>
+  <rect class="chip" x="362" y="194" width="254" height="30" rx="5"/>
+  <text class="ct" x="372" y="214">mgmt 10.0.0.64/27</text>
+  <rect class="n" x="362" y="234" width="254" height="94" rx="6"/>
+  <text class="t" x="489" y="266">NVA</text>
+  <text class="s" x="489" y="292">route table sends every</text>
+  <text class="s" x="489" y="314">spoke prefix here first</text>
+  <rect class="n" x="362" y="342" width="254" height="52" rx="6"/>
+  <text class="t" x="489" y="374">Hub VM</text>
+
+  <!--  ingress -->
+  <path class="cloud" d="M 377.5 495.5 L 600.5 495.5 C 629.1 495.5, 632.0 483.1, 603.4 478.8 C 632.0 465.1, 586.2 453.4, 540.5 459.6 C 529.0 441.0, 431.8 439.7, 420.4 458.3 C 371.7 454.6, 343.1 467.6, 374.6 478.8 C 346.0 483.1, 348.9 495.5, 377.5 495.5 Z"/>
+  <text class="t" x="489" y="484">Internet</text>
+
+  <rect class="n" x="346" y="536" width="286" height="88" rx="6"/>
+  <text class="t" x="489" y="568">App Gateway v2</text>
+  <text class="s" x="489" y="592">public IP · HTTP listener</text>
+  <text class="s" x="489" y="612">backend pool · 2 web apps</text>
+
+  <!--  spokes -->
+  <rect class="zone" x="720" y="78" width="264" height="242" rx="8"/>
+  <text class="zt" x="736" y="104">SPOKE 1 · 10.1.0.0/16</text>
+  <rect class="chip" x="736" y="118" width="232" height="30" rx="5"/>
+  <text class="ct" x="746" y="138">workload 10.1.1.0/24</text>
+  <rect class="chip" x="736" y="156" width="232" height="30" rx="5"/>
+  <text class="ct" x="746" y="176">mgmt 10.1.0.64/27</text>
+  <rect class="chip" x="736" y="194" width="232" height="30" rx="5"/>
+  <text class="cta" x="746" y="214">NSG · SSH from hub only</text>
+  <rect class="n" x="736" y="240" width="232" height="60" rx="6"/>
+  <text class="t" x="852" y="277">Workload VM</text>
+
+  <rect class="zone" x="720" y="348" width="264" height="276" rx="8"/>
+  <text class="zt" x="736" y="374">SPOKE 2 · 10.2.0.0/16</text>
+  <rect class="chip" x="736" y="388" width="232" height="30" rx="5"/>
+  <text class="ct" x="746" y="408">workload 10.2.1.0/24</text>
+  <rect class="chip" x="736" y="426" width="232" height="30" rx="5"/>
+  <text class="ct" x="746" y="446">mgmt 10.2.0.64/27</text>
+  <rect class="chip" x="736" y="464" width="232" height="30" rx="5"/>
+  <text class="cta" x="746" y="484">NSG · 1433 from hub only</text>
+  <rect class="n" x="736" y="508" width="232" height="98" rx="6"/>
+  <text class="t" x="852" y="542">2 Web Apps + SQL</text>
+  <text class="s" x="852" y="568">3 private endpoints</text>
+  <text class="s" x="852" y="590">1 database · no public IP</text>
+
+  <!-- - edges -->
+  <path class="e vpn" d="M288 318 H334"/>
+  <path class="head vpn" d="M-5 -4 Q5 0 -5 4" transform="translate(280 318) rotate(180)"/>
+  <path class="head vpn" d="M-5 -4 Q5 0 -5 4" transform="translate(342 318)"/>
+  <text class="lbl" x="311" y="304">IPsec</text>
+
+  <path class="e peer" d="M644 250 C 676 250, 676 270, 708 270"/>
+  <path class="head peer" d="M-5 -4 Q5 0 -5 4" transform="translate(636 250) rotate(180)"/>
+  <path class="head peer" d="M-5 -4 Q5 0 -5 4" transform="translate(716 270)"/>
+  <path class="e peer" d="M644 312 C 676 312, 676 557, 708 557"/>
+  <path class="head peer" d="M-5 -4 Q5 0 -5 4" transform="translate(636 312) rotate(180)"/>
+  <path class="head peer" d="M-5 -4 Q5 0 -5 4" transform="translate(716 557)"/>
+  <text class="lbl" x="676" y="300">peering</text>
+
+  <path class="e web" d="M489 502 V522"/>
+  <path class="head web" d="M-5 -4 Q5 0 -5 4" transform="translate(489 530) rotate(90)"/>
+  <path class="e web" d="M636 580 H708"/>
+  <path class="head web" d="M-5 -4 Q5 0 -5 4" transform="translate(716 580)"/>
+  <text class="lbl" x="676" y="566">HTTP</text>
+
+  <path class="e obs" d="M340 390 H320 V550 H288" stroke-dasharray="2 7"/>
+  <path class="head obs" d="M-5 -4 Q5 0 -5 4" transform="translate(280 550) rotate(180)"/>
+  <path class="e obs" d="M760 630 V648 H288" stroke-dasharray="2 7"/>
+  <path class="head obs" d="M-5 -4 Q5 0 -5 4" transform="translate(280 648) rotate(180)"/>
+  <text class="lbl" x="500" y="666">diagnostics from every VNet</text>
+</svg>

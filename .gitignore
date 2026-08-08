@@ -7,11 +7,14 @@ website/.vs/
 
 #Terraform files
 *.hcl
+# but the provider lock must be committed, so every machine resolves the
+# same provider versions
+!.terraform.lock.hcl
 *.zip
 *.tfstate
-*.zip
+*.tfstate.*
 *.backup
-*.terraform/
+.terraform/
 
 # Lambda Function Files
 src/lambdaFunctions.egg-info/

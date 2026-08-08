@@ -57,10 +57,14 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
   )
 }
 
+# Every object carries an etag. Without one Terraform only reacts to attribute
+# changes, so editing a file's contents produced "No changes" and the edit was
+# never deployed.
 resource "aws_s3_object" "html" {
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = "home.html"
-  source       = "../website/home.html"
+  source       = "website/home.html"
+  etag         = filemd5("website/home.html")
   content_type = "text/html"
 
   metadata = {
@@ -72,7 +76,8 @@ resource "aws_s3_object" "html" {
 resource "aws_s3_object" "css" {
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = "home.css"
-  source       = "../website/home.css"
+  source       = "website/home.css"
+  etag         = filemd5("website/home.css")
   content_type = "text/css"
 
   metadata = {
@@ -80,10 +85,13 @@ resource "aws_s3_object" "css" {
   }
 }
 
+#every .js file, so adding a script does not need a new resource block
 resource "aws_s3_object" "js" {
+  for_each     = fileset("website/", "*.js")
   bucket       = aws_s3_bucket.terraformBucket.id
-  key          = "home.js"
-  source       = "../website/home.js"
+  key          = each.value
+  source       = "website/${each.value}"
+  etag         = filemd5("website/${each.value}")
   content_type = "text/javascript"
 
   metadata = {
@@ -98,6 +106,7 @@ resource "aws_s3_object" "svg" {
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = each.value
   source       = "website/${each.value}"
+  etag         = filemd5("website/${each.value}")
   content_type = "image/svg+xml"
 
   metadata = {
@@ -110,6 +119,7 @@ resource "aws_s3_object" "png" {
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = each.value
   source       = "website/${each.value}"
+  etag         = filemd5("website/${each.value}")
   content_type = "image/png"
 
   metadata = {
@@ -122,6 +132,7 @@ resource "aws_s3_object" "ico" {
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = each.value
   source       = "website/${each.value}"
+  etag         = filemd5("website/${each.value}")
   content_type = "image/x-icon"
 
   metadata = {
@@ -134,6 +145,7 @@ resource "aws_s3_object" "webp" {
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = each.value
   source       = "website/${each.value}"
+  etag         = filemd5("website/${each.value}")
   content_type = "image/webp"
 
   metadata = {
@@ -166,6 +178,7 @@ resource "aws_s3_object" "htmlError" {
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = each.value
   source       = "errors/${each.value}"
+  etag         = filemd5("errors/${each.value}")
   content_type = "text/html"
 }
 
@@ -174,6 +187,7 @@ resource "aws_s3_object" "cssError" {
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = each.value
   source       = "errors/${each.value}"
+  etag         = filemd5("errors/${each.value}")
   content_type = "text/css"
 }
 
@@ -182,6 +196,7 @@ resource "aws_s3_object" "javascriptError" {
   bucket       = aws_s3_bucket.terraformBucket.id
   key          = each.value
   source       = "errors/${each.value}"
+  etag         = filemd5("errors/${each.value}")
   content_type = "text/javascript"
 }
 
@@ -252,24 +267,30 @@ resource "aws_s3_bucket_policy" "policyJson" {
 }
 
 
-# Render the template
-data "template_file" "urlTemplate" {
-  template = file("jsonFiles/links.tpl")
-  vars = {
-    urlCountVar  = "${aws_api_gateway_deployment.countDeployment.invoke_url}"
-    urlTimeVar   = "${aws_api_gateway_deployment.timeDeployment.invoke_url}"
-    urlStatusVar = "${aws_api_gateway_deployment.statusDeployment.invoke_url}"
-    urlCacheVar  = "${aws_api_gateway_deployment.cacheDeployment.invoke_url}"
-  }
+# Render the template with the built-in templatefile() function. The old
+# hashicorp/template provider is archived and ships no arm64 build, so this
+# drops a provider dependency as well as an init failure on newer machines.
+locals {
+  linksJson = templatefile("jsonFiles/links.tpl", {
+    urlCountVar  = aws_api_gateway_deployment.countDeployment.invoke_url
+    urlTimeVar   = aws_api_gateway_deployment.timeDeployment.invoke_url
+    urlStatusVar = aws_api_gateway_deployment.statusDeployment.invoke_url
+    urlCacheVar  = aws_api_gateway_deployment.cacheDeployment.invoke_url
+  })
 }
 
+# Consumed by home.js (count, time), errors/404.js (status) and the GitHub
+# Actions cache invalidation step (cache). Kept short-lived so a redeploy's
+# new gateway URLs reach clients quickly.
 resource "aws_s3_object" "jsonCount" {
   bucket       = aws_s3_bucket.jsonBucket.id
   key          = "links.json"
-  content      = data.template_file.urlTemplate.rendered #templatefile("jsonFiles/links.conf.tpl", local.template_vars)
+  content      = local.linksJson
+  etag         = md5(local.linksJson)
   content_type = "application/json"
 
-  metadata = {
-    "cache-control" = "max-age=86400, public"
-  }
+  # NOTE: cache_control is the real header. Every other object in this file
+  # sets metadata = { "cache-control" = ... } instead, which only produces
+  # x-amz-meta-cache-control and is ignored by browsers - see the README.
+  cache_control = "max-age=300, public"
 }

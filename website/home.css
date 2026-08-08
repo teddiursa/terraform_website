@@ -168,27 +168,6 @@ body {
   }
 }
 
-/* Hero Section */
-.hero-section {
-  padding: 0;
-  text-align: center;
-}
-
-.hero-section h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0;
-  margin-top: 0;
-  color: var(--text-primary);
-}
-
-.hero-section .lead {
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
@@ -324,35 +303,6 @@ a:hover {
   border-color: var(--accent-secondary);
 }
 
-/* Resume Download Button */
-.resume-download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  background: var(--accent-primary);
-  color: var(--bg-primary);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: var(--spacing-md);
-  transition: all var(--transition-fast);
-  border: 2px solid var(--accent-primary);
-}
-
-.resume-download-btn:hover {
-  background: transparent;
-  color: var(--accent-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  text-decoration: none;
-}
-
-.resume-download-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
 .contact-info {
   color: var(--text-secondary);
   font-size: 0.95rem;
@@ -422,14 +372,6 @@ a:hover {
   border-color: var(--accent-secondary);
 }
 
-/* Certifications */
-.certification-row {
-  background: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-md);
-  border-left: 3px solid var(--accent-secondary);
-}
-
 /* Images */
 img {
   max-width: 100%;
@@ -443,14 +385,6 @@ img {
 
 img:hover {
   transform: scale(1.02);
-}
-
-/* Ensure images in columns display properly */
-.column img {
-  margin: 0;
-  width: 100%;
-  height: auto;
-  display: block;
 }
 
 /* Enhance SVG readability on all screens */
@@ -471,7 +405,7 @@ img[src$=".svg"] {
   }
   
   .project-card-img img {
-    max-height: 200px;
+    max-height: 320px;
   }
 }
 
@@ -528,7 +462,7 @@ img[src$=".svg"] {
 
 .project-card-img img {
   max-width: 100%;
-  max-height: 220px;
+  max-height: 460px;
   width: auto;
   height: auto;
   margin: 0;
@@ -594,106 +528,33 @@ img[src$=".svg"] {
   color: var(--bg-primary);
   text-decoration: none;
 }
-
-/* Project card images should be constrained */
-.cloudDiagram img,
-.azure_image img,
-.form_filler_image img,
 .project-card-img img {
   max-width: 100%;
-  max-height: 220px;
+  max-height: 460px;
   height: auto;
   object-fit: contain;
   filter: brightness(1.1) contrast(1.05);
 }
 
 .project-card-img img {
-  max-height: 220px;
+  max-height: 460px;
 }
 
-/* Slideshow Styling */
-.slideshow,
-.home_slideshow {
-  position: relative;
-  max-width: 1000px;
-  margin: var(--spacing-xs) auto;
-  margin-bottom: var(--spacing-sm);
-  clear: both;
-  width: 100%;
-}
+/* Home lab card spans the row: 1400x720 diagram plus a six-up screenshot
+   grid. Already single-column below 1080px. */
+@media (min-width: 1081px) {
+  .project-card-wide {
+    grid-column: 1 / -1;
+  }
 
-/* Home page slideshow can be wider */
-.home_slideshow {
-  max-width: 1200px;
-}
+  .project-card-wide .project-card-img img {
+    max-height: 560px;
+  }
 
-.slideContainer,
-.home_slideContainer {
-  position: relative;
-  background: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-sm);
-  box-shadow: var(--shadow-md);
-  height: 450px;
-  display: block;
-  overflow: hidden;
-}
-
-/* Home page slideshow container can be taller */
-.home_slideContainer {
-  height: 500px;
-}
-
-/* Ensure zoomed images break out of all containers - highest specificity */
-body .mySlides img.zoomed,
-body .home_Slides img.zoomed,
-body .slideshow .mySlides img.zoomed,
-body .home_slideshow .home_Slides img.zoomed,
-body .slideContainer .mySlides img.zoomed,
-body .home_slideContainer .home_Slides img.zoomed {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) scale(3.5) !important;
-  z-index: 99999 !important;
-  max-width: 95vw !important;
-  max-height: 95vh !important;
-  cursor: zoom-out !important;
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.9) !important;
-  pointer-events: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-  filter: brightness(1.3) contrast(1.25) !important;
-}
-
-body .mySlides img.zoomed[src$=".svg"],
-body .home_Slides img.zoomed[src$=".svg"] {
-  filter: brightness(1.35) contrast(1.3) !important;
-}
-
-.mySlides,
-.home_Slides {
-  display: none;
-  width: 100%;
-  height: 400px;
-  position: relative;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Home page slides can be taller */
-.home_Slides {
-  height: 480px;
-}
-
-.mySlides.active,
-.home_Slides.active {
-  display: flex;
+  /* Six figures would land 4 + 2 on a full-width card. */
+  .project-card-wide .shots-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Simple Image Modal/Lightbox */
@@ -727,8 +588,23 @@ body .home_Slides img.zoomed[src$=".svg"] {
   filter: brightness(1.25) contrast(1.2);
 }
 
-.image-modal img[src$=".svg"] {
+/* is-raster is set by the lightbox, not inferred from the src - see home.js. */
+.image-modal img:not(.is-raster) {
   filter: brightness(1.3) contrast(1.25);
+}
+
+/* Screenshots are raster; narrowest source is 1261px, so cap below that and
+   they downscale rather than up. crisp-edges and the contrast lift are for
+   the SVGs and hurt screenshot text. */
+.image-modal img.is-raster {
+  max-width: min(80vw, 1200px);
+  image-rendering: auto;
+  filter: none;
+}
+
+/* The global img:hover scale resamples the bitmap; visible at full size. */
+.image-modal img:hover {
+  transform: none;
 }
 
 .image-modal .close-hint {
@@ -742,184 +618,6 @@ body .home_Slides img.zoomed[src$=".svg"] {
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-md);
   pointer-events: none;
-}
-
-.mySlides img,
-.home_Slides img {
-  width: 700px;
-  height: 400px;
-  max-width: 95%;
-  max-height: 400px;
-  object-fit: contain;
-  margin: 0 auto;
-  cursor: pointer;
-  display: inline-block;
-}
-
-/* Home page images can be larger */
-.home_Slides img {
-  width: 800px;
-  height: 470px;
-  max-height: 470px;
-}
-
-.mySlides img:hover,
-.home_Slides img:hover {
-  cursor: pointer;
-}
-
-/* Navigation Arrows */
-.prev,
-.next,
-.home_prev,
-.home_next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: auto;
-  padding: var(--spacing-md) var(--spacing-lg);
-  color: var(--text-primary);
-  font-weight: bold;
-  font-size: 1.5rem;
-  border-radius: var(--radius-md);
-  user-select: none;
-  background: rgba(0, 0, 0, 0.5);
-  transition: all var(--transition-fast);
-  z-index: 10;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.next,
-.home_next {
-  right: var(--spacing-sm);
-  border-radius: var(--radius-md) 0 0 var(--radius-md);
-}
-
-.prev,
-.home_prev {
-  left: var(--spacing-sm);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-
-.next,
-.home_next {
-  right: var(--spacing-sm);
-  border-radius: var(--radius-md) 0 0 var(--radius-md);
-}
-
-.prev,
-.home_prev {
-  left: var(--spacing-sm);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-
-.prev:hover,
-.next:hover,
-.home_prev:hover,
-.home_next:hover {
-  background: rgba(0, 0, 0, 0.8);
-  color: var(--accent-primary);
-}
-
-/* Number Text */
-.numbertext {
-  color: var(--text-primary);
-  padding: var(--spacing-sm);
-  position: absolute;
-  top: var(--spacing-sm);
-  right: var(--spacing-sm);
-  font-size: 0.875rem;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: var(--radius-sm);
-  z-index: 5;
-  pointer-events: none;
-}
-
-/* Caption */
-.caption-container,
-.home_caption-container {
-  text-align: center;
-  padding: var(--spacing-sm);
-  color: var(--text-secondary);
-  background: var(--bg-tertiary);
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
-  margin-top: var(--spacing-xs);
-  display: block;
-  clear: both;
-  min-height: 3.5em;
-}
-
-/* Thumbnail Row */
-.slideshow .row,
-.home_slideshow .row {
-  margin-top: var(--spacing-sm);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-}
-
-.slideshow .row:after,
-.home_slideshow .row:after {
-  display: none;
-}
-
-.column {
-  flex: 1;
-  min-width: 0;
-  padding: var(--spacing-xs);
-  box-sizing: border-box;
-}
-
-.slideshow .column {
-  width: 16.667%;
-}
-
-.home_slideshow .column {
-  width: 25%;
-}
-
-/* Demo Thumbnails */
-.demo,
-.home_demo {
-  width: 100%;
-  height: auto;
-  max-height: 80px;
-  min-height: 40px;
-  object-fit: contain;
-  opacity: 0.6;
-  cursor: pointer;
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
-  border: 2px solid transparent;
-  display: block;
-  box-sizing: border-box;
-  background-color: var(--bg-tertiary);
-  padding: 4px;
-  position: relative;
-  z-index: 1;
-}
-
-/* Make sure column images don't override slideshow images */
-.column .demo,
-.column .home_demo {
-  width: 100%;
-  max-height: 80px;
-  min-height: 40px;
-}
-
-.demo:hover,
-.home_demo:hover,
-.active,
-.demo.active,
-.home_demo.active {
-  opacity: 1;
-  border-color: var(--accent-primary);
-  transform: scale(1.05);
-  z-index: 2;
 }
 
 /* Contact Section */
@@ -977,35 +675,6 @@ body .home_Slides img.zoomed[src$=".svg"] {
   color: var(--accent-primary);
 }
 
-/* Resume Download Button */
-.resume-download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  background: var(--accent-primary);
-  color: var(--bg-primary);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: var(--spacing-md);
-  transition: all var(--transition-fast);
-  border: 2px solid var(--accent-primary);
-}
-
-.resume-download-btn:hover {
-  background: transparent;
-  color: var(--accent-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  text-decoration: none;
-}
-
-.resume-download-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
 .contact-info {
   color: var(--text-secondary);
   font-size: 0.95rem;
@@ -1018,44 +687,6 @@ body .home_Slides img.zoomed[src$=".svg"] {
 .contact-info .separator {
   color: var(--text-muted);
   margin: 0 var(--spacing-xs);
-}
-
-/* Counter Section - Only on Home Page */
-.counter-section {
-  margin-top: var(--spacing-xs);
-  padding-top: var(--spacing-xs);
-  border-top: 1px solid var(--border-color);
-}
-
-.counter {
-  text-align: center;
-  padding: var(--spacing-sm);
-  background: var(--bg-card);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  max-width: 600px;
-  margin: 0 auto;
-  box-shadow: var(--shadow-sm);
-}
-
-.counter h2 {
-  margin: 0 0;
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-}
-
-.counter h5 {
-  margin: 0 0;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-/* Footer */
-.footer {
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border-color);
-  padding: var(--spacing-lg) 0;
-  margin-top: auto;
 }
 
 /* Responsive Design */
@@ -1071,18 +702,6 @@ body .home_Slides img.zoomed[src$=".svg"] {
     display: none;
   }
 
-  .hero-section h1 {
-    font-size: 3rem;
-  }
-
-  .mySlides img,
-  .home_Slides img {
-    max-height: 550px;
-  }
-
-  .counter {
-    padding: var(--spacing-xl);
-  }
 
   h1 {
     font-size: 2.5rem;
@@ -1109,82 +728,13 @@ body .home_Slides img.zoomed[src$=".svg"] {
     display: block;
   }
 
-  .hero-section h1 {
-    font-size: 2rem;
-  }
-
-  .hero-section .lead {
-    font-size: 1rem;
-  }
-
-  .mySlides img,
-  .home_Slides img {
-    width: 100%;
-    max-height: 250px;
-  }
-
-  .slideContainer,
-  .home_slideContainer {
-    height: 300px;
-  }
-
-  .home_slideContainer {
-    height: 350px;
-  }
-
-  .home_Slides img {
-    width: 100%;
-    max-height: 300px;
-  }
-
-  .column {
-    width: 33.333%;
-  }
-
-  .home_slideshow .column {
-    width: 50%;
-  }
-
-  .demo,
-  .home_demo {
-    max-height: 60px;
-    min-height: 30px;
-    padding: 2px;
-  }
-
-  .hero-section h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-section .lead {
-    font-size: 0.875rem;
-  }
-
-  .prev,
-  .next,
-  .home_prev,
-  .home_next {
-    font-size: 1.25rem;
-    padding: var(--spacing-sm) var(--spacing-md);
-    height: 50px;
-  }
-
   .project-card,
   .experience-card {
     padding: var(--spacing-md);
   }
 
-  .counter {
-    padding: var(--spacing-md);
-  }
 
-  .counter h2 {
-    font-size: 1rem;
-  }
 
-  .counter h5 {
-    font-size: 0.75rem;
-  }
 
   h1 {
     font-size: 1.75rem;
@@ -1215,9 +765,7 @@ body .home_Slides img.zoomed[src$=".svg"] {
   ol {
     font-size: 0.875rem;
   }
-
-  .skills,
-  .certification-row {
+.skills {
     padding: var(--spacing-md);
   }
   
@@ -1257,16 +805,6 @@ body .home_Slides img.zoomed[src$=".svg"] {
   line-height: 1.6;
 }
 
-.list-unstyled {
-  list-style: none;
-  padding-left: 0;
-}
-
-.list-unstyled li {
-  padding: var(--spacing-xs) 0;
-  color: var(--text-secondary);
-}
-
 /* Animation for smooth section transitions */
 .section-content {
   animation: slideIn var(--transition-normal);
@@ -1283,14 +821,22 @@ body .home_Slides img.zoomed[src$=".svg"] {
   }
 }
 
-/* AOS Animation Overrides */
-[data-aos] {
-  pointer-events: none;
-}
+/* AOS Animation Overrides
 
-[data-aos].aos-animate {
-  pointer-events: auto;
-}
+   The pair that used to live here -
+
+     [data-aos]             { pointer-events: none; }
+     [data-aos].aos-animate { pointer-events: auto; }
+
+   - made every element inside a [data-aos] wrapper unclickable until AOS
+   marked it animated. AOS runs with once:true and only marks what scrolls
+   into view, but the Resume, Projects and Contact sections are display:none
+   until their nav link is used, so nothing in them is ever "in view" and
+   nothing in them was ever clickable. It also meant a blocked or slow CDN
+   left the whole page inert. Keyboard handlers on document still worked,
+   which is what made it look like only the mouse was broken.
+
+   Nothing here needs pointer-events at all: AOS only fades and translates. */
 
 /* Improved focus states for accessibility */
 a:focus,
@@ -1311,4 +857,1380 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}/* ===================================================================
+   Data palette
+
+   Shared by the telemetry panels (#tm-root), the homelab map (#nm-root)
+   and the AWS page-load map (#aw-root), so a colour means the same thing
+   in all three. Declared on :root rather than on any one of them - the
+   maps live in the Home tab and the panels in Projects, so a token
+   scoped to either subtree would not reach the other.
+   =================================================================== */
+
+:root {
+  /* Surfaces and ink are aliases onto the site's own design tokens, so the
+     panels track the theme instead of restating it. Only the categorical
+     series below stay literal: those are validated values, not theme colours. */
+  --tm-surface-1: var(--bg-primary);
+  --tm-surface-2: var(--bg-card);
+  --tm-text-primary: var(--text-primary);
+  --tm-text-secondary: var(--text-secondary);
+  --tm-text-muted: var(--text-muted);
+  --tm-gridline: var(--bg-tertiary);
+  --tm-baseline: var(--border-color);
+  --tm-hairline: var(--border-color);
+
+  /* Categorical series, five slots. All pairs clear CVD dE 8.0 and
+     normal-vision dE 15.0 on the dark surface. A sixth channel takes a
+     dash pattern, not a new hue. */
+  --tm-series-1: #3789fd;  /* network / request  */
+  --tm-series-2: #d8592b;  /* logs / read / automation */
+  --tm-series-3: #199e6e;  /* application traffic */
+  --tm-series-4: #8353d4;  /* observability / API */
+  --tm-series-5: #14799c;  /* storage / data */
+  --tm-deemph: #4a4b4d;
+  --tm-blue-track: #1d2c40;
+  /* reference-line ink: 3.4:1 on the surface, readable without competing
+     with the data it annotates */
+  --tm-ref: #6b6d70;
+
+  /* status tokens - reserved, never reused as a series colour */
+  --tm-good: var(--accent-primary);
+  --tm-warning: var(--accent-warning);
+  --tm-critical: var(--accent-error);
+}
+
+/* ===================================================================
+   Live homelab telemetry (metrics.js)
+
+   Every rule is scoped to #tm-root, both to keep it clear of the rest of
+   the sheet and because the redesign's section rules centre headings and
+   indent paragraphs - an id-scoped selector is what outranks them.
+   =================================================================== */
+
+#tm-root {
+  display: block;
+  margin: 2.5em auto 1em;
+  text-align: left;
+}
+
+#tm-root *,
+#tm-root *::before,
+#tm-root *::after {
+  box-sizing: border-box;
+}
+
+/* header */
+#tm-root .tm-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  border-bottom: 1px solid var(--tm-hairline);
+  padding-bottom: 14px;
+  margin-bottom: 28px;
+}
+
+#tm-root .tm-head h2 {
+  font-size: 24px;
+  margin: 0;
+  text-align: left;
+}
+
+#tm-root .tm-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--tm-text-secondary);
+}
+
+#tm-root .tm-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tm-good);
+  box-shadow: 0 0 0 3px rgba(12, 163, 12, 0.16);
+}
+
+#tm-root .tm-stamp {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--tm-text-muted);
+}
+
+/* KPI row */
+/* auto-fit rather than a fixed count: panels drop out when their exporter
+   is down, so the tile count varies between renders */
+#tm-root .tm-kpi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 14px;
+  margin-bottom: 34px;
+}
+
+#tm-root .tm-tile {
+  background: var(--tm-surface-2);
+  border: 1px solid var(--tm-hairline);
+  border-radius: 10px;
+  padding: 16px 18px 14px;
+  min-width: 0;
+}
+
+#tm-root .tm-tile .lbl {
+  font-size: 13px;
+  color: var(--tm-text-secondary);
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#tm-root .tm-tile .val {
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--tm-text-primary);
+}
+
+#tm-root .tm-tile .sub {
+  font-size: 12px;
+  color: var(--tm-text-muted);
+  margin-top: 5px;
+}
+
+#tm-root .tm-spark {
+  margin-top: 10px;
+  display: block;
+  max-width: 100%;
+}
+
+/* sections */
+#tm-root .tm-sec {
+  margin-bottom: 34px;
+}
+
+#tm-root .tm-sechead {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+#tm-root .tm-sechead > div {
+  min-width: 0;
+}
+
+#tm-root .tm-sec h3 {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  margin: 0 0 3px;
+  color: var(--tm-text-primary);
+}
+
+#tm-root .tm-sec .note {
+  font-size: 12.5px;
+  color: var(--tm-text-muted);
+  margin: 0 0 14px;
+  text-indent: 0;
+  text-align: left;
+}
+
+#tm-root .tm-card {
+  background: var(--tm-surface-2);
+  border: 1px solid var(--tm-hairline);
+  border-radius: 10px;
+  padding: 14px 14px 10px;
+  min-width: 0;
+}
+
+/* WAN small multiples */
+#tm-root .tm-wan {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+#tm-root .tm-card .cap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+#tm-root .tm-card .cap .n {
+  font-size: 13px;
+  color: var(--tm-text-secondary);
+}
+
+#tm-root .tm-card .cap .v {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+#tm-root .tm-card .cap .u {
+  font-size: 12px;
+  color: var(--tm-text-muted);
+}
+
+#tm-root .tm-plot {
+  width: 100%;
+  display: block;
+  touch-action: none;
+}
+
+/* node capacity meters */
+#tm-root .tm-nodes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+#tm-root .tm-node .nm {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+#tm-root .tm-node .nm b {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#tm-root .tm-node .nm span {
+  font-size: 12px;
+  color: var(--tm-text-muted);
+  margin-left: auto;
+}
+
+#tm-root .tm-meters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px 20px;
+  padding-bottom: 4px;
+}
+
+#tm-root .tm-meter .mrow {
+  display: flex;
+  align-items: baseline;
+  font-size: 12px;
+  color: var(--tm-text-secondary);
+  margin-bottom: 5px;
+}
+
+#tm-root .tm-meter .mrow .mv {
+  margin-left: auto;
+  color: var(--tm-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+#tm-root .tm-track {
+  height: 8px;
+  background: var(--tm-blue-track);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#tm-root .tm-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+/* downtime heatmap */
+#tm-root .tm-heat {
+  display: grid;
+  grid-template-columns: 116px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+#tm-root .tm-heat .rl {
+  font-size: 12.5px;
+  color: var(--tm-text-secondary);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#tm-root .tm-cells {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 2px;
+}
+
+#tm-root .tm-cell {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  min-height: 13px;
+}
+
+#tm-root .tm-legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--tm-text-muted);
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+#tm-root .tm-legend .sw {
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+#tm-root .tm-legend .grp {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* table view - so no value is reachable only by tooltip */
+#tm-root .tm-toggle {
+  background: none;
+  border: 1px solid var(--tm-hairline);
+  color: var(--tm-text-secondary);
+  font: inherit;
+  font-size: 12px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  margin-left: auto;
+  flex: none;
+}
+
+#tm-root .tm-toggle:hover,
+#tm-root .tm-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--tm-text-primary);
+}
+
+#tm-root .tm-tablewrap {
+  overflow-x: auto;
+  margin-top: 12px;
+}
+
+#tm-root table.tm-table {
+  border-collapse: collapse;
+  font-size: 12.5px;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+#tm-root table.tm-table th,
+#tm-root table.tm-table td {
+  text-align: right;
+  padding: 6px 12px 6px 0;
+  border-bottom: 1px solid var(--tm-hairline);
+  white-space: nowrap;
+}
+
+#tm-root table.tm-table th:first-child,
+#tm-root table.tm-table td:first-child {
+  text-align: left;
+}
+
+#tm-root table.tm-table th {
+  color: var(--tm-text-muted);
+  font-weight: 600;
+}
+
+/* tooltip - fixed to the viewport, outside #tm-root's stacking context */
+.tm-tip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 60;
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  padding: 7px 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #e4e6eb;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.1s;
+  white-space: nowrap;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.tm-tip.on {
+  opacity: 1;
+}
+
+.tm-tip .k {
+  color: #898781;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tm-tip {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #tm-root .tm-wan {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #tm-root .tm-kpi {
+    grid-template-columns: 1fr;
+  }
+
+  #tm-root .tm-heat {
+    grid-template-columns: 84px 1fr;
+  }
+
+  #tm-root .tm-head h2 {
+    font-size: 20px;
+  }
+}
+
+/* horizontal bars - certificate expiry and response time */
+#tm-root .tm-bars {
+  display: grid;
+  gap: 8px;
+}
+
+#tm-root .tm-bar {
+  display: grid;
+  grid-template-columns: 116px 1fr 62px;
+  gap: 10px;
+  align-items: center;
+}
+
+#tm-root .tm-bar .nm {
+  font-size: 12.5px;
+  color: var(--tm-text-secondary);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#tm-root .tm-bar .trk {
+  height: 14px;
+  min-width: 0;
+}
+
+/* square at the baseline, 4px rounded at the data end */
+#tm-root .tm-bar .fl {
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+}
+
+#tm-root .tm-bar .vl {
+  font-size: 12px;
+  color: var(--tm-text-primary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 600px) {
+  #tm-root .tm-bar {
+    grid-template-columns: 84px 1fr 56px;
+    gap: 8px;
+  }
+}
+
+/* ------------------------------------------------- capacity density bars */
+
+#tm-root .tm-density {
+  display: grid;
+  gap: 7px;
+}
+
+/* Group heading sits in the bar grid's own columns so the resource name
+   lines up with the row labels beneath it. */
+#tm-root .tm-dgrp {
+  display: grid;
+  grid-template-columns: 116px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  margin-top: 6px;
+}
+
+#tm-root .tm-dgrp:first-child {
+  margin-top: 0;
+}
+
+#tm-root .tm-dgrp .g {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--tm-text-primary);
+  text-align: right;
+}
+
+#tm-root .tm-dgrp .k {
+  font-size: 11.5px;
+  color: var(--tm-text-muted);
+}
+
+/* A visible track here, unlike the plain bars: the 1.0x reference needs
+   something to sit in, and the bars regularly overrun it. */
+#tm-root .tm-dbar .trk {
+  position: relative;
+  background: var(--tm-gridline);
+  border-radius: 0 2px 2px 0;
+}
+
+#tm-root .tm-dbar .fl {
+  position: relative;
+  z-index: 0;
+}
+
+#tm-root .tm-dbar .ref {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 0;
+  z-index: 1;
+  border-left: 1px dashed var(--tm-ref);
+  pointer-events: none;
+}
+
+#tm-root .tm-dbar .vl {
+  text-align: right;
+}
+
+/* ---------------------------------------------------- 24-hour rhythm cols */
+
+#tm-root .tm-cols {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 96px;
+  margin-top: 10px;
+}
+
+#tm-root .tm-col {
+  flex: 1 1 0;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+}
+
+/* 2px rounded data-end, square on the baseline */
+#tm-root .tm-col i {
+  display: block;
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+}
+
+#tm-root .tm-hax {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--tm-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media screen and (max-width: 600px) {
+  #tm-root .tm-dgrp {
+    grid-template-columns: 84px 1fr;
+    gap: 8px;
+  }
+
+  #tm-root .tm-cols {
+    height: 76px;
+    gap: 1px;
+  }
+}
+
+/* ------------------------------------------------------- NAS cache panel */
+
+/* Three headline figures across the top of the ARC card. */
+#tm-root .tm-figs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px 20px;
+  margin-bottom: 18px;
+}
+
+#tm-root .tm-fig .fv {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--tm-text-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+#tm-root .tm-fig .fl {
+  font-size: 12.5px;
+  color: var(--tm-text-secondary);
+  margin-top: 3px;
+}
+
+#tm-root .tm-fig .fs {
+  font-size: 11.5px;
+  color: var(--tm-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The 14-day high-water mark on the ARC meter. Positioned from the left of
+   the track, so it needs the track to be the containing block. */
+#tm-root .tm-meter .tm-track {
+  position: relative;
+}
+
+#tm-root .tm-refmark {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--tm-ref);
+  border-radius: 1px;
+}
+
+/* MFU against MRU. A 2px surface gap between the segments, so the boundary
+   is a division rather than a colour change. */
+#tm-root .tm-split {
+  display: flex;
+  height: 8px;
+  gap: 2px;
+  margin-top: 16px;
+}
+
+#tm-root .tm-split i {
+  display: block;
+  height: 100%;
+}
+
+#tm-root .tm-split i:first-child { border-radius: 4px 0 0 4px; }
+#tm-root .tm-split i:last-child  { border-radius: 0 4px 4px 0; }
+
+#tm-root .tm-splitlbl {
+  display: flex;
+  font-size: 11.5px;
+  color: var(--tm-text-muted);
+  margin-top: 6px;
+}
+
+#tm-root .tm-splitlbl .r {
+  margin-left: auto;
+}
+
+/* One row per pool member: name, stacked read/write bar, total. */
+#tm-root .tm-drows {
+  display: grid;
+  grid-template-columns: 74px 1fr auto;
+  gap: 9px 12px;
+  align-items: center;
+}
+
+#tm-root .tm-drows .dn {
+  font-size: 12.5px;
+  color: var(--tm-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+#tm-root .tm-drows .dv {
+  font-size: 12px;
+  color: var(--tm-text-muted);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+#tm-root .tm-dtrack {
+  display: flex;
+  height: 10px;
+  gap: 2px;
+  background: var(--tm-gridline);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#tm-root .tm-dtrack i {
+  display: block;
+  height: 100%;
+  cursor: default;
+}
+
+@media screen and (max-width: 600px) {
+  #tm-root .tm-drows {
+    grid-template-columns: 60px 1fr auto;
+  }
+
+  #tm-root .tm-fig .fv {
+    font-size: 21px;
+  }
+}
+
+/* Kept after every other #tm-root rule: it ties #tm-root's own display
+   rules on specificity, so source order decides and [hidden] wins. The map
+   sections below add no #tm-root selectors, so appending them is safe. */
+#tm-root[hidden],
+#tm-root [hidden] {
+  display: none;
+}
+
+/* ===================================================================
+   Live infrastructure section (Home tab)
+
+   Wrapper for the two animated maps. #home centres every heading and
+   indents every paragraph, so the rules that keep the figures and their
+   captions readable have to be scoped tightly enough to outrank it.
+   =================================================================== */
+
+#home .live-maps {
+  /* Width comes from the enclosing .container; the per-map caps below are
+     what keep each diagram inside one screen. */
+  margin: 0 auto 2em;
+  text-align: left;
+}
+
+#home .live-maps h2 {
+  text-align: left;
+  font-size: 1.75rem;
+  margin: 0 0 6px;
+  border-bottom: 1px solid var(--tm-hairline);
+  padding-bottom: 10px;
+}
+
+/* Kicker above each map: what the diagram is, in one line. Overrides the
+   centring and indent #home applies to every paragraph. */
+#home .live-maps p.live-kicker,
+#home .live-maps p.live-lede {
+  text-align: left;
+  text-indent: 0;
+  color: var(--tm-text-muted);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+#home .live-maps p.live-lede {
+  max-width: 68ch;
+  margin-bottom: 1.1em;
+}
+
+#home .live-maps h3 {
+  text-align: left;
+  font-size: 18px;
+  margin: 0 0 2px;
+}
+
+#home .live-maps .live-head {
+  margin-top: 1.9em;
+}
+
+/* The first one sits directly under the lede and needs no gap of its own. */
+#home .live-maps .live-head:first-of-type {
+  margin-top: 0.8em;
+}
+
+/* ===================================================================
+   Network map - how data actually moves, with flow direction animated
+   along each edge. Colours reuse the telemetry series tokens so the map
+   and the charts read as one system.
+
+   Edges are a single dashed path. Dropping the dash array turns them back
+   into solid connectors, which is exactly what the reduced-motion rule at
+   the bottom does - so the topology never depends on the animation.
+   =================================================================== */
+
+#nm-root {
+  --nm-line: #4a4b4d;
+  --nm-box: #202123;
+  --nm-edge-ink: #383835;
+  /* Per-edge dash speed, overwritten from the snapshot by renderMap(). */
+  --nm-dur-web: 2s;
+  --nm-dur-metric: 2s;
+  --nm-dur-log: 2s;
+  --nm-dur-disk: 2s;
+  display: block;
+  margin: 0.6em auto 1.2em;
+  text-align: left;
+}
+
+#nm-root .nm-fig {
+  margin: 0;
+}
+
+#nm-root .nm-svg {
+  display: block;
+  width: 100%;
+  /* viewBox is 1000x700, so height = width / 1.43 - a squarer drawing needs
+     a tighter width cap to sit inside the same screen. */
+  max-width: min(980px, 92vh);
+  height: auto;
+  margin: 0 auto;
+}
+
+#nm-root figcaption {
+  /* Matches the drawing's own cap so the caption aligns to its edges
+     rather than sitting as a narrow column beneath a wide figure. */
+  max-width: min(980px, 92vh);
+  margin: 14px auto 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--tm-text-muted, #898781);
+}
+
+/* ------------------------------------------------------------ nodes */
+
+#nm-root .nm-node rect,
+#nm-root .nm-host rect {
+  fill: var(--nm-box);
+  stroke: var(--nm-edge-ink);
+  stroke-width: 1;
+}
+
+#nm-root .nm-node text,
+#nm-root .nm-host text {
+  fill: var(--tm-text-primary, #e4e6eb);
+  font-size: 15px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+#nm-root .nm-sub {
+  font-size: 12.5px !important;
+  font-weight: 400 !important;
+  fill: var(--tm-text-muted, #898781) !important;
+}
+
+/* The hypervisor is what everything else hangs off, so it is the one
+   surface allowed to differ from its peers. */
+#nm-root .nm-host rect {
+  fill: #1c1d1f;
+  stroke: var(--nm-line);
+}
+
+#nm-root .nm-host-t {
+  font-size: 16px !important;
+}
+
+#nm-root .nm-chip {
+  fill: var(--tm-blue-track, #1d2c40);
+  stroke: none;
+}
+
+#nm-root .nm-chip-t {
+  font-size: 13px !important;
+  fill: var(--tm-series-1, #3789fd) !important;
+}
+
+/* "You are here" - the one node the reader is standing in */
+#nm-root .nm-here rect {
+  stroke: var(--tm-series-1, #3789fd);
+  stroke-width: 1.5;
+}
+
+/* ------------------------------------------------------------ edges */
+
+#nm-root .nm-edge {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* Dense on purpose: a sparse pattern leaves a single dash crossing a
+     short edge on its own, which reads as a pulse rather than a flow -
+     every edge looked like it was pulsing. */
+  stroke-width: 3.2;
+  stroke-dasharray: 3 7;
+  animation: nm-march 1.4s linear infinite;
+}
+
+@keyframes nm-march {
+  to { stroke-dashoffset: -10; }
+}
+
+/* Sequenced edges want the opposite: sparse, so each firing reads as one
+   discrete packet moving down the path instead of a continuous stream. */
+#nm-root .nm-edge.nm-seq {
+  stroke-dasharray: 3 12;
+}
+
+/* Ingress is not instrumented - nothing scrapes the reverse proxy - so it
+   marches at a fixed speed and carries no rate label. */
+#nm-root .f-web {
+  stroke: var(--tm-series-1, #3789fd);
+  animation-duration: 2.2s;
+}
+
+#nm-root .f-metric {
+  stroke: var(--tm-series-3, #199e6e);
+  animation-duration: var(--nm-dur-metric);
+}
+
+#nm-root .f-log {
+  stroke: var(--tm-series-2, #d8592b);
+  animation-duration: var(--nm-dur-log);
+}
+
+#nm-root .f-disk {
+  stroke: var(--tm-series-5, #14799c);
+  animation-duration: var(--nm-dur-disk);
+}
+
+/* Backup shares the storage hue and separates by texture: no sixth hue
+   survives the all-pairs CVD check alongside these five. The offset matches
+   the 16-unit period so the march stays seamless. */
+#nm-root .f-backup {
+  stroke: var(--tm-series-5, #14799c);
+  stroke-dasharray: 10 6;
+  animation-name: nm-march-long;
+  animation-duration: var(--nm-dur-disk);
+}
+
+@keyframes nm-march-long {
+  to { stroke-dashoffset: -16; }
+}
+
+/* The publish chain fires on a 15-minute timer rather than carrying a rate,
+   so it marches at a deliberately slow fixed speed - visibly the quietest
+   path on the diagram, which is exactly what it is. */
+#nm-root .f-pub {
+  stroke: var(--tm-series-3, #199e6e);
+  animation-duration: 4.4s;
+}
+
+/* Once the replay takes over, JS owns stroke-dashoffset outright - a running
+   CSS animation would fight it for the same property. Scoped to the edges the
+   replay actually drives: a blanket rule here silently freezes every edge it
+   does not touch. */
+#nm-root.nm-js-flow .nm-edge.nm-driven {
+  animation: none;
+}
+
+#nm-root .nm-clock {
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--tm-series-1, #3789fd);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* Arrowheads. Same stroke language as the edges but never dashed or
+   animated, so the dashes can stop short of them. */
+#nm-root .nm-head {
+  fill: none;
+  /* Matches the edge stroke so head and dashes read as one language. The
+     path is a quadratic through the tip, so there is no vertex to soften -
+     the roundness is in the geometry, not just the linejoin. */
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Camera feeds are not instrumented either - no exporter on the NVR. */
+#nm-root .f-video {
+  stroke: var(--tm-series-4, #8353d4);
+  animation-duration: 0.7s;
+}
+
+/* ----------------------------------------------------------- labels */
+
+#nm-root .nm-lbl {
+  font-size: 12.5px;
+  fill: var(--tm-text-secondary, #b0b3b8);
+}
+
+#nm-root .nm-mid {
+  text-anchor: middle;
+}
+
+/* Measured rate beside the edge it belongs to - tabular so the digits do not
+   jitter as the number changes between snapshots. */
+#nm-root .nm-rate {
+  font-size: 11.5px;
+  fill: var(--tm-text-muted, #898781);
+  font-variant-numeric: tabular-nums;
+}
+
+#nm-root .nm-key-note {
+  font-size: 11.5px !important;
+  fill: var(--tm-text-muted, #898781) !important;
+}
+
+#nm-root .nm-key text {
+  font-size: 12.5px;
+  fill: var(--tm-text-secondary, #b0b3b8);
+}
+
+#nm-root .nm-key .nm-edge {
+  animation: none;
+  stroke-dasharray: none;
+  stroke-width: 3.2;
+  opacity: 1;
+}
+
+/* Backup is the exception: it shares the datastore hue and is told apart by
+   its dash, so the swatch has to keep the dash the other swatches drop.
+   Same specificity as the rule above, so order is what decides it. */
+#nm-root .nm-key .f-backup {
+  stroke-dasharray: 10 6;
+}
+
+/* Direction is already carried by the arrowheads, so motion is enrichment
+   and can be dropped wholesale. The dash goes with it - except on backup,
+   where the dash is not decoration but the only thing separating it from
+   datastore traffic. */
+@media (prefers-reduced-motion: reduce) {
+  #nm-root .nm-edge {
+    animation: none !important;
+    stroke-dasharray: none !important;
+  }
+
+  #nm-root .f-backup {
+    stroke-dasharray: 10 6 !important;
+  }
+}
+
+/* ===================================================================
+   AWS page-load map. Twelve edges fire in order to trace one request
+   from browser to origin and back.
+
+   Nothing here is on a timer. Edges sit idle and metrics.js animates each
+   one when the request it stands for actually completes, using durations
+   from the browser's Navigation and Resource Timing entries. If that driver
+   cannot run, .aw-static leaves every edge drawn and solid.
+   =================================================================== */
+
+#aw-root {
+  --aw-box: #202123;
+  --aw-edge-ink: #383835;
+  display: block;
+  margin: 0.6em auto 1.2em;
+  text-align: left;
+}
+
+#aw-root .aw-fig {
+  margin: 0;
+}
+
+#aw-root .aw-svg {
+  display: block;
+  width: 100%;
+  /* viewBox is 1000x490, so height = width / 2.04. 105vh caps the drawing
+     at just over half the viewport, leaving room for the heading block. */
+  max-width: min(1100px, 105vh);
+  height: auto;
+  margin: 0 auto;
+}
+
+#aw-root figcaption {
+  /* Matches the drawing's own cap so the caption aligns to its edges
+     rather than sitting as a narrow column beneath a wide figure. */
+  max-width: min(1100px, 105vh);
+  margin: 14px auto 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--tm-text-muted, #898781);
+}
+
+/* ------------------------------------------------------------ nodes */
+
+#aw-root .aw-node rect {
+  fill: var(--aw-box);
+  stroke: var(--aw-edge-ink);
+  stroke-width: 1;
+}
+
+#aw-root .aw-node text {
+  fill: var(--tm-text-primary, #e4e6eb);
+  font-size: 15px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+#aw-root .aw-sub {
+  font-size: 12.5px !important;
+  font-weight: 400 !important;
+  fill: var(--tm-text-muted, #898781) !important;
+}
+
+/* The visitor is the one node the reader occupies */
+#aw-root .aw-here rect {
+  fill: #1c1d1f;
+  stroke: var(--tm-series-1, #3789fd);
+  stroke-width: 1.5;
+}
+
+/* ------------------------------------------------------------ edges */
+
+#aw-root .aw-edge {
+  fill: none;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* Sparse on purpose: one firing should read as a single packet moving
+     down the path, not a stream. */
+  stroke-dasharray: 3 9;
+  /* Idle until its request actually fires; the driver animates it. */
+  opacity: 0.18;
+}
+
+#aw-root .f-req { stroke: var(--tm-series-1, #3789fd); }
+#aw-root .f-res { stroke: var(--tm-series-3, #199e6e); }
+#aw-root .f-api { stroke: var(--tm-series-4, #8353d4); }
+#aw-root .f-tel { stroke: var(--tm-series-5, #14799c); }
+
+#aw-root .aw-head {
+  fill: none;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----------------------------------------------------------- labels */
+
+#aw-root .aw-lbl {
+  font-size: 12.5px;
+  fill: var(--tm-text-secondary, #b0b3b8);
+}
+
+#aw-root .aw-mid {
+  text-anchor: middle;
+}
+
+#aw-root .aw-end {
+  text-anchor: end;
+}
+
+/* ------------------------------------------- this-page-load readout
+
+   HTML rather than SVG text: it is tabular data, it reflows, and it is
+   selectable. */
+
+#aw-root .aw-readout {
+  max-width: 1100px;
+  margin: 16px auto 0;
+  background: #1c1d1f;
+  border: 1px solid var(--aw-edge-ink);
+  border-radius: 8px;
+  padding: 14px 18px 16px;
+}
+
+#aw-root .aw-readout h4 {
+  margin: 0 0 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--tm-text-secondary);
+}
+
+#aw-root .aw-readout dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px 24px;
+  margin: 0;
+}
+
+#aw-root .aw-readout .aw-r {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid var(--tm-hairline);
+  padding-bottom: 6px;
+}
+
+#aw-root .aw-readout dt {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--tm-text-muted);
+  white-space: nowrap;
+}
+
+#aw-root .aw-readout dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--tm-text-primary);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* The endpoint list is the one row that can run long, so it takes the full
+   width of the grid and breaks inside a hostname rather than pushing out. */
+#aw-root .aw-readout .aw-r-wide {
+  grid-column: 1 / -1;
+}
+
+#aw-root .aw-readout .aw-r-wide dd {
+  color: var(--tm-series-5);
+  word-break: break-word;
+  font-size: 12.5px;
+}
+
+/* Without the timing driver every edge simply stays drawn and solid. */
+#aw-root.aw-static .aw-edge {
+  stroke-dasharray: none;
+  animation: none;
+  opacity: 1;
+}
+
+#aw-root .aw-key text {
+  font-size: 12.5px;
+  fill: var(--tm-text-secondary, #b0b3b8);
+}
+
+#aw-root .aw-key-note {
+  font-size: 11.5px !important;
+  fill: var(--tm-text-muted, #898781) !important;
+}
+
+#aw-root .aw-key .aw-edge {
+  animation: none;
+  stroke-dasharray: none;
+  opacity: 1;
+}
+
+/* The order is carried by the arrowheads and the labels, so the motion is
+   enrichment and drops out wholesale. */
+@media (prefers-reduced-motion: reduce) {
+  #aw-root .aw-edge {
+    animation: none !important;
+    stroke-dasharray: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Below roughly 640px a 1000-unit viewBox puts 12.5px label text under 8px
+   on screen. Rather than ship an unreadable diagram, the maps scroll
+   sideways inside their own container at a floor width. */
+@media screen and (max-width: 640px) {
+  /* These used to be given min-width:640px and a scroll container, which
+     reads as a diagram cut off at the edge of the screen. Scaling the whole
+     thing down loses label legibility, but the shape and the caption still
+     carry it, and nothing is hidden off-screen. */
+  #nm-root .nm-svg,
+  #aw-root .aw-svg {
+    max-width: 100%;
+  }
+
+  #nm-root figcaption,
+  #aw-root figcaption {
+    font-size: 12px;
+  }
+}
+
+/* Wrappers for the two ported blocks. Width comes from the redesign's own
+   .section-content .container (1400px); nothing here re-caps it. */
+#home .live-maps-wrap {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Visitor count in the masthead. The AWS figure keeps its "Visitor count"
+   timing row. */
+.brand-visits {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-left: 14px;
+  padding-left: 14px;
+  border-left: 1px solid var(--border-color);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--tm-text-muted);
+  white-space: nowrap;
+}
+
+/* Hides the divider rule until the fetch resolves. */
+.brand-visits:empty {
+  display: none;
+}
+
+.brand-visits .visit-count {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Off the tabular-nums run so "th" reads as an ordinal, not a digit. */
+.brand-visits .visit-ord {
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: normal;
+  margin-left: 1px;
+}
+
+/* Shed trailing words before the chip crowds the nav toggler. */
+@media (max-width: 1199px) {
+  .brand-visits .visit-since {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .brand-visits .visit-label {
+    display: none;
+  }
+}
+
+#home .visit-strip a {
+  color: var(--accent-secondary);
+}
+
+/* Feature screenshots. Was a six-slide carousel with prev/next controls; a
+   grid shows all of them at once and has no state to get stuck in. */
+.shots {
+  margin: var(--spacing-lg) 0;
+}
+
+.shots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+  justify-items: stretch;
+}
+
+.shots-grid figure {
+  margin: 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.shots-grid figure:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-4px);
+}
+
+.shots-grid img {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  object-position: top left;
+  margin: 0;
+  cursor: zoom-in;
+}
+
+.shots-grid figcaption {
+  padding: var(--spacing-sm);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+#metrics .metrics-lede {
+  max-width: 70ch;
+  margin: 0 auto var(--spacing-lg);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* The panels carry their own left-aligned layout; the section heading above
+   them is centred like every other section's. */
+#metrics #tm-root {
+  margin-top: 0;
 }

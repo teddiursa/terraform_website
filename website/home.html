@@ -60,6 +60,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="#home">Greg Chow</a>
+            <!-- Filled by initVisitorCounter; empty until the fetch resolves. -->
+            <span class="brand-visits" id="counterID"></span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -76,6 +78,9 @@
                         <a class="nav-link" href="#projects" data-section="Projects">Projects</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#metrics" data-section="Metrics">Metrics</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#contact" data-section="Contact">Contact</a>
                     </li>
                 </ul>
@@ -89,69 +94,358 @@
         <!-- Home Section -->
         <section id="home" class="section-content active-section">
             <div class="container">
-                <div class="hero-section" data-aos="fade-down">
-                    <h1 class="text-center">Welcome to gregchow.net!</h1>
-                    <p class="text-center lead">My name is Gregory Chow, and I'm passionate about networking, servers, and cloud technology.</p>
+                <!-- No data-aos: AOS holds opacity 0 until it refreshes on window
+                     load, but the IntersectionObserver driving the AWS trace fires
+                     as soon as the section displays, so the pass played invisibly. -->
+                <div class="live-maps-wrap">
+                <section class="live-maps">
+                    <h2>Live infrastructure</h2>
+                    <p class="live-lede">Two systems drawn from their own telemetry. Both animate on
+                        measured data rather than on a loop.</p>
+
+                    <div class="live-head">
+                        <h3>gregchow.net on AWS</h3>
+                        <p class="live-kicker">Traced from this page load.</p>
+                    </div>
+                    <div id="aw-root">
+                    <figure class="aw-fig">
+
+
+                      <svg class="aw-svg" viewBox="0 0 1000 490" role="img"
+                           aria-label="How a page load on gregchow.net is served: the browser queries Route 53 and gets an answer, then connects to CloudFront, which fetches from the S3 origin on a cache miss and returns the page; the browser then calls API Gateway, which invokes a Lambda that reads DynamoDB and returns the visitor count; separately the homelab publishes a metrics snapshot to a second S3 bucket that this page fetches. Real timings from this page load are listed above the diagram.">
+
+                        <!-- Four flows, four corridors, no crossings by construction: DNS
+                             above the browser, content at mid height, dynamic calls along the
+                             lower band returning underneath, telemetry along the bottom.
+
+                             Arrowheads are static marks rather than marker-end so the animated
+                             dashes stop short of each box. A leg ends 20 from its target box and
+                             the head sits at 12. -->
+
+                        <!-- ------------------------------------------------------------ DNS -->
+                        <g class="aw-node">
+                          <rect x="30" y="20" width="160" height="48" rx="6"></rect>
+                          <text x="110" y="41">Route 53</text>
+                          <text class="aw-sub" x="110" y="57">DNS · A + AAAA</text>
+                        </g>
+
+                        <g class="aw-node aw-here">
+                          <rect x="16" y="150" width="156" height="132" rx="8"></rect>
+                          <text x="94" y="196">Browser</text>
+                          <text class="aw-sub" x="94" y="218">you</text>
+                          <text class="aw-sub aw-stamp" x="94" y="242" id="aw-stamp">gregchow.net</text>
+                        </g>
+
+                        <path class="aw-edge f-req s1" d="M70 144 V 88"></path>
+                        <path class="aw-head f-req" d="M-5 -4 Q5 0 -5 4" transform="translate(70 80) rotate(-90)"></path>
+                        <path class="aw-edge f-res s2" d="M130 74 V 130"></path>
+                        <path class="aw-head f-res" d="M-5 -4 Q5 0 -5 4" transform="translate(130 138) rotate(90)"></path>
+                        <!-- Baseline 112.5, not the corridor centre of 109: both labels are
+                             all x-height, so centring the visible band is 109 + x-height/2. -->
+                        <text class="aw-lbl aw-end" x="62" y="112.5">query</text>
+                        <text class="aw-lbl" x="138" y="112.5">answer</text>
+
+                        <!-- -------------------------------------------------------- content -->
+                        <g class="aw-node">
+                          <rect x="470" y="108" width="170" height="48" rx="6"></rect>
+                          <text x="555" y="129">CloudFront</text>
+                          <text class="aw-sub" x="555" y="145">edge cache · ACM TLS</text>
+                        </g>
+                        <g class="aw-node">
+                          <rect x="760" y="108" width="180" height="48" rx="6"></rect>
+                          <text x="850" y="129">S3</text>
+                          <text class="aw-sub" x="850" y="145">static site origin</text>
+                        </g>
+
+                        <path class="aw-edge f-req s3" d="M178 176 C 284 176, 370 128, 450 126"></path>
+                        <path class="aw-head f-req" d="M-5 -4 Q5 0 -5 4" transform="translate(458 126)"></path>
+                        <text class="aw-lbl aw-mid" x="318" y="138">TLS · GET</text>
+
+                        <path class="aw-edge f-req s4" d="M646 124 H 740"></path>
+                        <path class="aw-head f-req" d="M-5 -4 Q5 0 -5 4" transform="translate(748 124)"></path>
+                        <text class="aw-lbl aw-mid" x="696" y="110">origin fetch</text>
+
+                        <path class="aw-edge f-res s5" d="M754 148 H 660"></path>
+                        <path class="aw-head f-res" d="M-5 -4 Q5 0 -5 4" transform="translate(652 148) rotate(180)"></path>
+                        <text class="aw-lbl aw-mid" x="700" y="172">object</text>
+
+                        <path class="aw-edge f-res s6" d="M463.647 147.973 C 385.647 175.973, 300 200, 192 200"></path>
+                        <path class="aw-head f-res" d="M-5 -4 Q5 0 -5 4" transform="translate(184 200) rotate(180)"></path>
+                        <text class="aw-lbl aw-mid" x="330" y="222">HTML · CSS · JS</text>
+
+                        <!-- ------------------------------------------------- dynamic calls -->
+                        <g class="aw-node">
+                          <rect x="250" y="250" width="150" height="44" rx="6"></rect>
+                          <text x="325" y="271">API Gateway</text>
+                          <text class="aw-sub" x="325" y="286">REST · 4 stages</text>
+                        </g>
+                        <g class="aw-node">
+                          <rect x="470" y="250" width="170" height="44" rx="6"></rect>
+                          <text x="555" y="271">Lambda</text>
+                          <text class="aw-sub" x="555" y="286">visitorCount · timeCount</text>
+                        </g>
+                        <g class="aw-node">
+                          <rect x="760" y="250" width="180" height="44" rx="6"></rect>
+                          <text x="850" y="271">DynamoDB</text>
+                          <text class="aw-sub" x="850" y="286">counter tables</text>
+                        </g>
+
+                        <path class="aw-edge f-api s7" d="M178 272 H 230"></path>
+                        <path class="aw-head f-api" d="M-5 -4 Q5 0 -5 4" transform="translate(238 272)"></path>
+                        <path class="aw-edge f-api s8" d="M406 272 H 450"></path>
+                        <path class="aw-head f-api" d="M-5 -4 Q5 0 -5 4" transform="translate(458 272)"></path>
+                        <path class="aw-edge f-api s9" d="M646 272 H 740"></path>
+                        <path class="aw-head f-api" d="M-5 -4 Q5 0 -5 4" transform="translate(748 272)"></path>
+                        <text class="aw-lbl aw-mid" x="425" y="262">invoke</text>
+                        <text class="aw-lbl aw-mid" x="696" y="262">atomic increment</text>
+
+                        <path class="aw-edge f-res s10" d="M850 300 V 342H124 V302"></path>
+                        <path class="aw-head f-res" d="M-5 -4 Q5 0 -5 4" transform="translate(124 294) rotate(-90)"></path>
+                        <text class="aw-lbl aw-mid" x="470" y="362">visitor count</text>
+
+                        <!-- ---------------------------------------------- homelab snapshot -->
+                        <g class="aw-node">
+                          <rect x="470" y="386" width="170" height="44" rx="6"></rect>
+                          <text x="555" y="407">S3</text>
+                          <text class="aw-sub" x="555" y="422">metrics.json</text>
+                        </g>
+                        <g class="aw-node">
+                          <rect x="760" y="386" width="180" height="44" rx="6"></rect>
+                          <text x="850" y="407">Homelab</text>
+                          <text class="aw-sub" x="850" y="422">publisher · 15 min</text>
+                        </g>
+
+                        <path class="aw-edge f-tel s11" d="M754 408 H 660"></path>
+                        <path class="aw-head f-tel" d="M-5 -4 Q5 0 -5 4" transform="translate(652 408) rotate(180)"></path>
+                        <text class="aw-lbl aw-mid" x="700" y="398">PUT</text>
+
+                        <path class="aw-edge f-tel s12" d="M464 408 H 64V302"></path>
+                        <path class="aw-head f-tel" d="M-5 -4 Q5 0 -5 4" transform="translate(64 294) rotate(-90)"></path>
+                        <text class="aw-lbl aw-mid" x="290" y="398">metrics.json</text>
+
+                        <!-- ------------------------------------------------------- legend -->
+                        <g class="aw-key">
+                          <line class="aw-edge f-req" x1="16"  y1="462" x2="46"  y2="462"></line>
+                          <text x="54"  y="466">request</text>
+                          <line class="aw-edge f-res" x1="140" y1="462" x2="170" y2="462"></line>
+                          <text x="178" y="466">response</text>
+                          <line class="aw-edge f-api" x1="272" y1="462" x2="302" y2="462"></line>
+                          <text x="310" y="466">dynamic call</text>
+                          <line class="aw-edge f-tel" x1="424" y1="462" x2="454" y2="462"></line>
+                          <text x="462" y="466">telemetry</text>
+                          <text class="aw-key-note" x="580" y="466">fires on real requests</text>
+                        </g>
+                      </svg>
+                      <!-- Measured from this visit, filled in by the Navigation and Resource
+                           Timing APIs. HTML rather than SVG text: it is a table, not part of the
+                           drawing, and SVG text cannot wrap - every overflow this readout has had
+                           came from a value outgrowing a fixed-width box. Moving it out also frees
+                           the top left of the diagram, which is what lets the DNS exchange have a
+                           corridor of its own. -->
+                      <div class="aw-readout">
+                        <h4>This page load</h4>
+                        <dl>
+                          <div class="aw-r"><dt>DNS</dt><dd id="aw-t-dns">&mdash;</dd></div>
+                          <div class="aw-r"><dt>TLS + GET</dt><dd id="aw-t-req">&mdash;</dd></div>
+                          <div class="aw-r"><dt>Transfer</dt><dd id="aw-t-res">&mdash;</dd></div>
+                          <div class="aw-r"><dt>Visitor count</dt><dd id="aw-t-api">&mdash;</dd></div>
+                          <div class="aw-r"><dt>Telemetry</dt><dd id="aw-t-tel">&mdash;</dd></div>
+                          <div class="aw-r"><dt>Protocol</dt><dd id="aw-t-proto">&mdash;</dd></div>
+                          <div class="aw-r"><dt>Transferred</dt><dd id="aw-t-bytes">&mdash;</dd></div>
+                          <div class="aw-r"><dt>Decoded</dt><dd id="aw-t-decoded">&mdash;</dd></div>
+                          <div class="aw-r aw-r-wide"><dt>Endpoints</dt><dd id="aw-t-ep">&mdash;</dd></div>
+                        </dl>
+                      </div>
+                      <figcaption>Each leg animates when its request completes. Timings above are
+                        from the browser's Navigation and Resource Timing APIs for this page load.
+                        The origin fetch has no timing — CloudFront does not report cache hits to
+                        the client.</figcaption>
+                    </figure>
+                    </div>
+
+                    <div class="live-head">
+                        <h3>Homelab</h3>
+                        <p class="live-kicker">One Proxmox node, from a Prometheus snapshot.</p>
+                    </div>
+                    <div id="nm-root">
+                    <figure class="nm-fig">
+                      <svg class="nm-svg" viewBox="0 0 1000 700" role="img"
+                           aria-label="Data flow through the homelab: self-hosted services are served to LAN clients through an nginx reverse proxy; cameras stream to an NVR container which records to the datastore; the node mounts two ZFS NAS boxes, the primary taking camera recordings, datastore traffic and the monthly backup, the other taking datastore traffic only; guests ship syslog to Graylog while Prometheus scrapes the exporters; every fifteen minutes a timer publishes a sanitised snapshot to S3, which this page then fetches.">
+
+                        <!-- Arrowheads are their own static marks rather than marker-end. A marker
+                             sits at the path's end, so the dashes march underneath it; drawing the
+                             head separately lets the animated path stop 8 units short, clear of
+                             where the chevron's body would be if it were filled in.
+
+                             No lane labels: the three bands are legible from the layout and the
+                             legend already names every flow, so the ~100px gutter they cost is
+                             better spent on the gaps between boxes, where the edge labels live. -->
+
+                        <!-- ------------------------------------------------------- serving -->
+                        <g class="nm-node">
+                          <rect x="16" y="54" width="110" height="46" rx="6"></rect>
+                          <text x="71" y="82">LAN clients</text>
+
+                        </g>
+                        <g class="nm-node">
+                          <rect x="348" y="54" width="138" height="46" rx="6"></rect>
+                          <text x="417" y="76">Nginx Proxy</text>
+                          <text class="nm-sub" x="417" y="90">TLS termination</text>
+                        </g>
+
+                        <g class="nm-host">
+                          <rect x="560" y="32" width="200" height="112" rx="8"></rect>
+                          <text class="nm-host-t" x="660" y="58">Proxmox node</text>
+                          <text class="nm-sub" x="660" y="76" id="nm-host-sub">single hypervisor</text>
+                          <rect class="nm-chip" x="578" y="92" width="78" height="30" rx="5"></rect>
+                          <text class="nm-chip-t" x="617" y="111" id="nm-lxc">LXC</text>
+                          <rect class="nm-chip" x="664" y="92" width="78" height="30" rx="5"></rect>
+                          <text class="nm-chip-t" x="703" y="111" id="nm-vm">VMs</text>
+                        </g>
+
+                        <g class="nm-node">
+                          <rect x="840" y="30" width="144" height="56" rx="6"></rect>
+                          <text x="912" y="54" id="nm-nas1-n">Primary NAS</text>
+                          <text class="nm-sub" x="912" y="72" id="nm-nas1">ZFS pool</text>
+                        </g>
+                        <g class="nm-node">
+                          <rect x="840" y="118" width="144" height="42" rx="6"></rect>
+                          <text x="912" y="137" id="nm-nas2-n">Backup NAS</text>
+                          <text class="nm-sub" x="912" y="150" id="nm-nas2">ZFS pool</text>
+                        </g>
+
+                        <g class="nm-node">
+                          <rect x="16" y="110" width="110" height="42" rx="6"></rect>
+                          <text x="71" y="129">Cameras</text>
+                          <text class="nm-sub" x="71" y="143">ONVIF · PTZ</text>
+                        </g>
+                        <g class="nm-node">
+                          <rect x="188" y="110" width="120" height="42" rx="6"></rect>
+                          <text x="248" y="129">NVR LXC</text>
+                          <text class="nm-sub" x="248" y="143">H.265 1080p</text>
+                        </g>
+
+                        <path class="nm-edge f-web" d="M554 77 H506"></path>
+                        <path class="nm-head f-web" d="M-5 -4 Q5 0 -5 4" transform="translate(498 77) rotate(180)"></path>
+                        <path class="nm-edge f-web" d="M342 77 H142"></path>
+                        <path class="nm-head f-web" d="M-5 -4 Q5 0 -5 4" transform="translate(134 77) rotate(180)"></path>
+                        <text class="nm-lbl nm-mid" x="529" y="68">services</text>
+                        <text class="nm-lbl nm-mid" x="247" y="68">HTTPS</text>
+
+                        <!-- The camera stream and the recording write it produces are different
+                             flows, so they get two arrows rather than one implied hop. -->
+                        <path class="nm-edge f-video" d="M132 131 H168"></path>
+                        <path class="nm-head f-video" d="M-5 -4 Q5 0 -5 4" transform="translate(176 131)"></path>
+                        <text class="nm-lbl nm-mid" x="151" y="123">RTSP</text>
+
+                        <path class="nm-edge f-video" d="M314 131 H540"></path>
+                        <path class="nm-head f-video" d="M-5 -4 Q5 0 -5 4" transform="translate(548 131)"></path>
+                        <text class="nm-lbl nm-mid" x="424" y="123">recordings</text>
+
+                        <!-- Colour carries which flow is which, so these need no per-line text:
+                             camera recordings, live datastore traffic and the monthly backup all
+                             land on the primary; the other NAS takes datastore traffic only. -->
+                        <path class="nm-edge f-video" d="M766 42 H820"></path>
+                        <path class="nm-head f-video" d="M-5 -4 Q5 0 -5 4" transform="translate(828 42)"></path>
+                        <path class="nm-edge f-disk" d="M766 58 H820"></path>
+                        <path class="nm-head f-disk" d="M-5 -4 Q5 0 -5 4" transform="translate(828 58)"></path>
+                        <path class="nm-edge f-backup" d="M766 74 H820"></path>
+                        <path class="nm-head f-backup" d="M-5 -4 Q5 0 -5 4" transform="translate(828 74)"></path>
+
+                        <path class="nm-edge f-disk" d="M766 108 C 794 108, 792 139, 820 139"></path>
+                        <path class="nm-head f-disk" d="M-5 -4 Q5 0 -5 4" transform="translate(828 139)"></path>
+
+                        <!-- ------------------------------------------------------ watching -->
+                        <g class="nm-node">
+                          <rect x="176" y="222" width="184" height="42" rx="6"></rect>
+                          <text x="268" y="241">Graylog</text>
+                          <text class="nm-sub" x="268" y="254">syslog TCP + UDP</text>
+                        </g>
+                        <g class="nm-node">
+                          <rect x="176" y="284" width="184" height="42" rx="6"></rect>
+                          <text x="268" y="303">Uptime Kuma</text>
+                          <text class="nm-sub" x="268" y="316">probes · TLS expiry</text>
+                        </g>
+                        <g class="nm-node">
+                          <rect x="560" y="240" width="200" height="46" rx="6"></rect>
+                          <text x="660" y="262">Prometheus</text>
+                          <text class="nm-sub" x="660" y="276" id="nm-prom">scrape targets</text>
+                        </g>
+
+                        <path class="nm-edge f-log"
+                              d="M604 150 V184Q604 194 594 194 H276 Q266 194 266 202"></path>
+                        <path class="nm-head f-log" d="M-5 -4 Q5 0 -5 4" transform="translate(266 210) rotate(90)"></path>
+                        <text class="nm-lbl nm-mid" x="430" y="186">syslog</text>
+                        <text class="nm-lbl nm-mid nm-rate" x="498" y="186" id="nm-rate-log"></text>
+
+                        <path class="nm-edge f-metric" d="M366 243 C 430 243, 486 249, 540 249"></path>
+                        <path class="nm-head f-metric" d="M-5 -4 Q5 0 -5 4" transform="translate(548 249)"></path>
+                        <path class="nm-edge f-metric" d="M366 305 C 430 305, 486 277, 540 277"></path>
+                        <path class="nm-head f-metric" d="M-5 -4 Q5 0 -5 4" transform="translate(548 277)"></path>
+                        <text class="nm-lbl nm-mid" x="450" y="228">scrape</text>
+
+                        <path class="nm-edge f-metric" d="M660 150 V220"></path>
+                        <path class="nm-head f-metric" d="M-5 -4 Q5 0 -5 4" transform="translate(660 228) rotate(90)"></path>
+                        <text class="nm-lbl" x="672" y="192">exporters</text>
+                        <text class="nm-lbl nm-rate" x="672" y="206" id="nm-rate-metric"></text>
+
+                        <!-- ---------------------------------------------------- publishing -->
+                        <g class="nm-node">
+                          <rect x="560" y="372" width="200" height="44" rx="6"></rect>
+                          <text x="660" y="394">Publisher</text>
+                          <text class="nm-sub" x="660" y="408">sanitise · timer</text>
+                        </g>
+                        <g class="nm-node">
+                          <rect x="560" y="496" width="200" height="44" rx="6"></rect>
+                          <text x="660" y="518">S3</text>
+                          <text class="nm-sub" x="660" y="532">public JSON</text>
+                        </g>
+                        <g class="nm-node nm-here">
+                          <rect x="560" y="620" width="200" height="44" rx="6"></rect>
+                          <text x="660" y="642">This page</text>
+                          <text class="nm-sub" x="660" y="656">gregchow.net</text>
+                        </g>
+
+                        <path class="nm-edge f-pub" d="M660 292 V352"></path>
+                        <path class="nm-head f-pub" d="M-5 -4 Q5 0 -5 4" transform="translate(660 360) rotate(90)"></path>
+                        <path class="nm-edge f-pub" d="M660 422 V476"></path>
+                        <path class="nm-head f-pub" d="M-5 -4 Q5 0 -5 4" transform="translate(660 484) rotate(90)"></path>
+                        <path class="nm-edge f-pub" d="M660 546 V600"></path>
+                        <path class="nm-head f-pub" d="M-5 -4 Q5 0 -5 4" transform="translate(660 608) rotate(90)"></path>
+                        <text class="nm-lbl" x="672" y="326">query · 15 min</text>
+                        <text class="nm-lbl" x="672" y="453">PUT</text>
+                        <text class="nm-lbl" x="672" y="577">fetch</text>
+
+                        <!-- ------------------------------------------------------- legend -->
+                        <g class="nm-key">
+                          <line class="nm-edge f-web"    x1="16" y1="308" x2="46" y2="308"></line>
+                          <text x="54" y="312">web</text>
+                          <line class="nm-edge f-video"  x1="16" y1="334" x2="46" y2="334"></line>
+                          <text x="54" y="338">camera</text>
+                          <line class="nm-edge f-metric" x1="16" y1="360" x2="46" y2="360"></line>
+                          <text x="54" y="364">telemetry</text>
+                          <line class="nm-edge f-log"    x1="16" y1="386" x2="46" y2="386"></line>
+                          <text x="54" y="390">logs</text>
+                          <line class="nm-edge f-disk"   x1="16" y1="412" x2="46" y2="412"></line>
+                          <text x="54" y="416">datastore</text>
+                          <line class="nm-edge f-backup" x1="16" y1="438" x2="46" y2="438"></line>
+                          <text x="54" y="442">backup</text>
+                          <text class="nm-key-note" x="16" y="480">24h replay</text>
+                          <text class="nm-clock" x="16" y="500" id="nm-clock">00:00</text>
+                        </g>
+                      </svg>
+                      <figcaption>Dash speed is bytes per second on a log scale, with the daily
+                        swing exaggerated to read at this size. The clock replays a mean 24-hour
+                        day in 48 seconds; it drives the datastore and log edges, which are the
+                        two with an hourly profile behind them. Datastore I/O runs 0.6–4.7 MB/s
+                        and peaks 02:00–06:00. The backup is monthly and lands on the primary NAS, so a 14-day hourly
+                        mean does not show it. Scrape and publish pulse in sequence. Ingress and camera
+                        paths have no exporter.</figcaption>
+                    </figure>
+                    </div>
+                </section>
                 </div>
 
-                <h2 class="text-center mt-1" data-aos="fade-up">Project Examples</h2>
-                <div class="home_slideshow" data-aos="zoom-in">
-
-                    <div class="home_slideContainer">
-                        <div class="home_Slides">
-                            <div class="numbertext">1 / 4</div>
-                            <img src="CloudDiagram.svg">
-                        </div>
-
-                        <div class="home_Slides">
-                            <div class="numbertext">2 / 4</div>
-                            <img src="network_proxmox.svg">
-                        </div>
-
-                        <div class="home_Slides">
-                            <div class="numbertext">3 / 4</div>
-                            <img src="infrastructure.svg">
-                        </div>
-
-                        <div class="home_Slides">
-                            <div class="numbertext">4 / 4</div>
-                            <img src="grafana.png">
-                        </div>
-
-                        <a class=" home_prev">❮</a>
-                            <a class="home_next">❯</a>
-                    </div>
-
-                    <div class="home_caption-container">
-                        <p id="home_caption"></p>
-                    </div>
-
-                    <div class="row">
-                        <div class="column">
-                            <img class="home_demo" src="CloudDiagram.svg" alt="This website is hosted on AWS, featuring automated provisioning via Terraform and CI/CD pipelines using GitHub Actions and Pytest. Live metrics are provided through DynamoDB, Lambda, and API Gateway.">
-                        </div>
-                        <div class="column">
-                            <img class="home_demo" src="network_proxmox.svg" alt="Home Network with virtualized and containerized services, including DNS, SNMP, Reverse Proxy, and Syslog servers. Ansible Scripts automate provisioning and managing of infrastructure.">
-                        </div>
-                        <div class="column">
-                            <img class="home_demo" src="infrastructure.svg" alt="Azure Hub and Spoke infrastructure provisioned with Terraform IaC and featuring NSGs, VPN, and Log Analytical Workspaces.">
-                        </div>
-
-                        <div class="column">
-                            <img class="home_demo" src="grafana.png" alt="Grafana visualizes metrics from Prometheus, Netdata, Proxmox, LibreNMS, Github, and Watch Tower">
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Visitor Counter - Lambda/DynamoDB Demo -->
-                <div class="counter-section" data-aos="fade-up">
-                    <div class="counter" id="counterID">
-                        <h2>Loading visitor count...</h2>
-                        <h5>Created with AWS Lambda and DynamoDB</h5>
-                        <h5>Code hosted on <a href="https://github.com/teddiursa/terraform_website">GitHub</a></h5>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -306,7 +600,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <!-- Projects Section -->
@@ -318,7 +611,7 @@
                     
                     <div class="project-card" data-aos="fade-up">
                         <div class="project-card-img">
-                            <img src="CloudDiagram.svg" alt="AWS Cloud Infrastructure">
+                            <img src="aws-diagram.svg" alt="gregchow.net on AWS in three planes: delivery through Route 53, CloudFront and S3; dynamic calls from home.js through API Gateway and Lambda to DynamoDB; and a GitHub Actions pipeline with Terraform. Click to enlarge.">
                         </div>
                         <div class="project-card-body">
                             <h3>gregchow.net</h3>
@@ -338,7 +631,7 @@
 
                     <div class="project-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="project-card-img">
-                            <img src="infrastructure.svg" alt="Azure Topology">
+                            <img src="azure-diagram.svg" alt="Azure hub-and-spoke: on-premises network over IPsec to a hub whose NVA forces every hop, peered to a workload spoke and a data spoke; internet traffic arrives at an Application Gateway. Click to enlarge.">
                         </div>
                         <div class="project-card-body">
                             <h3>Azure Hub-Spoke Network</h3>
@@ -356,68 +649,25 @@
                         </div>
                     </div>
 
-                    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card project-card-wide" data-aos="fade-up" data-aos-delay="100">
                         <div class="project-card-img">
-                            <img src="network_proxmox.svg" alt="Home Network Diagram">
+                            <img src="homelab-diagram.svg" alt="Home lab network by VLAN: an ER605 firewall trunks client, dev, services and management VLANs; clients reach services over HTTPS through an Nginx reverse proxy, and the management VLAN runs Proxmox, TrueNAS, Pi-hole and the monitoring stack. Click to enlarge.">
                         </div>
                         <div class="project-card-body">
                             <h3>Home Lab</h3>
                             <p>Proxmox hypervisor with Ansible automation for VM and container provisioning. Includes reverse proxy, DNS, syslog, SNMP manager, PFSense firewall, and Grafana/Prometheus monitoring.</p>
                             
-                            <div class="slideshow">
-                                <h4 class="text-center">Features</h4>
-                                <div class="slideContainer">
-                                    <div class="mySlides">
-                                        <div class="numbertext">1 / 6</div>
-                                        <img src="grafana.png">
-                                    </div>
-                                    <div class="mySlides">
-                                        <div class="numbertext">2 / 6</div>
-                                        <img src="homepage.png">
-                                    </div>
-                                    <div class="mySlides">
-                                        <div class="numbertext">3 / 6</div>
-                                        <img src="librenms.png">
-                                    </div>
-                                    <div class="mySlides">
-                                        <div class="numbertext">4 / 6</div>
-                                        <img src="motd.png">
-                                    </div>
-                                    <div class="mySlides">
-                                        <div class="numbertext">5 / 6</div>
-                                        <img src="graylog.png">
-                                    </div>
-                                    <div class="mySlides">
-                                        <div class="numbertext">6 / 6</div>
-                                        <img src="code.png">
-                                    </div>
-                                    <a class="prev">❮</a>
-                                    <a class="next">❯</a>
-                                </div>
-                                <div class="caption-container">
-                                    <p id="caption"></p>
-                                </div>
-                                <div class="row">
-                                    <div class="column">
-                                        <img class="demo" src="grafana.png" alt="Grafana visualizes metrics from Prometheus, Netdata, Proxmox, LibreNMS, Github, and Watch Tower">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo" src="homepage.png" alt="Homepage Dashboard with Plex, Openmeteo, Proxmox, Pi-Hole, Truenas, Docker, and Nginx integration">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo" src="librenms.png" alt="LibreNMS an autodiscovering PHP/MySQL-based network monitoring system">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo" src="motd.png" alt="Message of the Day via Bash Script">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo" src="graylog.png" alt="Graylog filtering with Elasticsearch">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo" src="code.png" alt="VS Code Server hosting Ansible scripts">
+                            <div class="shots">
+                                    <h4 class="text-center">Features</h4>
+                                    <div class="shots-grid">
+                                        <figure><img src="grafana.png" alt="Grafana dashboards over Prometheus, Netdata, Proxmox and LibreNMS"><figcaption>Grafana dashboards over Prometheus, Netdata, Proxmox and LibreNMS</figcaption></figure>
+                                        <figure><img src="homepage.png" alt="Homepage dashboard linking every self-hosted service"><figcaption>Homepage dashboard linking every self-hosted service</figcaption></figure>
+                                        <figure><img src="librenms.png" alt="LibreNMS polling the network over SNMP"><figcaption>LibreNMS polling the network over SNMP</figcaption></figure>
+                                        <figure><img src="motd.png" alt="Dynamic message of the day generated at login"><figcaption>Dynamic message of the day generated at login</figcaption></figure>
+                                        <figure><img src="graylog.png" alt="Graylog consolidating syslog from every host"><figcaption>Graylog consolidating syslog from every host</figcaption></figure>
+                                        <figure><img src="code.png" alt="Code Server running in the browser"><figcaption>Code Server running in the browser</figcaption></figure>
                                     </div>
                                 </div>
-                            </div>
                             
                             <div class="project-tags">
                                 <span class="project-tag">Proxmox</span>
@@ -433,10 +683,154 @@
                     </div>
 
                 </div>
+
+
             </div>
         </section>
 
-        <!-- Contact Section -->
+                <!-- Metrics Section -->
+        <section id="metrics" class="section-content">
+            <div class="container">
+                <h2 class="text-center" data-aos="fade-down">Live metrics</h2>
+                <p class="metrics-lede">Published from the home lab every 15 minutes: a sanitised
+                    Prometheus snapshot, uploaded to S3 by a systemd timer and read by this page.</p>
+
+                <div id="tm-root" hidden>
+                    <div class="tm-head" id="tm-head" hidden>
+                        <h2>Homelab telemetry</h2>
+                        <span class="tm-live"><span class="tm-dot"></span>Live from Prometheus</span>
+                        <span class="tm-stamp" id="tm-stamp"></span>
+                    </div>
+
+                    <div class="tm-kpi" id="tm-kpi" hidden></div>
+
+                    <section class="tm-sec" id="tm-sec-wan" hidden>
+                        <div class="tm-sechead">
+                            <div>
+                                <h3>WAN performance</h3>
+                                <p class="note">Daily mean, speedtest exporter.</p>
+                            </div>
+                            <button class="tm-toggle" type="button" data-target="tm-wan-table"
+                                aria-expanded="false">Table view</button>
+                        </div>
+                        <div class="tm-wan" id="tm-wan"></div>
+                        <div class="tm-tablewrap" id="tm-wan-table" hidden></div>
+                    </section>
+
+                    <section class="tm-sec" id="tm-sec-density" hidden>
+                        <div class="tm-sechead">
+                            <div>
+                                <h3>Capacity commitment</h3>
+                                <p class="note" id="tm-density-note"></p>
+                            </div>
+                            <button class="tm-toggle" type="button" data-target="tm-density-table"
+                                aria-expanded="false">Table view</button>
+                        </div>
+                        <div class="tm-density" id="tm-density"></div>
+                        <div class="tm-tablewrap" id="tm-density-table" hidden>
+                            <div id="tm-density-tbl"></div>
+                        </div>
+                    </section>
+
+                    <section class="tm-sec" id="tm-sec-rhythm" hidden>
+                        <div class="tm-sechead">
+                            <div>
+                                <h3>Activity by hour</h3>
+                                <p class="note" id="tm-rhythm-note"></p>
+                            </div>
+                            <button class="tm-toggle" type="button" data-target="tm-rhythm-table"
+                                aria-expanded="false">Table view</button>
+                        </div>
+                        <div class="tm-wan" id="tm-rhythm"></div>
+                        <div class="tm-tablewrap" id="tm-rhythm-table" hidden>
+                            <div id="tm-rhythm-tbl"></div>
+                        </div>
+                    </section>
+
+                    <section class="tm-sec" id="tm-sec-storage" hidden>
+                        <div class="tm-sechead">
+                            <div>
+                                <h3>Storage</h3>
+                                <p class="note">Datastore capacity, as Proxmox reports it.</p>
+                            </div>
+                            <button class="tm-toggle" type="button" data-target="tm-storage-table"
+                                aria-expanded="false">Table view</button>
+                        </div>
+                        <div class="tm-nodes" id="tm-storage"></div>
+                        <div class="tm-tablewrap" id="tm-storage-table" hidden>
+                            <div id="tm-storage-tbl"></div>
+                        </div>
+                    </section>
+
+                    <section class="tm-sec" id="tm-sec-nas" hidden>
+                        <div class="tm-sechead">
+                            <div>
+                                <h3>NAS cache</h3>
+                                <p class="note" id="tm-nas-note"></p>
+                            </div>
+                            <button class="tm-toggle" type="button" data-target="tm-nas-table"
+                                aria-expanded="false">Table view</button>
+                        </div>
+                        <div class="tm-nodes" id="tm-nas"></div>
+                        <div class="tm-tablewrap" id="tm-nas-table" hidden>
+                            <div id="tm-nas-tbl"></div>
+                        </div>
+                    </section>
+
+                    <section class="tm-sec" id="tm-sec-nodes" hidden>
+                        <div class="tm-sechead">
+                            <div>
+                                <h3>Proxmox node capacity</h3>
+                                <p class="note">Allocation against installed capacity.</p>
+                            </div>
+                        </div>
+                        <div class="tm-nodes" id="tm-nodes"></div>
+                    </section>
+
+                    <section class="tm-sec" id="tm-sec-resp" hidden>
+                        <div class="tm-sechead">
+                            <div>
+                                <h3>Service response time</h3>
+                                <p class="note">Median response time across the window.</p>
+                            </div>
+                            <button class="tm-toggle" type="button" data-target="tm-resp-table"
+                                aria-expanded="false">Table view</button>
+                        </div>
+                        <div class="tm-bars" id="tm-resp"></div>
+                        <div class="tm-tablewrap" id="tm-resp-table" hidden></div>
+                    </section>
+
+                    <section class="tm-sec" id="tm-sec-heat" hidden>
+                        <div class="tm-sechead">
+                            <div>
+                                <h3>Service downtime</h3>
+                                <p class="note">Minutes down per day, per service.</p>
+                            </div>
+                            <button class="tm-toggle" type="button" data-target="tm-heat-table"
+                                aria-expanded="false">Table view</button>
+                        </div>
+                        <div class="tm-heat" id="tm-heat"></div>
+                        <div class="tm-legend" id="tm-heat-legend"></div>
+                        <div class="tm-tablewrap" id="tm-heat-table" hidden></div>
+                    </section>
+
+                    <section class="tm-sec" id="tm-sec-certs" hidden>
+                        <div class="tm-sechead">
+                            <div>
+                                <h3>TLS certificate expiry</h3>
+                                <p class="note">Days remaining on each certificate, soonest first.</p>
+                            </div>
+                        </div>
+                        <div class="tm-bars" id="tm-certs"></div>
+                        <div class="tm-legend" id="tm-certs-legend"></div>
+                    </section>
+                </div>
+                <div class="tm-tip" id="tm-tip"></div>
+                
+            </div>
+        </section>
+
+<!-- Contact Section -->
         <section id="contact" class="section-content">
             <div class="container">
                 <h2 class="text-center">Get In Touch</h2>
@@ -489,6 +883,10 @@
     <script>
         AOS.init({ duration: 600, once: true });
     </script>
+
+    <!-- Telemetry last: it measures SVG path lengths and observes #aw-root,
+         so the markup must exist before it runs. -->
+    <script src="metrics.js"></script>
 
 </body>
 

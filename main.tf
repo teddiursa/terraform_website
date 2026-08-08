@@ -40,3 +40,11 @@ output "iam"{
 output "iamTime"{
   value = "arn:aws:execute-api:us-east-1:${var.accountId}:${aws_api_gateway_rest_api.timeApi.id}/*/${aws_api_gateway_method.timeProxyRoot.http_method}${aws_api_gateway_resource.timeProxy.path}"
 }
+
+# The metrics publisher's IAM user is created by iam.tf, but its access key is
+# minted by hand so the secret never lands in the state file:
+#   aws iam create-access-key --user-name homelab-metrics-publisher
+output "metricsPublisherUser" {
+  description = "IAM user the homelab metrics publisher authenticates as"
+  value       = aws_iam_user.metricsPublisher.name
+}

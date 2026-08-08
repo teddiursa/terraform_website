@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720" role="img"
+     aria-label="Home lab network by VLAN. A router and firewall trunks four VLANs from the internet. Client devices and a dev VLAN running Code Server and EVE-NG reach services over HTTPS through an Nginx reverse proxy with Let's Encrypt certificates. The services VLAN runs that proxy, a Docker host, Plex, Vaultwarden, Watchtower and a Homepage dashboard. The management VLAN runs the Proxmox hypervisor which is also the local NTP server, a TrueNAS box taking media and Syncthing backups, Pi-hole serving DNS to every VLAN, Prometheus scraping each service API with Grafana on top, and Graylog and LibreNMS taking syslog and SNMP traps. WireGuard and Tailscale provide remote access, and Ansible provisions every container and VM.">
+  <title>Home lab: VLAN segmentation and the paths between</title>
+
+  <rect width="1400" height="720" rx="8" fill="#171819"/>
+
+  <defs>
+    <style>
+      .n     { fill:#202123; stroke:#383835; stroke-width:1.5; }
+      .zone  { fill:#1a1b1d; stroke-width:1.5; stroke-dasharray:7 6; }
+      .z-blue{ stroke:#3789fd; fill:#171b22; }  .z-blue-t   { fill:#72a3ec; }
+      .z-orange{ stroke:#d8592b; fill:#211916; }  .z-orange-t   { fill:#e18768; }
+      .z-green{stroke:#199e6e; fill:#151d19; }  .z-green-t  { fill:#50b98b; }
+      .z-purple{stroke:#8353d4;fill:#1c1a21; }  .z-purple-t { fill:#aa91e4; }
+      .cloud { fill:#242f40; stroke:#3a4e6c; stroke-width:1.5; }
+      .cyl   { fill:#202123; }
+      .cyl-lid { fill:#2a2c30; stroke:#4a4b4d; stroke-width:1.5; }
+      .t     { fill:#e4e6eb; font-family:sans-serif; font-size:25px; font-weight:600; text-anchor:middle; }
+      .s     { fill:#8f9296; font-family:sans-serif; font-size:18px; text-anchor:middle; }
+      .zt    { font-family:sans-serif; font-size:19px; font-weight:700; text-anchor:start; letter-spacing:.06em; }
+      .lbl   { fill:#b0b3b8; font-family:sans-serif; font-size:17px; text-anchor:middle; }
+      .key   { fill:#8f9296; font-family:sans-serif; font-size:18px; text-anchor:start; }
+      .e     { fill:none; stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; }
+      .head  { fill:none; stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; }
+      .net   { stroke:#3789fd; }
+      .web  { stroke:#199e6e; }
+      .mon   { stroke:#8353d4; }
+      .data { stroke:#14799c; }
+      .auto  { stroke:#d8592b; }
+    </style>
+  </defs>
+
+  <path class="cloud" d="M 41.7 107.0 L 224.3 107.0 C 247.7 107.0, 250.0 91.8, 226.6 86.4 C 250.0 69.7, 212.6 55.3, 175.1 62.9 C 165.8 40.1, 86.2 38.6, 76.8 61.4 C 37.1 56.8, 13.7 72.8, 39.4 86.4 C 16.0 91.8, 18.3 107.0, 41.7 107.0 Z"/>
+  <text class="t" x="133" y="88">Internet</text>
+  <rect class="n" x="16" y="146" width="234" height="76" rx="7"/>
+  <text class="t" x="133" y="182">Router</text>
+  <text class="s" x="133" y="206">firewall - VLAN trunk</text>
+  <rect class="n" x="16" y="266" width="234" height="76" rx="7"/>
+  <text class="t" x="133" y="302">VPN</text>
+  <text class="s" x="133" y="326">WireGuard - Tailscale</text>
+  <rect class="zone z-blue" x="320" y="40" width="310" height="150" rx="9"/>
+  <text class="zt z-blue-t" x="336" y="68">CLIENT VLAN</text>
+  <rect class="n" x="338" y="78" width="274" height="88" rx="7"/>
+  <text class="t" x="475" y="120">User devices</text>
+  <text class="s" x="475" y="144">reach services over HTTPS</text>
+  <rect class="zone z-orange" x="320" y="224" width="310" height="358" rx="9"/>
+  <text class="zt z-orange-t" x="336" y="252">DEV VLAN</text>
+  <rect class="n" x="338" y="264" width="274" height="88" rx="7"/>
+  <text class="t" x="475" y="306">Code Server</text>
+  <text class="s" x="475" y="330">browser IDE</text>
+  <rect class="n" x="338" y="366" width="274" height="88" rx="7"/>
+  <text class="t" x="475" y="408">EVE-NG</text>
+  <text class="s" x="475" y="432">network lab</text>
+  <rect class="n" x="338" y="468" width="274" height="88" rx="7"/>
+  <text class="t" x="475" y="506">Ansible</text>
+  <text class="s" x="475" y="530">provisions LXC and VMs</text>
+  <rect class="zone z-green" x="700" y="40" width="310" height="542" rx="9"/>
+  <text class="zt z-green-t" x="716" y="68">SERVICES VLAN</text>
+  <rect class="n" x="718" y="84" width="274" height="82" rx="7"/>
+  <text class="t" x="855" y="123">Nginx Proxy</text>
+  <text class="s" x="855" y="147">Let's Encrypt TLS</text>
+  <rect class="n" x="718" y="176" width="274" height="82" rx="7"/>
+  <text class="t" x="855" y="215">Docker Host</text>
+  <text class="s" x="855" y="239">container runtime</text>
+  <rect class="n" x="718" y="268" width="274" height="82" rx="7"/>
+  <text class="t" x="855" y="307">Plex</text>
+  <text class="s" x="855" y="331">media</text>
+  <rect class="n" x="718" y="360" width="274" height="82" rx="7"/>
+  <text class="t" x="855" y="399">Vaultwarden</text>
+  <text class="s" x="855" y="423">credential vault</text>
+  <rect class="n" x="718" y="452" width="274" height="82" rx="7"/>
+  <text class="t" x="855" y="491">Watchtower</text>
+  <text class="s" x="855" y="515">Homepage dashboard</text>
+  <rect class="zone z-purple" x="1080" y="40" width="304" height="542" rx="9"/>
+  <text class="zt z-purple-t" x="1096" y="68">MANAGEMENT VLAN</text>
+  <rect class="n" x="1098" y="84" width="268" height="82" rx="7"/>
+  <text class="t" x="1232" y="123">Proxmox</text>
+  <text class="s" x="1232" y="147">hypervisor - NTP</text>
+  <g class="cyl">
+  <rect x="1098" y="185" width="268" height="62"/>
+  <ellipse cx="1232" cy="248" rx="134" ry="9"/>
+  </g>
+  <ellipse class="cyl-lid" cx="1232" cy="185" rx="134" ry="9"/>
+  <text class="t" x="1232" y="219">TrueNAS</text>
+  <text class="s" x="1232" y="243">Syncthing backup</text>
+  <rect class="n" x="1098" y="268" width="268" height="82" rx="7"/>
+  <text class="t" x="1232" y="307">Pi-hole</text>
+  <text class="s" x="1232" y="331">DNS for every VLAN</text>
+  <rect class="n" x="1098" y="360" width="268" height="82" rx="7"/>
+  <text class="t" x="1232" y="399">Prometheus</text>
+  <text class="s" x="1232" y="423">Grafana - metrics API</text>
+  <rect class="n" x="1098" y="452" width="268" height="82" rx="7"/>
+  <text class="t" x="1232" y="491">Graylog</text>
+  <text class="s" x="1232" y="515">LibreNMS - SNMP traps</text>
+  <path class="e net" d="M133 234 V254"/>
+  <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(133 262) rotate(90)"/>
+  <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(133 226) rotate(-90)"/>
+  <path class="e net" d="M133 119 V134"/>
+  <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(133 111) rotate(-90)"/>
+  <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(133 142) rotate(90)"/>
+  <path class="e net" d="M262 184 H308"/>
+  <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(254 184) rotate(180)"/>
+  <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(316 184)"/>
+  <text class="lbl" x="285" y="214">trunk</text>
+  <path class="e web" d="M642 126 H688"/>
+  <path class="head web" d="M-5 -4 Q5 0 -5 4" transform="translate(634 126) rotate(180)"/>
+  <path class="head web" d="M-5 -4 Q5 0 -5 4" transform="translate(696 126)"/>
+  <text class="lbl" x="665" y="110">HTTPS</text>
+  <path class="e web" d="M642 400 H688"/>
+  <path class="head web" d="M-5 -4 Q5 0 -5 4" transform="translate(634 400) rotate(180)"/>
+  <path class="head web" d="M-5 -4 Q5 0 -5 4" transform="translate(696 400)"/>
+  <text class="lbl" x="665" y="384">HTTPS</text>
+  <path class="e data" d="M1022 217 H1068"/>
+  <path class="head data" d="M-5 -4 Q5 0 -5 4" transform="translate(1014 217) rotate(180)"/>
+  <path class="head data" d="M-5 -4 Q5 0 -5 4" transform="translate(1076 217)"/>
+  <text class="lbl" x="1045" y="201">media</text>
+  <path class="e web" d="M1022 309 H1068"/>
+  <path class="head web" d="M-5 -4 Q5 0 -5 4" transform="translate(1014 309) rotate(180)"/>
+  <path class="head web" d="M-5 -4 Q5 0 -5 4" transform="translate(1076 309)"/>
+  <text class="lbl" x="1045" y="293">DNS</text>
+  <path class="e mon" d="M1022 401 H1068"/>
+  <path class="head mon" d="M-5 -4 Q5 0 -5 4" transform="translate(1076 401)"/>
+  <path class="head mon" d="M-5 -4 Q5 0 -5 4" transform="translate(1014 401) rotate(180)"/>
+  <text class="lbl" x="1045" y="385">scrape</text>
+  <path class="e mon" d="M1014 493 H1068"/>
+  <path class="head mon" d="M-5 -4 Q5 0 -5 4" transform="translate(1076 493)"/>
+  <text class="lbl" x="1045" y="477">logs</text>
+  <path class="e auto" d="M475 564 V628 H1232 V594"/>
+  <path class="head auto" d="M-5 -4 Q5 0 -5 4" transform="translate(1232 586) rotate(-90)"/>
+  <text class="lbl" x="700" y="652">provisions guests</text>
+  <line class="e net" x1="16" y1="686" x2="50" y2="686"/>
+  <text class="key" x="60" y="692">network</text>
+  <line class="e web" x1="206" y1="686" x2="240" y2="686"/>
+  <text class="key" x="250" y="692">app traffic</text>
+  <line class="e mon" x1="396" y1="686" x2="430" y2="686"/>
+  <text class="key" x="440" y="692">telemetry</text>
+  <line class="e data" x1="586" y1="686" x2="620" y2="686"/>
+  <text class="key" x="630" y="692">storage</text>
+  <line class="e auto" x1="776" y1="686" x2="810" y2="686"/>
+  <text class="key" x="820" y="692">automation</text>
+</svg>

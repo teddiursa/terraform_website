@@ -2134,9 +2134,22 @@ body {
   padding-left: 14px;
   border-left: 1px solid var(--border-color);
   font-size: 13px;
-  line-height: 1;
   color: var(--tm-text-muted);
   white-space: nowrap;
+  /* Tall enough that overflow:hidden does not clip descenders. */
+  line-height: 1.4;
+  /* Shrinkable in the navbar's flex row, and clipped rather than wrapped or
+     pushed over the toggler when the viewport runs out. */
+  min-width: 0;
+  flex: 0 1 auto;
+  overflow: hidden;
+}
+
+.brand-visits .visit-label,
+.brand-visits .visit-since {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Hides the divider rule until the fetch resolves. */
@@ -2144,7 +2157,10 @@ body {
   display: none;
 }
 
+/* The count is the payload and never gives up characters; the words beside
+   it truncate first. */
 .brand-visits .visit-count {
+  flex: 0 0 auto;
   font-size: 15px;
   font-weight: 700;
   color: var(--accent-primary);
@@ -2166,9 +2182,18 @@ body {
   }
 }
 
+/* The label stays down to the smallest screens - a bare ordinal with no noun
+   reads as a version number. It truncates rather than disappearing, so the
+   chip gives up characters instead of meaning. */
 @media (max-width: 575px) {
-  .brand-visits .visit-label {
-    display: none;
+  .brand-visits {
+    margin-left: 10px;
+    padding-left: 10px;
+    font-size: 12px;
+  }
+
+  .brand-visits .visit-count {
+    font-size: 14px;
   }
 }
 

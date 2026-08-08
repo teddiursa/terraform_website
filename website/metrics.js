@@ -595,7 +595,53 @@
       setText("nm-rate-metric", "~" + rate(f.metric_bps));
     }
 
-    if (f.hourly) replayDay(mapRoot, f.hourly);
+    if (f.hourly) {
+      diskNote(f.hourly.disk);
+      replayDay(mapRoot, f.hourly);
+    }
+  }
+
+  /* The caption quotes the datastore range and its peak window. Both come from
+   * a snapshot that refreshes every 15 minutes, so they are written here
+   * rather than kept in the markup, where they drifted out of date.
+   *
+   * The peak window is the run of hours holding at or above 70% of the day's
+   * maximum, walked outwards from the busiest hour so a window crossing
+   * midnight stays contiguous. */
+  function diskNote(disk) {
+    var el = $("nm-disk-note");
+    if (!el || !disk || disk.length !== 24) return;
+
+    var top = 0, i;
+    for (i = 1; i < 24; i++) if (disk[i] > disk[top]) top = i;
+    if (!(disk[top] > 0)) return;
+
+    var lo = disk[0], hi = disk[0];
+    for (i = 1; i < 24; i++) {
+      if (disk[i] < lo) lo = disk[i];
+      if (disk[i] > hi) hi = disk[i];
+    }
+
+    var thr = hi * 0.7, start = top, end = top, prev, next;
+    while ((prev = (start + 23) % 24) !== top && disk[prev] >= thr) start = prev;
+    while ((next = (end + 1) % 24) !== top && disk[next] >= thr) end = next;
+
+    function hh(h) { return (h < 10 ? "0" : "") + h + ":00"; }
+
+    /* Both ends share the top of the range's unit, so the span reads as one
+     * quantity - rate() on its own would pair "674 kB/s" with "5.3 MB/s". */
+    var div = 1, unit = " B/s";
+    if (hi >= 1e6) { div = 1e6; unit = " MB/s"; }
+    else if (hi >= 1e3) { div = 1e3; unit = " kB/s"; }
+    var dp = div === 1 ? 0 : (lo / div < 0.1 ? 2 : 1);
+
+    /* A near-flat day clears the threshold almost everywhere, and "peaks
+     * 01:00-23:00" says nothing. Past two thirds of the day, drop the clause. */
+    var span = (end - start + 24) % 24 + 1;
+    var peak = span >= 16 ? "" : " and peaks " + hh(start) + "–" + hh(end);
+
+    el.textContent = " Datastore I/O runs " + (lo / div).toFixed(dp) + "–" +
+                     (hi / div).toFixed(dp) + unit + peak + ".";
   }
 
   /* Replay a day across the map.

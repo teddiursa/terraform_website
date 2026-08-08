@@ -61,96 +61,75 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 # changes, so editing a file's contents produced "No changes" and the edit was
 # never deployed.
 resource "aws_s3_object" "html" {
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = "home.html"
-  source       = "website/home.html"
-  etag         = filemd5("website/home.html")
-  content_type = "text/html"
-
-  metadata = {
-    "cache-control" = "max-age=86400, public"
-  }
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = "home.html"
+  source        = "website/home.html"
+  etag          = filemd5("website/home.html")
+  content_type  = "text/html"
+  cache_control = "max-age=86400,public"
 
 }
 
 resource "aws_s3_object" "css" {
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = "home.css"
-  source       = "website/home.css"
-  etag         = filemd5("website/home.css")
-  content_type = "text/css"
-
-  metadata = {
-    "cache-control" = "max-age=86400, public"
-  }
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = "home.css"
+  source        = "website/home.css"
+  etag          = filemd5("website/home.css")
+  content_type  = "text/css"
+  cache_control = "max-age=86400,public"
 }
 
 #every .js file, so adding a script does not need a new resource block
 resource "aws_s3_object" "js" {
-  for_each     = fileset("website/", "*.js")
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = each.value
-  source       = "website/${each.value}"
-  etag         = filemd5("website/${each.value}")
-  content_type = "text/javascript"
-
-  metadata = {
-    "cache-control" = "max-age=86400, public"
-  }
+  for_each      = fileset("website/", "*.js")
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = each.value
+  source        = "website/${each.value}"
+  etag          = filemd5("website/${each.value}")
+  content_type  = "text/javascript"
+  cache_control = "max-age=86400,public"
 }
 
 
 
 resource "aws_s3_object" "svg" {
-  for_each     = fileset("website/", "*.svg")
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = each.value
-  source       = "website/${each.value}"
-  etag         = filemd5("website/${each.value}")
-  content_type = "image/svg+xml"
-
-  metadata = {
-    "cache-control" = "max-age=86400, public"
-  }
+  for_each      = fileset("website/", "*.svg")
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = each.value
+  source        = "website/${each.value}"
+  etag          = filemd5("website/${each.value}")
+  content_type  = "image/svg+xml"
+  cache_control = "max-age=86400,public"
 }
 
 resource "aws_s3_object" "png" {
-  for_each     = fileset("website/", "*.png")
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = each.value
-  source       = "website/${each.value}"
-  etag         = filemd5("website/${each.value}")
-  content_type = "image/png"
-
-  metadata = {
-    "cache-control" = "max-age=86400, public"
-  }
+  for_each      = fileset("website/", "*.png")
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = each.value
+  source        = "website/${each.value}"
+  etag          = filemd5("website/${each.value}")
+  content_type  = "image/png"
+  cache_control = "max-age=86400,public"
 }
 
 resource "aws_s3_object" "ico" {
-  for_each     = fileset("website/", "*.ico")
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = each.value
-  source       = "website/${each.value}"
-  etag         = filemd5("website/${each.value}")
-  content_type = "image/x-icon"
-
-  metadata = {
-    "cache-control" = "max-age=86400, public"
-  }
+  for_each      = fileset("website/", "*.ico")
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = each.value
+  source        = "website/${each.value}"
+  etag          = filemd5("website/${each.value}")
+  content_type  = "image/vnd.microsoft.icon"
+  cache_control = "max-age=86400,public"
 }
 
 resource "aws_s3_object" "webp" {
-  for_each     = fileset("website/", "*.webp")
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = each.value
-  source       = "website/${each.value}"
-  etag         = filemd5("website/${each.value}")
-  content_type = "image/webp"
-
-  metadata = {
-    "cache-control" = "max-age=86400, public"
-  }
+  for_each      = fileset("website/", "*.webp")
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = each.value
+  source        = "website/${each.value}"
+  etag          = filemd5("website/${each.value}")
+  content_type  = "image/webp"
+  cache_control = "max-age=86400,public"
 }
 
 resource "aws_s3_bucket_website_configuration" "terraformWebsite" {
@@ -174,30 +153,33 @@ resource "aws_s3_bucket_cors_configuration" "myCorsConfig" {
 
 #errors
 resource "aws_s3_object" "htmlError" {
-  for_each     = fileset("errors/", "*.html")
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = each.value
-  source       = "errors/${each.value}"
-  etag         = filemd5("errors/${each.value}")
-  content_type = "text/html"
+  for_each      = fileset("errors/", "*.html")
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = each.value
+  source        = "errors/${each.value}"
+  etag          = filemd5("errors/${each.value}")
+  content_type  = "text/html"
+  cache_control = "max-age=86400,public"
 }
 
 resource "aws_s3_object" "cssError" {
-  for_each     = fileset("errors/", "*.css")
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = each.value
-  source       = "errors/${each.value}"
-  etag         = filemd5("errors/${each.value}")
-  content_type = "text/css"
+  for_each      = fileset("errors/", "*.css")
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = each.value
+  source        = "errors/${each.value}"
+  etag          = filemd5("errors/${each.value}")
+  content_type  = "text/css"
+  cache_control = "max-age=86400,public"
 }
 
 resource "aws_s3_object" "javascriptError" {
-  for_each     = fileset("errors/", "*.js")
-  bucket       = aws_s3_bucket.terraformBucket.id
-  key          = each.value
-  source       = "errors/${each.value}"
-  etag         = filemd5("errors/${each.value}")
-  content_type = "text/javascript"
+  for_each      = fileset("errors/", "*.js")
+  bucket        = aws_s3_bucket.terraformBucket.id
+  key           = each.value
+  source        = "errors/${each.value}"
+  etag          = filemd5("errors/${each.value}")
+  content_type  = "text/javascript"
+  cache_control = "max-age=86400,public"
 }
 
 #bucket to pass api gateway url to javascript
@@ -289,8 +271,5 @@ resource "aws_s3_object" "jsonCount" {
   etag         = md5(local.linksJson)
   content_type = "application/json"
 
-  # NOTE: cache_control is the real header. Every other object in this file
-  # sets metadata = { "cache-control" = ... } instead, which only produces
-  # x-amz-meta-cache-control and is ignored by browsers - see the README.
   cache_control = "max-age=300, public"
 }

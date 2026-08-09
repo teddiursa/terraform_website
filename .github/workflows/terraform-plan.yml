@@ -91,22 +91,34 @@ jobs:
           echo "exitcode=$code" >> "$GITHUB_OUTPUT"
 
           if [ "$code" -eq 1 ]; then
-            # Job logs need repo admin to read, so the error is emitted as
-            # annotations and into the summary too - both are visible from the
-            # run page without downloading anything. The account id is scrubbed
-            # on every path because this repository is public.
-            scrubbed=$(sed -E 's/[0-9]{12}/<account>/g' plan.txt | grep -vE '^\s*$' | tail -25)
+            # THIS REPOSITORY IS PUBLIC, and on a public repo anyone can read a
+            # workflow run's logs and summary in the web UI - so raw plan output
+            # is published to the world, not just to the owner. An AWS error
+            # normally carries the caller's ARN, the resource ARN, the account
+            # id and the CloudFront distribution id.
+            #
+            # What is actually needed to fix a broken plan is the error headline
+            # and, for a permissions failure, which action was denied. Both are
+            # kept; every identifier is stripped.
+            diag=$(grep -hoE '^Error: [^:]+|is not authorized to perform: [a-zA-Z0-9-]+:[A-Za-z]+|\b(AccessDenied|ExpiredToken|InvalidClientTokenId|UnauthorizedOperation|Throttling|RequestTimeTooSkewed)\b' plan.txt \
+                   | sed -E 's/[0-9]{12}/<account>/g' \
+                   | sort -u | head -12)
+            [ -n "$diag" ] || diag="No recognisable error line. Open the run's log for the full output."
 
             echo "::error::terraform plan failed"
             while IFS= read -r line; do
               echo "::error::${line}"
-            done <<< "$scrubbed"
+            done <<< "$diag"
 
             {
               echo "### Terraform plan failed"
               echo
+              echo "Identifiers are stripped and the full output is not retained -"
+              echo "this repository is public and run logs are world-readable."
+              echo "Run \`terraform plan\` locally with credentials to see it all."
+              echo
               echo '```'
-              echo "$scrubbed"
+              echo "$diag"
               echo '```'
             } >> "$GITHUB_STEP_SUMMARY"
             exit 1

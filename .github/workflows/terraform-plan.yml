@@ -141,6 +141,13 @@ jobs:
             exit 1
           fi
 
+          changes=""
+          if [ "$code" -eq 2 ]; then
+            changes=$(terraform show -no-color tfplan \
+                      | grep -E '^  # |^Plan: ' \
+                      | sed -E 's/[0-9]{12}/<account>/g')
+          fi
+
           {
             echo "### Terraform plan"
             echo
@@ -151,12 +158,20 @@ jobs:
               echo "withheld because this repository is public."
               echo
               echo '```'
-              terraform show -no-color tfplan \
-                | grep -E '^  # |^Plan: ' \
-                | sed -E 's/[0-9]{12}/<account>/g'
+              echo "$changes"
               echo '```'
             fi
           } >> "$GITHUB_STEP_SUMMARY"
+
+          # Also as annotations. A job summary can only be read from the run
+          # page; annotations come back from the checks API, which is how this
+          # gets looked at from a phone. Resource addresses are safe to publish -
+          # they are literally the resource names in the .tf files.
+          if [ "$code" -eq 2 ]; then
+            while IFS= read -r line; do
+              [ -n "$line" ] && echo "::notice::${line}"
+            done <<< "$changes"
+          fi
 
       # On a pull request, changes are the point - the plan is there to be read.
       # On main after a deploy, or on the weekly run, changes mean the two paths

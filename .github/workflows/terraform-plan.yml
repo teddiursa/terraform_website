@@ -91,19 +91,36 @@ jobs:
           echo "exitcode=$code" >> "$GITHUB_OUTPUT"
 
           if [ "$code" -eq 1 ]; then
-            # THIS REPOSITORY IS PUBLIC, and on a public repo anyone can read a
-            # workflow run's logs and summary in the web UI - so raw plan output
-            # is published to the world, not just to the owner. An AWS error
-            # normally carries the caller's ARN, the resource ARN, the account
-            # id and the CloudFront distribution id.
+            # THIS REPOSITORY IS PUBLIC: anyone can read a run's logs and
+            # summary in the web UI, so whatever is printed here is published to
+            # the world. An AWS error normally carries the caller's ARN, the
+            # resource ARN, the account id and the CloudFront distribution id.
             #
-            # What is actually needed to fix a broken plan is the error headline
-            # and, for a permissions failure, which action was denied. Both are
-            # kept; every identifier is stripped.
-            diag=$(grep -hoE '^Error: [^:]+|is not authorized to perform: [a-zA-Z0-9-]+:[A-Za-z]+|\b(AccessDenied|ExpiredToken|InvalidClientTokenId|UnauthorizedOperation|Throttling|RequestTimeTooSkewed)\b' plan.txt \
-                   | sed -E 's/[0-9]{12}/<account>/g' \
-                   | sort -u | head -12)
-            [ -n "$diag" ] || diag="No recognisable error line. Open the run's log for the full output."
+            # Safe by construction, not by blacklist. Scrubbing identifiers out
+            # of free text failed twice - first a pattern anchored on the colon
+            # published the id sitting in parentheses before it, then a rule
+            # broad enough to catch those ids also ate "CloudFront" and
+            # "Certificate" and left the diagnosis meaningless.
+            #
+            # So nothing is copied out of the error text. Three fixed shapes are
+            # matched, none of which can contain a resource identifier: AWS
+            # error codes from a known list, "service:Action" permission names,
+            # and the resource *type* that precedes the "(id)" in a read error.
+            codes=$(grep -hoE '\b(AccessDenied|ExpiredToken|InvalidClientTokenId|UnauthorizedOperation|Throttling|RequestTimeTooSkewed|NoCredentialProviders)\b' plan.txt | sort -u)
+            actions=$(grep -hoE 'is not authorized to perform: [a-zA-Z0-9-]+:[A-Za-z]+' plan.txt \
+                      | sed -E 's/.*perform: //' | sort -u)
+            types=$(grep -hoE '^Error: reading [A-Za-z0-9 ]+ \(' plan.txt \
+                    | sed -E 's/^Error: reading //; s/ \($//' | sort -u)
+            nerr=$(grep -c '^Error:' plan.txt || true)
+
+            # Joined with paste, not `echo $var`: resource types contain spaces
+            # ("Route53 Hosted Zone") and word-splitting would list each word.
+            join() { paste -sd'|' - | sed 's/|/, /g'; }
+
+            diag="${nerr:-0} errors"
+            [ -n "$codes" ]   && diag="$diag"$'\n'"codes: $(printf '%s\n' "$codes" | join)"
+            [ -n "$types" ]   && diag="$diag"$'\n'"failed to read: $(printf '%s\n' "$types" | join)"
+            [ -n "$actions" ] && diag="$diag"$'\n'"denied: $(printf '%s\n' "$actions" | join)"
 
             echo "::error::terraform plan failed"
             while IFS= read -r line; do

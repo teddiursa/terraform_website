@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720" role="img"
-     aria-label="Home lab network by VLAN. A router and firewall trunks four VLANs from the internet. Client devices and a dev VLAN running Code Server and EVE-NG reach services over HTTPS through an Nginx reverse proxy with Let's Encrypt certificates. The services VLAN runs that proxy, a Docker host, Plex, Vaultwarden, a container update watcher and a Homepage dashboard. The management VLAN runs the Proxmox hypervisor which is also the local NTP server, a TrueNAS box taking media and Syncthing backups, Pi-hole serving DNS to every VLAN, Prometheus scraping each service API with Grafana on top, and Loki with an Alloy collector taking syslog from every guest. WireGuard and Tailscale provide remote access, and Ansible provisions every container and VM.">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="812" viewBox="0 0 1400 812" role="img"
+     aria-label="Home lab network by VLAN. A router and firewall trunks four VLANs from the internet. Client devices and a dev VLAN running Code Server and EVE-NG reach services over HTTPS through an Nginx reverse proxy with Let's Encrypt certificates. The services VLAN runs that proxy, a Docker host, Plex, Vaultwarden, a container update watcher and a Homepage dashboard. The management VLAN runs the Proxmox hypervisor which is also the local NTP server, a TrueNAS box taking media and Syncthing backups, Pi-hole serving DNS to every VLAN, Prometheus scraping each service API with Grafana on top, Loki with an Alloy collector taking syslog from every guest, and ntfy delivering alerts from Grafana, Uptime Kuma and Proxmox to a phone. WireGuard provides remote access, and Ansible provisions every container and VM.">
   <title>Home lab: VLAN segmentation and the paths between</title>
 
-  <rect width="1400" height="720" rx="8" fill="#171819"/>
+  <rect width="1400" height="812" rx="8" fill="#171819"/>
 
   <defs>
     <style>
@@ -37,7 +37,7 @@
   <text class="s" x="133" y="206">firewall - VLAN trunk</text>
   <rect class="n" x="16" y="266" width="234" height="76" rx="7"/>
   <text class="t" x="133" y="302">VPN</text>
-  <text class="s" x="133" y="326">WireGuard - Tailscale</text>
+  <text class="s" x="133" y="326">WireGuard</text>
   <rect class="zone z-blue" x="320" y="40" width="310" height="150" rx="9"/>
   <text class="zt z-blue-t" x="336" y="68">CLIENT VLAN</text>
   <rect class="n" x="338" y="78" width="274" height="88" rx="7"/>
@@ -71,7 +71,7 @@
   <rect class="n" x="718" y="452" width="274" height="82" rx="7"/>
   <text class="t" x="855" y="491">WUD</text>
   <text class="s" x="855" y="515">image updates - Homepage</text>
-  <rect class="zone z-purple" x="1080" y="40" width="304" height="542" rx="9"/>
+  <rect class="zone z-purple" x="1080" y="40" width="304" height="634" rx="9"/>
   <text class="zt z-purple-t" x="1096" y="68">MANAGEMENT VLAN</text>
   <rect class="n" x="1098" y="84" width="268" height="82" rx="7"/>
   <text class="t" x="1232" y="123">Proxmox</text>
@@ -92,6 +92,9 @@
   <rect class="n" x="1098" y="452" width="268" height="82" rx="7"/>
   <text class="t" x="1232" y="491">Loki</text>
   <text class="s" x="1232" y="515">syslog via Alloy</text>
+  <rect class="n" x="1098" y="544" width="268" height="82" rx="7"/>
+  <text class="t" x="1232" y="583">ntfy</text>
+  <text class="s" x="1232" y="607">alerts - Uptime Kuma</text>
   <path class="e net" d="M133 234 V254"/>
   <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(133 262) rotate(90)"/>
   <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(133 226) rotate(-90)"/>
@@ -125,17 +128,17 @@
   <path class="e mon" d="M1014 493 H1068"/>
   <path class="head mon" d="M-5 -4 Q5 0 -5 4" transform="translate(1076 493)"/>
   <text class="lbl" x="1045" y="477">logs</text>
-  <path class="e auto" d="M475 564 V628 H1232 V594"/>
-  <path class="head auto" d="M-5 -4 Q5 0 -5 4" transform="translate(1232 586) rotate(-90)"/>
-  <text class="lbl" x="700" y="652">provisions guests</text>
-  <line class="e net" x1="16" y1="686" x2="50" y2="686"/>
-  <text class="key" x="60" y="692">network</text>
-  <line class="e web" x1="206" y1="686" x2="240" y2="686"/>
-  <text class="key" x="250" y="692">app traffic</text>
-  <line class="e mon" x1="396" y1="686" x2="430" y2="686"/>
-  <text class="key" x="440" y="692">telemetry</text>
-  <line class="e data" x1="586" y1="686" x2="620" y2="686"/>
-  <text class="key" x="630" y="692">storage</text>
-  <line class="e auto" x1="776" y1="686" x2="810" y2="686"/>
-  <text class="key" x="820" y="692">automation</text>
+  <path class="e auto" d="M475 564 V720 H1232 V694"/>
+  <path class="head auto" d="M-5 -4 Q5 0 -5 4" transform="translate(1232 686) rotate(-90)"/>
+  <text class="lbl" x="700" y="744">provisions guests</text>
+  <line class="e net" x1="16" y1="778" x2="50" y2="778"/>
+  <text class="key" x="60" y="784">network</text>
+  <line class="e web" x1="206" y1="778" x2="240" y2="778"/>
+  <text class="key" x="250" y="784">app traffic</text>
+  <line class="e mon" x1="396" y1="778" x2="430" y2="778"/>
+  <text class="key" x="440" y="784">telemetry</text>
+  <line class="e data" x1="586" y1="778" x2="620" y2="778"/>
+  <text class="key" x="630" y="784">storage</text>
+  <line class="e auto" x1="776" y1="778" x2="810" y2="778"/>
+  <text class="key" x="820" y="784">automation</text>
 </svg>

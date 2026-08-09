@@ -1,0 +1,131 @@
+name: Terraform Plan
+
+# Two deploy paths write the same S3 objects: this repo's "Upload Website"
+# workflow, and `terraform apply`. If their settings drift apart - a
+# cache_control string, a content_type guess - each silently reverts the other
+# on its next run. A clean plan is the only thing that detects it.
+#
+# So this runs a plan and treats "there are changes" as a failure on main,
+# where a freshly deployed site should already match the config.
+
+on:
+  # After a deploy, not alongside it. A plan racing the s3 sync would compare
+  # against a half-uploaded site and report drift that is not real.
+  workflow_run:
+    workflows: ["Upload Website"]
+    types: [completed]
+
+  # Catches drift introduced outside this repo - a console edit, a lifecycle
+  # rule someone added by hand.
+  schedule:
+    - cron: '17 6 * * 1'
+
+  pull_request:
+    paths:
+      - '**.tf'
+      - 'website/**'
+      - 'errors/**'
+      - '.github/workflows/terraform-plan.yml'
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+
+    # Nothing to check if the deploy itself failed, and fork PRs cannot read
+    # the AWS secrets - without this they fail confusingly on every run.
+    if: >-
+      (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') &&
+      (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+          # The wrapper reformats stdout, which would defeat the redaction
+          # below by echoing plan output into the public job log.
+          terraform_wrapper: false
+
+      # No `terraform fmt -check` step on purpose: lambda.tf, main.tf and
+      # records.tf are not canonically formatted, so it would fail every run for
+      # reasons that have nothing to do with drift. Add it after a `terraform
+      # fmt -recursive` cleanup if you want the gate.
+
+      - name: Init
+        run: terraform init -input=false -lock=false
+
+      - name: Validate
+        run: terraform validate -no-color
+
+      # -lock=false: a plan only reads state, and taking the DynamoDB lock in CI
+      # would block an apply running from a laptop at the same time.
+      #
+      # THIS REPO IS PUBLIC. Plan output carries account ids, distribution ids
+      # and full attribute diffs, so it is written to a file rather than to the
+      # job log, and only resource addresses and the counts are surfaced. Never
+      # echo plan.txt, and never upload tfplan as an artifact - it embeds state
+      # values.
+      - name: Plan
+        id: plan
+        run: |
+          set +e
+          terraform plan -input=false -lock=false -no-color \
+            -detailed-exitcode -out=tfplan > plan.txt 2>&1
+          code=$?
+          set -e
+          echo "exitcode=$code" >> "$GITHUB_OUTPUT"
+
+          if [ "$code" -eq 1 ]; then
+            echo "::error::terraform plan failed"
+            # Errors are worth showing, but scrub the account id first.
+            sed -E 's/[0-9]{12}/<account>/g' plan.txt | tail -40
+            exit 1
+          fi
+
+          {
+            echo "### Terraform plan"
+            echo
+            if [ "$code" -eq 0 ]; then
+              echo "No changes. The deployed site matches the config."
+            else
+              echo "**Changes detected.** Resource addresses only - full diffs are"
+              echo "withheld because this repository is public."
+              echo
+              echo '```'
+              terraform show -no-color tfplan \
+                | grep -E '^  # |^Plan: ' \
+                | sed -E 's/[0-9]{12}/<account>/g'
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # On a pull request, changes are the point - the plan is there to be read.
+      # On main after a deploy, or on the weekly run, changes mean the two paths
+      # have drifted and someone needs to look.
+      - name: Fail on drift
+        if: >-
+          steps.plan.outputs.exitcode == '2' &&
+          github.event_name != 'pull_request'
+        run: |
+          echo "::error::Deployed site does not match the terraform config."
+          echo "See the job summary for which resources differ."
+          exit 1
+
+      - name: Remove the plan file
+        if: always()
+        run: rm -f tfplan plan.txt

@@ -91,9 +91,24 @@ jobs:
           echo "exitcode=$code" >> "$GITHUB_OUTPUT"
 
           if [ "$code" -eq 1 ]; then
+            # Job logs need repo admin to read, so the error is emitted as
+            # annotations and into the summary too - both are visible from the
+            # run page without downloading anything. The account id is scrubbed
+            # on every path because this repository is public.
+            scrubbed=$(sed -E 's/[0-9]{12}/<account>/g' plan.txt | grep -vE '^\s*$' | tail -25)
+
             echo "::error::terraform plan failed"
-            # Errors are worth showing, but scrub the account id first.
-            sed -E 's/[0-9]{12}/<account>/g' plan.txt | tail -40
+            while IFS= read -r line; do
+              echo "::error::${line}"
+            done <<< "$scrubbed"
+
+            {
+              echo "### Terraform plan failed"
+              echo
+              echo '```'
+              echo "$scrubbed"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
 

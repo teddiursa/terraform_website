@@ -270,7 +270,7 @@
                     <div id="nm-root">
                     <figure class="nm-fig">
                       <svg class="nm-svg" viewBox="0 0 1000 700" role="img"
-                           aria-label="Data flow through the homelab: self-hosted services are served to LAN clients through an nginx reverse proxy; cameras stream to an NVR container which records to the datastore; the node mounts two ZFS NAS boxes, the primary taking camera recordings, datastore traffic and the monthly backup, the other taking datastore traffic only; guests ship syslog to Graylog while Prometheus scrapes the exporters; every fifteen minutes a timer publishes a sanitised snapshot to S3, which this page then fetches.">
+                           aria-label="Data flow through the homelab: self-hosted services are served to LAN clients through an nginx reverse proxy; cameras stream to an NVR container which records to the datastore; the node mounts two ZFS NAS boxes, the primary taking camera recordings, datastore traffic and the monthly backup, the other taking datastore traffic only; guests ship syslog to Loki while Prometheus scrapes the exporters; every fifteen minutes a timer publishes a sanitised snapshot to S3, which this page then fetches.">
 
                         <!-- Arrowheads are their own static marks rather than marker-end. A marker
                              sits at the path's end, so the dashes march underneath it; drawing the
@@ -358,7 +358,7 @@
                         <!-- ------------------------------------------------------ watching -->
                         <g class="nm-node">
                           <rect x="176" y="222" width="184" height="42" rx="6"></rect>
-                          <text x="268" y="241">Graylog</text>
+                          <text x="268" y="241">Loki</text>
                           <text class="nm-sub" x="268" y="254">syslog TCP + UDP</text>
                         </g>
                         <g class="nm-node">

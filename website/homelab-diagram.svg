@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720" role="img"
-     aria-label="Home lab network by VLAN. A router and firewall trunks four VLANs from the internet. Client devices and a dev VLAN running Code Server and EVE-NG reach services over HTTPS through an Nginx reverse proxy with Let's Encrypt certificates. The services VLAN runs that proxy, a Docker host, Plex, Vaultwarden, Watchtower and a Homepage dashboard. The management VLAN runs the Proxmox hypervisor which is also the local NTP server, a TrueNAS box taking media and Syncthing backups, Pi-hole serving DNS to every VLAN, Prometheus scraping each service API with Grafana on top, and Graylog and LibreNMS taking syslog and SNMP traps. WireGuard and Tailscale provide remote access, and Ansible provisions every container and VM.">
+     aria-label="Home lab network by VLAN. A router and firewall trunks four VLANs from the internet. Client devices and a dev VLAN running Code Server and EVE-NG reach services over HTTPS through an Nginx reverse proxy with Let's Encrypt certificates. The services VLAN runs that proxy, a Docker host, Plex, Vaultwarden, a container update watcher and a Homepage dashboard. The management VLAN runs the Proxmox hypervisor which is also the local NTP server, a TrueNAS box taking media and Syncthing backups, Pi-hole serving DNS to every VLAN, Prometheus scraping each service API with Grafana on top, and Loki with an Alloy collector taking syslog from every guest. WireGuard and Tailscale provide remote access, and Ansible provisions every container and VM.">
   <title>Home lab: VLAN segmentation and the paths between</title>
 
   <rect width="1400" height="720" rx="8" fill="#171819"/>
@@ -69,8 +69,8 @@
   <text class="t" x="855" y="399">Vaultwarden</text>
   <text class="s" x="855" y="423">credential vault</text>
   <rect class="n" x="718" y="452" width="274" height="82" rx="7"/>
-  <text class="t" x="855" y="491">Watchtower</text>
-  <text class="s" x="855" y="515">Homepage dashboard</text>
+  <text class="t" x="855" y="491">WUD</text>
+  <text class="s" x="855" y="515">image updates - Homepage</text>
   <rect class="zone z-purple" x="1080" y="40" width="304" height="542" rx="9"/>
   <text class="zt z-purple-t" x="1096" y="68">MANAGEMENT VLAN</text>
   <rect class="n" x="1098" y="84" width="268" height="82" rx="7"/>
@@ -90,8 +90,8 @@
   <text class="t" x="1232" y="399">Prometheus</text>
   <text class="s" x="1232" y="423">Grafana - metrics API</text>
   <rect class="n" x="1098" y="452" width="268" height="82" rx="7"/>
-  <text class="t" x="1232" y="491">Graylog</text>
-  <text class="s" x="1232" y="515">LibreNMS - SNMP traps</text>
+  <text class="t" x="1232" y="491">Loki</text>
+  <text class="s" x="1232" y="515">syslog via Alloy</text>
   <path class="e net" d="M133 234 V254"/>
   <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(133 262) rotate(90)"/>
   <path class="head net" d="M-5 -4 Q5 0 -5 4" transform="translate(133 226) rotate(-90)"/>

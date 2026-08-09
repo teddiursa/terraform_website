@@ -227,7 +227,7 @@
       tiles.push({
         lbl: "Images auto-updated",
         val: String(m.images_updated),
-        sub: "by Watchtower, " + m.window_days + "d"
+        sub: "by WUD, " + m.window_days + "d"
       });
     }
 

@@ -20,3 +20,6 @@ website/.vs/
 src/lambdaFunctions.egg-info/
 .github
 website/index.html
+
+# Working notes for Claude Code - deliberately local, never published.
+CLAUDE.md

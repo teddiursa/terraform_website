@@ -81,14 +81,11 @@ jobs:
       - name: Validate
         run: terraform validate -no-color
 
-      # -lock=false: a plan only reads state, and taking the DynamoDB lock in CI
-      # would block an apply running from a laptop at the same time.
+      # -lock=false so a plan here cannot block an apply from a laptop.
       #
-      # THIS REPO IS PUBLIC. Plan output carries account ids, distribution ids
-      # and full attribute diffs, so it is written to a file rather than to the
-      # job log, and only resource addresses and the counts are surfaced. Never
-      # echo plan.txt, and never upload tfplan as an artifact - it embeds state
-      # values.
+      # Plan output goes to a file, never the log: this repo is public and run
+      # logs are world-readable. Never echo plan.txt, and never upload tfplan as
+      # an artifact - it embeds state values.
       - name: Plan
         id: plan
         run: |
@@ -100,21 +97,12 @@ jobs:
           echo "exitcode=$code" >> "$GITHUB_OUTPUT"
 
           if [ "$code" -eq 1 ]; then
-            # THIS REPOSITORY IS PUBLIC: anyone can read a run's logs and
-            # summary in the web UI, so whatever is printed here is published to
-            # the world. An AWS error normally carries the caller's ARN, the
-            # resource ARN, the account id and the CloudFront distribution id.
-            #
-            # Safe by construction, not by blacklist. Scrubbing identifiers out
-            # of free text failed twice - first a pattern anchored on the colon
-            # published the id sitting in parentheses before it, then a rule
-            # broad enough to catch those ids also ate "CloudFront" and
-            # "Certificate" and left the diagnosis meaningless.
-            #
-            # So nothing is copied out of the error text. Three fixed shapes are
-            # matched, none of which can contain a resource identifier: AWS
-            # error codes from a known list, "service:Action" permission names,
-            # and the resource *type* that precedes the "(id)" in a read error.
+            # Nothing is copied out of the error text - an AWS error carries
+            # ARNs, the account id and resource ids. Only three shapes are
+            # matched, none of which can contain an identifier: error codes from
+            # a known list, service:Action names, and the resource type before
+            # the "(id)". Redacting free text instead was tried twice and leaked
+            # both times.
             codes=$(grep -hoE '\b(AccessDenied|ExpiredToken|InvalidClientTokenId|UnauthorizedOperation|Throttling|RequestTimeTooSkewed|NoCredentialProviders)\b' plan.txt | sort -u)
             actions=$(grep -hoE 'is not authorized to perform: [a-zA-Z0-9-]+:[A-Za-z]+' plan.txt \
                       | sed -E 's/.*perform: //' | sort -u)
@@ -122,8 +110,8 @@ jobs:
                     | sed -E 's/^Error: reading //; s/ \($//' | sort -u)
             nerr=$(grep -c '^Error:' plan.txt || true)
 
-            # Joined with paste, not `echo $var`: resource types contain spaces
-            # ("Route53 Hosted Zone") and word-splitting would list each word.
+            # paste, not `echo $var` - types contain spaces ("Route53 Hosted
+            # Zone") and word-splitting would list each word separately.
             join() { paste -sd'|' - | sed 's/|/, /g'; }
 
             diag="${nerr:-0} errors"
@@ -172,10 +160,9 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
-          # Also as annotations. A job summary can only be read from the run
-          # page; annotations come back from the checks API, which is how this
-          # gets looked at from a phone. Resource addresses are safe to publish -
-          # they are literally the resource names in the .tf files.
+          # Annotations too: a summary only renders on the run page, but
+          # annotations come back from the checks API. Resource addresses are
+          # the same names the .tf files already carry in public.
           if [ "$code" -eq 2 ]; then
             while IFS= read -r line; do
               [ -n "$line" ] && echo "::notice::${line}"

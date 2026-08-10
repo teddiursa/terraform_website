@@ -6,7 +6,30 @@ on:
     - main
 
 jobs:
+  # Nothing reaches the bucket until both of these pass. The sync itself has no
+  # opinion about what it uploads - it will happily publish a page whose script
+  # tag points at a file that does not exist.
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Check every referenced file will be deployed
+      run: python3 scripts/check_assets.py
+
+  # Catches a config that no longer plans, or credentials that have expired,
+  # before anything is written. Changes are expected here and do not block:
+  # every content edit changes an object's etag, so a gate that demanded a
+  # clean plan would mean never deploying again. Drift is checked after the
+  # deploy instead, by the same workflow running in its default mode.
+  plan:
+    uses: ./.github/workflows/terraform-plan.yml
+    with:
+      mode: gate
+    secrets: inherit
+
   deploy:
+    needs: [checks, plan]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout

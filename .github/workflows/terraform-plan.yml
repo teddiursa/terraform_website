@@ -29,6 +29,15 @@ on:
 
   workflow_dispatch:
 
+  # Called by "Upload Website" as a gate. In that mode changes are expected -
+  # every content edit changes an object's etag - so only a plan that errors
+  # blocks the deploy.
+  workflow_call:
+    inputs:
+      mode:
+        type: string
+        default: drift
+
 permissions:
   contents: read
 
@@ -179,7 +188,8 @@ jobs:
       - name: Fail on drift
         if: >-
           steps.plan.outputs.exitcode == '2' &&
-          github.event_name != 'pull_request'
+          github.event_name != 'pull_request' &&
+          inputs.mode != 'gate'
         run: |
           echo "::error::Deployed site does not match the terraform config."
           echo "See the job summary for which resources differ."
